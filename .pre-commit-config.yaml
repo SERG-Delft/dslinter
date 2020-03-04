@@ -7,16 +7,11 @@ repos:
     rev: v2.5.0
     hooks:
       - id: end-of-file-fixer
-  - repo: https://github.com/timothycrosley/isort
-    rev: 4.3.21
-    hooks:
-      - id: isort
-        args: [--atomic, --apply]
   - repo: https://github.com/pycqa/pydocstyle
     rev: 5.0.2
     hooks:
       - id: pydocstyle
   - repo: https://github.com/pycqa/pylint
-    rev: pylint-2.4.4
+    rev: pylint-2.4.2
     hooks:
       - id: pylint

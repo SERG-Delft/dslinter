@@ -14,11 +14,11 @@ class TestUniqueReturnChecker(pylint.testutils.CheckerTestCase):
         """Test if message is added when there are non-unique returns."""
         func_node, return_node_a, return_node_b = astroid.extract_node(
             """
-        def test(): #@
-            if True:
+            def test(): #@
+                if True:
+                    return 5 #@
                 return 5 #@
-            return 5 #@
-        """
+            """
         )
 
         self.checker.visit_functiondef(func_node)
