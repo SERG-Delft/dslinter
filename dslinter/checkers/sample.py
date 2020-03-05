@@ -39,27 +39,31 @@ class SampleChecker(BaseChecker):
         super(SampleChecker, self).__init__(linter)
         self._function_stack = []
 
-    def visit_functiondef(self, node):  # pylint: disable=unused-argument
+    def visit_functiondef(
+        self, node: astroid.nodes.FunctionDef
+    ):  # pylint: disable=unused-argument
         """
         Append an empty list to the stack when a FunctionDef node is visited.
 
-        :param FunctionDef node: Node which is visited.
+        :param node: Node which is visited.
         """
         self._function_stack.append([])
 
-    def leave_functiondef(self, node):  # pylint: disable=unused-argument
+    def leave_functiondef(
+        self, node: astroid.nodes.FunctionDef
+    ):  # pylint: disable=unused-argument
         """
         Pop the list from the stack when a FunctionDef node is left.
 
-        :param FunctionDef node: Node which is left.
+        :param node: Node which is left.
         """
         self._function_stack.pop()
 
-    def visit_return(self, node):
+    def visit_return(self, node: astroid.nodes.Return):
         """
         When a return node is visited, check if it returns the same constant as another return node.
 
-        :param Return node: Node which is visited.
+        :param node: Node which is visited.
         """
         if not isinstance(node.value, astroid.node_classes.Const):
             return

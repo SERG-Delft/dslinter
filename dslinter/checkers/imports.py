@@ -1,4 +1,5 @@
 """Import checker which checks whether imports are bound to local names by the conventions."""
+import astroid
 from pylint.checkers import BaseChecker
 from pylint.interfaces import IAstroidChecker
 
@@ -34,11 +35,11 @@ class ImportChecker(BaseChecker):
     }
     options = ()
 
-    def visit_import(self, node):
+    def visit_import(self, node: astroid.nodes.Import):
         """
         When an Import node is visited, check if it follows the conventions.
 
-        :param Import node: Node which is visited.
+        :param node: Node which is visited.
         """
         for name, alias in node.names:
             if name == "pandas" and alias != "pd":
@@ -48,11 +49,11 @@ class ImportChecker(BaseChecker):
             elif name == "matplotlib.pyplot" and alias != "plt":
                 self.add_message("import-pyplot", node=node)
 
-    def visit_import_from(self, node):
+    def visit_import_from(self, node: astroid.nodes.ImportFrom):
         """
         When an ImportFrom node is visited, check if it follows the conventions.
 
-        :param ImportFrom node: Node which is visited.
+        :param node: Node which is visited.
         """
         if node.modname[:7] == "sklearn":
             for _, alias in node.names:
