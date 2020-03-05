@@ -26,6 +26,11 @@ class ImportChecker(BaseChecker):
             "import-pyplot",
             "The matplotlib.pyplot module should be imported as 'plt'.",
         ),
+        "C0004": (
+            "Import from sklearn module has an alias.",
+            "import-sklearn",
+            "Imports from sklearn modules should not have an alias.",
+        ),
     }
     options = ()
 
@@ -42,3 +47,14 @@ class ImportChecker(BaseChecker):
                 self.add_message("import-numpy", node=node)
             elif name == "matplotlib.pyplot" and alias != "plt":
                 self.add_message("import-pyplot", node=node)
+
+    def visit_import_from(self, node):
+        """
+        When an ImportFrom node is visited, check if it follows the conventions.
+
+        :param ImportFrom node: Node which is visited.
+        """
+        if node.modname[:7] == "sklearn":
+            for _, alias in node.names:
+                if alias is not None:
+                    self.add_message("import-sklearn", node=node)

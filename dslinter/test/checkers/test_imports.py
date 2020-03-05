@@ -81,3 +81,27 @@ class TestImportChecker(pylint.testutils.CheckerTestCase):
 
         with self.assertNoMessages():
             self.checker.visit_import(import_node)
+
+    def test_finds_incorrect_sklearn(self):
+        """Test if message is added when an import from the sklearn module is assigned an alias."""
+        import_node = astroid.extract_node(
+            """
+            from sklearn.cluster import KMeans as km #@
+            """
+        )
+
+        with self.assertAddsMessages(
+            pylint.testutils.Message(msg_id="import-sklearn", node=import_node),
+        ):
+            self.checker.visit_import_from(import_node)
+
+    def test_ignore_correct_sklearn(self):
+        """Test if no message is added when an sklearn module import is not assigned an alias."""
+        import_node = astroid.extract_node(
+            """
+            from sklearn.cluster import KMeans #@
+            """
+        )
+
+        with self.assertNoMessages():
+            self.checker.visit_import_from(import_node)
