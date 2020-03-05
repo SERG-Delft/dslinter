@@ -57,3 +57,27 @@ class TestImportChecker(pylint.testutils.CheckerTestCase):
 
         with self.assertNoMessages():
             self.checker.visit_import(import_node)
+
+    def test_finds_incorrect_pyplot(self):
+        """Test if message is added when pyplot is imported incorrectly."""
+        import_node = astroid.extract_node(
+            """
+            import matplotlib.pyplot as plot #@
+            """
+        )
+
+        with self.assertAddsMessages(
+            pylint.testutils.Message(msg_id="import-pyplot", node=import_node),
+        ):
+            self.checker.visit_import(import_node)
+
+    def test_ignore_correct_pyplot(self):
+        """Test if no message is added when pyplot is imported correctly."""
+        import_node = astroid.extract_node(
+            """
+            import matplotlib.pyplot as plt #@
+            """
+        )
+
+        with self.assertNoMessages():
+            self.checker.visit_import(import_node)

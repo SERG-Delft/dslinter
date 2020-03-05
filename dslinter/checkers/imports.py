@@ -21,12 +21,17 @@ class ImportChecker(BaseChecker):
             "import-numpy",
             "The numpy module should be imported as 'np'.",
         ),
+        "C0003": (
+            "Import of matplotlib.pyplot not bound to 'plt'.",
+            "import-pyplot",
+            "The matplotlib.pyplot module should be imported as 'plt'.",
+        ),
     }
     options = ()
 
     def visit_import(self, node):
         """
-        When an import node is visited, check if it follows the conventions.
+        When an Import node is visited, check if it follows the conventions.
 
         :param Import node: Node which is visited.
         """
@@ -35,3 +40,5 @@ class ImportChecker(BaseChecker):
                 self.add_message("import-pandas", node=node)
             elif name == "numpy" and alias != "np":
                 self.add_message("import-numpy", node=node)
+            elif name == "matplotlib.pyplot" and alias != "plt":
+                self.add_message("import-pyplot", node=node)
