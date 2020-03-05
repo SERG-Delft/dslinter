@@ -36,7 +36,7 @@ class HyperparameterChecker(BaseChecker):
         Check if the hyperparameters of a KMeans call are all set.
 
         Hyperparameter(s):
-        - n_clusters keyword (or the first positional one).
+        - n_clusters keyword (or the first positional argument).
 
         :param node: Node which is visited.
         """
