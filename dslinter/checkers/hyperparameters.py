@@ -23,6 +23,12 @@ class HyperparameterChecker(BaseChecker):
     options = ()
 
     hyperparameters = {
+        # sklearn.manifold
+        "Isomap": [{"positional": 2, "keywords": ["n_neighbors", "n_components"]}],
+        "LocallyLinearEmbedding": [{"positional": 2, "keywords": ["n_neighbors", "n_components"]}],
+        "SpectralEmbedding": [{"positional": 1, "keywords": ["n_components"]}],
+        "MDS": [{"positional": 1, "keywords": ["n_components"]}],
+        "TSNE": [{"positional": 2, "keywords": ["n_components", "perplexity"]}],
         # sklearn.cluster
         "KMeans": [{"positional": 1, "keywords": ["n_clusters"]}],
         "MiniBatchKMeans": [{"positional": 1, "keywords": ["n_clusters"]}],
@@ -31,11 +37,26 @@ class HyperparameterChecker(BaseChecker):
         "SpectralClustering": [{"positional": 1, "keywords": ["n_clusters"]}],
         "AgglomerativeClustering": [
             {"positional": 1, "keywords": ["n_clusters"]},
-            {"positional": 99, "keywords": ["linkage", "distance_threshold"]},
+            {"positional": 7, "keywords": ["linkage", "distance_threshold"]},
         ],
         "DBSCAN": [{"positional": 2, "keywords": ["eps", "min_samples"]}],
         "OPTICS": [{"positional": 1, "keywords": ["min_samples"]}],
         "Birch": [{"positional": 2, "keywords": ["threshold", "branching_factor"]}],
+        # sklearn.neighbors
+        "KernelDensity": [{"positional": 1, "keywords": ["bandwidth"]}],
+        # klearn.neural_network
+        "BernoulliRBM": [{"positional": 2, "keywords": ["n_components", "learning_rate"]}],
+        # sklearn.linear_model
+        "Ridge": [{"positional": 1, "keywords": ["alpha"]}],
+        "Lasso": [{"positional": 1, "keywords": ["alpha"]}],
+        "MultiTaskLasso": [{"positional": 1, "keywords": ["alpha"]}],
+        "ElasticNet": [{"positional": 2, "keywords": ["alpha", "l1_ratio"]}],
+        "MultiTaskElasticNet": [{"positional": 2, "keywords": ["alpha", "l1_ratio"]}],
+        "LassoLars": [{"positional": 1, "keywords": ["alpha"]}],
+        # sklearn.svm
+        "SVC": [{"positional": 2, "keywords": ["C", "kernel"]}],
+        "NuSVC": [{"positional": 2, "keywords": ["nu", "kernel"]}],
+        # There are more modules.
     }
 
     def visit_call(self, node: astroid.nodes.Call):
