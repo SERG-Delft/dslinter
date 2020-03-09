@@ -14,12 +14,12 @@ class TestHyperParameterChecker(pylint.testutils.CheckerTestCase):
         """Test if the function returns true when the keyword is present."""
         call_node = astroid.extract_node(
             """
-            f(keyword0=0, keyword1=1) #@
+            f(keyword0=0, keyword1=1, keyword2=2) #@
             """
         )
         keywords = call_node.keywords
 
-        assert self.checker.has_keyword(keywords, "keyword1")
+        assert self.checker.has_keywords(keywords, ["keyword1", "keyword2"])
 
     def test_has_keyword_false(self):
         """Test if the function returns false when the keyword is not present."""
@@ -30,7 +30,7 @@ class TestHyperParameterChecker(pylint.testutils.CheckerTestCase):
         )
         keywords = call_node.keywords
 
-        assert not self.checker.has_keyword(keywords, "keyword1")
+        assert not self.checker.has_keywords(keywords, ["keyword1"])
 
     def test_has_keyword_empty(self):
         """Test if the function returns false when there is no keyword present."""
@@ -41,7 +41,7 @@ class TestHyperParameterChecker(pylint.testutils.CheckerTestCase):
         )
         keywords = call_node.keywords
 
-        assert not self.checker.has_keyword(keywords, "keyword1")
+        assert not self.checker.has_keywords(keywords, ["keyword1"])
 
     def test_kmeans_no_keywords(self):
         """Test if a message is added when no keywords are present."""

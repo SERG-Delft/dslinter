@@ -22,42 +22,42 @@ class HyperparameterChecker(BaseChecker):
     }
     options = ()
 
+    hyperparameters = {
+        "KMeans": {"positional": 1, "keywords": ["n_clusters"]},
+    }
+
     def visit_call(self, node: astroid.nodes.Call):
         """
-        When a Call node is visited, ...
+        When a Call node is visited, check if all hyperparameters are set.
 
         :param node: Node which is visited.
         """
-        if node.func.name == "KMeans":
-            self.check_hyperparameters_kmeans(node)
-
-    def check_hyperparameters_kmeans(self, node: astroid.nodes.Call):
-        """
-        Check if the hyperparameters of a KMeans call are all set.
-
-        Hyperparameter(s):
-        - n_clusters keyword (or the first positional argument).
-
-        :param node: Node which is visited.
-        """
-        if not len(node.args) >= 1 and not self.has_keyword(
-            node.keywords, "n_clusters"
-        ):
-            self.add_message("hyperparameters", node=node)
+        function_name = node.func.name
+        if function_name in self.hyperparameters:
+            if not len(node.args) >= self.hyperparameters[function_name][
+                "positional"
+            ] and not self.has_keywords(
+                node.keywords, self.hyperparameters[function_name]["keywords"]
+            ):
+                self.add_message("hyperparameters", node=node)
 
     @staticmethod
-    def has_keyword(keywords: List[astroid.nodes.Keyword], keyword_goal: str) -> bool:
+    def has_keywords(
+        keywords: List[astroid.nodes.Keyword], keywords_goal: List[str]
+    ) -> bool:
         """
-        Check if a list of keywords contain a certain keyword.
+        Check if a list of keywords contains certain keywords.
 
         :param keywords: List of keywords.
-        :param keyword_goal: Name of the keyword which is checked against.
-        :return: True if the keyword is present, False if it is not.
+        :param keywords_goal: Name of the keywords which are checked against.
+        :return: True if keywords are present, False if they are not.
         """
         if keywords is None:
             return False
 
+        found = 0
         for keyword in keywords:
-            if keyword.arg == keyword_goal:
-                return True
-        return False
+            if keyword.arg in keywords_goal:
+                found += 1
+
+        return found == len(keywords_goal)
