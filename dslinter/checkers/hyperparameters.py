@@ -1,4 +1,5 @@
 """Hyperparameter checker checks whether all hyperparameters for learning algorithms are set."""
+from inspect import signature
 from typing import List
 
 import astroid
@@ -17,7 +18,12 @@ class HyperparameterChecker(BaseChecker):
         "W0001": (
             "Hyperparameter not set.",
             "hyperparameters",
-            "For learning algorithms, all hyperparamters should be tuned and set.",
+            "For learning algorithms, all main hyperparameters should be tuned and set.",
+        ),
+        "W0002": (
+            "Hyperparameter not set.",
+            "hyperparameters-strict",
+            "For learning algorithms, all hyperparameters should be tuned and set.",
         ),
     }
     options = ()
@@ -65,6 +71,14 @@ class HyperparameterChecker(BaseChecker):
 
         :param node: Node which is visited.
         """
+        self.check_main_hyperparameters(node)
+
+    def check_main_hyperparameters(self, node: astroid.nodes.Call):
+        """
+        When a Call node is visited, check if all main hyperparameters are set.
+
+        :param node: Node which is visited.
+        """
         function_name = node.func.name
         if function_name in self.hyperparameters:
             correct = False
@@ -78,6 +92,14 @@ class HyperparameterChecker(BaseChecker):
 
             if not correct:
                 self.add_message("hyperparameters", node=node)
+
+    def check_hyperparameters_strict(self, node: astroid.nodes.Call):
+        """
+        When a Call node is visited, check if all hyperparameters are set.
+
+        :param node: Node which is visited.
+        """
+        pass
 
     @staticmethod
     def has_keywords(keywords: List[astroid.nodes.Keyword], keywords_goal: List[str]) -> bool:
