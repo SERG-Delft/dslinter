@@ -39,9 +39,7 @@ class SampleChecker(BaseChecker):
         super(SampleChecker, self).__init__(linter)
         self._function_stack = []
 
-    def visit_functiondef(
-        self, node: astroid.nodes.FunctionDef
-    ):  # pylint: disable=unused-argument
+    def visit_functiondef(self, node: astroid.nodes.FunctionDef):  # pylint: disable=unused-argument
         """
         Append an empty list to the stack when a FunctionDef node is visited.
 
@@ -49,9 +47,7 @@ class SampleChecker(BaseChecker):
         """
         self._function_stack.append([])
 
-    def leave_functiondef(
-        self, node: astroid.nodes.FunctionDef
-    ):  # pylint: disable=unused-argument
+    def leave_functiondef(self, node: astroid.nodes.FunctionDef):  # pylint: disable=unused-argument
         """
         Pop the list from the stack when a FunctionDef node is left.
 

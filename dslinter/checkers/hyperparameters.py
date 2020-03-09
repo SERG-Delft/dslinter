@@ -26,9 +26,7 @@ class HyperparameterChecker(BaseChecker):
         # sklearn.cluster
         "KMeans": [{"positional": 1, "keywords": ["n_clusters"]}],
         "MiniBatchKMeans": [{"positional": 1, "keywords": ["n_clusters"]}],
-        "AffinityPropagation": [
-            {"positional": 1, "keywords": ["damping", "preference"]}
-        ],
+        "AffinityPropagation": [{"positional": 1, "keywords": ["damping", "preference"]}],
         "MeanShift": [{"positional": 1, "keywords": ["bandwidth"]}],
         "SpectralClustering": [{"positional": 1, "keywords": ["n_clusters"]}],
         "AgglomerativeClustering": [
@@ -53,8 +51,7 @@ class HyperparameterChecker(BaseChecker):
                 if len(node.args) >= self.hyperparameters[function_name][option][
                     "positional"
                 ] or self.has_keywords(
-                    node.keywords,
-                    self.hyperparameters[function_name][option]["keywords"],
+                    node.keywords, self.hyperparameters[function_name][option]["keywords"],
                 ):
                     correct = True
 
@@ -62,9 +59,7 @@ class HyperparameterChecker(BaseChecker):
                 self.add_message("hyperparameters", node=node)
 
     @staticmethod
-    def has_keywords(
-        keywords: List[astroid.nodes.Keyword], keywords_goal: List[str]
-    ) -> bool:
+    def has_keywords(keywords: List[astroid.nodes.Keyword], keywords_goal: List[str]) -> bool:
         """
         Check if a list of keywords contains certain keywords.
 
