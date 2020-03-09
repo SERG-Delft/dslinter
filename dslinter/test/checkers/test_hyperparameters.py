@@ -43,7 +43,7 @@ class TestHyperParameterChecker(pylint.testutils.CheckerTestCase):
 
         assert not self.checker.has_keywords(keywords, ["keyword1"])
 
-    def test_kmeans_no_keywords(self):
+    def test_no_keywords(self):
         """Test if a message is added when no keywords are present."""
         call_node = astroid.extract_node(
             """
@@ -56,7 +56,7 @@ class TestHyperParameterChecker(pylint.testutils.CheckerTestCase):
         ):
             self.checker.visit_call(call_node)
 
-    def test_kmeans_missing_hyperparameter(self):
+    def test_missing(self):
         """Test if a message is added when no hyperparameters are present."""
         call_node = astroid.extract_node(
             """
@@ -69,7 +69,7 @@ class TestHyperParameterChecker(pylint.testutils.CheckerTestCase):
         ):
             self.checker.visit_call(call_node)
 
-    def test_kmeans_correct_hyperparameter_keyword(self):
+    def test_correct_keyword(self):
         """Test if no message is added when the hyperparameters are present as keyword."""
         call_node = astroid.extract_node(
             """
@@ -80,7 +80,7 @@ class TestHyperParameterChecker(pylint.testutils.CheckerTestCase):
         with self.assertNoMessages():
             self.checker.visit_call(call_node)
 
-    def test_kmeans_correct_hyperparameter_positional_argument(self):
+    def test_correct_positional_argument(self):
         """Test if no message is added when the hyperparameters are present as positional args."""
         call_node = astroid.extract_node(
             """
@@ -90,3 +90,20 @@ class TestHyperParameterChecker(pylint.testutils.CheckerTestCase):
 
         with self.assertNoMessages():
             self.checker.visit_call(call_node)
+
+    def test_correct_optional_keyword(self):
+        """Test if no message is added when the hyperparameters are present as keyword."""
+        call_node_option_one = astroid.extract_node(
+            """
+            AgglomerativeClustering(n_init=5, n_clusters=5) #@
+            """
+        )
+        call_node_option_two = astroid.extract_node(
+            """
+            AgglomerativeClustering(n_init=5, linkage="ward", distance_threshold=1) #@
+            """
+        )
+
+        with self.assertNoMessages():
+            self.checker.visit_call(call_node_option_one)
+            self.checker.visit_call(call_node_option_two)

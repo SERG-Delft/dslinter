@@ -23,7 +23,21 @@ class HyperparameterChecker(BaseChecker):
     options = ()
 
     hyperparameters = {
-        "KMeans": {"positional": 1, "keywords": ["n_clusters"]},
+        # sklearn.cluster
+        "KMeans": [{"positional": 1, "keywords": ["n_clusters"]}],
+        "MiniBatchKMeans": [{"positional": 1, "keywords": ["n_clusters"]}],
+        "AffinityPropagation": [
+            {"positional": 1, "keywords": ["damping", "preference"]}
+        ],
+        "MeanShift": [{"positional": 1, "keywords": ["bandwidth"]}],
+        "SpectralClustering": [{"positional": 1, "keywords": ["n_clusters"]}],
+        "AgglomerativeClustering": [
+            {"positional": 1, "keywords": ["n_clusters"]},
+            {"positional": 99, "keywords": ["linkage", "distance_threshold"]},
+        ],
+        "DBSCAN": [{"positional": 2, "keywords": ["eps", "min_samples"]}],
+        "OPTICS": [{"positional": 1, "keywords": ["min_samples"]}],
+        "Birch": [{"positional": 2, "keywords": ["threshold", "branching_factor"]}],
     }
 
     def visit_call(self, node: astroid.nodes.Call):
@@ -34,11 +48,17 @@ class HyperparameterChecker(BaseChecker):
         """
         function_name = node.func.name
         if function_name in self.hyperparameters:
-            if not len(node.args) >= self.hyperparameters[function_name][
-                "positional"
-            ] and not self.has_keywords(
-                node.keywords, self.hyperparameters[function_name]["keywords"]
-            ):
+            correct = False
+            for option in range(len(self.hyperparameters[function_name])):
+                if len(node.args) >= self.hyperparameters[function_name][option][
+                    "positional"
+                ] or self.has_keywords(
+                    node.keywords,
+                    self.hyperparameters[function_name][option]["keywords"],
+                ):
+                    correct = True
+
+            if not correct:
                 self.add_message("hyperparameters", node=node)
 
     @staticmethod
