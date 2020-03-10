@@ -1,6 +1,8 @@
 """Hyperparameter checker checks whether all hyperparameters for learning algorithms are set."""
-from inspect import signature
-from typing import List
+import os
+import pickle
+from pathlib import Path
+from typing import List, Dict
 
 import astroid
 from pylint.checkers import BaseChecker
@@ -15,20 +17,30 @@ class HyperparameterChecker(BaseChecker):
     name = "hyperparameters"
     priority = -1
     msgs = {
-        "W0001": (
+        "W5001": (
             "Hyperparameter not set.",
             "hyperparameters",
-            "For learning algorithms, all main hyperparameters should be tuned and set.",
-        ),
-        "W0002": (
-            "Hyperparameter not set.",
-            "hyperparameters-strict",
             "For learning algorithms, all hyperparameters should be tuned and set.",
         ),
+        "F5001": (
+            "Pickled strict hyperparameters dict not found.",
+            "hyperparameters-strict-file-not-found",
+            "The pickled dict with strict hyperparameters cannot be found on disk.",
+        ),
     }
-    options = ()
+    options = (
+        (
+            "strict_hyperparameters",
+            {
+                "default": False,
+                "type": "yn",
+                "metavar": "<y_or_n>",
+                "help": "Force that all parameters of learning algorithms are set.",
+            },
+        ),
+    )
 
-    hyperparameters = {
+    hyperparameters_main = {
         # sklearn.manifold
         "Isomap": [{"positional": 2, "keywords": ["n_neighbors", "n_components"]}],
         "LocallyLinearEmbedding": [{"positional": 2, "keywords": ["n_neighbors", "n_components"]}],
@@ -60,46 +72,56 @@ class HyperparameterChecker(BaseChecker):
         "MultiTaskElasticNet": [{"positional": 2, "keywords": ["alpha", "l1_ratio"]}],
         "LassoLars": [{"positional": 1, "keywords": ["alpha"]}],
         # sklearn.svm
-        "SVC": [{"positional": 2, "keywords": ["C", "kernel"]}],
-        "NuSVC": [{"positional": 2, "keywords": ["nu", "kernel"]}],
+        "SVC": [{"positional": 4, "keywords": ["C", "gamma"]}],
+        "NuSVC": [{"positional": 4, "keywords": ["nu", "gamma"]}],
         # There are more modules.
     }
 
+    def __init__(self, linter=None):
+        """
+        Initialize the checker.
+
+        :param linter: Linter where the checker is added to.
+        """
+        super(HyperparameterChecker, self).__init__(linter)
+        self._hyperparameters_strict = None
+
     def visit_call(self, node: astroid.nodes.Call):
         """
-        When a Call node is visited, check if all hyperparameters are set.
+        When a Call node is visited, check whether all hyperparameters are set.
 
         :param node: Node which is visited.
         """
-        self.check_main_hyperparameters(node)
+        try:
+            function_name = node.func.name
+        except AttributeError:
+            return
 
-    def check_main_hyperparameters(self, node: astroid.nodes.Call):
-        """
-        When a Call node is visited, check if all main hyperparameters are set.
-
-        :param node: Node which is visited.
-        """
-        function_name = node.func.name
-        if function_name in self.hyperparameters:
+        hyperparameters = self.hyperparameters_to_check()
+        if function_name in hyperparameters:
             correct = False
-            for option in range(len(self.hyperparameters[function_name])):
-                if len(node.args) >= self.hyperparameters[function_name][option][
+            for option in range(len(hyperparameters[function_name])):
+                if len(node.args) >= hyperparameters[function_name][option][
                     "positional"
                 ] or self.has_keywords(
-                    node.keywords, self.hyperparameters[function_name][option]["keywords"],
+                    node.keywords, hyperparameters[function_name][option]["keywords"],
                 ):
                     correct = True
 
             if not correct:
                 self.add_message("hyperparameters", node=node)
 
-    def check_hyperparameters_strict(self, node: astroid.nodes.Call):
+    def hyperparameters_to_check(self) -> Dict:
         """
-        When a Call node is visited, check if all hyperparameters are set.
+        Get the hyperparameters to check against.
 
-        :param node: Node which is visited.
+        :return: Dict of learning classes and parameters needed.
         """
-        pass
+        if self.config.strict_hyperparameters:
+            if self._hyperparameters_strict is None:
+                self.load_hyperparameters_pickle()
+            return self._hyperparameters_strict
+        return self.hyperparameters_main
 
     @staticmethod
     def has_keywords(keywords: List[astroid.nodes.Keyword], keywords_goal: List[str]) -> bool:
@@ -119,3 +141,15 @@ class HyperparameterChecker(BaseChecker):
                 found += 1
 
         return found == len(keywords_goal)
+
+    def load_hyperparameters_pickle(self):
+        """Load the pickled strict hyperparameters dict from disk."""
+        file = os.path.join(
+            Path(__file__).parent.parent.parent, "resources\\hyperparameters_dict.pickle"
+        )
+        if os.path.exists(file):
+            with open(file, "rb") as file_handler:
+                self._hyperparameters_strict = pickle.load(file_handler)
+        else:
+            self.add_message("hyperparameters-strict-file-not-found")
+            self._hyperparameters_strict = self.hyperparameters_main

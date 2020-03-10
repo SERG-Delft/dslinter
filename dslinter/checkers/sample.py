@@ -12,7 +12,7 @@ class SampleChecker(BaseChecker):
     name = "sample"
     priority = -1
     msgs = {
-        "W0001": (
+        "W0000": (
             "Returns a non-unique constant.",
             "non-unique-returns",
             "All constants returned in a function should be unique.",

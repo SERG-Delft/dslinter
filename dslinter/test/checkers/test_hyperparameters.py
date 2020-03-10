@@ -2,6 +2,8 @@
 import astroid
 import pylint.testutils
 
+from pylint.testutils import set_config
+
 import dslinter
 
 
@@ -107,3 +109,31 @@ class TestHyperParameterChecker(pylint.testutils.CheckerTestCase):
         with self.assertNoMessages():
             self.checker.visit_call(call_node_option_one)
             self.checker.visit_call(call_node_option_two)
+
+    @set_config(strict_hyperparameters=True)
+    def test_strict_incorrect(self):
+        """Test if a message is added when not strictly all hyperparameters are added."""
+        call_node = astroid.extract_node(
+            """
+            KMeans(n_clusters=5) #@
+            """
+        )
+
+        with self.assertAddsMessages(
+            pylint.testutils.Message(msg_id="hyperparameters", node=call_node),
+        ):
+            self.checker.visit_call(call_node)
+
+    @set_config(strict_hyperparameters=True)
+    def test_strict_correct(self):
+        """Test if no message is added when strictly all hyperparameters are added."""
+        call_node = astroid.extract_node(
+            """
+            KMeans(n_clusters=8, init='k-means++', n_init=10, max_iter=300, tol=0.0001, \
+            precompute_distances='auto', verbose=0, random_state=None, copy_x=True, n_jobs=None, \
+            algorithm='auto') #@
+            """
+        )
+
+        with self.assertNoMessages():
+            self.checker.visit_call(call_node)
