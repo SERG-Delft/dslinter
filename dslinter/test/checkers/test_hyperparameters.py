@@ -1,7 +1,9 @@
 """Class which tests the HyperparameterChecker."""
+import os
+from pathlib import Path
+
 import astroid
 import pylint.testutils
-
 from pylint.testutils import set_config
 
 import dslinter
@@ -11,6 +13,16 @@ class TestHyperParameterChecker(pylint.testutils.CheckerTestCase):
     """Class which tests the HyperparameterChecker."""
 
     CHECKER_CLASS = dslinter.plugin.HyperparameterChecker
+
+    @staticmethod
+    def get_strict_pickle() -> str:
+        """
+        Get the path to the strict hyperparameters dict pickle.
+
+        :return: path of pickle.
+        """
+        package_dir = Path(os.path.dirname(os.path.realpath(__file__))).parent.parent.parent
+        return os.path.join(package_dir, "resources\\hyperparameters_dict.pickle")
 
     def test_has_keyword_true(self):
         """Test if the function returns true when the keyword is present."""
@@ -122,6 +134,7 @@ class TestHyperParameterChecker(pylint.testutils.CheckerTestCase):
         with self.assertAddsMessages(
             pylint.testutils.Message(msg_id="hyperparameters", node=call_node),
         ):
+            self.checker.strict_pickle = self.get_strict_pickle()
             self.checker.visit_call(call_node)
 
     @set_config(strict_hyperparameters=True)
@@ -136,4 +149,5 @@ class TestHyperParameterChecker(pylint.testutils.CheckerTestCase):
         )
 
         with self.assertNoMessages():
+            self.checker.strict_pickle = self.get_strict_pickle()
             self.checker.visit_call(call_node)

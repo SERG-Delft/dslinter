@@ -2,7 +2,7 @@
 import os
 import pickle
 from pathlib import Path
-from typing import List, Dict
+from typing import Dict, List
 
 import astroid
 from pylint.checkers import BaseChecker
@@ -85,6 +85,9 @@ class HyperparameterChecker(BaseChecker):
         """
         super(HyperparameterChecker, self).__init__(linter)
         self._hyperparameters_strict = None
+        self._strict_pickle = os.path.join(
+            Path(__file__).parent.parent.parent, "resources\\hyperparameters_dict.pickle"
+        )
 
     def visit_call(self, node: astroid.nodes.Call):
         """
@@ -144,12 +147,19 @@ class HyperparameterChecker(BaseChecker):
 
     def load_hyperparameters_pickle(self):
         """Load the pickled strict hyperparameters dict from disk."""
-        file = os.path.join(
-            Path(__file__).parent.parent.parent, "resources\\hyperparameters_dict.pickle"
-        )
-        if os.path.exists(file):
-            with open(file, "rb") as file_handler:
+        if os.path.exists(self._strict_pickle):
+            with open(self._strict_pickle, "rb") as file_handler:
                 self._hyperparameters_strict = pickle.load(file_handler)
         else:
             self.add_message("hyperparameters-strict-file-not-found")
             self._hyperparameters_strict = self.hyperparameters_main
+
+    @property
+    def strict_pickle(self):
+        """Get the _strict_pickle property."""
+        return self._strict_pickle
+
+    @strict_pickle.setter
+    def strict_pickle(self, value):
+        """Set the _strict_pickle property."""
+        self._strict_pickle = value
