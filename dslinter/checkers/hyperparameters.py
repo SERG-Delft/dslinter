@@ -72,8 +72,8 @@ class HyperparameterChecker(BaseChecker):
         "MultiTaskElasticNet": [{"positional": 2, "keywords": ["alpha", "l1_ratio"]}],
         "LassoLars": [{"positional": 1, "keywords": ["alpha"]}],
         # sklearn.svm
-        "SVC": [{"positional": 4, "keywords": ["C", "gamma"]}],
-        "NuSVC": [{"positional": 4, "keywords": ["nu", "gamma"]}],
+        "SVC": [{"positional": 4, "keywords": ["C", "kernel", "gamma"]}],
+        "NuSVC": [{"positional": 4, "keywords": ["nu", "kernel", "gamma"]}],
         # There are more modules.
     }
 
