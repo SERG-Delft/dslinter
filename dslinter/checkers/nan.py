@@ -1,8 +1,7 @@
 """Checker which checks whether values are compared with np.nan."""
+import astroid
 from pylint.checkers import BaseChecker
 from pylint.interfaces import IAstroidChecker
-
-import astroid
 
 
 class NanChecker(BaseChecker):

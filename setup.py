@@ -8,5 +8,5 @@ setup(
     author="Man Foo",
     author_email="foomail@foo.com",
     packages=find_packages(),
-    install_requires=["pylint>=2.0", "astroid"],
+    install_requires=["pylint>=2.0", "astroid", "mypy", "data-science-types"],
 )
