@@ -1,7 +1,8 @@
 """Utility class for type inference."""
 import os
-from typing import Callable, List, Tuple
+from typing import Callable, Dict, List, Tuple
 
+import astroid
 import mypy.api
 
 
@@ -59,3 +60,21 @@ class TypeInference:
                 inferred_type = line.split(indicator)[1][:-1]
                 types.append((line_number, inferred_type))
         return types
+
+    @staticmethod
+    def combine_nodes_with_inferred_types(
+        nodes: List[astroid.nodes], types: List[Tuple[int, str]]
+    ) -> Dict[astroid.nodes, str]:
+        """
+        Create a Dict with nodes and their inferred types.
+
+        :param nodes: Nodes where a type is inferred from.
+        :param types: List of (line number, inferred type) Tuples.
+        :return: Dict with nodes and their inferred types
+        """
+        nodes_with_types = {}
+        for node in nodes:
+            for line, type_inferred in types:
+                if node.tolineno == line:
+                    nodes_with_types[node] = type_inferred
+        return nodes_with_types

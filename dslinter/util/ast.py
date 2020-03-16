@@ -8,9 +8,7 @@ class AST:
     """Utility class for working with the Abstract Syntax Tree (AST)."""
 
     @staticmethod
-    def search_nodes(
-        node: astroid.node_classes.NodeNG, type_searched: type
-    ) -> List[astroid.node_classes.NodeNG]:
+    def search_nodes(node: astroid.nodes, type_searched: type) -> List[astroid.nodes]:
         """
         Search recursively for all nodes of a certain type.
 

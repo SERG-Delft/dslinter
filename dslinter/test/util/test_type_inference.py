@@ -46,3 +46,9 @@ class TestTypeInference:
 
         result = TypeInference.parse_mypy_result(mypy_result)
         assert result == [(1, "builtins.int"), (2, "builtins.str")]
+
+    def test_add_types_to_nodes(self):
+        """Test if the add_types_to_nodes returns a correct dict on a single line."""
+        nodes = [astroid.extract_node("a.b()")]
+        types = [(1, "builtins.str")]
+        assert TypeInference.combine_nodes_with_inferred_types(nodes, types) == {nodes[0]: types[0][1]}
