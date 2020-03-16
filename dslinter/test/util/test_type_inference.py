@@ -6,6 +6,14 @@ from dslinter.util.type_inference import TypeInference
 
 class TestTypeInference:
     """Class which tests the TypeInference util class."""
+    def test_infer_types(self):
+        """Test the infer_types method."""
+        code = "a = 'b'; a.join([])"
+        module_node = astroid.parse(code)
+        node_type = astroid.nodes.Call
+        result = TypeInference.infer_types(module_node, node_type, lambda x: x.func.expr.name)
+
+        assert result == {module_node.body[1].value: "builtins.str"}
 
     def test_add_reveal_type_calls(self):
         """Test the add_reveal_type_calls() method with a single expression."""
@@ -51,4 +59,5 @@ class TestTypeInference:
         """Test if the add_types_to_nodes returns a correct dict on a single line."""
         nodes = [astroid.extract_node("a.b()")]
         types = [(1, "builtins.str")]
-        assert TypeInference.combine_nodes_with_inferred_types(nodes, types) == {nodes[0]: types[0][1]}
+        result = TypeInference.combine_nodes_with_inferred_types(nodes, types)
+        assert result == {nodes[0]: types[0][1]}

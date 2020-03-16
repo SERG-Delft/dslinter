@@ -5,9 +5,32 @@ from typing import Callable, Dict, List, Tuple
 import astroid
 import mypy.api
 
+from dslinter.util.ast import AST
+
 
 class TypeInference:
     """Utility class for type inference."""
+
+    @staticmethod
+    def infer_types(
+        module: astroid.nodes.Module, node_type: type, expr: Callable
+    ) -> Dict[astroid.node_classes.NodeNG, str]:
+        """
+        Infer the types of an attribute of all nodes of the same type in a module.
+
+        :param module: The module node where all nodes are located in.
+        :param node_type: Type of node of which the type will be inferred on a certain attribute.
+        :param expr: Expression to extract the attribute from the node where the type will be
+            inferred on. E.g., lambda node: node.func.expr.name
+        :return: All nodes in the module of type 'node_type' with the inferred type of the attribute
+            accessible with the expression 'expr'.
+        """
+        nodes = AST.search_nodes(module, node_type)
+        source_code = AST.get_source_code(module)
+        mypy_code = TypeInference.add_reveal_type_calls(source_code, nodes, expr)
+        mypy_result = TypeInference.run_mypy(mypy_code)
+        mypy_types = TypeInference.parse_mypy_result(mypy_result)
+        return TypeInference.combine_nodes_with_inferred_types(nodes, mypy_types)
 
     @staticmethod
     def add_reveal_type_calls(code: str, nodes: List, expr: Callable) -> str:
@@ -63,15 +86,16 @@ class TypeInference:
 
     @staticmethod
     def combine_nodes_with_inferred_types(
-        nodes: List[astroid.nodes], types: List[Tuple[int, str]]
-    ) -> Dict[astroid.nodes, str]:
+        nodes: List[astroid.node_classes.NodeNG], types: List[Tuple[int, str]]
+    ) -> Dict[astroid.node_classes.NodeNG, str]:
         """
         Create a Dict with nodes and their inferred types.
 
         :param nodes: Nodes where a type is inferred from.
         :param types: List of (line number, inferred type) Tuples.
-        :return: Dict with nodes and their inferred types
+        :return: Dict with nodes and their inferred types.
         """
+        # TODO: The current implementation is limited to one call per line of source code.
         nodes_with_types = {}
         for node in nodes:
             for line, type_inferred in types:
