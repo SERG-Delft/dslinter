@@ -23,3 +23,13 @@ class TestTypeInference:
 
         result = TypeInference.add_reveal_type_calls(code, nodes, lambda node: node.func.expr.name)
         assert result == "a = b.c(d); reveal_type(b)\nx = 5 \ne = f.g(); reveal_type(f)"
+
+    def test_run_mypy_success(self):
+        """Test if mypy is ran successfully on some correct code."""
+        result = TypeInference.run_mypy("a = 5")
+        assert result == "Success: no issues found in 1 source file\n"
+
+    def test_run_mypy_error(self):
+        """Test if mypy returns an error when code is incorrect."""
+        result = TypeInference.run_mypy("a: str = 5")
+        assert result.splitlines()[1] == "Found 1 error in 1 file (checked 1 source file)"

@@ -1,5 +1,9 @@
 """Utility class for type inference."""
-from typing import List, Callable
+import os
+from typing import Callable, List
+
+import mypy.api
+
 
 class TypeInference:
     """Utility class for type inference."""
@@ -20,3 +24,21 @@ class TypeInference:
             lines[node.tolineno - 1] += "; reveal_type({})".format(expr(node))
 
         return "\n".join(lines)
+
+    @staticmethod
+    def run_mypy(code: str) -> str:
+        """
+        Run mypy on some code.
+
+        :param code: Code to run mypy on.
+        :return: Normal report written to sys.stdout by mypy.
+        """
+        file = open("_tmp_dslinter.py", "w")
+        file.write(code)
+        file.close()
+        result = mypy.api.run(["_tmp_dslinter.py"])
+        os.remove("_tmp_dslinter.py")
+
+        if result[1] != "":
+            raise Exception("Running mypy resulted in an error: " + result[1])
+        return result[0]

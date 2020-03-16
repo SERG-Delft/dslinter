@@ -41,4 +41,4 @@ class AST:
             with open(node.file, "r") as file:
                 return file.read()
         else:
-            raise ValueError("Could not retrieve the source code of the module.")
+            raise Exception("Could not retrieve the source code of the module.")
