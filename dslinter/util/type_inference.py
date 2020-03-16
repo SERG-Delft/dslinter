@@ -1,6 +1,6 @@
 """Utility class for type inference."""
 import os
-from typing import Callable, List
+from typing import Callable, List, Tuple
 
 import mypy.api
 
@@ -42,3 +42,20 @@ class TypeInference:
         if result[1] != "":
             raise Exception("Running mypy resulted in an error: " + result[1])
         return result[0]
+
+    @staticmethod
+    def parse_mypy_result(mypy_result: str) -> List[Tuple[int, str]]:
+        """
+        Parse the result of mypy to obtain all revealed types.
+
+        :param mypy_result: mypy result to parse.
+        :return: List of (line number, inferred type) Tuples.
+        """
+        types = []
+        indicator = ": note: Revealed type is '"
+        for line in mypy_result.splitlines():
+            if indicator in line:
+                line_number = int(line.split(indicator)[0].split(":")[-1])
+                inferred_type = line.split(indicator)[1][:-1]
+                types.append((line_number, inferred_type))
+        return types

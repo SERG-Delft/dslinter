@@ -33,3 +33,16 @@ class TestTypeInference:
         """Test if mypy returns an error when code is incorrect."""
         result = TypeInference.run_mypy("a: str = 5")
         assert result.splitlines()[1] == "Found 1 error in 1 file (checked 1 source file)"
+
+    def test_parse_mypy_result(self):
+        """Test if the parse_mypy_result method returns the correct type."""
+        mypy_result = "<string>:1: note: Revealed type is 'builtins.int'"
+        assert TypeInference.parse_mypy_result(mypy_result) == [(1, "builtins.int")]
+
+    def test_parse_mypy_result_multiple(self):
+        """Test if the parse_mypy_result method returns the correct types."""
+        mypy_result = "<string>:1: note: Revealed type is 'builtins.int'"
+        mypy_result += "\n<string>:2: note: Revealed type is 'builtins.str'"
+
+        result = TypeInference.parse_mypy_result(mypy_result)
+        assert result == [(1, "builtins.int"), (2, "builtins.str")]
