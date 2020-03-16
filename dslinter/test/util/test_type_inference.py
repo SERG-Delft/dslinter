@@ -6,6 +6,7 @@ from dslinter.util.type_inference import TypeInference
 
 class TestTypeInference:
     """Class which tests the TypeInference util class."""
+
     def test_infer_types(self):
         """Test the infer_types method."""
         code = "a = 'b'; a.join([])"
