@@ -45,7 +45,10 @@ class TypeInference:
         """
         lines = code.splitlines()
         for node in nodes:
-            lines[node.tolineno - 1] += "; reveal_type({})".format(expr(node))
+            try:
+                lines[node.tolineno - 1] += "; reveal_type({})".format(expr(node))
+            except AttributeError:
+                pass  # The attribute from the expression is not found. Continue.
 
         return "\n".join(lines)
 
@@ -95,10 +98,10 @@ class TypeInference:
         :param types: List of (line number, inferred type) Tuples.
         :return: Dict with nodes and their inferred types.
         """
-        # TODO: The current implementation is limited to one call per line of source code.
         nodes_with_types = {}
         for node in nodes:
             for line, type_inferred in types:
                 if node.tolineno == line:
                     nodes_with_types[node] = type_inferred
+                    types.remove((line, type_inferred))  # Remove for any next call on same line.
         return nodes_with_types
