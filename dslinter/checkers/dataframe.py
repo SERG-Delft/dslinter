@@ -50,12 +50,40 @@ class DataFrameChecker(BaseChecker):
 
         :param node: Node which is visited.
         """
-        if hasattr(node.func.expr, "name") and not isinstance(node.parent, astroid.nodes.Attribute):
-            # The call is of the form 'a.f();'
-            if self._call_types[node] == "pandas.core.frame.DataFrame" and not (
+        if self._is_simple_call_node(node) and self._dataframe_is_lost(node):
+            self.add_message("dataframe-lost", node=node)
+
+    @staticmethod
+    def _is_simple_call_node(node: astroid.nodes.Call) -> bool:
+        """
+        Evaluate whether the node is a 'simple' call node.
+
+        A 'simple' Call node is a single function call made on an expression.
+        E.g., 'a.f()' and not 'f()' or 'a.f().g()' or 'a.f(g())'.
+
+        :param node: Call node to evaluate.
+        :return: True if the Call node is considered simple.
+        """
+        return (
+            hasattr(node.func, "expr")  # The call is made on an expression.
+            and hasattr(node.func.expr, "name")  # The expr the func is called on is a named thing.
+            and not isinstance(node.parent, astroid.nodes.Attribute)  # Call is not an attribute.
+            and not isinstance(node.parent, astroid.nodes.Call)  # Call is not part of another call.
+        )
+
+    def _dataframe_is_lost(self, node: astroid.nodes.Call) -> bool:
+        """
+        Check if the call is done on a DataFrame and the result is not assigned to a variable.
+
+        :param node: Node which is visited.
+        :return: True if the call results in a DataFrame which is lost.
+        """
+        return (
+            node in self._call_types  # Check if the type is inferred of this call.
+            and self._call_types[node] == "pandas.core.frame.DataFrame"
+            and not (  # Check if the call is part of an assign operation.
                 isinstance(node.parent, astroid.nodes.Assign)
                 or isinstance(node.parent, astroid.nodes.AssignAttr)
                 or isinstance(node.parent, astroid.nodes.AnnAssign)
-            ):
-                # The result of the call is not assigned.
-                self.add_message("dataframe-lost", node=node)
+            )
+        )
