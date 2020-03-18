@@ -62,7 +62,7 @@ class DataFrameChecker(BaseChecker):
         E.g., 'a.f()' and not 'f()' or 'a.f().g()' or 'a.f(g())'.
 
         :param node: Call node to evaluate.
-        :return: True if the Call node is considered simple.
+        :return: True when the Call node is considered simple.
         """
         return (
             hasattr(node.func, "expr")  # The call is made on an expression.
@@ -73,17 +73,37 @@ class DataFrameChecker(BaseChecker):
 
     def _dataframe_is_lost(self, node: astroid.nodes.Call) -> bool:
         """
-        Check if the call is done on a DataFrame and the result is not assigned to a variable.
+        Check whether the call is done on a DataFrame and the result is lost.
+
+        A result is seen as lost if it is not assigned to a variable and the operation is not done
+        inplace.
 
         :param node: Node which is visited.
-        :return: True if the call results in a DataFrame which is lost.
+        :return: True when the call results in a DataFrame which is lost.
         """
         return (
             node in self._call_types  # Check if the type is inferred of this call.
             and self._call_types[node] == "pandas.core.frame.DataFrame"
+            and not self._is_inplace_operation(node)
             and not (  # Check if the call is part of an assign operation.
                 isinstance(node.parent, astroid.nodes.Assign)
                 or isinstance(node.parent, astroid.nodes.AssignAttr)
                 or isinstance(node.parent, astroid.nodes.AnnAssign)
             )
         )
+
+    @staticmethod
+    def _is_inplace_operation(node: astroid.nodes.Call) -> bool:
+        """
+        Evaluate whether the call has an 'inplace==True' keyword argument.
+
+        :param node: Node to check the arguments from.
+        :return: True when the call has an 'inplace==True' keyword argument.
+        """
+        if node.keywords is None:
+            return False
+
+        for keyword in node.keywords:
+            if keyword.arg == "inplace":
+                return keyword.value.value
+        return False

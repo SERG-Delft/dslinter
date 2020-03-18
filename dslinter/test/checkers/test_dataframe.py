@@ -41,6 +41,14 @@ class TestDataFrameChecker(pylint.testutils.CheckerTestCase):
             self.checker.visit_module(module_tree)
             self.checker.visit_call(unassigned_call)
 
+    def test_dataframe_call_not_assigned_inplace(self):
+        """Test whether no message is added when an inplace DataFrame operation is not assigned."""
+        module_tree = astroid.parse(self.DF_INIT + "df.abs(inplace=True)")
+        unassigned_call = module_tree.body[-1].value
+        with self.assertNoMessages():
+            self.checker.visit_module(module_tree)
+            self.checker.visit_call(unassigned_call)
+
     def test_dataframe_call_assigned_double(self):
         """Test whether no message is added when two DataFrame operations are assigned."""
         module_tree = astroid.parse(self.DF_INIT + "a = df.abs().abs()")
