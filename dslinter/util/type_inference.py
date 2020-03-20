@@ -103,10 +103,12 @@ class TypeInference:
         :param types: List of (line number, inferred type) Tuples.
         :return: Dict with nodes and their inferred types.
         """
+        unseen_types = types.copy()
         nodes_with_types = {}
         for node in nodes:
-            for line, type_inferred in types:
+            for line, type_inferred in unseen_types:
                 if node.tolineno == line:
                     nodes_with_types[node] = type_inferred
-                    types.remove((line, type_inferred))  # Remove for any next call on same line.
+                    # Remove the tuple so multiple calls on the same line get the correct type.
+                    unseen_types.remove((line, type_inferred))
         return nodes_with_types
