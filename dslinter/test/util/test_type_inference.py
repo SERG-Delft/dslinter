@@ -63,9 +63,17 @@ class TestTypeInference:
         result = TypeInference.combine_nodes_with_inferred_types(nodes, types)
         assert result == {nodes[0]: types[0][1]}
 
+    def test_add_reveal_type_calls_block(self):
+        """Test if the reveal_type() call is added to the body of a block statement."""
+        code = "y = ''\nfor x in y.join([]):\n\tpass"
+        nodes = [astroid.parse(code).body[1].iter]
+
+        result = TypeInference.add_reveal_type_calls(code, nodes, lambda node: node.func.expr.name)
+        assert result == "y = ''\nfor x in y.join([]):\n\tpass; reveal_type(y)"
+
     def test_type_inference_in_for_loop_definition(self):
         """Test if type inference works for Calls inside for loop definitions."""
-        code = "y = ''\nfor x in y.join([]): pass"
+        code = "y = ''\nfor x in y.join([]):\n\tpass"
         module_node = astroid.parse(code)
         node_type = astroid.nodes.Call
         result = TypeInference.infer_types(module_node, node_type, lambda x: x.func.expr.name)

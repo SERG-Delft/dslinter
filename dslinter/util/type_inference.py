@@ -75,8 +75,8 @@ class TypeInference:
         :param node: The node where a call is added to in the source code.
         :return: Line number where the reveal_type() call can be added.
         """
-        if hasattr(node, "blockstart_tolineno"):
-            return TypeInference.line_to_add_call(node.body[0])
+        if hasattr(node.parent, "blockstart_tolineno") and node not in node.parent.body:
+            return TypeInference.line_to_add_call(node.parent.body[0])
         return node.tolineno
 
     @staticmethod
