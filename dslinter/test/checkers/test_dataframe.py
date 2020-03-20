@@ -8,7 +8,7 @@ import dslinter
 class TestDataFrameChecker(pylint.testutils.CheckerTestCase):
     """Class which tests the DataFrameChecker."""
 
-    CHECKER_CLASS = dslinter.plugin.DataFrameChecker
+    CHECKER_CLASS = dslinter.plugin.DataFrameCallChecker
 
     DF_INIT = """
     import pandas as pd

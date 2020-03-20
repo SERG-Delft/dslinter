@@ -1,4 +1,4 @@
-"""DataFrame checker which checks correct handling of DataFrames."""
+"""DataFrame checker which checks correct handling of calls on DataFrames."""
 from typing import Dict
 
 import astroid
@@ -8,18 +8,18 @@ from pylint.interfaces import IAstroidChecker
 from dslinter.util.type_inference import TypeInference
 
 
-class DataFrameChecker(BaseChecker):
-    """DataFrame checker which checks correct handling of DataFrames."""
+class DataFrameCallChecker(BaseChecker):
+    """DataFrame checker which checks correct handling of calls on DataFrames."""
 
     __implements__ = IAstroidChecker
 
-    name = "dataframe"
+    name = "dataframe-call"
     priority = -1
     msgs = {
         "W5501": (
             "Result of operation on a DataFrame is not assigned.",
             "dataframe-lost",
-            "Most operations on a DataFrame return a new DataFrame, which should be assigned to \
+            "Most operations on a DataFrame return a new DataFrame. These should be assigned to \
             a variable.",
         ),
     }
@@ -31,7 +31,7 @@ class DataFrameChecker(BaseChecker):
 
     def visit_module(self, node: astroid.nodes.Module):
         """
-        When an Module node is visited, scan for Call nodes and get the type of the func expr.
+        When an Module node is visited, scan for Call nodes and get type the function is called on.
 
         :param node: Node which is visited.
         """
