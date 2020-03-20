@@ -45,6 +45,8 @@ class TypeInference:
         """
         lines = code.splitlines()
         for node in nodes:
+            if lines[node.tolineno - 1].strip()[-1:] == ":":
+                continue  # Adding something here would break the syntax.
             try:
                 lines[node.tolineno - 1] += "; reveal_type({})".format(expr(node))
             except AttributeError:
@@ -78,12 +80,15 @@ class TypeInference:
         :param mypy_result: mypy result to parse.
         :return: List of (line number, inferred type) Tuples.
         """
+        if "error: invalid syntax" in mypy_result:
+            raise Exception("Mypy cannot run on invalid syntax.")
+
         types = []
-        indicator = ": note: Revealed type is '"
+        revealed_type_indicator = ": note: Revealed type is '"
         for line in mypy_result.splitlines():
-            if indicator in line:
-                line_number = int(line.split(indicator)[0].split(":")[-1])
-                inferred_type = line.split(indicator)[1][:-1]
+            if revealed_type_indicator in line:
+                line_number = int(line.split(revealed_type_indicator)[0].split(":")[-1])
+                inferred_type = line.split(revealed_type_indicator)[1][:-1]
                 types.append((line_number, inferred_type))
         return types
 
