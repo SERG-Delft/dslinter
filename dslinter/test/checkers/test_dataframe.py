@@ -130,3 +130,13 @@ class TestDataFrameChecker(pylint.testutils.CheckerTestCase):
             self.checker.visit_module(module_tree)
             self.checker.visit_call(assigned_call_1)
             self.checker.visit_call(assigned_call_2)
+
+    def test_iterating_through_dataframe(self):
+        """Test whether a message is added when there is iterated through a DataFrame."""
+        module_tree = astroid.parse(self.DF_INIT + "for _, row in df.iterrows(): pass")
+        call = module_tree.body[-1].iter
+        with self.assertAddsMessages(
+            pylint.testutils.Message(msg_id="dataframe-iteration", node=call),
+        ):
+            self.checker.visit_module(module_tree)
+            self.checker.visit_call(call)

@@ -22,6 +22,11 @@ class DataFrameCallChecker(BaseChecker):
             "Most operations on a DataFrame return a new DataFrame. These should be assigned to \
             a variable.",
         ),
+        "W5502": (
+            "Iterating through a DataFrame.",
+            "dataframe-iteration",
+            "Iteration through pandas objects is generally slow and should be avoided.",
+        ),
     }
     options = ()
 
@@ -42,16 +47,14 @@ class DataFrameCallChecker(BaseChecker):
 
     def visit_call(self, node: astroid.nodes.Call):  # noqa: D205, D400
         """
-        When a 'simple' Call node is visited and the type of object the function is called on is a
-            DataFrame, check if the Call node is part of an expression.
-
-        A 'simple' Call node is a single function call. E.g., 'f()' and not 'f().g()'.
-        This means that 'DataFrame([]).abs().abs()' is a known false negative.
+        When a Call node is visited, add messages if it violated the defined rules.
 
         :param node: Node which is visited.
         """
         if self._is_simple_call_node(node) and self._dataframe_is_lost(node):
             self.add_message("dataframe-lost", node=node)
+        if self._iterating_through_dataframe(node):
+            self.add_message("dataframe-iteration", node=node)
 
     @staticmethod
     def _is_simple_call_node(node: astroid.nodes.Call) -> bool:
@@ -104,3 +107,17 @@ class DataFrameCallChecker(BaseChecker):
             if keyword.arg == "inplace":
                 return keyword.value.value
         return False
+
+    def _iterating_through_dataframe(self, node: astroid.nodes.Call) -> bool:
+        """
+        Evaluate whether there is iterated through a DataFrame.
+
+        :param node: Node which is visited.
+        :return: True when there is iterated through a DataFrame.
+        """
+        return (
+            isinstance(node.parent, astroid.nodes.For)
+            and node not in node.parent.body
+            and node in self._call_types
+            and self._call_types[node] == "pandas.core.frame.DataFrame"
+        )
