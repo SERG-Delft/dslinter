@@ -75,7 +75,7 @@ class DataFrameCallChecker(BaseChecker):
         """
         Check whether the call is done on a DataFrame and the result is lost.
 
-        A result is seen as lost if it is not assigned to a variable and the operation is not done
+        A result is seen as lost if its parent is an Expression and the operation is not done
         inplace.
 
         :param node: Node which is visited.
@@ -85,11 +85,8 @@ class DataFrameCallChecker(BaseChecker):
             node in self._call_types  # Check if the type is inferred of this call.
             and self._call_types[node] == "pandas.core.frame.DataFrame"
             and not self._is_inplace_operation(node)
-            and not (  # Check if the call is part of an assign operation.
-                isinstance(node.parent, astroid.nodes.Assign)
-                or isinstance(node.parent, astroid.nodes.AssignAttr)
-                or isinstance(node.parent, astroid.nodes.AnnAssign)
-            )
+            # If the parent of the Call is an Expression, it means the DataFrame is lost.
+            and isinstance(node.parent, astroid.nodes.Expr)
         )
 
     @staticmethod

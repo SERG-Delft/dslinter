@@ -10,10 +10,7 @@ class TestDataFrameChecker(pylint.testutils.CheckerTestCase):
 
     CHECKER_CLASS = dslinter.plugin.DataFrameCallChecker
 
-    DF_INIT = """
-    import pandas as pd
-    df = pd.DataFrame()
-    """
+    DF_INIT = "import pandas as pd\ndf = pd.DataFrame()\n"
 
     def test_dataframe_call_assigned(self):
         """Test whether no message is added when a DataFrame operation is assigned."""
@@ -40,6 +37,14 @@ class TestDataFrameChecker(pylint.testutils.CheckerTestCase):
         ):
             self.checker.visit_module(module_tree)
             self.checker.visit_call(unassigned_call)
+
+    def test_call_in_for_loop(self):
+        """Test whether no message is added when a call is made in a for loop definition."""
+        module_tree = astroid.parse(self.DF_INIT + "for x in df.abs(): pass")
+        call = module_tree.body[-1].iter
+        with self.assertNoMessages():
+            self.checker.visit_module(module_tree)
+            self.checker.visit_call(call)
 
     def test_dataframe_call_not_assigned_inplace(self):
         """Test whether no message is added when an inplace DataFrame operation is not assigned."""
