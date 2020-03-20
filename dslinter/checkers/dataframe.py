@@ -8,12 +8,12 @@ from pylint.interfaces import IAstroidChecker
 from dslinter.util.type_inference import TypeInference
 
 
-class DataFrameCallChecker(BaseChecker):
+class DataFrameChecker(BaseChecker):
     """DataFrame checker which checks correct handling of calls on DataFrames."""
 
     __implements__ = IAstroidChecker
 
-    name = "dataframe-call"
+    name = "dataframe"
     priority = -1
     msgs = {
         "W5501": (
