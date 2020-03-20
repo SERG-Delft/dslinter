@@ -1,5 +1,5 @@
 """Main module for the plugin."""
-from dslinter.checkers.dataframe import DataFrameCallChecker
+from dslinter.checkers.dataframe_call import DataFrameCallChecker
 from dslinter.checkers.hyperparameters import HyperparameterChecker
 from dslinter.checkers.imports import ImportChecker
 from dslinter.checkers.nan import NanChecker
