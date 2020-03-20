@@ -62,3 +62,12 @@ class TestTypeInference:
         types = [(1, "builtins.str")]
         result = TypeInference.combine_nodes_with_inferred_types(nodes, types)
         assert result == {nodes[0]: types[0][1]}
+
+    def test_type_inference_in_for_loop_definition(self):
+        """Test if type inference works for Calls inside for loop definitions."""
+        code = "y = ''\nfor x in y.join([]): pass"
+        module_node = astroid.parse(code)
+        node_type = astroid.nodes.Call
+        result = TypeInference.infer_types(module_node, node_type, lambda x: x.func.expr.name)
+
+        assert result == {module_node.body[1].iter: "builtins.str"}

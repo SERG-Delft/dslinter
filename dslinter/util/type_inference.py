@@ -45,14 +45,39 @@ class TypeInference:
         """
         lines = code.splitlines()
         for node in nodes:
-            if lines[node.tolineno - 1].strip()[-1:] == ":":
-                continue  # Adding something here would break the syntax.
             try:
-                lines[node.tolineno - 1] += "; reveal_type({})".format(expr(node))
+                lines[TypeInference.line_to_add_call(node) - 1] += "; reveal_type({})".format(
+                    expr(node)
+                )
             except AttributeError:
                 pass  # The attribute from the expression is not found. Continue.
 
         return "\n".join(lines)
+
+    @staticmethod
+    def line_to_add_call(node: astroid.node_classes.NodeNG):
+        """
+        Determine the line number where the reveal_type() call can be added to.
+
+        In case the node starts a block, the call cannot be added to the end of the line, as it
+        will break the syntax. An example how this would break the syntax:
+        '''
+        for x in y:;reveal_type(x)
+            print(x)
+        '''
+        The call will be added to the end of the first non block node in the body of the node:
+        '''
+        for x in y:
+            for z in x:
+                print(z);reveal_type(x)
+        '''
+
+        :param node: The node where a call is added to in the source code.
+        :return: Line number where the reveal_type() call can be added.
+        """
+        if hasattr(node, "blockstart_tolineno"):
+            return TypeInference.line_to_add_call(node.body[0])
+        return node.tolineno
 
     @staticmethod
     def run_mypy(code: str) -> str:
@@ -107,7 +132,7 @@ class TypeInference:
         nodes_with_types = {}
         for node in nodes:
             for line, type_inferred in unseen_types:
-                if node.tolineno == line:
+                if TypeInference.line_to_add_call(node) == line:
                     nodes_with_types[node] = type_inferred
                     # Remove the tuple so multiple calls on the same line get the correct type.
                     unseen_types.remove((line, type_inferred))
