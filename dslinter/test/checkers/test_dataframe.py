@@ -132,3 +132,13 @@ class TestDataFrameChecker(pylint.testutils.CheckerTestCase):
         ):
             self.checker.visit_module(module_tree)
             self.checker.visit_call(call)
+
+    def test_iterating_and_modifying(self):
+        """Test whether a dataframe-iteration-modification violation is correctly found."""
+        module_tree = astroid.parse(self.DF_INIT + "for _, row in df.iterrows(): row['a'] = 10")
+        for_node = module_tree.body[-1]
+        with self.assertAddsMessages(
+            pylint.testutils.Message(msg_id="dataframe-iteration-modification", node=for_node),
+        ):
+            self.checker.visit_module(module_tree)
+            self.checker.visit_for(for_node)

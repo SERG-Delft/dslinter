@@ -1,5 +1,5 @@
 """DataFrame checker which checks correct handling of calls on DataFrames."""
-from typing import Dict
+from typing import Dict, List
 
 import astroid
 from pylint.checkers import BaseChecker
@@ -26,6 +26,11 @@ class DataFrameChecker(BaseChecker):
             "Iterating through a DataFrame.",
             "dataframe-iteration",
             "Iteration through pandas objects is generally slow and should be avoided.",
+        ),
+        "W5503": (
+            "Iterated object is modified.",
+            "dataframe-iteration-modification",
+            "An object where is iterated over should not be modified.",
         ),
     }
     options = ()
@@ -121,3 +126,71 @@ class DataFrameChecker(BaseChecker):
             and node in self._call_types
             and self._call_types[node] == "pandas.core.frame.DataFrame"
         )
+
+    def visit_for(self, node: astroid.nodes.For):
+        """
+        When a For node is visited, check for dataframe-iteration-modification violations.
+
+        :param node: Node which is visited.
+        """
+        if not (
+            isinstance(node.iter, astroid.nodes.Call)
+            and node.iter in self._call_types
+            and self._call_types[node.iter] == "pandas.core.frame.DataFrame"
+        ):
+            return
+
+        for_targets = DataFrameChecker._get_for_targets(node)
+        assigned = DataFrameChecker._get_assigned_target_names(node)
+        modified_iterated_targets = any(target in for_targets for target in assigned)
+
+        if modified_iterated_targets:
+            self.add_message("dataframe-iteration-modification", node=node)
+
+    @staticmethod
+    def _get_for_targets(node: astroid.nodes.For) -> List[str]:
+        """
+        Get the target names of the for-loop definition.
+
+        :param node: For node to get the target names from.
+        :return: Target names.
+        """
+        target_names = []
+        if isinstance(node.target, astroid.nodes.Tuple):
+            for element in node.target.elts:
+                if isinstance(element, astroid.nodes.AssignName):
+                    target_names.append(element.name)
+        elif isinstance(node.target, astroid.nodes.AssignName):
+            target_names.append(node.target.name)
+        return target_names
+
+    @staticmethod
+    def _get_assigned_target_names(node: astroid.nodes.For) -> List[str]:
+        """
+        Get the target names of all assign nodes in the body of a For node.
+
+        :param node: For node to get the target names from.
+        :return: Target names.
+        """
+        assigned_names = []
+        for body_node in node.body:
+            if isinstance(body_node, astroid.nodes.Assign):
+                for target in body_node.targets:
+                    assigned_names.append(DataFrameChecker._get_target_name(target))
+            elif isinstance(body_node, astroid.nodes.AnnAssign):
+                assigned_names.append(DataFrameChecker._get_target_name(body_node.target))
+        return assigned_names
+
+    @staticmethod
+    def _get_target_name(target: astroid.node_classes.NodeNG) -> str:
+        """
+        Get the name attribute of a node listed as target.
+
+        :param target: Node to get the name from.
+        :return: Name.
+        """
+        if hasattr(target, "name"):
+            return target.name
+        if hasattr(target, "value"):
+            return DataFrameChecker._get_target_name(target.value)
+        raise Exception("Target name cannot be retrieved.")
