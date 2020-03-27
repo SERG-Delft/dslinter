@@ -42,3 +42,26 @@ class AST:
                 return file.read()
         else:
             raise Exception("Could not retrieve the source code of the module.")
+
+    @staticmethod
+    def search_body_parent(node: astroid.node_classes.NodeNG) -> astroid.node_classes.NodeNG:
+        """
+        Search the parent of the body block a node is part of.
+
+        :param node: Node to search the parent of the body block of.
+        :return: Parent node of the body block.
+        """
+        if hasattr(node, "body"):
+            return node
+        return AST.search_body_parent(node.parent)
+
+    @staticmethod
+    def search_body(node: astroid.node_classes.NodeNG) -> List[astroid.node_classes.NodeNG]:
+        """
+        Search the body block a node is part of.
+
+        :param node: Node to search the body block of.
+        :return: Body block the node is part of.
+        """
+        # noinspection PyUnresolvedReferences
+        return AST.search_body_parent(node).body

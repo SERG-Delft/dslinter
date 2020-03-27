@@ -26,3 +26,34 @@ class TestAST:
         source_code = "a = b.c(d)"
         module_tree = astroid.parse(source_code)
         assert AST.get_source_code(module_tree) == source_code
+
+    def test_search_body_parent_module(self):
+        """Test whether the module is returned when searching for the parent of its child."""
+        module_tree = astroid.parse(
+            """
+            f()
+            """
+        )
+        node = module_tree.body[0]
+        assert AST.search_body_parent(node) == module_tree
+
+    def test_search_body(self):
+        """Test whether the correct body is returned."""
+        module_tree = astroid.parse(
+            """
+            f()
+            """
+        )
+        node = module_tree.body[0]
+        assert AST.search_body(node) == module_tree.body
+
+    def test_search_body_parent_function(self):
+        """Test whether the function is returned when searching for the parent of its child."""
+        module_tree = astroid.parse(
+            """
+            def f():
+                return 0
+            """
+        )
+        node = module_tree.body[0].body[0]
+        assert AST.search_body_parent(node) == module_tree.body[0]

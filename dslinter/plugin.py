@@ -1,4 +1,5 @@
 """Main module for the plugin."""
+from dslinter.checkers.data_leakage import DataLeakageChecker
 from dslinter.checkers.dataframe import DataFrameChecker
 from dslinter.checkers.hyperparameters import HyperparameterChecker
 from dslinter.checkers.imports import ImportChecker
@@ -17,3 +18,4 @@ def register(linter):
     linter.register_checker(HyperparameterChecker(linter))
     linter.register_checker(NanChecker(linter))
     linter.register_checker(DataFrameChecker(linter))
+    linter.register_checker(DataLeakageChecker(linter))
