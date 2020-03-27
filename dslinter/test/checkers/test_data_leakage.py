@@ -1,13 +1,8 @@
 """Class which tests the DataLeakageChecker."""
-import os
-from pathlib import Path
-
 import astroid
 import pylint.testutils
-import pytest
 
 import dslinter
-from dslinter.util.resources import Resources
 
 
 class TestDataLeakageChecker(pylint.testutils.CheckerTestCase):

@@ -73,7 +73,8 @@ class DataLeakageChecker(BaseChecker):
                     return True
         return False
 
-    def _call_initiates_learning_class(self, call: astroid.Call) -> bool:
+    @staticmethod
+    def _call_initiates_learning_class(call: astroid.Call) -> bool:
         """
         Evaluate whether a Call node is initiating a learning class.
 

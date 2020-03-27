@@ -1,13 +1,9 @@
 """Class which tests the HyperparameterChecker."""
-import os
-from pathlib import Path
-
 import astroid
 import pylint.testutils
 from pylint.testutils import set_config
 
 import dslinter
-from dslinter.util.resources import Resources
 
 
 class TestHyperparameterChecker(pylint.testutils.CheckerTestCase):
