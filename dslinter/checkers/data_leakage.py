@@ -5,7 +5,7 @@ import astroid
 from pylint.checkers import BaseChecker
 from pylint.interfaces import IAstroidChecker
 
-from dslinter.util.ast import AST
+from dslinter.util.ast import ASTUtil
 
 
 class DataLeakageChecker(BaseChecker):
@@ -62,7 +62,7 @@ class DataLeakageChecker(BaseChecker):
         # If expr is a Name, check whether the assignment can be found
         # and the name is assigned a learning class.
         if isinstance(expr, astroid.Name):
-            body_block = AST.search_body(expr)
+            body_block = ASTUtil.search_body(expr)
             for child in body_block:
                 if (
                     isinstance(child, astroid.Assign)

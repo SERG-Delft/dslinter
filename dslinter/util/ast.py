@@ -4,7 +4,7 @@ from typing import List
 import astroid
 
 
-class AST:
+class ASTUtil:
     """Utility class for working with the Abstract Syntax Tree (AST)."""
 
     @staticmethod
@@ -19,7 +19,7 @@ class AST:
         """
         found: List = []
         for child in node.get_children():
-            found += AST.search_nodes(child, type_searched)
+            found += ASTUtil.search_nodes(child, type_searched)
 
         if isinstance(node, type_searched):
             found.append(node)
@@ -53,7 +53,7 @@ class AST:
         """
         if hasattr(node, "body"):
             return node
-        return AST.search_body_parent(node.parent)
+        return ASTUtil.search_body_parent(node.parent)
 
     @staticmethod
     def search_body(node: astroid.node_classes.NodeNG) -> List[astroid.node_classes.NodeNG]:
@@ -64,4 +64,4 @@ class AST:
         :return: Body block the node is part of.
         """
         # noinspection PyUnresolvedReferences
-        return AST.search_body_parent(node).body
+        return ASTUtil.search_body_parent(node).body

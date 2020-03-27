@@ -5,7 +5,7 @@ from typing import Callable, Dict, List, Tuple
 import astroid
 import mypy.api
 
-from dslinter.util.ast import AST
+from dslinter.util.ast import ASTUtil
 
 
 class TypeInference:
@@ -25,8 +25,8 @@ class TypeInference:
         :return: All nodes in the module of type 'node_type' with the inferred type of the attribute
             accessible with the expression 'expr'.
         """
-        nodes = AST.search_nodes(module, node_type)
-        source_code = AST.get_source_code(module)
+        nodes = ASTUtil.search_nodes(module, node_type)
+        source_code = ASTUtil.get_source_code(module)
         mypy_code = TypeInference.add_reveal_type_calls(source_code, nodes, expr)
         mypy_result = TypeInference.run_mypy(mypy_code)
         mypy_types = TypeInference.parse_mypy_result(mypy_result)
