@@ -6,6 +6,7 @@ from pylint.checkers import BaseChecker
 from pylint.interfaces import IAstroidChecker
 
 from dslinter.util.ast import ASTUtil
+from dslinter.util.resources import Resources
 
 
 class DataLeakageChecker(BaseChecker):
@@ -17,7 +18,8 @@ class DataLeakageChecker(BaseChecker):
     priority = -1
     msgs = {
         "W5601": (
-            "scikit-learn estimator not used in a pipeline." "sk-pipeline",
+            "scikit-learn estimator not used in a pipeline.",
+            "sk-pipeline",
             "All scikit-learn estimators should be used inside pipelines, to prevent data leakage \
              between training and test data.",
         ),
@@ -32,7 +34,6 @@ class DataLeakageChecker(BaseChecker):
         "score",
         "transform",
     ]
-    LEARNING_CLASSES: List[str] = ["KMeans"]  # TODO: Read the learning classes from pickle.
 
     def visit_call(self, node: astroid.Call):
         """
@@ -82,7 +83,7 @@ class DataLeakageChecker(BaseChecker):
         return (
             call.func is not None
             and hasattr(call.func, "name")
-            and call.func.name in self.LEARNING_CLASSES
+            and call.func.name in Resources.get_hyperparameters().keys()
         )
 
     def _learning_class_assigned(self, assign: Union[astroid.Assign, astroid.AnnAssign]) -> bool:
