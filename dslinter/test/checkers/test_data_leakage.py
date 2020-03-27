@@ -15,13 +15,6 @@ class TestDataLeakageChecker(pylint.testutils.CheckerTestCase):
 
     CHECKER_CLASS = dslinter.plugin.DataLeakageChecker
 
-    @pytest.fixture(autouse=True)
-    def set_pickle_path(self):
-        """Set the path of the strict hyperparameters dict pickle for testing."""
-        package_dir = Path(os.path.dirname(os.path.realpath(__file__))).parent.parent.parent
-        pickle_path = os.path.join(package_dir, "resources\\hyperparameters_dict.pickle")
-        Resources.__HYPERPARAMETER_PATH = pickle_path
-
     def test_pipeline_violation_on_call(self):
         """Message should be added when learning function is called directly on a learning class."""
         call_node = astroid.extract_node("KMeans().fit()")

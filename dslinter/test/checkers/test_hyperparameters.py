@@ -15,16 +15,6 @@ class TestHyperparameterChecker(pylint.testutils.CheckerTestCase):
 
     CHECKER_CLASS = dslinter.plugin.HyperparameterChecker
 
-    @staticmethod
-    def get_strict_pickle_path() -> str:
-        """
-        Get the path to the strict hyperparameters dict pickle.
-
-        :return: path of pickle.
-        """
-        package_dir = Path(os.path.dirname(os.path.realpath(__file__))).parent.parent.parent
-        return os.path.join(package_dir, "resources\\hyperparameters_dict.pickle")
-
     def test_has_keyword_true(self):
         """Test whether the function returns true when the keyword is present."""
         call_node = astroid.extract_node(
@@ -135,7 +125,6 @@ class TestHyperparameterChecker(pylint.testutils.CheckerTestCase):
         with self.assertAddsMessages(
             pylint.testutils.Message(msg_id="hyperparameters", node=call_node),
         ):
-            Resources.__HYPERPARAMETER_PATH = self.get_strict_pickle_path()
             self.checker.visit_call(call_node)
 
     @set_config(strict_hyperparameters=True)
@@ -150,5 +139,4 @@ class TestHyperparameterChecker(pylint.testutils.CheckerTestCase):
         )
 
         with self.assertNoMessages():
-            Resources.__HYPERPARAMETER_PATH = self.get_strict_pickle_path()
             self.checker.visit_call(call_node)
