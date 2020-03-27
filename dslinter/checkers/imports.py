@@ -35,7 +35,7 @@ class ImportChecker(BaseChecker):
     }
     options = ()
 
-    def visit_import(self, node: astroid.nodes.Import):
+    def visit_import(self, node: astroid.Import):
         """
         When an Import node is visited, check if it follows the conventions.
 
@@ -49,7 +49,7 @@ class ImportChecker(BaseChecker):
             elif name == "matplotlib.pyplot" and alias != "plt":
                 self.add_message("import-pyplot", node=node)
 
-    def visit_import_from(self, node: astroid.nodes.ImportFrom):
+    def visit_import_from(self, node: astroid.ImportFrom):
         """
         When an ImportFrom node is visited, check if it follows the conventions.
 

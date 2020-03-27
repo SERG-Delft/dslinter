@@ -89,7 +89,7 @@ class HyperparameterChecker(BaseChecker):
             Path(__file__).parent.parent.parent, "resources\\hyperparameters_dict.pickle"
         )
 
-    def visit_call(self, node: astroid.nodes.Call):
+    def visit_call(self, node: astroid.Call):
         """
         When a Call node is visited, check whether all hyperparameters are set.
 
@@ -127,7 +127,7 @@ class HyperparameterChecker(BaseChecker):
         return self.hyperparameters_main
 
     @staticmethod
-    def has_keywords(keywords: List[astroid.nodes.Keyword], keywords_goal: List[str]) -> bool:
+    def has_keywords(keywords: List[astroid.Keyword], keywords_goal: List[str]) -> bool:
         """
         Check if a list of keywords contains certain keywords.
 

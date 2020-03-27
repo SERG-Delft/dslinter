@@ -36,21 +36,19 @@ class DataFrameChecker(BaseChecker):
     options = ()
 
     _call_types: Dict[
-        astroid.nodes.Call, str
+        astroid.Call, str
     ] = {}  # [node, inferred type of object the function is called on]
 
-    def visit_module(self, node: astroid.nodes.Module):
+    def visit_module(self, node: astroid.Module):
         """
         When an Module node is visited, scan for Call nodes and get type the function is called on.
 
         :param node: Node which is visited.
         """
         # noinspection PyTypeChecker
-        self._call_types = TypeInference.infer_types(
-            node, astroid.nodes.Call, lambda x: x.func.expr.name
-        )
+        self._call_types = TypeInference.infer_types(node, astroid.Call, lambda x: x.func.expr.name)
 
-    def visit_call(self, node: astroid.nodes.Call):  # noqa: D205, D400
+    def visit_call(self, node: astroid.Call):
         """
         When a Call node is visited, add messages if it violated the defined rules.
 
@@ -62,7 +60,7 @@ class DataFrameChecker(BaseChecker):
             self.add_message("dataframe-iteration", node=node)
 
     @staticmethod
-    def _is_simple_call_node(node: astroid.nodes.Call) -> bool:
+    def _is_simple_call_node(node: astroid.Call) -> bool:
         """
         Evaluate whether the node is a 'simple' call node.
 
@@ -75,11 +73,11 @@ class DataFrameChecker(BaseChecker):
         return (
             hasattr(node.func, "expr")  # The call is made on an expression.
             and hasattr(node.func.expr, "name")  # The expr the func is called on is a named thing.
-            and not isinstance(node.parent, astroid.nodes.Attribute)  # Call is not an attribute.
-            and not isinstance(node.parent, astroid.nodes.Call)  # Call is not part of another call.
+            and not isinstance(node.parent, astroid.Attribute)  # Call is not an attribute.
+            and not isinstance(node.parent, astroid.Call)  # Call is not part of another call.
         )
 
-    def _dataframe_is_lost(self, node: astroid.nodes.Call) -> bool:
+    def _dataframe_is_lost(self, node: astroid.Call) -> bool:
         """
         Check whether the call is done on a DataFrame and the result is lost.
 
@@ -94,11 +92,11 @@ class DataFrameChecker(BaseChecker):
             and self._call_types[node] == "pandas.core.frame.DataFrame"
             and not self._is_inplace_operation(node)
             # If the parent of the Call is an Expression, it means the DataFrame is lost.
-            and isinstance(node.parent, astroid.nodes.Expr)
+            and isinstance(node.parent, astroid.Expr)
         )
 
     @staticmethod
-    def _is_inplace_operation(node: astroid.nodes.Call) -> bool:
+    def _is_inplace_operation(node: astroid.Call) -> bool:
         """
         Evaluate whether the call has an 'inplace==True' keyword argument.
 
@@ -113,7 +111,7 @@ class DataFrameChecker(BaseChecker):
                 return keyword.value.value
         return False
 
-    def _iterating_through_dataframe(self, node: astroid.nodes.Call) -> bool:
+    def _iterating_through_dataframe(self, node: astroid.Call) -> bool:
         """
         Evaluate whether there is iterated through a DataFrame.
 
@@ -121,20 +119,20 @@ class DataFrameChecker(BaseChecker):
         :return: True when there is iterated through a DataFrame.
         """
         return (
-            isinstance(node.parent, astroid.nodes.For)
+            isinstance(node.parent, astroid.For)
             and node not in node.parent.body
             and node in self._call_types
             and self._call_types[node] == "pandas.core.frame.DataFrame"
         )
 
-    def visit_for(self, node: astroid.nodes.For):
+    def visit_for(self, node: astroid.For):
         """
         When a For node is visited, check for dataframe-iteration-modification violations.
 
         :param node: Node which is visited.
         """
         if not (
-            isinstance(node.iter, astroid.nodes.Call)
+            isinstance(node.iter, astroid.Call)
             and node.iter in self._call_types
             and self._call_types[node.iter] == "pandas.core.frame.DataFrame"
         ):
@@ -148,7 +146,7 @@ class DataFrameChecker(BaseChecker):
             self.add_message("dataframe-iteration-modification", node=node)
 
     @staticmethod
-    def _get_for_targets(node: astroid.nodes.For) -> List[str]:
+    def _get_for_targets(node: astroid.For) -> List[str]:
         """
         Get the target names of the for-loop definition.
 
@@ -156,16 +154,16 @@ class DataFrameChecker(BaseChecker):
         :return: Target names.
         """
         target_names = []
-        if isinstance(node.target, astroid.nodes.Tuple):
+        if isinstance(node.target, astroid.Tuple):
             for element in node.target.elts:
-                if isinstance(element, astroid.nodes.AssignName):
+                if isinstance(element, astroid.AssignName):
                     target_names.append(element.name)
-        elif isinstance(node.target, astroid.nodes.AssignName):
+        elif isinstance(node.target, astroid.AssignName):
             target_names.append(node.target.name)
         return target_names
 
     @staticmethod
-    def _get_assigned_target_names(node: astroid.nodes.For) -> List[str]:
+    def _get_assigned_target_names(node: astroid.For) -> List[str]:
         """
         Get the target names of all assign nodes in the body of a For node.
 
@@ -174,10 +172,10 @@ class DataFrameChecker(BaseChecker):
         """
         assigned_names = []
         for body_node in node.body:
-            if isinstance(body_node, astroid.nodes.Assign):
+            if isinstance(body_node, astroid.Assign):
                 for target in body_node.targets:
                     assigned_names.append(DataFrameChecker._get_target_name(target))
-            elif isinstance(body_node, astroid.nodes.AnnAssign):
+            elif isinstance(body_node, astroid.AnnAssign):
                 assigned_names.append(DataFrameChecker._get_target_name(body_node.target))
         return assigned_names
 

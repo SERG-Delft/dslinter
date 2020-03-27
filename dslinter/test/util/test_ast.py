@@ -17,7 +17,7 @@ class TestAST:
                 return g.h(i)
             """
         )
-        found = AST.search_nodes(module_tree, astroid.nodes.Call)
+        found = AST.search_nodes(module_tree, astroid.Call)
         # noinspection PyUnresolvedReferences
         assert len(found) == 2 and found[0].func.attrname == "c" and found[1].func.attrname == "h"
 

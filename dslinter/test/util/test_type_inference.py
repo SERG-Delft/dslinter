@@ -11,7 +11,7 @@ class TestTypeInference:
         """Test the infer_types method."""
         code = "a = 'b'; a.join([])"
         module_node = astroid.parse(code)
-        node_type = astroid.nodes.Call
+        node_type = astroid.Call
         result = TypeInference.infer_types(module_node, node_type, lambda x: x.func.expr.name)
 
         assert result == {module_node.body[1].value: "builtins.str"}
@@ -75,7 +75,7 @@ class TestTypeInference:
         """Test if type inference works for Calls inside for loop definitions."""
         code = "y = ''\nfor x in y.join([]):\n\tpass"
         module_node = astroid.parse(code)
-        node_type = astroid.nodes.Call
+        node_type = astroid.Call
         result = TypeInference.infer_types(module_node, node_type, lambda x: x.func.expr.name)
 
         assert result == {module_node.body[1].iter: "builtins.str"}

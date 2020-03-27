@@ -71,6 +71,6 @@ with open("../resources/hyperparameters_dict.pickle", "wb") as file_handler:
     print("The pickle with all hyperparameters is written to disk.")
 with open("../resources/hyperparameters_dict.pickle", "rb") as file_handler:
     hyperparameters_loaded = pickle.load(file_handler)
-assert hyperparameters == hyperparameters_loaded
+    assert hyperparameters == hyperparameters_loaded
 
 print("Done!")

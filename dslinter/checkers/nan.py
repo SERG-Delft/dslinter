@@ -20,7 +20,7 @@ class NanChecker(BaseChecker):
     }
     options = ()
 
-    def visit_compare(self, node: astroid.nodes.Compare):
+    def visit_compare(self, node: astroid.Compare):
         """
         When a compare node is visited, check whether a comparison is done with np.nan.
 
@@ -28,7 +28,7 @@ class NanChecker(BaseChecker):
         """
         for side in (node.left, node.ops[0][1]):
             if (
-                isinstance(side, astroid.nodes.Attribute)
+                isinstance(side, astroid.Attribute)
                 and side.attrname == "nan"
                 and side.expr.name == "np"
             ):

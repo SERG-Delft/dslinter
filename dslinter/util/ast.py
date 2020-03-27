@@ -26,7 +26,7 @@ class AST:
         return found
 
     @staticmethod
-    def get_source_code(node: astroid.nodes.Module) -> str:
+    def get_source_code(node: astroid.Module) -> str:
         """
         Get the source code of a Module node.
 

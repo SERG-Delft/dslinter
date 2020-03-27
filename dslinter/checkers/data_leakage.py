@@ -34,7 +34,7 @@ class DataLeakageChecker(BaseChecker):
     ]
     LEARNING_CLASSES: List[str] = ["KMeans"]  # TODO: Read the learning classes from pickle.
 
-    def visit_call(self, node: astroid.nodes.Call):
+    def visit_call(self, node: astroid.Call):
         """
         When a Call node is visited, check whether it violated the rules in this checker.
 
@@ -56,23 +56,23 @@ class DataLeakageChecker(BaseChecker):
         :param expr: Expression to evaluate.
         :return: True when the expression is a learning class.
         """
-        if isinstance(expr, astroid.nodes.Call) and self._call_initiates_learning_class(expr):
+        if isinstance(expr, astroid.Call) and self._call_initiates_learning_class(expr):
             return True
 
         # If expr is a Name, check whether the assignment can be found
         # and the name is assigned a learning class.
-        if isinstance(expr, astroid.nodes.Name):
+        if isinstance(expr, astroid.Name):
             body_block = AST.search_body(expr)
             for child in body_block:
                 if (
-                    isinstance(child, astroid.nodes.Assign)
-                    or isinstance(child, astroid.nodes.AnnAssign)
+                    isinstance(child, astroid.Assign)
+                    or isinstance(child, astroid.AnnAssign)
                     and self._learning_class_assigned(child)
                 ):
                     return True
         return False
 
-    def _call_initiates_learning_class(self, call: astroid.nodes.Call) -> bool:
+    def _call_initiates_learning_class(self, call: astroid.Call) -> bool:
         """
         Evaluate whether a Call node is initiating a learning class.
 
@@ -85,24 +85,22 @@ class DataLeakageChecker(BaseChecker):
             and call.func.name in self.LEARNING_CLASSES
         )
 
-    def _learning_class_assigned(
-        self, assign: Union[astroid.nodes.Assign, astroid.nodes.AnnAssign]
-    ) -> bool:
+    def _learning_class_assigned(self, assign: Union[astroid.Assign, astroid.AnnAssign]) -> bool:
         """
         Evaluate whether a learning class is assigned.
 
         :param assign: Assign to evaluate.
         :return: True when a learning class is assigned.
         """
-        if isinstance(assign, astroid.nodes.Assign):
+        if isinstance(assign, astroid.Assign):
             for target in assign.targets:
-                if isinstance(
-                    target.value, astroid.nodes.Call
-                ) and self._call_initiates_learning_class(target.value):
+                if isinstance(target.value, astroid.Call) and self._call_initiates_learning_class(
+                    target.value
+                ):
                     return True
         if (
-            isinstance(assign, astroid.nodes.AnnAssign)
-            and isinstance(assign.target.value, astroid.nodes.Call)
+            isinstance(assign, astroid.AnnAssign)
+            and isinstance(assign.target.value, astroid.Call)
             and self._call_initiates_learning_class(assign.target.value)
         ):
             return True
