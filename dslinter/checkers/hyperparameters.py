@@ -1,12 +1,11 @@
 """Hyperparameter checker checks whether all hyperparameters for learning algorithms are set."""
-import os
-import pickle
-from pathlib import Path
 from typing import Dict, List
 
 import astroid
 from pylint.checkers import BaseChecker
 from pylint.interfaces import IAstroidChecker
+
+from dslinter.util.resources import Resources
 
 
 class HyperparameterChecker(BaseChecker):
@@ -22,11 +21,6 @@ class HyperparameterChecker(BaseChecker):
             "hyperparameters",
             "For learning algorithms, all hyperparameters should be tuned and set.",
         ),
-        "F5001": (
-            "Pickled strict hyperparameters dict not found.",
-            "hyperparameters-strict-file-not-found",
-            "The pickled dict with strict hyperparameters cannot be found on disk.",
-        ),
     }
     options = (
         (
@@ -40,7 +34,7 @@ class HyperparameterChecker(BaseChecker):
         ),
     )
 
-    hyperparameters_main = {
+    HYPERPARAMETERS_MAIN = {
         # sklearn.manifold
         "Isomap": [{"positional": 2, "keywords": ["n_neighbors", "n_components"]}],
         "LocallyLinearEmbedding": [{"positional": 2, "keywords": ["n_neighbors", "n_components"]}],
@@ -77,18 +71,6 @@ class HyperparameterChecker(BaseChecker):
         # There are more modules.
     }
 
-    def __init__(self, linter=None):
-        """
-        Initialize the checker.
-
-        :param linter: Linter where the checker is added to.
-        """
-        super(HyperparameterChecker, self).__init__(linter)
-        self._hyperparameters_strict = None
-        self._strict_pickle = os.path.join(
-            Path(__file__).parent.parent.parent, "resources\\hyperparameters_dict.pickle"
-        )
-
     def visit_call(self, node: astroid.Call):
         """
         When a Call node is visited, check whether all hyperparameters are set.
@@ -116,15 +98,15 @@ class HyperparameterChecker(BaseChecker):
 
     def hyperparameters_to_check(self) -> Dict:
         """
-        Get the hyperparameters to check against.
+        Get the hyperparameters to check against, depending on the config 'strict_hyperparameters'.
+
+        See Resources.get_hyperparameters() for a description of the Dict.
 
         :return: Dict of learning classes and parameters needed.
         """
         if self.config.strict_hyperparameters:
-            if self._hyperparameters_strict is None:
-                self.load_hyperparameters_pickle()
-            return self._hyperparameters_strict
-        return self.hyperparameters_main
+            return Resources.get_hyperparameters()
+        return self.HYPERPARAMETERS_MAIN
 
     @staticmethod
     def has_keywords(keywords: List[astroid.Keyword], keywords_goal: List[str]) -> bool:
@@ -144,22 +126,3 @@ class HyperparameterChecker(BaseChecker):
                 found += 1
 
         return found == len(keywords_goal)
-
-    def load_hyperparameters_pickle(self):
-        """Load the pickled strict hyperparameters dict from disk."""
-        if os.path.exists(self._strict_pickle):
-            with open(self._strict_pickle, "rb") as file_handler:
-                self._hyperparameters_strict = pickle.load(file_handler)
-        else:
-            self.add_message("hyperparameters-strict-file-not-found")
-            self._hyperparameters_strict = self.hyperparameters_main
-
-    @property
-    def strict_pickle(self):
-        """Get the _strict_pickle property."""
-        return self._strict_pickle
-
-    @strict_pickle.setter
-    def strict_pickle(self, value):
-        """Set the _strict_pickle property."""
-        self._strict_pickle = value

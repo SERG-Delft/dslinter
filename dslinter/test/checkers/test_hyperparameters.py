@@ -7,6 +7,7 @@ import pylint.testutils
 from pylint.testutils import set_config
 
 import dslinter
+from dslinter.util.resources import Resources
 
 
 class TestHyperparameterChecker(pylint.testutils.CheckerTestCase):
@@ -15,7 +16,7 @@ class TestHyperparameterChecker(pylint.testutils.CheckerTestCase):
     CHECKER_CLASS = dslinter.plugin.HyperparameterChecker
 
     @staticmethod
-    def get_strict_pickle() -> str:
+    def get_strict_pickle_path() -> str:
         """
         Get the path to the strict hyperparameters dict pickle.
 
@@ -134,7 +135,7 @@ class TestHyperparameterChecker(pylint.testutils.CheckerTestCase):
         with self.assertAddsMessages(
             pylint.testutils.Message(msg_id="hyperparameters", node=call_node),
         ):
-            self.checker.strict_pickle = self.get_strict_pickle()
+            Resources.__HYPERPARAMETER_PATH = self.get_strict_pickle_path()
             self.checker.visit_call(call_node)
 
     @set_config(strict_hyperparameters=True)
@@ -149,5 +150,5 @@ class TestHyperparameterChecker(pylint.testutils.CheckerTestCase):
         )
 
         with self.assertNoMessages():
-            self.checker.strict_pickle = self.get_strict_pickle()
+            Resources.__HYPERPARAMETER_PATH = self.get_strict_pickle_path()
             self.checker.visit_call(call_node)

@@ -27,7 +27,7 @@ from sklearn.tree import DecisionTreeClassifier, DecisionTreeRegressor, ExtraTre
 
 # Collect learning classes. A class is a learning class if it is described in section '1. Supervised learning' or '2. Unsupervised learning' of the scikit-learn user guide.
 learning_classes = []
-learning_classes.extend([CalibratedClassifierCV]) # calibration
+learning_classes.extend([CalibratedClassifierCV])  # calibration
 learning_classes.extend([AffinityPropagation, AgglomerativeClustering, Birch, DBSCAN, FeatureAgglomeration, KMeans, MiniBatchKMeans, MeanShift, OPTICS, SpectralClustering, SpectralBiclustering, SpectralCoclustering])  # cluster
 learning_classes.extend([EmpiricalCovariance, EllipticEnvelope, GraphicalLasso, GraphicalLassoCV, LedoitWolf, MinCovDet, OAS, ShrunkCovariance])  # covariance
 learning_classes.extend([CCA, PLSCanonical, PLSRegression, PLSSVD])  # cross_decomposition
