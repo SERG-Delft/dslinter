@@ -1,16 +1,15 @@
 """Utility class for reading resources."""
 
-import os
 import pickle
-from pathlib import Path
+from pkg_resources import resource_stream
 from typing import Dict, List, Union
 
 
 class Resources:
     """Utility class for reading resources."""
 
-    __RESOURCES_PATH = os.path.join(Path(__file__).parent.parent.parent, "resources")
-    __HYPERPARAMETER_PATH = os.path.join(__RESOURCES_PATH, "hyperparameters_dict.pickle")
+    __RESOURCES_PACKAGE = "dslinter.resources"
+    __HYPERPARAMETER_RESOURCE = "hyperparameters_dict.pickle"
 
     __HYPERPARAMETERS = None
 
@@ -24,16 +23,15 @@ class Resources:
         amount of keywords and a list with the names of its keywords respectively.
         """
         if Resources.__HYPERPARAMETERS is None:
-            Resources.__HYPERPARAMETERS = Resources.read_pickle(Resources.__HYPERPARAMETER_PATH)
+            Resources.__HYPERPARAMETERS = Resources.read_pickle(Resources.__HYPERPARAMETER_RESOURCE)
         return Resources.__HYPERPARAMETERS
 
     @staticmethod
-    def read_pickle(path: str):
+    def read_pickle(file):
         """
         Read a pickled object from disk.
 
-        :param path: Path of the pickle.
+        :param file: File name of the pickle in the resource package.
         :return: Deserialized object.
         """
-        with open(path, "rb") as file_handler:
-            return pickle.load(file_handler)
+        return pickle.load(resource_stream(Resources.__RESOURCES_PACKAGE, file))
