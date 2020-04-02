@@ -68,14 +68,15 @@ class DataLeakageChecker(BaseChecker):
         ):
             self.add_message("sk-pipeline", node=node)
 
-    def _expr_is_estimator(self, expr: astroid.node_classes.NodeNG) -> bool:
+    @staticmethod
+    def _expr_is_estimator(expr: astroid.node_classes.NodeNG) -> bool:
         """
         Evaluate whether the expression is an estimator.
 
         :param expr: Expression to evaluate.
         :return: True when the expression is an estimator.
         """
-        if isinstance(expr, astroid.Call) and self._call_initiates_estimator(expr):
+        if isinstance(expr, astroid.Call) and DataLeakageChecker._call_initiates_estimator(expr):
             return True
 
         # If expr is a Name, check whether the assignment can be found
@@ -84,10 +85,8 @@ class DataLeakageChecker(BaseChecker):
             body_block = ASTUtil.search_body(expr)
             for child in body_block:
                 if (
-                    isinstance(child, astroid.Assign)
-                    or isinstance(child, astroid.AnnAssign)
-                    and self._estimator_assigned(child)
-                ):
+                    isinstance(child, astroid.Assign) or isinstance(child, astroid.AnnAssign)
+                ) and DataLeakageChecker._estimator_assigned(expr.name, child):
                     return True
         return False
 
@@ -118,23 +117,30 @@ class DataLeakageChecker(BaseChecker):
         learning_classes = list(Resources.get_hyperparameters().keys())
         return learning_classes + DataLeakageChecker.PREPROCESSING_CLASSES
 
-    def _estimator_assigned(self, assign: Union[astroid.Assign, astroid.AnnAssign]) -> bool:
+    @staticmethod
+    def _estimator_assigned(name: str, assign: Union[astroid.Assign, astroid.AnnAssign]) -> bool:
         """
-        Evaluate whether an estimator is assigned.
+        Evaluate whether an estimator is assigned to a certain name.
 
+        :param name: Name which has to be assigned.
         :param assign: Assign to evaluate.
         :return: True when an estimator is assigned.
         """
         if isinstance(assign, astroid.Assign):
             for target in assign.targets:
-                if isinstance(target.value, astroid.Call) and self._call_initiates_estimator(
-                    target.value
+                if (
+                    hasattr(target, "name")
+                    and target.name == name
+                    and isinstance(assign.value, astroid.Call)
+                    and DataLeakageChecker._call_initiates_estimator(assign.value)
                 ):
                     return True
         if (
             isinstance(assign, astroid.AnnAssign)
-            and isinstance(assign.target.value, astroid.Call)
-            and self._call_initiates_estimator(assign.target.value)
+            and hasattr(assign.target, "name")
+            and assign.target.name == name
+            and isinstance(assign.value, astroid.Call)
+            and DataLeakageChecker._call_initiates_estimator(assign.value)
         ):
             return True
         return False
