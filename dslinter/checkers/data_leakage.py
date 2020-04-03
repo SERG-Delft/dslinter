@@ -81,10 +81,12 @@ class DataLeakageChecker(BaseChecker):
 
         # If expr is a Name, check whether that name is assigned to an estimator.
         if isinstance(expr, astroid.Name):
-            value = AssignUtil.assignment_value(expr)
-            return isinstance(value, astroid.Call) and DataLeakageChecker._call_initiates_estimator(
-                value
-            )
+            values = AssignUtil.assignment_values(expr)
+            for value in values:
+                if isinstance(value, astroid.Call) and DataLeakageChecker._call_initiates_estimator(
+                    value
+                ):
+                    return True
         return False
 
     @staticmethod

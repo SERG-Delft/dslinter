@@ -50,3 +50,17 @@ class TestDataLeakageChecker(pylint.testutils.CheckerTestCase):
             pylint.testutils.Message(msg_id="sk-pipeline", node=call_node),
         ):
             self.checker.visit_call(call_node)
+
+    def test_pipeline_violation_in_function(self):
+        """Test whether sk-pipeline violation is found when assignment is a function argument."""
+        call_node = astroid.extract_node(
+            """
+            def f(model):
+                model.fit() #@
+            f(KMeans())
+            """
+        )
+        with self.assertAddsMessages(
+            pylint.testutils.Message(msg_id="sk-pipeline", node=call_node),
+        ):
+            self.checker.visit_call(call_node)
