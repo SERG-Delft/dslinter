@@ -5,7 +5,7 @@ import astroid
 from pylint.checkers import BaseChecker
 from pylint.interfaces import IAstroidChecker
 
-from dslinter.util.ast import ASTUtil
+from dslinter.util.ast import AssignUtil
 from dslinter.util.resources import Resources
 
 
@@ -79,15 +79,12 @@ class DataLeakageChecker(BaseChecker):
         if isinstance(expr, astroid.Call) and DataLeakageChecker._call_initiates_estimator(expr):
             return True
 
-        # If expr is a Name, check whether the assignment can be found
-        # and the name is assigned an estimator.
+        # If expr is a Name, check whether that name is assigned to an estimator.
         if isinstance(expr, astroid.Name):
-            body_block = ASTUtil.search_body(expr)
-            for child in body_block:
-                if (
-                    isinstance(child, astroid.Assign) or isinstance(child, astroid.AnnAssign)
-                ) and DataLeakageChecker._estimator_assigned(expr.name, child):
-                    return True
+            value = AssignUtil.assignment_value(expr)
+            return isinstance(value, astroid.Call) and DataLeakageChecker._call_initiates_estimator(
+                value
+            )
         return False
 
     @staticmethod
@@ -115,32 +112,6 @@ class DataLeakageChecker(BaseChecker):
         :return: List of estimator classes.
         """
         learning_classes = list(Resources.get_hyperparameters().keys())
-        return learning_classes + DataLeakageChecker.PREPROCESSING_CLASSES
-
-    @staticmethod
-    def _estimator_assigned(name: str, assign: Union[astroid.Assign, astroid.AnnAssign]) -> bool:
-        """
-        Evaluate whether an estimator is assigned to a certain name.
-
-        :param name: Name which has to be assigned.
-        :param assign: Assign to evaluate.
-        :return: True when an estimator is assigned.
-        """
-        if isinstance(assign, astroid.Assign):
-            for target in assign.targets:
-                if (
-                    hasattr(target, "name")
-                    and target.name == name
-                    and isinstance(assign.value, astroid.Call)
-                    and DataLeakageChecker._call_initiates_estimator(assign.value)
-                ):
-                    return True
-        if (
-            isinstance(assign, astroid.AnnAssign)
-            and hasattr(assign.target, "name")
-            and assign.target.name == name
-            and isinstance(assign.value, astroid.Call)
-            and DataLeakageChecker._call_initiates_estimator(assign.value)
-        ):
-            return True
-        return False
+        estimator_classes = learning_classes + DataLeakageChecker.PREPROCESSING_CLASSES
+        assert None not in estimator_classes
+        return estimator_classes

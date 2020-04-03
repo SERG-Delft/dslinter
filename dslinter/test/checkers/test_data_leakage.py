@@ -24,6 +24,20 @@ class TestDataLeakageChecker(pylint.testutils.CheckerTestCase):
         with self.assertNoMessages():
             self.checker.visit_call(call_node)
 
+    def test_pipeline_violation_outside_block(self):
+        """Test whether sk-pipeline violation is found when assignment is done outside block."""
+        call_node = astroid.extract_node(
+            """
+            model = KMeans()
+            if True:
+                model.fit() #@
+            """
+        )
+        with self.assertAddsMessages(
+            pylint.testutils.Message(msg_id="sk-pipeline", node=call_node),
+        ):
+            self.checker.visit_call(call_node)
+
     def test_pipeline_violation_on_name(self):
         """Message should be added when learning function is called directly on a learning class."""
         call_node = astroid.extract_node(
