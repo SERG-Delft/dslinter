@@ -83,9 +83,7 @@ class DataLeakageChecker(BaseChecker):
         if isinstance(expr, astroid.Name):
             values = AssignUtil.assignment_values(expr)
             for value in values:
-                if isinstance(value, astroid.Call) and DataLeakageChecker._call_initiates_estimator(
-                    value
-                ):
+                if DataLeakageChecker._expr_is_estimator(value):
                     return True
         return False
 

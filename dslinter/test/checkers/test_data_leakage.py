@@ -51,6 +51,20 @@ class TestDataLeakageChecker(pylint.testutils.CheckerTestCase):
         ):
             self.checker.visit_call(call_node)
 
+    def test_pipeline_violation_on_name_twice(self):
+        """Test calling an estimator by multiple assignments."""
+        call_node = astroid.extract_node(
+            """
+            kmeans = KMeans()
+            kmeans2 = kmeans
+            kmeans2.fit() #@
+            """
+        )
+        with self.assertAddsMessages(
+            pylint.testutils.Message(msg_id="sk-pipeline", node=call_node),
+        ):
+            self.checker.visit_call(call_node)
+
     def test_pipeline_violation_in_function(self):
         """Test whether sk-pipeline violation is found when assignment is a function argument."""
         call_node = astroid.extract_node(
@@ -58,6 +72,21 @@ class TestDataLeakageChecker(pylint.testutils.CheckerTestCase):
             def f(model):
                 model.fit() #@
             f(KMeans())
+            """
+        )
+        with self.assertAddsMessages(
+            pylint.testutils.Message(msg_id="sk-pipeline", node=call_node),
+        ):
+            self.checker.visit_call(call_node)
+
+    def test_pipeline_violation_in_function_arg_assigned(self):
+        """Test calling an estimator within a function, where the argument is assigned."""
+        call_node = astroid.extract_node(
+            """
+            def f(model):
+                model.fit() #@
+            kmeans_model = KMeans()
+            f(kmeans_model)
             """
         )
         with self.assertAddsMessages(

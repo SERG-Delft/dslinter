@@ -113,7 +113,6 @@ class AssignUtil:
         function_with_arg = AssignUtil._name_is_arg_from_function(name, name_node)
         if function_with_arg is not None:
             return AssignUtil._function_arg_values(function_with_arg, "", 0)  # TODO: Hardcoded
-        # TODO: The values can be name nodes, of which assignment values have to be found again...
 
         return AssignUtil._assign_values_in_body_of_parents(name, name_node)
 
