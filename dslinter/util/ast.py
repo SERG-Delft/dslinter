@@ -1,5 +1,5 @@
 """Utility class for working with the Abstract Syntax Tree (AST)."""
-from typing import List, Union
+from typing import List, Union, Tuple
 
 import astroid
 
@@ -110,9 +110,9 @@ class AssignUtil:
         :return: Value nodes which are assigned to the name from the Name node.
         """
         name = name_node.name
-        function_with_arg = AssignUtil._name_is_arg_from_function(name, name_node)
+        function_with_arg, idx = AssignUtil._name_is_arg_from_function(name, name_node)
         if function_with_arg is not None:
-            return AssignUtil._function_arg_values(function_with_arg, "", 0)  # TODO: Hardcoded
+            return AssignUtil._function_arg_values(function_with_arg, name, idx)
 
         return AssignUtil._assign_values_in_body_of_parents(name, name_node)
 
@@ -141,22 +141,22 @@ class AssignUtil:
     @staticmethod
     def _name_is_arg_from_function(
         name: str, node: astroid.node_classes.NodeNG
-    ) -> Union[astroid.FunctionDef, None]:
+    ) -> Tuple[Union[astroid.FunctionDef, None], int]:
         """
         Get the FunctionDef the name is part of (if it exists).
 
         :param name: Name to look for.
         :param node: Node to look for FunctionDef nodes in.
-        :return: FunctionDef with arg 'name' or None when it is not found.
+        :return: FunctionDef with arg 'name' or None when not found and the position of the arg.
         """
         if isinstance(node, astroid.FunctionDef):
-            for arg in node.args.args:
+            for idx, arg in enumerate(node.args.args):
                 if hasattr(arg, "name") and arg.name == name:
-                    return node
-            return None
+                    return node, idx
+            return None, -1
         if hasattr(node, "parent"):
             return AssignUtil._name_is_arg_from_function(name, node.parent)
-        return None
+        return None, -1
 
     # noinspection PyUnresolvedReferences
     @staticmethod
@@ -174,7 +174,7 @@ class AssignUtil:
         values = []
         for call_node in ASTUtil.search_nodes(node.parent, astroid.Call):
             if hasattr(call_node.func, "name") and call_node.func.name == node.name:
-                if call_node.args is not None and len(call_node.args) >= arg_position:
+                if call_node.args is not None and len(call_node.args) > arg_position:
                     values.append(call_node.args[arg_position])
                 if call_node.keywords is not None:
                     keyword = ASTUtil.retrieve_keyword_from_list(call_node.keywords, arg_name)

@@ -93,3 +93,31 @@ class TestDataLeakageChecker(pylint.testutils.CheckerTestCase):
             pylint.testutils.Message(msg_id="sk-pipeline", node=call_node),
         ):
             self.checker.visit_call(call_node)
+
+    def test_pipeline_violation_in_named_function_argument(self):
+        """Test calling an estimator with named function argument."""
+        call_node = astroid.extract_node(
+            """
+            def f(model):
+                model.fit() #@
+            f(model = KMeans())
+            """
+        )
+        with self.assertAddsMessages(
+            pylint.testutils.Message(msg_id="sk-pipeline", node=call_node),
+        ):
+            self.checker.visit_call(call_node)
+
+    def test_pipeline_violation_in_second_function_argument(self):
+        """Test calling an estimator with a second function argument."""
+        call_node = astroid.extract_node(
+            """
+            def f(x, model):
+                model.fit() #@
+            f(0, KMeans())
+            """
+        )
+        with self.assertAddsMessages(
+            pylint.testutils.Message(msg_id="sk-pipeline", node=call_node),
+        ):
+            self.checker.visit_call(call_node)
