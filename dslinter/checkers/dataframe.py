@@ -18,7 +18,7 @@ class DataFrameChecker(BaseChecker):
     msgs = {
         "W5501": (
             "Result of operation on a DataFrame is not assigned.",
-            "dataframe-lost",
+            "unassigned-dataframe",
             "Most operations on a DataFrame return a new DataFrame. These should be assigned to \
             a variable.",
         ),
@@ -87,6 +87,7 @@ class DataFrameChecker(BaseChecker):
         :param node: Node which is visited.
         :return: True when the call results in a DataFrame which is lost.
         """
+        # TODO: Whitelist the functions head, tail, sample, boxplot, describe, hist, info, memory_usage, plot, and to_*** (all functions starting with "to_").
         return (
             node in self._call_types  # Check if the type is inferred of this call.
             and self._call_types[node] == "pandas.core.frame.DataFrame"
