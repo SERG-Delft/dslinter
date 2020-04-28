@@ -1,5 +1,5 @@
 """Checker which checks rules for preventing data leakage between training and test data."""
-from typing import List, Union
+from typing import List
 
 import astroid
 from pylint.checkers import BaseChecker

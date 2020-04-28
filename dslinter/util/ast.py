@@ -1,5 +1,5 @@
 """Utility class for working with the Abstract Syntax Tree (AST)."""
-from typing import List, Union, Tuple
+from typing import List, Union, Tuple, Optional
 
 import astroid
 
@@ -68,7 +68,7 @@ class ASTUtil:
     @staticmethod
     def retrieve_keyword_from_list(
         keywords: List[astroid.Keyword], arg_name: str
-    ) -> Union[astroid.Keyword, None]:
+    ) -> Optional[astroid.Keyword]:
         """
         Retrieve the keyword with a certain arg from a list of keywords.
 
@@ -141,7 +141,7 @@ class AssignUtil:
     @staticmethod
     def _name_is_arg_from_function(
         name: str, node: astroid.node_classes.NodeNG
-    ) -> Tuple[Union[astroid.FunctionDef, None], int]:
+    ) -> Tuple[Optional[astroid.FunctionDef], int]:
         """
         Get the FunctionDef the name is part of (if it exists).
 
