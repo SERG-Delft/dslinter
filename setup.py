@@ -9,5 +9,5 @@ setup(
     author_email="foomail@foo.com",
     packages=find_packages(),
     package_data={"": ["*.pickle"]},
-    install_requires=["pylint>=2.0", "astroid", "mypy", "data-science-types"],
+    install_requires=["pylint>=2.0", "astroid", "mypy", "data-science-types", "pyspark-stubs"],
 )

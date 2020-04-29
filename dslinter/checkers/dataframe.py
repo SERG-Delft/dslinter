@@ -26,7 +26,7 @@ class DataFrameChecker(BaseChecker):
         "W5502": (
             "Iterating through a DataFrame.",
             "dataframe-iteration",
-            "Iteration through pandas objects is generally slow and should be avoided.",
+            "Iteration through a DataFrame is generally slow and should be avoided.",
         ),
         "W5503": (
             "Iterated object is modified.",
@@ -91,7 +91,10 @@ class DataFrameChecker(BaseChecker):
         # TODO: Whitelist the functions head, tail, sample, boxplot, describe, hist, info, memory_usage, plot, and to_*** (all functions starting with "to_").
         return (
             node in self._call_types  # Check if the type is inferred of this call.
-            and self._call_types[node] == "pandas.core.frame.DataFrame"
+            and (
+                self._call_types[node] == "pandas.core.frame.DataFrame"
+                or self._call_types[node] == "pyspark.sql.dataframe.DataFrame"
+            )
             and not self._is_inplace_operation(node)
             # If the parent of the Call is an Expression, it means the DataFrame is lost.
             and isinstance(node.parent, astroid.Expr)
@@ -124,7 +127,10 @@ class DataFrameChecker(BaseChecker):
             isinstance(node.parent, astroid.For)
             and node not in node.parent.body
             and node in self._call_types
-            and self._call_types[node] == "pandas.core.frame.DataFrame"
+            and (
+                self._call_types[node] == "pandas.core.frame.DataFrame"
+                or self._call_types[node] == "pyspark.sql.dataframe.DataFrame"
+            )
         )
 
     def visit_for(self, node: astroid.For):
@@ -136,7 +142,10 @@ class DataFrameChecker(BaseChecker):
         if not (
             isinstance(node.iter, astroid.Call)
             and node.iter in self._call_types
-            and self._call_types[node.iter] == "pandas.core.frame.DataFrame"
+            and (
+                self._call_types[node.iter] == "pandas.core.frame.DataFrame"
+                or self._call_types[node.iter] == "pyspark.sql.dataframe.DataFrame"
+            )
         ):
             return
 

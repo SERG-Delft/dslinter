@@ -3,9 +3,9 @@ Pylint plugin for linting data science and machine learning code, focussed on th
 
 Implemented checkers:
 
-- **Unassigned DataFrame Checker**: Operations on a pandas DataFrame return a new DataFrame. This DataFrame should be
+- **Unassigned DataFrame Checker**: Operations on DataFrames return new DataFrames. These DataFrames should be
     assigned to a variable.
-- **DataFrame Iteration Checker**: Vectorized solutions are preferred over iterators for pandas DataFrames.
+- **DataFrame Iteration Checker**: Vectorized solutions are preferred over iterators for DataFrames.
 - **Nan Equality Checker**: Values cannot be compared with np.nan, as `np.nan != np.nan`.
 - **Hyperparameter Checker**: For (scikit-learn) learning algorithms, all hyperparameters should be set.
 - **Import Checker**: Check whether data science modules are imported using the correct naming conventions.
