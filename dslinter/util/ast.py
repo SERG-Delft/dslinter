@@ -181,3 +181,39 @@ class AssignUtil:
                     if keyword is not None:
                         values.append(keyword.value)
         return values
+
+    @staticmethod
+    def get_assigned_target_names(node: astroid.node_classes.NodeNG) -> List[str]:
+        """
+        Get the target names of all assign nodes in the body of a node.
+
+        :param node: Node to get the target names from.
+        :return: Target names.
+        """
+        assigned_names = []
+        if not hasattr(node, "body"):
+            return []
+
+        for body_node in node.body:
+            if isinstance(body_node, astroid.Assign):
+                for target in body_node.targets:
+                    assigned_names.append(AssignUtil._get_target_name(target))
+            if isinstance(body_node, astroid.AnnAssign):
+                assigned_names.append(AssignUtil._get_target_name(body_node.target))
+            else:
+                assigned_names += AssignUtil.get_assigned_target_names(body_node)
+        return assigned_names
+
+    @staticmethod
+    def _get_target_name(target: astroid.node_classes.NodeNG) -> str:
+        """
+        Get the name attribute of a node listed as target.
+
+        :param target: Node to get the name from.
+        :return: Name.
+        """
+        if hasattr(target, "name"):
+            return target.name
+        if hasattr(target, "value"):
+            return AssignUtil._get_target_name(target.value)
+        raise Exception("Target name cannot be retrieved.")

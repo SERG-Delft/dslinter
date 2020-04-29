@@ -5,6 +5,7 @@ import astroid
 from pylint.checkers import BaseChecker
 from pylint.interfaces import IAstroidChecker
 
+from dslinter.util.ast import AssignUtil
 from dslinter.util.type_inference import TypeInference
 
 
@@ -55,7 +56,7 @@ class DataFrameChecker(BaseChecker):
         :param node: Node which is visited.
         """
         if self._is_simple_call_node(node) and self._dataframe_is_lost(node):
-            self.add_message("dataframe-lost", node=node)
+            self.add_message("unassigned-dataframe", node=node)
         if self._iterating_through_dataframe(node):
             self.add_message("dataframe-iteration", node=node)
 
@@ -140,7 +141,7 @@ class DataFrameChecker(BaseChecker):
             return
 
         for_targets = DataFrameChecker._get_for_targets(node)
-        assigned = DataFrameChecker._get_assigned_target_names(node)
+        assigned = AssignUtil.get_assigned_target_names(node)
         modified_iterated_targets = any(target in for_targets for target in assigned)
 
         if modified_iterated_targets:
@@ -162,34 +163,3 @@ class DataFrameChecker(BaseChecker):
         elif isinstance(node.target, astroid.AssignName):
             target_names.append(node.target.name)
         return target_names
-
-    @staticmethod
-    def _get_assigned_target_names(node: astroid.For) -> List[str]:
-        """
-        Get the target names of all assign nodes in the body of a For node.
-
-        :param node: For node to get the target names from.
-        :return: Target names.
-        """
-        assigned_names = []
-        for body_node in node.body:
-            if isinstance(body_node, astroid.Assign):
-                for target in body_node.targets:
-                    assigned_names.append(DataFrameChecker._get_target_name(target))
-            elif isinstance(body_node, astroid.AnnAssign):
-                assigned_names.append(DataFrameChecker._get_target_name(body_node.target))
-        return assigned_names
-
-    @staticmethod
-    def _get_target_name(target: astroid.node_classes.NodeNG) -> str:
-        """
-        Get the name attribute of a node listed as target.
-
-        :param target: Node to get the name from.
-        :return: Name.
-        """
-        if hasattr(target, "name"):
-            return target.name
-        if hasattr(target, "value"):
-            return DataFrameChecker._get_target_name(target.value)
-        raise Exception("Target name cannot be retrieved.")

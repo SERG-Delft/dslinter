@@ -33,7 +33,7 @@ class TestDataFrameChecker(pylint.testutils.CheckerTestCase):
         module_tree = astroid.parse(self.DF_INIT + "df.abs()")
         unassigned_call = module_tree.body[-1].value
         with self.assertAddsMessages(
-            pylint.testutils.Message(msg_id="dataframe-lost", node=unassigned_call),
+            pylint.testutils.Message(msg_id="unassigned-dataframe", node=unassigned_call),
         ):
             self.checker.visit_module(module_tree)
             self.checker.visit_call(unassigned_call)
@@ -102,7 +102,7 @@ class TestDataFrameChecker(pylint.testutils.CheckerTestCase):
         assigned_call_1 = module_tree.body[-2].value
         assigned_call_2 = module_tree.body[-1].value
         with self.assertAddsMessages(
-            pylint.testutils.Message(msg_id="dataframe-lost", node=assigned_call_2),
+            pylint.testutils.Message(msg_id="unassigned-dataframe", node=assigned_call_2),
         ):
             self.checker.visit_module(module_tree)
             self.checker.visit_call(assigned_call_1)
@@ -117,7 +117,7 @@ class TestDataFrameChecker(pylint.testutils.CheckerTestCase):
         assigned_call_1 = module_tree.body[-2].value
         assigned_call_2 = module_tree.body[-1].value
         with self.assertAddsMessages(
-            pylint.testutils.Message(msg_id="dataframe-lost", node=assigned_call_1),
+            pylint.testutils.Message(msg_id="unassigned-dataframe", node=assigned_call_1),
         ):
             self.checker.visit_module(module_tree)
             self.checker.visit_call(assigned_call_1)
@@ -136,6 +136,18 @@ class TestDataFrameChecker(pylint.testutils.CheckerTestCase):
     def test_iterating_and_modifying(self):
         """Test whether a dataframe-iteration-modification violation is correctly found."""
         module_tree = astroid.parse(self.DF_INIT + "for _, row in df.iterrows(): row['a'] = 10")
+        for_node = module_tree.body[-1]
+        with self.assertAddsMessages(
+            pylint.testutils.Message(msg_id="dataframe-iteration-modification", node=for_node),
+        ):
+            self.checker.visit_module(module_tree)
+            self.checker.visit_for(for_node)
+
+    def test_iterating_and_modifying_nested(self):
+        """Test whether a nested dataframe-iteration-modification violation is correctly found."""
+        module_tree = astroid.parse(
+            self.DF_INIT + "for _, row in df.iterrows():\n\tif True: row['a'] = 10"
+        )
         for_node = module_tree.body[-1]
         with self.assertAddsMessages(
             pylint.testutils.Message(msg_id="dataframe-iteration-modification", node=for_node),
