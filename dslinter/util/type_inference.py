@@ -29,7 +29,11 @@ class TypeInference:
         source_code = ASTUtil.get_source_code(module)
         mypy_code = TypeInference.add_reveal_type_calls(source_code, nodes, expr)
         mypy_result = TypeInference.run_mypy(mypy_code)
-        mypy_types = TypeInference.parse_mypy_result(mypy_result)
+        try:
+            mypy_types = TypeInference.parse_mypy_result(mypy_result)
+        except SyntaxError as ex:
+            print("Skipping type checking of module: " + ex.msg)
+            return {}
         return TypeInference.combine_nodes_with_inferred_types(nodes, mypy_types)
 
     @staticmethod
@@ -106,7 +110,7 @@ class TypeInference:
         :return: List of (line number, inferred type) Tuples.
         """
         if "error: invalid syntax" in mypy_result:
-            raise Exception("Mypy cannot run on invalid syntax.")
+            raise SyntaxError("Mypy cannot run on invalid syntax.")
 
         types = []
         revealed_type_indicator = ": note: Revealed type is '"
