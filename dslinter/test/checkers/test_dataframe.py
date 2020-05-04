@@ -123,6 +123,18 @@ class TestDataFrameChecker(pylint.testutils.CheckerTestCase):
             self.checker.visit_call(assigned_call_1)
             self.checker.visit_call(assigned_call_2)
 
+    def test_dataframe_call_not_assigned_indented_false_negative(self):
+        """
+        Show the false negative of a violation in an indented setting.
+
+        Due to https://github.com/PyCQA/astroid/issues/784
+        """
+        module_tree = astroid.parse(self.DF_INIT + "df.abs(\n\ta=0\n)")
+        unassigned_call = module_tree.body[-1].value
+        with self.assertNoMessages():
+            self.checker.visit_module(module_tree)
+            self.checker.visit_call(unassigned_call)
+
     def test_iterating_through_dataframe(self):
         """Test whether a message is added when there is iterated through a DataFrame."""
         module_tree = astroid.parse(self.DF_INIT + "for _, row in df.iterrows(): pass")

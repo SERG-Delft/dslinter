@@ -38,7 +38,7 @@ class ASTUtil:
             return node.file_bytes.decode("utf-8")
         if node.file is not None:
             # Otherwise, read the entire file stated in the 'file' attribute.
-            with open(node.file, "r") as file:
+            with open(node.file, "r", encoding="utf-8") as file:
                 return file.read()
         raise Exception("Could not retrieve the source code of the module.")
 

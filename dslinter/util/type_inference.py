@@ -32,8 +32,20 @@ class TypeInference:
         try:
             mypy_types = TypeInference.parse_mypy_result(mypy_result)
         except SyntaxError as ex:
-            print("Skipping type checking of module: " + ex.msg)
-            return {}
+            mypy_code_split = mypy_code.splitlines()
+            faulty_code = mypy_code_split[int(ex.lineno) - 1]
+            if "; reveal_type(" in faulty_code:
+                original_code = faulty_code.split("; reveal_type(")[0]
+                mypy_code_split[int(ex.lineno) - 1] = original_code
+                mypy_types = TypeInference.parse_mypy_result("\n".join(mypy_code_split))
+                return TypeInference.combine_nodes_with_inferred_types(nodes, mypy_types)
+            else:
+                print(
+                    "Skipping type checking of module {}: {}. Line {}: {}".format(
+                        module.name, ex.msg, ex.lineno, faulty_code
+                    )
+                )
+                return {}
         return TypeInference.combine_nodes_with_inferred_types(nodes, mypy_types)
 
     @staticmethod
@@ -50,9 +62,11 @@ class TypeInference:
         lines = code.splitlines()
         for node in nodes:
             try:
-                lines[TypeInference.line_to_add_call(node) - 1] += "; reveal_type({})".format(
-                    expr(node)
-                )
+                line_no = TypeInference.line_to_add_call(node) - 1
+                lines[line_no] += "; reveal_type({})".format(expr(node))
+                if lines[line_no].strip()[0] == ";":
+                    # If the call is added to a new line, remove the semicolon.
+                    lines[line_no] = lines[line_no].strip()[1:]
             except AttributeError:
                 pass  # The attribute from the expression is not found. Continue.
 
@@ -91,7 +105,7 @@ class TypeInference:
         :param code: Code to run mypy on.
         :return: Normal report written to sys.stdout by mypy.
         """
-        file = open("_tmp_dslinter.py", "w")
+        file = open("_tmp_dslinter.py", "w", encoding="utf-8")
         file.write(code)
         file.close()
         result = mypy.api.run(["_tmp_dslinter.py"])
@@ -110,7 +124,8 @@ class TypeInference:
         :return: List of (line number, inferred type) Tuples.
         """
         if "error: invalid syntax" in mypy_result:
-            raise SyntaxError("Mypy cannot run on invalid syntax.")
+            lineno = mypy_result.split(":")[1]
+            raise SyntaxError("Mypy cannot run on invalid syntax.", ("", lineno, 0, ""))
 
         types = []
         revealed_type_indicator = ": note: Revealed type is '"
