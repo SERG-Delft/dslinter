@@ -40,6 +40,20 @@ class DataFrameChecker(BaseChecker):
         astroid.Call, str
     ] = {}  # [node, inferred type of object the function is called on]
 
+    # Whitelisted functions for which a DataFrame does not have to be assigned.
+    WHITELISTED = [
+        "head",
+        "tail",
+        "sample",
+        "boxplot",
+        "describe",
+        "hist",
+        "info",
+        "memory_usage",
+        "plot",
+        "to_***",
+    ]
+
     def visit_module(self, node: astroid.Module):
         """
         When an Module node is visited, scan for Call nodes and get type the function is called on.
@@ -55,7 +69,11 @@ class DataFrameChecker(BaseChecker):
 
         :param node: Node which is visited.
         """
-        if self._is_simple_call_node(node) and self._dataframe_is_lost(node):
+        if (
+            self._is_simple_call_node(node)
+            and not self._function_whitelisted(node)
+            and self._dataframe_is_lost(node)
+        ):
             self.add_message("unassigned-dataframe", node=node)
         if self._iterating_through_dataframe(node):
             self.add_message("dataframe-iteration", node=node)
@@ -78,6 +96,21 @@ class DataFrameChecker(BaseChecker):
             and not isinstance(node.parent, astroid.Call)  # Call is not part of another call.
         )
 
+    @staticmethod
+    def _function_whitelisted(node: astroid.Call) -> bool:
+        """
+        Evaluate whether the a Call node is whitelisted for the unassigned-dataframe rule.
+
+        All whitelisted functions do not have to assigned to a variable. Whitelisted functions
+        are listed in the WHITELISTED variable and also include all functions starting with "to_".
+
+        :param node: Call node to evaluate.
+        :return: True when the function of the call is whitelisted.
+        """
+        return hasattr(node.func, "attrname") and (
+            node.func.attrname in DataFrameChecker.WHITELISTED or node.func.attrname[:3] == "to_"
+        )
+
     def _dataframe_is_lost(self, node: astroid.Call) -> bool:
         """
         Check whether the call is done on a DataFrame and the result is lost.
@@ -88,7 +121,6 @@ class DataFrameChecker(BaseChecker):
         :param node: Node which is visited.
         :return: True when the call results in a DataFrame which is lost.
         """
-        # TODO: Whitelist the functions head, tail, sample, boxplot, describe, hist, info, memory_usage, plot, and to_*** (all functions starting with "to_").
         return (
             node in self._call_types  # Check if the type is inferred of this call.
             and (

@@ -46,6 +46,14 @@ class TestDataFrameChecker(pylint.testutils.CheckerTestCase):
             self.checker.visit_module(module_tree)
             self.checker.visit_call(unassigned_call)
 
+    def test_dataframe_call_assigned_whitelisted(self):
+        """Test whether no message is added when a DataFrame operation is whitelisted."""
+        module_tree = astroid.parse(self.DF_INIT + "df.describe()")
+        assigned_call = module_tree.body[-1].value
+        with self.assertNoMessages():
+            self.checker.visit_module(module_tree)
+            self.checker.visit_call(assigned_call)
+
     def test_dataframe_call_assigned_double(self):
         """Test whether no message is added when two DataFrame operations are assigned."""
         module_tree = astroid.parse(self.DF_INIT + "a = df.abs().abs()")
