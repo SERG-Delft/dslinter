@@ -1,8 +1,9 @@
-"""Utility class for reading resources."""
+"""Utility module for reading resources."""
 
 import pickle
-from pkg_resources import resource_stream
 from typing import Dict, List, Union
+
+from pkg_resources import resource_stream
 
 
 class Resources:

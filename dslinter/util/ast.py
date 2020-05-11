@@ -1,5 +1,5 @@
-"""Utility class for working with the Abstract Syntax Tree (AST)."""
-from typing import List, Union, Tuple, Optional
+"""Utility module for working with the Abstract Syntax Tree (AST)."""
+from typing import List, Optional, Tuple, Union
 
 import astroid
 
@@ -55,6 +55,18 @@ class ASTUtil:
         return ASTUtil.search_body_parent(node.parent)
 
     @staticmethod
+    def search_module(node: astroid.node_classes.NodeNG) -> astroid.Module:
+        """
+        Search the module a node is part of.
+
+        :param node: Node to search the module from.
+        :return: Module the node is part of.
+        """
+        if isinstance(node, astroid.Module):
+            return node
+        return ASTUtil.search_module(node.parent)
+
+    @staticmethod
     def search_body(node: astroid.node_classes.NodeNG) -> List[astroid.node_classes.NodeNG]:
         """
         Search the body block a node is part of.
@@ -63,7 +75,11 @@ class ASTUtil:
         :return: Body block the node is part of.
         """
         # noinspection PyUnresolvedReferences
-        return ASTUtil.search_body_parent(node).body
+        body = ASTUtil.search_body_parent(node).body
+        if isinstance(body, list):
+            return body
+        else:
+            return [body]
 
     @staticmethod
     def retrieve_keyword_from_list(

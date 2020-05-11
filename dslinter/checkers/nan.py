@@ -3,6 +3,8 @@ import astroid
 from pylint.checkers import BaseChecker
 from pylint.interfaces import IAstroidChecker
 
+from dslinter.util.exception_handler import ExceptionHandler
+
 
 class NanChecker(BaseChecker):
     """Checker which checks whether values are compared with np.nan."""
@@ -26,11 +28,14 @@ class NanChecker(BaseChecker):
 
         :param node: Node which is visited.
         """
-        for side in (node.left, node.ops[0][1]):
-            if (
-                isinstance(side, astroid.Attribute)
-                and side.attrname == "nan"
-                and side.expr.name == "np"
-            ):
-                self.add_message("nan-equality", node=node)
-                return
+        try:
+            for side in (node.left, node.ops[0][1]):
+                if (
+                    isinstance(side, astroid.Attribute)
+                    and side.attrname == "nan"
+                    and side.expr.name == "np"
+                ):
+                    self.add_message("nan-equality", node=node)
+                    return
+        except:
+            ExceptionHandler.handle(self, node)

@@ -6,6 +6,7 @@ from pylint.checkers import BaseChecker
 from pylint.interfaces import IAstroidChecker
 
 from dslinter.util.ast import AssignUtil
+from dslinter.util.exception_handler import ExceptionHandler
 from dslinter.util.resources import Resources
 
 
@@ -59,14 +60,17 @@ class DataLeakageChecker(BaseChecker):
 
         :param node: The node which is visited.
         """
-        # If the learning function is called on an estimator, rule is violated.
-        if (
-            node.func is not None
-            and hasattr(node.func, "attrname")
-            and node.func.attrname in self.LEARNING_FUNCTIONS
-            and self._expr_is_estimator(node.func.expr)
-        ):
-            self.add_message("sk-pipeline", node=node)
+        try:
+            # If the learning function is called on an estimator, rule is violated.
+            if (
+                node.func is not None
+                and hasattr(node.func, "attrname")
+                and node.func.attrname in self.LEARNING_FUNCTIONS
+                and self._expr_is_estimator(node.func.expr)
+            ):
+                self.add_message("sk-pipeline", node=node)
+        except:
+            ExceptionHandler.handle(self, node)
 
     @staticmethod
     def _expr_is_estimator(expr: astroid.node_classes.NodeNG) -> bool:

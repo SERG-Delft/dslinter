@@ -1,4 +1,4 @@
-"""Utility class for type inference."""
+"""Utility module for type inference."""
 import os
 from typing import Callable, Dict, List, Tuple
 

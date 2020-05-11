@@ -3,6 +3,8 @@ import astroid
 from pylint.checkers import BaseChecker
 from pylint.interfaces import IAstroidChecker
 
+from dslinter.util.exception_handler import ExceptionHandler
+
 
 class ImportChecker(BaseChecker):
     """Import checker which checks whether imports are bound to local names by the conventions."""
@@ -41,13 +43,16 @@ class ImportChecker(BaseChecker):
 
         :param node: Node which is visited.
         """
-        for name, alias in node.names:
-            if name == "pandas" and alias != "pd":
-                self.add_message("import-pandas", node=node)
-            elif name == "numpy" and alias != "np":
-                self.add_message("import-numpy", node=node)
-            elif name == "matplotlib.pyplot" and alias != "plt":
-                self.add_message("import-pyplot", node=node)
+        try:
+            for name, alias in node.names:
+                if name == "pandas" and alias != "pd":
+                    self.add_message("import-pandas", node=node)
+                elif name == "numpy" and alias != "np":
+                    self.add_message("import-numpy", node=node)
+                elif name == "matplotlib.pyplot" and alias != "plt":
+                    self.add_message("import-pyplot", node=node)
+        except:
+            ExceptionHandler.handle(self, node)
 
     def visit_import_from(self, node: astroid.ImportFrom):
         """
@@ -55,7 +60,10 @@ class ImportChecker(BaseChecker):
 
         :param node: Node which is visited.
         """
-        if node.modname[:7] == "sklearn":
-            for _, alias in node.names:
-                if alias is not None:
-                    self.add_message("import-sklearn", node=node)
+        try:
+            if node.modname[:7] == "sklearn":
+                for _, alias in node.names:
+                    if alias is not None:
+                        self.add_message("import-sklearn", node=node)
+        except:
+            ExceptionHandler.handle(self, node)

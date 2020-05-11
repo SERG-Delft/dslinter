@@ -6,6 +6,7 @@ from pylint.checkers import BaseChecker
 from pylint.interfaces import IAstroidChecker
 
 from dslinter.util.ast import AssignUtil
+from dslinter.util.exception_handler import ExceptionHandler
 from dslinter.util.type_inference import TypeInference
 
 
@@ -60,8 +61,13 @@ class DataFrameChecker(BaseChecker):
 
         :param node: Node which is visited.
         """
-        # noinspection PyTypeChecker
-        self._call_types = TypeInference.infer_types(node, astroid.Call, lambda x: x.func.expr.name)
+        try:
+            # noinspection PyTypeChecker
+            self._call_types = TypeInference.infer_types(
+                node, astroid.Call, lambda x: x.func.expr.name
+            )
+        except:
+            ExceptionHandler.handle(self, node)
 
     def visit_call(self, node: astroid.Call):
         """
@@ -69,14 +75,17 @@ class DataFrameChecker(BaseChecker):
 
         :param node: Node which is visited.
         """
-        if (
-            self._is_simple_call_node(node)
-            and not self._function_whitelisted(node)
-            and self._dataframe_is_lost(node)
-        ):
-            self.add_message("unassigned-dataframe", node=node)
-        if self._iterating_through_dataframe(node):
-            self.add_message("dataframe-iteration", node=node)
+        try:
+            if (
+                self._is_simple_call_node(node)
+                and not self._function_whitelisted(node)
+                and self._dataframe_is_lost(node)
+            ):
+                self.add_message("unassigned-dataframe", node=node)
+            if self._iterating_through_dataframe(node):
+                self.add_message("dataframe-iteration", node=node)
+        except:
+            ExceptionHandler.handle(self, node)
 
     @staticmethod
     def _is_simple_call_node(node: astroid.Call) -> bool:
@@ -171,22 +180,25 @@ class DataFrameChecker(BaseChecker):
 
         :param node: Node which is visited.
         """
-        if not (
-            isinstance(node.iter, astroid.Call)
-            and node.iter in self._call_types
-            and (
-                self._call_types[node.iter] == "pandas.core.frame.DataFrame"
-                or self._call_types[node.iter] == "pyspark.sql.dataframe.DataFrame"
-            )
-        ):
-            return
+        try:
+            if not (
+                isinstance(node.iter, astroid.Call)
+                and node.iter in self._call_types
+                and (
+                    self._call_types[node.iter] == "pandas.core.frame.DataFrame"
+                    or self._call_types[node.iter] == "pyspark.sql.dataframe.DataFrame"
+                )
+            ):
+                return
 
-        for_targets = DataFrameChecker._get_for_targets(node)
-        assigned = AssignUtil.get_assigned_target_names(node)
-        modified_iterated_targets = any(target in for_targets for target in assigned)
+            for_targets = DataFrameChecker._get_for_targets(node)
+            assigned = AssignUtil.get_assigned_target_names(node)
+            modified_iterated_targets = any(target in for_targets for target in assigned)
 
-        if modified_iterated_targets:
-            self.add_message("dataframe-iteration-modification", node=node)
+            if modified_iterated_targets:
+                self.add_message("dataframe-iteration-modification", node=node)
+        except:
+            ExceptionHandler.handle(self, node)
 
     @staticmethod
     def _get_for_targets(node: astroid.For) -> List[str]:

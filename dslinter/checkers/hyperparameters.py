@@ -5,6 +5,7 @@ import astroid
 from pylint.checkers import BaseChecker
 from pylint.interfaces import IAstroidChecker
 
+from dslinter.util.exception_handler import ExceptionHandler
 from dslinter.util.resources import Resources
 
 
@@ -78,23 +79,26 @@ class HyperparameterChecker(BaseChecker):
         :param node: Node which is visited.
         """
         try:
-            function_name = node.func.name
-        except AttributeError:
-            return
+            try:
+                function_name = node.func.name
+            except AttributeError:
+                return
 
-        hyperparameters = self.hyperparameters_to_check()
-        if function_name in hyperparameters:
-            correct = False
-            for option in range(len(hyperparameters[function_name])):
-                if len(node.args) >= hyperparameters[function_name][option][
-                    "positional"
-                ] or self.has_keywords(
-                    node.keywords, hyperparameters[function_name][option]["keywords"],
-                ):
-                    correct = True
+            hyperparameters = self.hyperparameters_to_check()
+            if function_name in hyperparameters:
+                correct = False
+                for option in range(len(hyperparameters[function_name])):
+                    if len(node.args) >= hyperparameters[function_name][option][
+                        "positional"
+                    ] or self.has_keywords(
+                        node.keywords, hyperparameters[function_name][option]["keywords"],
+                    ):
+                        correct = True
 
-            if not correct:
-                self.add_message("hyperparameters", node=node)
+                if not correct:
+                    self.add_message("hyperparameters", node=node)
+        except:
+            ExceptionHandler.handle(self, node)
 
     def hyperparameters_to_check(self) -> Dict:
         """
