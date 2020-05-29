@@ -63,7 +63,7 @@ hyperparameters = {}
 for class_name, signature in signatures:
     keywords_amount = len(signature.parameters)
     keywords = list(signature.parameters.keys())
-    hyperparameters[class_name] = [{"positional": keywords_amount, "keywords": keywords}]
+    hyperparameters[class_name] = {"positional": keywords_amount, "keywords": keywords}
 
 # Write the pickled hyperparameters dict to disk and verify it.
 with open("../dslinter/resources/hyperparameters_dict.pickle", "wb") as file_handler:

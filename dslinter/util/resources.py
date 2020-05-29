@@ -15,13 +15,13 @@ class Resources:
     __HYPERPARAMETERS = None
 
     @staticmethod
-    def get_hyperparameters() -> Dict[str, List[Dict[str, Union[int, List[str]]]]]:
+    def get_hyperparameters() -> Dict[str, Dict[str, Union[int, List[str]]]]:
         """
         Get the hyperparameters resource.
 
-        :return: Dict with every learning algorithm from scikit-learn as keys. Each value is a list
-        of length one, with a Dict containing the keys 'positional' and 'keywords' containing its
-        amount of keywords and a list with the names of its keywords respectively.
+        :return: Dict with every learning algorithm from scikit-learn as keys. Each value is a Dict
+        containing the keys 'positional' and 'keywords' containing its amount of keywords and a list
+        with the names of its keywords respectively.
         """
         if Resources.__HYPERPARAMETERS is None:
             Resources.__HYPERPARAMETERS = Resources.read_pickle(Resources.__HYPERPARAMETER_RESOURCE)

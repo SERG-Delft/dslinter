@@ -1,5 +1,5 @@
 """Hyperparameter checker checks whether all hyperparameters for learning algorithms are set."""
-from typing import Dict, List
+from typing import Dict, List, Union
 
 import astroid
 from pylint.checkers import BaseChecker
@@ -20,7 +20,7 @@ class HyperparameterChecker(BaseChecker):
         "W5001": (
             "Hyperparameter not set.",
             "hyperparameters",
-            "For learning algorithms, all hyperparameters should be tuned and set.",
+            "For learning algorithms, hyperparameters should be tuned and set.",
         ),
     }
     options = (
@@ -35,46 +35,51 @@ class HyperparameterChecker(BaseChecker):
         ),
     )
 
+    # Main hyperparameters of learning algorithms, as defined in research.
+    # Sources:
+    # 1. Probst, P., Boulesteix, A. L., & Bischl, B. (2019). Tunability: Importance of
+    #   Hyperparameters of Machine Learning Algorithms. Journal of Machine Learning Research,
+    #   20(53), 1-32.
+    # 2. van Rijn, J. N., & Hutter, F. (2018, July). Hyperparameter importance across datasets.
+    #   In Proceedings of the 24th ACM SIGKDD International Conference on Knowledge Discovery &
+    #   Data Mining (pp. 2367-2376).
     HYPERPARAMETERS_MAIN = {
-        # sklearn.manifold
-        "Isomap": [{"positional": 2, "keywords": ["n_neighbors", "n_components"]}],
-        "LocallyLinearEmbedding": [{"positional": 2, "keywords": ["n_neighbors", "n_components"]}],
-        "SpectralEmbedding": [{"positional": 1, "keywords": ["n_components"]}],
-        "MDS": [{"positional": 1, "keywords": ["n_components"]}],
-        "TSNE": [{"positional": 2, "keywords": ["n_components", "perplexity"]}],
-        # sklearn.cluster
-        "KMeans": [{"positional": 1, "keywords": ["n_clusters"]}],
-        "MiniBatchKMeans": [{"positional": 1, "keywords": ["n_clusters"]}],
-        "AffinityPropagation": [{"positional": 1, "keywords": ["damping", "preference"]}],
-        "MeanShift": [{"positional": 1, "keywords": ["bandwidth"]}],
-        "SpectralClustering": [{"positional": 1, "keywords": ["n_clusters"]}],
-        "AgglomerativeClustering": [
-            {"positional": 1, "keywords": ["n_clusters"]},
-            {"positional": 7, "keywords": ["linkage", "distance_threshold"]},
-        ],
-        "DBSCAN": [{"positional": 2, "keywords": ["eps", "min_samples"]}],
-        "OPTICS": [{"positional": 1, "keywords": ["min_samples"]}],
-        "Birch": [{"positional": 2, "keywords": ["threshold", "branching_factor"]}],
-        # sklearn.neighbors
-        "KernelDensity": [{"positional": 1, "keywords": ["bandwidth"]}],
-        # klearn.neural_network
-        "BernoulliRBM": [{"positional": 2, "keywords": ["n_components", "learning_rate"]}],
-        # sklearn.linear_model
-        "Ridge": [{"positional": 1, "keywords": ["alpha"]}],
-        "Lasso": [{"positional": 1, "keywords": ["alpha"]}],
-        "MultiTaskLasso": [{"positional": 1, "keywords": ["alpha"]}],
-        "ElasticNet": [{"positional": 2, "keywords": ["alpha", "l1_ratio"]}],
-        "MultiTaskElasticNet": [{"positional": 2, "keywords": ["alpha", "l1_ratio"]}],
-        "LassoLars": [{"positional": 1, "keywords": ["alpha"]}],
         # sklearn.svm
-        "SVC": [{"positional": 4, "keywords": ["C", "kernel", "gamma"]}],
-        "NuSVC": [{"positional": 4, "keywords": ["nu", "kernel", "gamma"]}],
-        # There are more modules.
+        "NuSVC": {"positional": 4, "keywords": ["nu", "kernel", "gamma"]},
+        "NuSVR": {"positional": 4, "keywords": ["C", "kernel", "gamma"]},
+        "SVC": {"positional": 4, "keywords": ["C", "kernel", "gamma"]},
+        "SVR": {"positional": 4, "keywords": ["C", "kernel", "gamma"]},
+        # sklearn.ensemble
+        "AdaBoostClassifier": {"positional": 3, "keywords": ["learning_rate"]},
+        "AdaBoostRegressor": {"positional": 3, "keywords": ["learning_rate"]},
+        "GradientBoostingClassifier": {"positional": 2, "keywords": ["learning_rate"]},
+        "GradientBoostingRegressor": {"positional": 2, "keywords": ["learning_rate"]},
+        "HistGradientBoostingClassifier": {"positional": 2, "keywords": ["learning_rate"]},
+        "HistGradientBoostingRegressor": {"positional": 2, "keywords": ["learning_rate"]},
+        "RandomForestClassifier": {
+            "positional": 7,
+            "keywords": ["min_samples_leaf", "max_features"],
+        },
+        "RandomForestRegressor": {
+            "positional": 7,
+            "keywords": ["min_samples_leaf", "max_features"],
+        },
+        # sklearn.linear_model
+        "ElasticNet": {"positional": 2, "keywords": ["alpha", "l1_ratio"]},
+        # sklearn.tree
+        "DecisionTreeClassifier": {"positional": 14, "keywords": ["ccp_alpha"]},
+        "DecisionTreeRegressor": {"positional": 14, "keywords": ["ccp_alpha"]},
+        # sklearn.neighbors
+        "NearestNeighbors": {"positional": 1, "keywords": ["n_neighbors"]},
     }
 
     def visit_call(self, node: astroid.Call):
         """
-        When a Call node is visited, check whether all hyperparameters are set.
+        When a Call node is visited, check whether hyperparameters are set.
+
+        In strict mode, all hyperparameters should be set.
+        In non-strict mode, function calls to learning functions should either contain all
+        hyperparameters defined in HYPERPARAMETERS_MAIN or have at least one hyperparameter defined.
 
         :param node: Node which is visited.
         """
@@ -84,33 +89,41 @@ class HyperparameterChecker(BaseChecker):
             except AttributeError:
                 return
 
-            hyperparameters = self.hyperparameters_to_check()
-            if function_name in hyperparameters:
-                correct = False
-                for option in range(len(hyperparameters[function_name])):
-                    if len(node.args) >= hyperparameters[function_name][option][
-                        "positional"
-                    ] or self.has_keywords(
-                        node.keywords, hyperparameters[function_name][option]["keywords"],
-                    ):
-                        correct = True
+            hyperparams_all = Resources.get_hyperparameters()
 
-                if not correct:
-                    self.add_message("hyperparameters", node=node)
-        except:
+            if function_name in hyperparams_all:
+                if self.config.strict_hyperparameters:
+                    if not HyperparameterChecker.has_required_hyperparameters(
+                        node, hyperparams_all
+                    ):
+                        self.add_message("hyperparameters", node=node)
+                else:  # non-strict
+                    if (
+                        function_name in self.HYPERPARAMETERS_MAIN
+                        and not HyperparameterChecker.has_required_hyperparameters(
+                            node, self.HYPERPARAMETERS_MAIN
+                        )
+                    ):
+                        self.add_message("hyperparameters", node=node)
+                    elif len(node.args) == 0 and node.keywords is None:
+                        self.add_message("hyperparameters", node=node)
+        except Exception:
             ExceptionHandler.handle(self, node)
 
-    def hyperparameters_to_check(self) -> Dict:
+    @staticmethod
+    def has_required_hyperparameters(node: astroid.Call, hyperparameters: Dict):
         """
-        Get the hyperparameters to check against, depending on the config 'strict_hyperparameters'.
+        Evaluate whether a function call has all required hyperparameters defined.
 
-        See Resources.get_hyperparameters() for a description of the Dict.
-
-        :return: Dict of learning classes and parameters needed.
+        :param node: Node which is visited.
+        :param hyperparameters: Dict of functions with their required hyperparameters.
+        :return: True when all required hyperparameters are defined.
         """
-        if self.config.strict_hyperparameters:
-            return Resources.get_hyperparameters()
-        return self.HYPERPARAMETERS_MAIN
+        return len(node.args) >= hyperparameters[node.func.name][
+            "positional"
+        ] or HyperparameterChecker.has_keywords(
+            node.keywords, hyperparameters[node.func.name]["keywords"]
+        )
 
     @staticmethod
     def has_keywords(keywords: List[astroid.Keyword], keywords_goal: List[str]) -> bool:
