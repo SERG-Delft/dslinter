@@ -44,11 +44,6 @@ class HyperparameterChecker(BaseChecker):
     #   In Proceedings of the 24th ACM SIGKDD International Conference on Knowledge Discovery &
     #   Data Mining (pp. 2367-2376).
     HYPERPARAMETERS_MAIN = {
-        # sklearn.svm
-        "NuSVC": {"positional": 4, "keywords": ["nu", "kernel", "gamma"]},
-        "NuSVR": {"positional": 4, "keywords": ["C", "kernel", "gamma"]},
-        "SVC": {"positional": 4, "keywords": ["C", "kernel", "gamma"]},
-        "SVR": {"positional": 4, "keywords": ["C", "kernel", "gamma"]},
         # sklearn.ensemble
         "AdaBoostClassifier": {"positional": 3, "keywords": ["learning_rate"]},
         "AdaBoostRegressor": {"positional": 3, "keywords": ["learning_rate"]},
@@ -60,11 +55,16 @@ class HyperparameterChecker(BaseChecker):
         "RandomForestRegressor": {"positional": 7, "keywords": ["min_samples_leaf", "max_features"],},
         # sklearn.linear_model
         "ElasticNet": {"positional": 2, "keywords": ["alpha", "l1_ratio"]},
+        # sklearn.neighbors
+        "NearestNeighbors": {"positional": 1, "keywords": ["n_neighbors"]},
+        # sklearn.svm
+        "NuSVC": {"positional": 4, "keywords": ["nu", "kernel", "gamma"]},
+        "NuSVR": {"positional": 4, "keywords": ["C", "kernel", "gamma"]},
+        "SVC": {"positional": 4, "keywords": ["C", "kernel", "gamma"]},
+        "SVR": {"positional": 4, "keywords": ["C", "kernel", "gamma"]},
         # sklearn.tree
         "DecisionTreeClassifier": {"positional": 14, "keywords": ["ccp_alpha"]},
         "DecisionTreeRegressor": {"positional": 14, "keywords": ["ccp_alpha"]},
-        # sklearn.neighbors
-        "NearestNeighbors": {"positional": 1, "keywords": ["n_neighbors"]},
     }
 
     def visit_call(self, node: astroid.Call):
