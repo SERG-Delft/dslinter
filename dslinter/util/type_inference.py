@@ -12,9 +12,7 @@ class TypeInference:
     """Utility class for type inference."""
 
     @staticmethod
-    def infer_types(
-        module: astroid.Module, node_type: type, expr: Callable
-    ) -> Dict[astroid.node_classes.NodeNG, str]:
+    def infer_types(module: astroid.Module, node_type: type, expr: Callable) -> Dict[astroid.node_classes.NodeNG, str]:
         """
         Infer the types of an attribute of all nodes of the same type in a module.
 

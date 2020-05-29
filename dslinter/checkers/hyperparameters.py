@@ -1,5 +1,5 @@
 """Hyperparameter checker checks whether all hyperparameters for learning algorithms are set."""
-from typing import Dict, List, Union
+from typing import Dict, List
 
 import astroid
 from pylint.checkers import BaseChecker
@@ -56,14 +56,8 @@ class HyperparameterChecker(BaseChecker):
         "GradientBoostingRegressor": {"positional": 2, "keywords": ["learning_rate"]},
         "HistGradientBoostingClassifier": {"positional": 2, "keywords": ["learning_rate"]},
         "HistGradientBoostingRegressor": {"positional": 2, "keywords": ["learning_rate"]},
-        "RandomForestClassifier": {
-            "positional": 7,
-            "keywords": ["min_samples_leaf", "max_features"],
-        },
-        "RandomForestRegressor": {
-            "positional": 7,
-            "keywords": ["min_samples_leaf", "max_features"],
-        },
+        "RandomForestClassifier": {"positional": 7, "keywords": ["min_samples_leaf", "max_features"],},
+        "RandomForestRegressor": {"positional": 7, "keywords": ["min_samples_leaf", "max_features"],},
         # sklearn.linear_model
         "ElasticNet": {"positional": 2, "keywords": ["alpha", "l1_ratio"]},
         # sklearn.tree
@@ -93,16 +87,12 @@ class HyperparameterChecker(BaseChecker):
 
             if function_name in hyperparams_all:
                 if self.config.strict_hyperparameters:
-                    if not HyperparameterChecker.has_required_hyperparameters(
-                        node, hyperparams_all
-                    ):
+                    if not HyperparameterChecker.has_required_hyperparameters(node, hyperparams_all):
                         self.add_message("hyperparameters", node=node)
                 else:  # non-strict
                     if (
                         function_name in self.HYPERPARAMETERS_MAIN
-                        and not HyperparameterChecker.has_required_hyperparameters(
-                            node, self.HYPERPARAMETERS_MAIN
-                        )
+                        and not HyperparameterChecker.has_required_hyperparameters(node, self.HYPERPARAMETERS_MAIN)
                     ):
                         self.add_message("hyperparameters", node=node)
                     elif len(node.args) == 0 and node.keywords is None:
@@ -119,9 +109,7 @@ class HyperparameterChecker(BaseChecker):
         :param hyperparameters: Dict of functions with their required hyperparameters.
         :return: True when all required hyperparameters are defined.
         """
-        return len(node.args) >= hyperparameters[node.func.name][
-            "positional"
-        ] or HyperparameterChecker.has_keywords(
+        return len(node.args) >= hyperparameters[node.func.name]["positional"] or HyperparameterChecker.has_keywords(
             node.keywords, hyperparameters[node.func.name]["keywords"]
         )
 

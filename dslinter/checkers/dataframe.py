@@ -37,9 +37,7 @@ class DataFrameChecker(BaseChecker):
     }
     options = ()
 
-    _call_types: Dict[
-        astroid.Call, str
-    ] = {}  # [node, inferred type of object the function is called on]
+    _call_types: Dict[astroid.Call, str] = {}  # [node, inferred type of object the function is called on]
 
     # Whitelisted functions for which a DataFrame does not have to be assigned.
     WHITELISTED = [
@@ -97,9 +95,7 @@ class DataFrameChecker(BaseChecker):
         """
         try:
             # noinspection PyTypeChecker
-            self._call_types = TypeInference.infer_types(
-                node, astroid.Call, lambda x: x.func.expr.name
-            )
+            self._call_types = TypeInference.infer_types(node, astroid.Call, lambda x: x.func.expr.name)
         except:
             ExceptionHandler.handle(self, node)
 

@@ -13,9 +13,7 @@ class TestDataLeakageChecker(pylint.testutils.CheckerTestCase):
     def test_pipeline_violation_on_call(self):
         """Message should be added when learning function is called directly on a learning class."""
         call_node = astroid.extract_node("KMeans().fit()")
-        with self.assertAddsMessages(
-            pylint.testutils.Message(msg_id="sk-pipeline", node=call_node),
-        ):
+        with self.assertAddsMessages(pylint.testutils.Message(msg_id="sk-pipeline", node=call_node),):
             self.checker.visit_call(call_node)
 
     def test_learning_function_on_not_an_estimator(self):
@@ -33,9 +31,7 @@ class TestDataLeakageChecker(pylint.testutils.CheckerTestCase):
                 model.fit() #@
             """
         )
-        with self.assertAddsMessages(
-            pylint.testutils.Message(msg_id="sk-pipeline", node=call_node),
-        ):
+        with self.assertAddsMessages(pylint.testutils.Message(msg_id="sk-pipeline", node=call_node),):
             self.checker.visit_call(call_node)
 
     def test_pipeline_violation_on_name(self):
@@ -46,9 +42,7 @@ class TestDataLeakageChecker(pylint.testutils.CheckerTestCase):
             kmeans.fit() #@
             """
         )
-        with self.assertAddsMessages(
-            pylint.testutils.Message(msg_id="sk-pipeline", node=call_node),
-        ):
+        with self.assertAddsMessages(pylint.testutils.Message(msg_id="sk-pipeline", node=call_node),):
             self.checker.visit_call(call_node)
 
     def test_pipeline_violation_on_name_twice(self):
@@ -60,9 +54,7 @@ class TestDataLeakageChecker(pylint.testutils.CheckerTestCase):
             kmeans2.fit() #@
             """
         )
-        with self.assertAddsMessages(
-            pylint.testutils.Message(msg_id="sk-pipeline", node=call_node),
-        ):
+        with self.assertAddsMessages(pylint.testutils.Message(msg_id="sk-pipeline", node=call_node),):
             self.checker.visit_call(call_node)
 
     def test_pipeline_violation_in_function(self):
@@ -74,9 +66,7 @@ class TestDataLeakageChecker(pylint.testutils.CheckerTestCase):
             f(KMeans())
             """
         )
-        with self.assertAddsMessages(
-            pylint.testutils.Message(msg_id="sk-pipeline", node=call_node),
-        ):
+        with self.assertAddsMessages(pylint.testutils.Message(msg_id="sk-pipeline", node=call_node),):
             self.checker.visit_call(call_node)
 
     def test_pipeline_violation_in_function_arg_assigned(self):
@@ -89,9 +79,7 @@ class TestDataLeakageChecker(pylint.testutils.CheckerTestCase):
             f(kmeans_model)
             """
         )
-        with self.assertAddsMessages(
-            pylint.testutils.Message(msg_id="sk-pipeline", node=call_node),
-        ):
+        with self.assertAddsMessages(pylint.testutils.Message(msg_id="sk-pipeline", node=call_node),):
             self.checker.visit_call(call_node)
 
     def test_pipeline_violation_in_named_function_argument(self):
@@ -103,9 +91,7 @@ class TestDataLeakageChecker(pylint.testutils.CheckerTestCase):
             f(model = KMeans())
             """
         )
-        with self.assertAddsMessages(
-            pylint.testutils.Message(msg_id="sk-pipeline", node=call_node),
-        ):
+        with self.assertAddsMessages(pylint.testutils.Message(msg_id="sk-pipeline", node=call_node),):
             self.checker.visit_call(call_node)
 
     def test_pipeline_violation_in_second_function_argument(self):
@@ -117,7 +103,5 @@ class TestDataLeakageChecker(pylint.testutils.CheckerTestCase):
             f(0, KMeans())
             """
         )
-        with self.assertAddsMessages(
-            pylint.testutils.Message(msg_id="sk-pipeline", node=call_node),
-        ):
+        with self.assertAddsMessages(pylint.testutils.Message(msg_id="sk-pipeline", node=call_node),):
             self.checker.visit_call(call_node)
