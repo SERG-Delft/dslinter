@@ -17,7 +17,7 @@ class HyperparameterChecker(BaseChecker):
     name = "hyperparameters"
     priority = -1
     msgs = {
-        "W5001": (
+        "W5505": (
             "Hyperparameter not set.",
             "hyperparameters",
             "For learning algorithms, hyperparameters should be tuned and set.",

@@ -14,7 +14,7 @@ class NanChecker(BaseChecker):
     name = "nan"
     priority = -1
     msgs = {
-        "E5001": (
+        "E5501": (
             "Value compared with np.nan.",
             "nan-equality",
             "Values cannot be compared with np.nan, as np.nan != np.nan.",

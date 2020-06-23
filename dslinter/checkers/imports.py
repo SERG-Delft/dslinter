@@ -14,22 +14,22 @@ class ImportChecker(BaseChecker):
     name = "import"
     priority = -1
     msgs = {
-        "C0001": (
+        "C5501": (
             "Import of pandas not bound to 'pd'.",
             "import-pandas",
             "The pandas module should be imported as 'pd'.",
         ),
-        "C0002": (
+        "C5502": (
             "Import of numpy not bound to 'np'.",
             "import-numpy",
             "The numpy module should be imported as 'np'.",
         ),
-        "C0003": (
+        "C5503": (
             "Import of matplotlib.pyplot not bound to 'plt'.",
             "import-pyplot",
             "The matplotlib.pyplot module should be imported as 'plt'.",
         ),
-        "C0004": (
+        "C5504": (
             "Import from sklearn module has an alias.",
             "import-sklearn",
             "Imports from sklearn modules should not have an alias.",
