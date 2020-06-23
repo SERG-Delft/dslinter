@@ -69,7 +69,7 @@ class DataLeakageChecker(BaseChecker):
                 and self._expr_is_estimator(node.func.expr)
             ):
                 self.add_message("sk-pipeline", node=node)
-        except:
+        except:  # pylint: disable=bare-except
             ExceptionHandler.handle(self, node)
 
     @staticmethod
@@ -102,11 +102,11 @@ class DataLeakageChecker(BaseChecker):
         return (
             call.func is not None
             and hasattr(call.func, "name")
-            and call.func.name in DataLeakageChecker.get_estimator_classes()
+            and call.func.name in DataLeakageChecker._get_estimator_classes()
         )
 
     @staticmethod
-    def get_estimator_classes() -> List[str]:
+    def _get_estimator_classes() -> List[str]:
         """
         Get all estimator classes.
 

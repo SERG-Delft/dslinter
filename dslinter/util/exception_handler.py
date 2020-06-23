@@ -8,12 +8,12 @@ from dslinter.util.ast import ASTUtil
 class ExceptionHandler:
     """Utility class for handling exceptions thrown in checkers."""
 
+    # pylint: disable=too-few-public-methods
+
     @staticmethod
     def handle(checker: BaseChecker, node: astroid.node_classes.NodeNG):
         """
-        Handle an exception thrown in a checker.
-
-        Print an error message to the console.
+        Handle a generic exception thrown in a checker by printing an error message.
 
         :param checker: Checker where the exception is thrown from.
         :param node: Node which is visited while the exception is thrown.

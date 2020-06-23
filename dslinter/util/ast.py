@@ -112,6 +112,7 @@ class AssignUtil:
                     return True
         if isinstance(assign, astroid.AnnAssign):
             return hasattr(assign.target, "name") and assign.target.name == name
+        return False
 
     @staticmethod
     def assignment_values(name_node: astroid.Name) -> List[astroid.node_classes.NodeNG]:

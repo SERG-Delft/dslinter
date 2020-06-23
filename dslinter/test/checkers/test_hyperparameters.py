@@ -20,7 +20,7 @@ class TestHyperparameterChecker(pylint.testutils.CheckerTestCase):
         )
         keywords = call_node.keywords
 
-        assert self.checker.has_keywords(keywords, ["keyword1", "keyword2"])
+        assert self.checker._has_keywords(keywords, ["keyword1", "keyword2"])
 
     def test_has_keyword_false(self):
         """Test whether the function returns false when the keyword is not present."""
@@ -31,7 +31,7 @@ class TestHyperparameterChecker(pylint.testutils.CheckerTestCase):
         )
         keywords = call_node.keywords
 
-        assert not self.checker.has_keywords(keywords, ["keyword1"])
+        assert not self.checker._has_keywords(keywords, ["keyword1"])
 
     def test_has_keyword_empty(self):
         """Test whether the function returns false when there is no keyword present."""
@@ -42,7 +42,7 @@ class TestHyperparameterChecker(pylint.testutils.CheckerTestCase):
         )
         keywords = call_node.keywords
 
-        assert not self.checker.has_keywords(keywords, ["keyword1"])
+        assert not self.checker._has_keywords(keywords, ["keyword1"])
 
     @set_config(strict_hyperparameters=True)
     def test_strict_keywords_correct(self):

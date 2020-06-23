@@ -96,7 +96,7 @@ class DataFrameChecker(BaseChecker):
         try:
             # noinspection PyTypeChecker
             self._call_types = TypeInference.infer_types(node, astroid.Call, lambda x: x.func.expr.name)
-        except:
+        except:  # pylint: disable=bare-except
             ExceptionHandler.handle(self, node)
 
     def visit_call(self, node: astroid.Call):
@@ -114,7 +114,7 @@ class DataFrameChecker(BaseChecker):
                 self.add_message("unassigned-dataframe", node=node)
             if self._iterating_through_dataframe(node):
                 self.add_message("dataframe-iteration", node=node)
-        except:
+        except:  # pylint: disable=bare-except
             ExceptionHandler.handle(self, node)
 
     @staticmethod
@@ -227,7 +227,7 @@ class DataFrameChecker(BaseChecker):
 
             if modified_iterated_targets:
                 self.add_message("dataframe-iteration-modification", node=node)
-        except:
+        except:  # pylint: disable=bare-except
             ExceptionHandler.handle(self, node)
 
     @staticmethod

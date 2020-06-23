@@ -51,7 +51,7 @@ class ImportChecker(BaseChecker):
                     self.add_message("import-numpy", node=node)
                 elif name == "matplotlib.pyplot" and alias != "plt":
                     self.add_message("import-pyplot", node=node)
-        except:
+        except:  # pylint: disable=bare-except
             ExceptionHandler.handle(self, node)
 
     def visit_import_from(self, node: astroid.ImportFrom):
@@ -65,5 +65,5 @@ class ImportChecker(BaseChecker):
                 for _, alias in node.names:
                     if alias is not None:
                         self.add_message("import-sklearn", node=node)
-        except:
+        except:  # pylint: disable=bare-except
             ExceptionHandler.handle(self, node)

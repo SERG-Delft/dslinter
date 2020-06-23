@@ -33,5 +33,5 @@ class NanChecker(BaseChecker):
                 if isinstance(side, astroid.Attribute) and side.attrname == "nan" and side.expr.name == "np":
                     self.add_message("nan-equality", node=node)
                     return
-        except:
+        except:  # pylint: disable=bare-except
             ExceptionHandler.handle(self, node)
