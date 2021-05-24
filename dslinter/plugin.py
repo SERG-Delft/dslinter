@@ -4,6 +4,7 @@ from dslinter.checkers.dataframe import DataFrameChecker
 from dslinter.checkers.hyperparameters import HyperparameterChecker
 from dslinter.checkers.imports import ImportChecker
 from dslinter.checkers.nan import NanChecker
+from dslinter.checkers.controlling_randomness import ControllingRandomness
 
 
 def register(linter):
@@ -17,3 +18,4 @@ def register(linter):
     linter.register_checker(NanChecker(linter))
     linter.register_checker(DataFrameChecker(linter))
     linter.register_checker(DataLeakageChecker(linter))
+    linter.register_checker(ControllingRandomness(linter))
