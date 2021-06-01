@@ -1,16 +1,10 @@
 """Checker which checks rules for controlling randomness."""
 from typing import List
-import sys
-
 import traceback
-
 import astroid
 from pylint.checkers import BaseChecker
 from pylint.interfaces import IAstroidChecker
-
-from dslinter.util.ast import AssignUtil
 from dslinter.util.exception_handler import ExceptionHandler
-from dslinter.util.resources import Resources
 
 
 class ControllingRandomness(BaseChecker):
@@ -57,6 +51,8 @@ class ControllingRandomness(BaseChecker):
                 for keyword in node.keywords:
                     if (keyword.arg == "random_state" and keyword.value.as_string() == "None"):
                         self.add_message("controlling randomness", node=node)
-        except:  # pylint: disable=bare-except
+        except:
             ExceptionHandler.handle(self, node)
             traceback.print_exc()
+
+
