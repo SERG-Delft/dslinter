@@ -11,9 +11,9 @@ Implemented checkers:
 - **Import Checker**: Check whether data science modules are imported using the correct naming conventions.
 - **Data Leakage Checker**: All scikit-learn estimators should be used inside Pipelines, to prevent data leakage between
     training and test data.
-    
 - **Controlling Randomness Checker**: For reproducible results across executions, remove any use of random_state=None in scikit-learn estimators.
 - **Excessive Hyperparameter Precision Checker**: Check hyperparameter in scikit-learn estimators. excessive hyperparameter precision might suggest over-tuning.
+- **Scaler before PCA Checker**: Check scaler is used before Principle Component Analysis (PCA) in a scikit-learn pipeline. Feature scaling is important for PCA.
 
 
 ## Installation
@@ -29,15 +29,16 @@ pip install dslinter
 ## Usage
 To only use the checkers implemented in this plugin, run:
 ```
-pylint --load-plugins=dslinter --disable=all --enable=dataframe,nan,hyperparameters,import,data-leakage,controlling-randomness,excessive-hyperparameter-precision <other_options> <path_to_sources>
+pylint --load-plugins=dslinter --disable=all --enable=dataframe,nan,hyperparameters,import,data-leakage,controlling-randomness,excessive-hyperparameter-precision,pca-scaler <other_options> <path_to_sources>
 ```
 To expand a current pylint configuration with the checkers from this plugin, run:
 ```
 pylint --load-plugins=dslinter <other_options> <path_to_sources>
-``` 
+```
 
 ## Tests
 Tests can be run by using the pytest package:
 ```
 pytest .
 ```
+
