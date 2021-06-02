@@ -6,6 +6,7 @@ from dslinter.checkers.imports import ImportChecker
 from dslinter.checkers.nan import NanChecker
 from dslinter.checkers.controlling_randomness import ControllingRandomness
 from dslinter.checkers.excessive_hyperparameter_precision import ExcessiveHyperparameterPrecision
+from dslinter.checkers.pca_scaler import PCAScalerChecker
 
 
 def register(linter):
@@ -21,3 +22,5 @@ def register(linter):
     linter.register_checker(DataLeakageChecker(linter))
     linter.register_checker(ControllingRandomness(linter))
     linter.register_checker(ExcessiveHyperparameterPrecision(linter))
+    linter.register_checker(PCAScalerChecker(linter))
+    
