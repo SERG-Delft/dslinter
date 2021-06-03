@@ -7,12 +7,12 @@ with open("README.md", encoding="utf-8") as f:
 
 setup(
     name="dslinter",
-    version="1.0.0",
+    version="1.0.1",
     description="Pylint plugin for linting data science and machine learning code, focussed on the libraries pandas and scikit-learn.",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/MarkHaakman/dslinter",
-    author="Mark Haakman",
+    url="https://github.com/Hynn01/dslinter",
+    author="Mark Haakman, Haiyin Zhang, Daoyao Wang, Chadha Degachi",
     packages=find_packages(),
     package_data={"": ["*.pickle"]},
     python_requires="~=3.5",
