@@ -16,7 +16,7 @@ class ControllingRandomness(BaseChecker):
     priority = -1
     msgs = {
         "W5506": (
-            "'random_state=None' used in estimators or cross-validation splitters",
+            "'random_state=None' shouldn't be used in estimators or cross-validation splitters",
             "controlling randomness",
             "For reproducible results across executions, remove any use of random_state=None."
         ),
