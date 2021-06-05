@@ -6,6 +6,7 @@ from pylint.checkers import BaseChecker
 from pylint.interfaces import IAstroidChecker
 
 from dslinter.util.exception_handler import ExceptionHandler
+from dslinter.util.ast import AssignUtil
 
 
 class PCAScalerChecker(BaseChecker):
@@ -28,9 +29,17 @@ class PCAScalerChecker(BaseChecker):
         "Pipeline",
     ]
 
-    PCA = ["PCA",]
+    PCA = ["PCA","KernelPCA","SparsePCA","IncrementalPCA",]
 
     SCALER = ["RobustScaler", "StandardScaler", "MaxAbsScaler", "MinMaxScaler",]
+
+    LEARNING_FUNCTIONS: List[str] = [
+        "fit",
+        "fit_transform",
+        "transform",
+    ]
+
+    Variables = []
 
 
     def visit_call(self, node: astroid.Call):
@@ -63,6 +72,31 @@ class PCAScalerChecker(BaseChecker):
                                     break
                 if hasPCA == True and hasScaler==False:
                     self.add_message("pca scaler checker", node=node)
+
+            if (
+                    node.func is not None
+                    and hasattr(node.func, "attrname")
+                    and node.func.attrname in self.LEARNING_FUNCTIONS
+                    and self._expr_is_pca(node.func.expr)
+                    and node.args is not None
+            ):
+                hasPCA = True
+                for arg in node.args:
+                    # print(arg)
+                    if isinstance(arg, astroid.Name):
+                        values = AssignUtil.assignment_values(arg)
+                        for value in values:
+                            if (
+                                    value.func is not None
+                                    and hasattr(node.func, "attrname")
+                                    and node.func.attrname in self.LEARNING_FUNCTIONS
+                                    and self._expr_is_scaler(value.func.expr)
+                            ):
+                                hasScaler=True
+                if hasPCA == True and hasScaler==False:
+                    self.add_message("pca scaler checker", node=node)
+
+
         except:  # pylint: disable=bare-except
             ExceptionHandler.handle(self, node)
             traceback.print_exc()
@@ -94,3 +128,41 @@ class PCAScalerChecker(BaseChecker):
             and hasattr(call.func, "name")
             and call.func.name in PCAScalerChecker.SCALER
         )
+
+    @staticmethod
+    def _expr_is_pca(expr: astroid.node_classes.NodeNG) -> bool:
+        """
+        Evaluate whether the expression is an estimator.
+
+        :param expr: Expression to evaluate.
+        :return: True when the expression is an estimator.
+        """
+        if isinstance(expr, astroid.Call) and PCAScalerChecker._call_initiates_pca(expr):
+            return True
+
+        # If expr is a Name, check whether that name is assigned to an estimator.
+        if isinstance(expr, astroid.Name):
+            values = AssignUtil.assignment_values(expr)
+            for value in values:
+                if PCAScalerChecker._expr_is_pca(value):
+                    return True
+        return False
+
+    @staticmethod
+    def _expr_is_scaler(expr: astroid.node_classes.NodeNG) -> bool:
+        """
+        Evaluate whether the expression is an estimator.
+
+        :param expr: Expression to evaluate.
+        :return: True when the expression is an estimator.
+        """
+        if isinstance(expr, astroid.Call) and PCAScalerChecker._call_initiates_scaler(expr):
+            return True
+
+        # If expr is a Name, check whether that name is assigned to an estimator.
+        if isinstance(expr, astroid.Name):
+            values = AssignUtil.assignment_values(expr)
+            for value in values:
+                if PCAScalerChecker._expr_is_scaler(value):
+                    return True
+        return False
