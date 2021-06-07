@@ -88,7 +88,8 @@ class PCAScalerChecker(BaseChecker):
                         values = AssignUtil.assignment_values(arg)
                         for value in values:
                             if (
-                                    value.func is not None
+                                    isinstance(value, astroid.Call)
+                                    and value.func is not None
                                     and hasattr(node.func, "attrname")
                                     and node.func.attrname in self.LEARNING_FUNCTIONS
                                     and self._expr_is_scaler(value.func.expr)
