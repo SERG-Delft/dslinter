@@ -45,7 +45,7 @@ class ControllingRandomness(BaseChecker):
                 hasattr(node, "func")
                 and hasattr(node.func, "name")
                 and hasattr(node, "keywords")
-                and (node.func.name in self.FUNCTIONS or node.func.name in self.CLASSES)
+                # and (node.func.name in self.FUNCTIONS or node.func.name in self.CLASSES)
                 and node.keywords is not None
             ):
                 for keyword in node.keywords:
