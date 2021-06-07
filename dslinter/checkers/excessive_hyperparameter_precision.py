@@ -38,8 +38,9 @@ class ExcessiveHyperparameterPrecision(BaseChecker):
             if function_name in hyperparams_all:
                 if(node.keywords is not None):
                     for keyword in node.keywords:
-                        if type(keyword.value.value) == float and len(keyword.value.as_string().split(".")[1]) > 2 :
-                            self.add_message("excessive hyperparameter precision", node=node)
+                        if(hasattr(keyword, "value") and hasattr(keyword.value, "value")):
+                            if type(keyword.value.value) == float and len(keyword.value.as_string().split(".")[1]) > 2 :
+                                self.add_message("excessive hyperparameter precision", node=node)
         except:
             ExceptionHandler.handle(self, node)
             traceback.print_exc()
