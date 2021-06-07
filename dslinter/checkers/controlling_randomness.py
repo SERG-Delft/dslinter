@@ -23,16 +23,16 @@ class ControllingRandomness(BaseChecker):
     }
     options = ()
 
-    FUNCTIONS: List[str] = [
-        "make_classification",
-        "train_test_split",
-    ]
-
-    CLASSES = [
-        "KFold",
-        "SGDClassifier",
-        "RandomForestClassifier",
-    ]
+    # FUNCTIONS: List[str] = [
+    #     "make_classification",
+    #     "train_test_split",
+    # ]
+    #
+    # CLASSES = [
+    #     "KFold",
+    #     "SGDClassifier",
+    #     "RandomForestClassifier",
+    # ]
 
     def visit_call(self, node: astroid.Call):
         """
