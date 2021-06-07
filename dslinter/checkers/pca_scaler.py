@@ -81,6 +81,7 @@ class PCAScalerChecker(BaseChecker):
                     and node.args is not None
             ):
                 hasPCA = True
+                hasScaler = False
                 for arg in node.args:
                     # print(arg)
                     if isinstance(arg, astroid.Name):
