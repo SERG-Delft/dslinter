@@ -22,6 +22,9 @@ class ExcessiveHyperparameterPrecision(BaseChecker):
     }
     options = ()
 
+    highPrecisionParameters=["tol"]
+    highPrecisionCombinations={"MLPRegressor":["alpha"]}
+
     def visit_call(self, node: astroid.Call):
         """
         When a Call node is visited, check whether it violated the rules in this checker.
@@ -38,11 +41,20 @@ class ExcessiveHyperparameterPrecision(BaseChecker):
             if function_name in hyperparams_all:
                 if(node.keywords is not None):
                     for keyword in node.keywords:
-                        if(hasattr(keyword, "value") and hasattr(keyword.value, "value")):
-                            if type(keyword.value.value) == float \
-                                    and len(keyword.value.as_string().split("."))>1 \
-                                    and len(keyword.value.as_string().split(".")[1]) > 3 :
-                                self.add_message("excessive hyperparameter precision", node=node)
+                        if(
+                            function_name in self.highPrecisionCombinations
+                            and keyword.arg in self.highPrecisionCombinations[function_name]
+                        ):
+                            continue
+                        if(
+                            keyword.arg not in self.highPrecisionParameters
+                            and hasattr(keyword, "value")
+                            and hasattr(keyword.value, "value")
+                            and type(keyword.value.value) == float
+                            and len(keyword.value.as_string().split("."))>1
+                            and len(keyword.value.as_string().split(".")[1]) > 3
+                        ):
+                            self.add_message("excessive hyperparameter precision", node=node)
         except:
             ExceptionHandler.handle(self, node)
             traceback.print_exc()
