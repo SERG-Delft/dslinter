@@ -15,7 +15,7 @@ class ExcessiveHyperparameterPrecision(BaseChecker):
     priority = -1
     msgs = {
         "W5507": (
-            "excessive hyperparameter precision shouldn't be used in the project",
+            "excessive hyperparameter precision might suggest over-tuning",
             "excessive hyperparameter precision",
             "excessive hyperparameter precision might suggest over-tuning"
         ),

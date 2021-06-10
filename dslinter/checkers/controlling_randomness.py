@@ -32,6 +32,8 @@ class ControllingRandomness(BaseChecker):
     #     "KFold",
     #     "SGDClassifier",
     #     "RandomForestClassifier",
+    #     "StratifiedKFold",
+    #     "Lasso",
     # ]
 
     def visit_call(self, node: astroid.Call):
