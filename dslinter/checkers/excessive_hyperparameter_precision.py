@@ -6,6 +6,8 @@ from pylint.interfaces import IAstroidChecker
 from dslinter.util.exception_handler import ExceptionHandler
 from dslinter.util.resources import Resources
 
+import decimal
+
 class ExcessiveHyperparameterPrecision(BaseChecker):
     """Checker which checks rules for excessive hyperparameter precision."""
 
@@ -53,18 +55,9 @@ class ExcessiveHyperparameterPrecision(BaseChecker):
                                 and hasattr(keyword, "value")
                                 and hasattr(keyword.value, "value")
                                 and type(keyword.value.value) == float
+                                and abs(decimal.Decimal(keyword.value.as_string()).as_tuple().exponent) > self.precisionThreshold
                         ):
-                            if(
-                                len(keyword.value.as_string().split(".")) > 1
-                                and len(keyword.value.as_string().split(".")[1]) > self.precisionThreshold
-                            ):
-                                self.add_message("excessive hyperparameter precision", node=node)
-                            if(
-                                "e-" in keyword.value.as_string()
-                                and len(keyword.value.as_string().split("e-")) > 1
-                                and int(keyword.value.as_string().split("e-")[1]) > self.precisionThreshold
-                            ):
-                                self.add_message("excessive hyperparameter precision", node=node)
+                            self.add_message("excessive hyperparameter precision", node=node)
         except:
             ExceptionHandler.handle(self, node)
             traceback.print_exc()
