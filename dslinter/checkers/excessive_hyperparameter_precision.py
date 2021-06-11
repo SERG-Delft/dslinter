@@ -25,6 +25,8 @@ class ExcessiveHyperparameterPrecision(BaseChecker):
     highPrecisionParameters=["tol"]
     highPrecisionCombinations={"MLPRegressor":["alpha"]}
 
+    precisionThreshold = 3
+
     def visit_call(self, node: astroid.Call):
         """
         When a Call node is visited, check whether it violated the rules in this checker.
@@ -46,15 +48,23 @@ class ExcessiveHyperparameterPrecision(BaseChecker):
                             and keyword.arg in self.highPrecisionCombinations[function_name]
                         ):
                             continue
-                        if(
-                            keyword.arg not in self.highPrecisionParameters
-                            and hasattr(keyword, "value")
-                            and hasattr(keyword.value, "value")
-                            and type(keyword.value.value) == float
-                            and len(keyword.value.as_string().split("."))>1
-                            and len(keyword.value.as_string().split(".")[1]) > 3
+                        if (
+                                keyword.arg not in self.highPrecisionParameters
+                                and hasattr(keyword, "value")
+                                and hasattr(keyword.value, "value")
+                                and type(keyword.value.value) == float
                         ):
-                            self.add_message("excessive hyperparameter precision", node=node)
+                            if(
+                                len(keyword.value.as_string().split(".")) > 1
+                                and len(keyword.value.as_string().split(".")[1]) > self.precisionThreshold
+                            ):
+                                self.add_message("excessive hyperparameter precision", node=node)
+                            if(
+                                "e-" in keyword.value.as_string()
+                                and len(keyword.value.as_string().split("e-")) > 1
+                                and int(keyword.value.as_string().split("e-")[1]) > self.precisionThreshold
+                            ):
+                                self.add_message("excessive hyperparameter precision", node=node)
         except:
             ExceptionHandler.handle(self, node)
             traceback.print_exc()
