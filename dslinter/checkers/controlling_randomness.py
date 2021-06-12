@@ -5,6 +5,7 @@ import astroid
 from pylint.checkers import BaseChecker
 from pylint.interfaces import IAstroidChecker
 from dslinter.util.exception_handler import ExceptionHandler
+from dslinter.util.resources import Resources
 
 
 class ControllingRandomness(BaseChecker):
@@ -16,25 +17,35 @@ class ControllingRandomness(BaseChecker):
     priority = -1
     msgs = {
         "W5506": (
-            "'random_state=None' shouldn't be used in estimators or cross-validation splitters",
+            "'random_state=None' shouldn't be used in estimators or cross-validation splitters, it indicates improper randomness control",
             "controlling randomness",
             "For reproducible results across executions, remove any use of random_state=None."
         ),
     }
     options = ()
 
-    # FUNCTIONS: List[str] = [
-    #     "make_classification",
-    #     "train_test_split",
-    # ]
-    #
-    # CLASSES = [
-    #     "KFold",
-    #     "SGDClassifier",
-    #     "RandomForestClassifier",
-    #     "StratifiedKFold",
-    #     "Lasso",
-    # ]
+    SPLITTER_FUNCTIONS: List[str] = [
+        "make_classification",
+        "check_cv",
+        "train_test_split",
+    ]
+
+    SPLITTER_CLASSES = [
+        "GroupKFold",
+        "GroupShuffleSplit",
+        "KFold",
+        "LeaveOneGroupOut",
+        "LeavePGroupsOut",
+        "LeaveOneOut",
+        "LeavePOut",
+        "PredefinedSplit",
+        "RepeatedKFold",
+        "RepeatedStratifiedKFold",
+        "ShuffleSplit",
+        "StratifiedKFold",
+        "StratifiedShuffleSplit",
+        "TimeSeriesSplit"
+    ]
 
     def visit_call(self, node: astroid.Call):
         """
@@ -42,12 +53,14 @@ class ControllingRandomness(BaseChecker):
 
         :param node: The node which is visited.
         """
+
+        estimators_all = Resources.get_hyperparameters()
         try:
             if (
                 hasattr(node, "func")
                 and hasattr(node.func, "name")
                 and hasattr(node, "keywords")
-                # and (node.func.name in self.FUNCTIONS or node.func.name in self.CLASSES)
+                and (node.func.name in self.SPLITTER_FUNCTIONS or node.func.name in self.SPLITTER_CLASSES or node.func.name in estimators_all)
                 and node.keywords is not None
             ):
                 for keyword in node.keywords:
@@ -56,5 +69,3 @@ class ControllingRandomness(BaseChecker):
         except:
             ExceptionHandler.handle(self, node)
             traceback.print_exc()
-
-

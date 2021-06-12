@@ -24,8 +24,56 @@ class ExcessiveHyperparameterPrecision(BaseChecker):
     }
     options = ()
 
-    highPrecisionParameters=["tol"]
-    highPrecisionCombinations={"MLPRegressor":["alpha"]}
+    highPrecisionCombinations={
+        "KMeans":["tol"],
+        "GraphicalLasso":[" tol","enet_tol"],
+        "CCA":["tol"],"PLSCanonical":["tol"],
+        "PLSRegression":["tol"],
+        "GraphicalLassoCV":["tol","enet_tol"],
+        "DictionaryLearning":["tol"],
+        "FastICA":["tol"],
+        "NMF":["tol"],
+        "SparsePCA":["tol"],
+        "LinearDiscriminantAnalysis":["tol"],
+        "QuadraticDiscriminantAnalysis":["tol"],
+        "GradientBoostingClassifier":["tol"],
+        "GradientBoostingRegressor":["tol"],
+        "HistGradientBoostingRegressor":["tol"],
+        "HistGradientBoostingClassifier":["tol"],
+        "GenericUnivariateSelect":["param"],
+        "GaussianProcessRegressor": ["alpha"],
+        "LogisticRegression":["tol"],
+        "LogisticRegressionCV":["tol"],
+        "Perceptron":["alpha"],
+        "SGDClassifier":["alpha"],
+        "SGDRegressor":["alpha"],
+        "ElasticNet":["tol"],
+        "ElasticNetCV":["tol"],
+        "Lars":["eps"],
+        "LarsCV":["eps"],
+        "Lasso":["tol"],
+        "LassoCV":["tol"],
+        "LassoLars":["eps"],
+        "LassoLarsCV":["eps"],
+        "LassoLarsIC":["eps"],
+        "ARDRegression":["alpha_1","alpha_2","lambda_1","lambda_2"],
+        "BayesianRidge":["alpha_1","alpha_2","lambda_1","lambda_2"],
+        "MultiTaskElasticNet":["tol"],
+        "MultiTaskElasticNetCV":["tol"],
+        "MultiTaskLasso":["tol"],
+        "MultiTaskLassoCV":["tol"],
+        "HuberRegressor":["alpha","tol"],
+        "LocallyLinearEmbedding":["tol","hessian_tol","modified_tol"],
+        "TSNE":["min_grad_norm"],
+        "BayesianGaussianMixture":["reg_covar"],
+        "GaussianMixture":["reg_covar"],
+        "GaussianNB":["var_smoothing"],
+        "NeighborhoodComponentsAnalysis":["tol"],
+        "MLPClassifier":["alpha","tol"],
+        "MLPRegressor":["alpha","tol"],
+        "LinearSVC":["tol"],
+        "LinearSVR":["tol"],
+        }
 
     precisionThreshold = 3
 
@@ -51,10 +99,10 @@ class ExcessiveHyperparameterPrecision(BaseChecker):
                         ):
                             continue
                         if (
-                                keyword.arg not in self.highPrecisionParameters
-                                and hasattr(keyword, "value")
+                                hasattr(keyword, "value")
                                 and hasattr(keyword.value, "value")
                                 and type(keyword.value.value) == float
+                                and decimal.Decimal(keyword.value.as_string()).as_tuple().exponent < 0
                                 and abs(decimal.Decimal(keyword.value.as_string()).as_tuple().exponent) > self.precisionThreshold
                         ):
                             self.add_message("excessive hyperparameter precision", node=node)
