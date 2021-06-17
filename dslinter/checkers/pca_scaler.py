@@ -83,20 +83,15 @@ class PCAScalerChecker(BaseChecker):
                 hasPCA = True
                 hasScaler = False
                 for arg in node.args:
-                    # print(arg)
                     if isinstance(arg, astroid.Name):
                         values = AssignUtil.assignment_values(arg)
                         for value in values:
-                            # print(value)
                             if (
                                     isinstance(value, astroid.Call)
                                     and value.func is not None
                                     and hasattr(value.func, "attrname")
                                     and value.func.attrname in self.LEARNING_FUNCTIONS
                             ):
-                                # while(hasattr(value.func.expr, "attrname")
-                                #     if()
-                                # print(value.func.expr)
                                 if(self._expr_is_scaler(value.func.expr)):
                                     hasScaler = True
                                 elif(isinstance(value.func.expr, astroid.Call)
@@ -176,8 +171,6 @@ class PCAScalerChecker(BaseChecker):
         if isinstance(expr, astroid.Name):
             values = AssignUtil.assignment_values(expr)
             for value in values:
-                # print(expr, value)
-                if PCAScalerChecker._expr_is_scaler(value):
-                    # print("Scaler")
+                if PCAScalerChecker._expr_is_scaler(value):              
                     return True
         return False
