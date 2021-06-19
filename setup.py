@@ -7,7 +7,7 @@ with open("README.md", encoding="utf-8") as f:
 
 setup(
     name="dslinter",
-    version="1.0.2",
+    version="1.1.0",
     description="Pylint plugin for linting data science and machine learning code, focussed on the libraries pandas and scikit-learn.",
     long_description=long_description,
     long_description_content_type="text/markdown",
