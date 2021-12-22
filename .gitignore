@@ -136,3 +136,6 @@ dmypy.json
 .idea/**/shelf
 .idea/dataSources.local.xml
 .idea/dataSources.xml
+
+#MacOS
+.DS_Store
