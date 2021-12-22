@@ -1,5 +1,5 @@
 ---
-title: "{{ replace .Name "-" " " | title }}"
+title: "Randomness Uncontrolled"
 disableShare: true
 # ShowReadingTime: true
 ---
