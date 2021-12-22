@@ -1,1 +1,15 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml"><url><loc>https://hynn01.github.io/dslinter/categories/</loc></url><url><loc>https://hynn01.github.io/dslinter/</loc></url><url><loc>https://hynn01.github.io/dslinter/tags/</loc></url></urlset>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://hynn01.github.io/dslinter/catalog/</loc>
+  </url><url>
+    <loc>https://hynn01.github.io/dslinter/categories/</loc>
+  </url><url>
+    <loc>https://hynn01.github.io/dslinter/</loc>
+  </url><url>
+    <loc>https://hynn01.github.io/dslinter/catalog/randomness-uncontrolled/</loc>
+  </url><url>
+    <loc>https://hynn01.github.io/dslinter/tags/</loc>
+  </url>
+</urlset>
