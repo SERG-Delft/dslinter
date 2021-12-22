@@ -1,9 +1,9 @@
 ---
-title: "{{ replace .Name "-" " " | title }}"
+title: "Data Leakage"
 disableShare: true
 # ShowReadingTime: true
 tags: 
-weight: 
+weight: 5
 ---
 
 ### Description

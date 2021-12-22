@@ -1,9 +1,9 @@
 ---
-title: "{{ replace .Name "-" " " | title }}"
+title: "Tensor Shape Unset"
 disableShare: true
 # ShowReadingTime: true
 tags: 
-weight: 
+weight: 16
 ---
 
 ### Description

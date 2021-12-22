@@ -1,9 +1,9 @@
 ---
-title: "{{ replace .Name "-" " " | title }}"
+title: "Hyperparameter Not Set"
 disableShare: true
 # ShowReadingTime: true
 tags: 
-weight: 
+weight: 6
 ---
 
 ### Description

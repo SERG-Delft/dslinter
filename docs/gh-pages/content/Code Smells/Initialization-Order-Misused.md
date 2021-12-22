@@ -1,9 +1,9 @@
 ---
-title: "{{ replace .Name "-" " " | title }}"
+title: "Initialization Order Misused"
 disableShare: true
 # ShowReadingTime: true
 tags: 
-weight: 
+weight: 20
 ---
 
 ### Description

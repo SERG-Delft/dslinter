@@ -2,7 +2,8 @@
 title: "Randomness Uncontrolled"
 disableShare: true
 # ShowReadingTime: true
-tag: automated
+tags: ["can be automated"]
+weight: 1
 ---
 
 ### Description
@@ -54,5 +55,4 @@ kf = KFold(random_state=rng)
 
 #### Documentation
 - https://pytorch.org/docs/stable/notes/randomness.html
-
 

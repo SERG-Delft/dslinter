@@ -1,5 +1,13 @@
 :root {
   /* Wider content width */
-  --nav-width: 1600px;
-  --main-width: 1600px;
+  --nav-width: 1200px;
+  --main-width: 1200px;
+  /* Custom colors (light mode). */
+  --theme: #f2ebe1;
+  --code-bg: #f2ebe1;
+  --secondary: #a59a89;
+}
+
+.dark{
+  --primary: #e1ebf2;
 }

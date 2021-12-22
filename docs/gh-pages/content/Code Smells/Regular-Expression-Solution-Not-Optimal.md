@@ -1,9 +1,9 @@
 ---
-title: "{{ replace .Name "-" " " | title }}"
+title: "Regular Expression Solution Not Optimal"
 disableShare: true
 # ShowReadingTime: true
 tags: 
-weight: 
+weight: 15
 ---
 
 ### Description

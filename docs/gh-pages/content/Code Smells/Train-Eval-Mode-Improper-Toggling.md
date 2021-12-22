@@ -1,9 +1,9 @@
 ---
-title: "{{ replace .Name "-" " " | title }}"
+title: "Train Eval Mode Improper Toggling"
 disableShare: true
 # ShowReadingTime: true
 tags: 
-weight: 
+weight: 22
 ---
 
 ### Description

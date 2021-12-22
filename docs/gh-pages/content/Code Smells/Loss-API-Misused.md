@@ -1,5 +1,5 @@
 ---
-title: "{{ replace .Name "-" " " | title }}"
+title: "Loss API Misused"
 disableShare: true
 # ShowReadingTime: true
 tags: 

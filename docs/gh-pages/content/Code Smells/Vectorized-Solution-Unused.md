@@ -1,9 +1,9 @@
 ---
-title: "{{ replace .Name "-" " " | title }}"
+title: "Vectorized Solution Unused"
 disableShare: true
 # ShowReadingTime: true
 tags: 
-weight: 
+weight: 3
 ---
 
 ### Description

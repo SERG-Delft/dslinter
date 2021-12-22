@@ -1,9 +1,9 @@
 ---
-title: "{{ replace .Name "-" " " | title }}"
+title: "No Scaling Before Scaling Sensitive Operation"
 disableShare: true
 # ShowReadingTime: true
 tags: 
-weight: 
+weight: 4
 ---
 
 ### Description

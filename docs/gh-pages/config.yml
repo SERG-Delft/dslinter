@@ -3,22 +3,38 @@ baseURL: https://hynn01.github.io/dslinter/
 languageCode: en-us
 theme: "PaperMod"
 
+enableInlineShortcodes: true
 enableRobotsTXT: true
 buildDrafts: false
 buildFuture: false
 buildExpired: false
-
-googleAnalytics: UA-123-45
+enableEmoji: true
+# googleAnalytics: UA-123-45
 
 minify:
   disableXML: true
   minifyOutput: true
 
+menu:
+  main:
+    - identifier: Code Smells
+      name: Code Smells
+      url: /Code Smells/
+      weight: 10
+    - identifier: Tags
+      name: Tags
+      url: /tags/
+      weight: 10
+
+taxonomies:
+    Code Smell: Code Smell
+    tag: tags
+
 params:
   # env: production # to enable google analytics, opengraph, twitter-cards and schema.
   title: DSLinter - Linter for Machine Learnig Application - Specific Code Smells
   description: ""
-  keywords: [Blog, Portfolio, PaperMod]
+  # keywords: [Blog, Portfolio, PaperMod]
   # author: Me
   # author: ["Me", "You"] # multiple authors
   defaultTheme: light # dark, light
@@ -26,7 +42,7 @@ params:
 
   # ShowReadingTime: true
   # ShowShareButtons: true
-  # ShowPostNavLinks: true
+  ShowPostNavLinks: true
   ShowBreadCrumbs: true
   ShowCodeCopyButtons: false
   disableSpecial1stPost: false
@@ -49,20 +65,20 @@ params:
   label:
     text: "DSLinter - Linter for Machine Learnig Application - Specific Code Smells"
 
-  # profile-mode
-  profileMode:
-    enabled: false # needs to be explicitly set
-    title: ExampleSite
-    subtitle: "This is subtitle"
-    imageUrl: "<img location>"
-    imageWidth: 120
-    imageHeight: 120
-    imageTitle: my image
-    buttons:
-      # - name: Posts
-      #   url: posts
-      # - name: Tags
-      #   url: tags
+  # # profile-mode
+  # profileMode:
+  #   enabled: false # needs to be explicitly set
+  #   title: ExampleSite
+  #   subtitle: "This is subtitle"
+  #   imageUrl: "<img location>"
+  #   imageWidth: 120
+  #   imageHeight: 120
+  #   imageTitle: my image
+  #   buttons:
+  #     # - name: Posts
+  #     #   url: posts
+  #     # - name: Tags
+  #     #   url: tags
 
   # home-info mode
   homeInfoParams:
@@ -97,12 +113,7 @@ params:
     threshold: 0.4
     minMatchCharLength: 0
     keys: ["title", "permalink", "summary", "content"]
-menu:
-  main:
-    - identifier: Code Smells
-      name: Code Smells
-      url: /Code Smells/
-      weight: 10
+
 # Read: https://github.com/adityatelange/hugo-PaperMod/wiki/FAQs#using-hugos-syntax-highlighter-chroma
 # pygmentsUseClasses: true
 # markup:

@@ -1,9 +1,9 @@
 ---
-title: "{{ replace .Name "-" " " | title }}"
+title: "Memory Not Freed"
 disableShare: true
 # ShowReadingTime: true
 tags: 
-weight: 
+weight: 9
 ---
 
 ### Description

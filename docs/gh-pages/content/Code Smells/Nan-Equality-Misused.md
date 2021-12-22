@@ -1,9 +1,9 @@
 ---
-title: "{{ replace .Name "-" " " | title }}"
+title: "Nan Equality Misused"
 disableShare: true
 # ShowReadingTime: true
 tags: 
-weight: 
+weight: 12
 ---
 
 ### Description

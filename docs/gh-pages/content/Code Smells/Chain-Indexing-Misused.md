@@ -1,9 +1,9 @@
 ---
-title: "{{ replace .Name "-" " " | title }}"
+title: "Chain Indexing Misused"
 disableShare: true
 # ShowReadingTime: true
 tags: 
-weight: 
+weight: 13
 ---
 
 ### Description

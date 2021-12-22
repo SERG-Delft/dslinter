@@ -1,9 +1,9 @@
 ---
-title: "{{ replace .Name "-" " " | title }}"
+title: "Excessive Hyperparameter"
 disableShare: true
 # ShowReadingTime: true
 tags: 
-weight: 
+weight: 7
 ---
 
 ### Description

@@ -1,9 +1,9 @@
 ---
-title: "{{ replace .Name "-" " " | title }}"
+title: "Counterintuitive Hyperparameter"
 disableShare: true
 # ShowReadingTime: true
 tags: 
-weight: 
+weight: 8
 ---
 
 ### Description

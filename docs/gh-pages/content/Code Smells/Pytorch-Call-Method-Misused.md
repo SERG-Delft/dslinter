@@ -1,9 +1,9 @@
 ---
-title: "{{ replace .Name "-" " " | title }}"
+title: "Pytorch Call Method Misused"
 disableShare: true
 # ShowReadingTime: true
 tags: 
-weight: 
+weight: 21
 ---
 
 ### Description

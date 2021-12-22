@@ -1,9 +1,9 @@
 ---
-title: "{{ replace .Name "-" " " | title }}"
+title: "Deterministic Algorithm Not Used"
 disableShare: true
 # ShowReadingTime: true
 tags: 
-weight: 
+weight: 10
 ---
 
 ### Description
