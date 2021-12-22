@@ -99,9 +99,9 @@ params:
     keys: ["title", "permalink", "summary", "content"]
 menu:
   main:
-    - identifier: catalog
-      name: catalog
-      url: /catalog/
+    - identifier: Code Smells
+      name: Code Smells
+      url: /Code Smells/
       weight: 10
 # Read: https://github.com/adityatelange/hugo-PaperMod/wiki/FAQs#using-hugos-syntax-highlighter-chroma
 # pygmentsUseClasses: true

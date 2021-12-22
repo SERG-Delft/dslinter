@@ -4,19 +4,19 @@ disableShare: true
 # ShowReadingTime: true
 ---
 
-### Description:
+### Description
 
 
-### Type:
+### Type
 
 
-### Existing Stage:
+### Existing Stage
 
 
-### Effect:
+### Effect
 
 
-### Example:
+### Example
 
 ```python
 # Violated Code
@@ -27,25 +27,15 @@ disableShare: true
 
 ### Source:
 
-| Paper           |
-| --------------- |
-|                 |
+#### Paper 
+- https://towardsdatascience.com/my-machine-learning-model-is-perfect-9a7928e0f604
 
+#### Grey Literature
 
-| Grey Literature |
-| --------------- |
-|                 |
+#### GitHub Commit
 
-| GitHub Commit   |
-| --------------- |
-|                 |
+#### Stack Overflow
 
-| Stack Overflow  |
-| --------------- |
-|                 |
-
-| Documentation   |
-| --------------- |
-|                 |
+#### Documentation
 
 
