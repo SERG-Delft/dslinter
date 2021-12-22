@@ -1,4 +1,4 @@
-baseURL: http://example.org/
+baseURL: https://hynn01.github.io/dslinter/
 languageCode: en-us
 title: My New Hugo Site
 theme: "PaperMod"
