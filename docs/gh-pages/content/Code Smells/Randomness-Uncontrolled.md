@@ -2,7 +2,7 @@
 title: "Randomness Uncontrolled"
 disableShare: true
 # ShowReadingTime: true
-tags: ["can be automated"]
+tags: ["can be automated","generic","reproducibility"]
 weight: 1
 ---
 
@@ -27,6 +27,33 @@ Reproducibility
 
 ```python
 
+### python in general
+
+# Violated Code
+# random seed not set
+
+# Recommended Fix
+import random
+random.seed(0)
+
+### Tensorflow
+
+# Violated Code
+# random seed not set
+
+# Recommended Fix
+import tensoflow as tf
+tf.random.set_seed(0)
+
+### PyTorch
+
+# Violated Code
+# random seed not set
+
+# Recommended Fix
+import torch
+torch.manual_seed(0)
+
 ### Scikit-Learn
 from sklearn.model_selection 
 import KFold
@@ -37,6 +64,15 @@ kf = KFold(random_state=None)
 # Recommended Fix
 rng = 0
 kf = KFold(random_state=rng)
+
+### NumPy
+
+# Violated Code
+# random seed not set
+
+# Recommended Fix
+import numpy as np
+np.random.seed(0)
 
 ```
 

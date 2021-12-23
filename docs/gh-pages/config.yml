@@ -25,6 +25,10 @@ menu:
       name: Tags
       url: /tags/
       weight: 10
+    - identifier: Survey
+      name: Survey
+      url: 
+      weight: 10
 
 taxonomies:
     Code Smell: Code Smell
