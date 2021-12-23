@@ -5,7 +5,11 @@
 <meta name=robots content="index, follow">
 <title>Zero_grad Not Used Before Backward | DSLinter - Linter for Machine Learnig Application - Specific Code Smells</title>
 <meta name=keywords content>
-<meta name=description content="Description Type Existing Stage Effect Example # Violated Code # Recommended Fix Source: Paper Grey Literature GitHub Commit Stack Overflow Documentation ">
+<meta name=description content="Description Developers should use \textit{optimizer.zero_grad()}, \textit{loss_fn.backward()}, \textit{optimizer.step()} together and should be forget to use \textit{optimizer.zero_grad()} before \textit{loss_fn.backward()}. \textit{optimizer.zero_grad()} clears the old gradients from last step. If this API is not used, the gradients will be accumulated from all \textit{loss.backward()} calls and it will lead to the gradient explosion, which fails the training.
+Type API Specific
+Existing Stage Model Training
+Effect Error-prone
+Example ### PyTorch # Violated Code output = model(input) # forward-pass loss_fn.">
 <meta name=author content>
 <link rel=canonical href=https://hynn01.github.io/dslinter/code-smells/zero_grad-not-used-before-backward/>
 <meta name=google-site-verification content="XYZabc">
@@ -20,19 +24,27 @@
 <link rel=mask-icon href=https://hynn01.github.io/dslinter/%3Clink%20/%20abs%20url%3E>
 <meta name=theme-color content="#2e2e33">
 <meta name=msapplication-TileColor content="#2e2e33">
-<meta name=generator content="Hugo 0.91.0">
+<meta name=generator content="Hugo 0.91.1">
 <noscript>
 <style>#theme-toggle,.top-link{display:none}</style>
 </noscript><meta property="og:title" content="Zero_grad Not Used Before Backward">
-<meta property="og:description" content="Description Type Existing Stage Effect Example # Violated Code # Recommended Fix Source: Paper Grey Literature GitHub Commit Stack Overflow Documentation ">
+<meta property="og:description" content="Description Developers should use \textit{optimizer.zero_grad()}, \textit{loss_fn.backward()}, \textit{optimizer.step()} together and should be forget to use \textit{optimizer.zero_grad()} before \textit{loss_fn.backward()}. \textit{optimizer.zero_grad()} clears the old gradients from last step. If this API is not used, the gradients will be accumulated from all \textit{loss.backward()} calls and it will lead to the gradient explosion, which fails the training.
+Type API Specific
+Existing Stage Model Training
+Effect Error-prone
+Example ### PyTorch # Violated Code output = model(input) # forward-pass loss_fn.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://hynn01.github.io/dslinter/code-smells/zero_grad-not-used-before-backward/"><meta property="article:section" content="Code Smells">
 <meta property="og:site_name" content="DSLinter - Linter for Machine Learnig Application - Specific Code Smells">
 <meta name=twitter:card content="summary">
 <meta name=twitter:title content="Zero_grad Not Used Before Backward">
-<meta name=twitter:description content="Description Type Existing Stage Effect Example # Violated Code # Recommended Fix Source: Paper Grey Literature GitHub Commit Stack Overflow Documentation ">
+<meta name=twitter:description content="Description Developers should use \textit{optimizer.zero_grad()}, \textit{loss_fn.backward()}, \textit{optimizer.step()} together and should be forget to use \textit{optimizer.zero_grad()} before \textit{loss_fn.backward()}. \textit{optimizer.zero_grad()} clears the old gradients from last step. If this API is not used, the gradients will be accumulated from all \textit{loss.backward()} calls and it will lead to the gradient explosion, which fails the training.
+Type API Specific
+Existing Stage Model Training
+Effect Error-prone
+Example ### PyTorch # Violated Code output = model(input) # forward-pass loss_fn.">
 <script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":2,"name":"Zero_grad Not Used Before Backward","item":"https://hynn01.github.io/dslinter/code-smells/zero_grad-not-used-before-backward/"}]}</script>
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Zero_grad Not Used Before Backward","name":"Zero_grad Not Used Before Backward","description":"Description Type Existing Stage Effect Example # Violated Code # Recommended Fix Source: Paper Grey Literature GitHub Commit Stack Overflow Documentation ","keywords":[],"articleBody":"Description Type Existing Stage Effect Example # Violated Code # Recommended Fix Source: Paper Grey Literature GitHub Commit Stack Overflow Documentation ","wordCount":"21","inLanguage":"en","datePublished":"0001-01-01T00:00:00Z","dateModified":"0001-01-01T00:00:00Z","mainEntityOfPage":{"@type":"WebPage","@id":"https://hynn01.github.io/dslinter/code-smells/zero_grad-not-used-before-backward/"},"publisher":{"@type":"Organization","name":"DSLinter - Linter for Machine Learnig Application - Specific Code Smells","logo":{"@type":"ImageObject","url":"https://hynn01.github.io/dslinter/%3Clink%20/%20abs%20url%3E"}}}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Zero_grad Not Used Before Backward","name":"Zero_grad Not Used Before Backward","description":"Description Developers should use \\textit{optimizer.zero_grad()}, \\textit{loss_fn.backward()}, \\textit{optimizer.step()} together and should be forget to use \\textit{optimizer.zero_grad()} before \\textit{loss_fn.backward()}. \\textit{optimizer.zero_grad()} clears the old gradients from last step. If this API is not used, the gradients will be accumulated from all \\textit{loss.backward()} calls and it will lead to the gradient explosion, which fails the training.\nType API Specific\nExisting Stage Model Training\nEffect Error-prone\nExample ### PyTorch # Violated Code output = model(input) # forward-pass loss_fn.","keywords":[],"articleBody":"Description Developers should use \\textit{optimizer.zero_grad()}, \\textit{loss_fn.backward()}, \\textit{optimizer.step()} together and should be forget to use \\textit{optimizer.zero_grad()} before \\textit{loss_fn.backward()}. \\textit{optimizer.zero_grad()} clears the old gradients from last step. If this API is not used, the gradients will be accumulated from all \\textit{loss.backward()} calls and it will lead to the gradient explosion, which fails the training.\nType API Specific\nExisting Stage Model Training\nEffect Error-prone\nExample ### PyTorch # Violated Code output = model(input) # forward-pass loss_fn.backward() # backward-pass optimizer.step() # update weights by an ever growing gradient  # Recommended Fix output = model(input) # forward-pass optimizer.zero_grad() # reset gradient  loss_fn.backward() # backward-pass optimizer.step() # weight updates using reasonable gradients  Source: Paper Grey Literature  https://medium.com/missinglink-deep-learning-platform/most-common-neural-net-pytorch-mistakes-456560ada037  GitHub Commit Stack Overflow Documentation ","wordCount":"116","inLanguage":"en","datePublished":"0001-01-01T00:00:00Z","dateModified":"0001-01-01T00:00:00Z","mainEntityOfPage":{"@type":"WebPage","@id":"https://hynn01.github.io/dslinter/code-smells/zero_grad-not-used-before-backward/"},"publisher":{"@type":"Organization","name":"DSLinter - Linter for Machine Learnig Application - Specific Code Smells","logo":{"@type":"ImageObject","url":"https://hynn01.github.io/dslinter/%3Clink%20/%20abs%20url%3E"}}}</script>
 </head>
 <body id=top>
 <script>localStorage.getItem("pref-theme")==="dark"&&document.body.classList.add('dark')</script>
@@ -49,6 +61,11 @@
 <li>
 <a href=https://hynn01.github.io/dslinter/code-smells/ title="Code Smells">
 <span>Code Smells</span>
+</a>
+</li>
+<li>
+<a href=https://hynn01.github.io/dslinter/ title=Survey>
+<span>Survey</span>
 </a>
 </li>
 <li>
@@ -70,17 +87,37 @@ Zero_grad Not Used Before Backward
 </div>
 </header>
 <div class=post-content><h3 id=description>Description<a hidden class=anchor aria-hidden=true href=#description>#</a></h3>
+<p>Developers should use \textit{optimizer.zero_grad()}, \textit{loss_fn.backward()}, \textit{optimizer.step()} together and should be forget to use \textit{optimizer.zero_grad()} before \textit{loss_fn.backward()}. \textit{optimizer.zero_grad()} clears the old gradients from last step. If this API is not used, the gradients will be accumulated from all \textit{loss.backward()} calls and it will lead to the gradient explosion, which fails the training.</p>
 <h3 id=type>Type<a hidden class=anchor aria-hidden=true href=#type>#</a></h3>
+<p>API Specific</p>
 <h3 id=existing-stage>Existing Stage<a hidden class=anchor aria-hidden=true href=#existing-stage>#</a></h3>
+<p>Model Training</p>
 <h3 id=effect>Effect<a hidden class=anchor aria-hidden=true href=#effect>#</a></h3>
+<p>Error-prone</p>
 <h3 id=example>Example<a hidden class=anchor aria-hidden=true href=#example>#</a></h3>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#75715e># Violated Code</span>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python>
+<span style=color:#75715e>### PyTorch</span>
+
+<span style=color:#75715e># Violated Code</span>
+output <span style=color:#f92672>=</span> model(input) <span style=color:#75715e># forward-pass</span>
+loss_fn<span style=color:#f92672>.</span>backward()    <span style=color:#75715e># backward-pass</span>
+optimizer<span style=color:#f92672>.</span>step()      <span style=color:#75715e># update weights by an ever growing gradient </span>
+
 
 <span style=color:#75715e># Recommended Fix</span>
+
+output <span style=color:#f92672>=</span> model(input) <span style=color:#75715e># forward-pass</span>
+optimizer<span style=color:#f92672>.</span>zero_grad() <span style=color:#75715e># reset gradient </span>
+loss_fn<span style=color:#f92672>.</span>backward()    <span style=color:#75715e># backward-pass</span>
+optimizer<span style=color:#f92672>.</span>step()      <span style=color:#75715e># weight updates using reasonable gradients </span>
+
 
 </code></pre></div><h3 id=source>Source:<a hidden class=anchor aria-hidden=true href=#source>#</a></h3>
 <h4 id=paper>Paper<a hidden class=anchor aria-hidden=true href=#paper>#</a></h4>
 <h4 id=grey-literature>Grey Literature<a hidden class=anchor aria-hidden=true href=#grey-literature>#</a></h4>
+<ul>
+<li><a href=https://medium.com/missinglink-deep-learning-platform/most-common-neural-net-pytorch-mistakes-456560ada037>https://medium.com/missinglink-deep-learning-platform/most-common-neural-net-pytorch-mistakes-456560ada037</a></li>
+</ul>
 <h4 id=github-commit>GitHub Commit<a hidden class=anchor aria-hidden=true href=#github-commit>#</a></h4>
 <h4 id=stack-overflow>Stack Overflow<a hidden class=anchor aria-hidden=true href=#stack-overflow>#</a></h4>
 <h4 id=documentation>Documentation<a hidden class=anchor aria-hidden=true href=#documentation>#</a></h4>

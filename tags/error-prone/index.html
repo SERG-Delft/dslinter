@@ -1,0 +1,109 @@
+<!doctype html><html lang=en dir=auto>
+<head><meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
+<meta name=robots content="index, follow">
+<title>error-prone | DSLinter - Linter for Machine Learnig Application - Specific Code Smells</title>
+<meta name=keywords content>
+<meta name=description content>
+<meta name=author content>
+<link rel=canonical href=https://hynn01.github.io/dslinter/tags/error-prone/>
+<meta name=google-site-verification content="XYZabc">
+<meta name=yandex-verification content="XYZabc">
+<meta name=msvalidate.01 content="XYZabc">
+<link crossorigin=anonymous href=/dslinter/assets/css/stylesheet.min.ccf63c2001f333f5fe878d473648051efe3aea1e5baceba8797e9f94daa448e6.css integrity="sha256-zPY8IAHzM/X+h41HNkgFHv466h5brOuoeX6flNqkSOY=" rel="preload stylesheet" as=style>
+<link rel=icon href=https://hynn01.github.io/dslinter/%3Clink%20/%20abs%20url%3E>
+<link rel=icon type=image/png sizes=16x16 href=https://hynn01.github.io/dslinter/%3Clink%20/%20abs%20url%3E>
+<link rel=icon type=image/png sizes=32x32 href=https://hynn01.github.io/dslinter/%3Clink%20/%20abs%20url%3E>
+<link rel=apple-touch-icon href=https://hynn01.github.io/dslinter/%3Clink%20/%20abs%20url%3E>
+<link rel=mask-icon href=https://hynn01.github.io/dslinter/%3Clink%20/%20abs%20url%3E>
+<meta name=theme-color content="#2e2e33">
+<meta name=msapplication-TileColor content="#2e2e33">
+<meta name=generator content="Hugo 0.91.1">
+<link rel=alternate type=application/rss+xml href=https://hynn01.github.io/dslinter/tags/error-prone/index.xml>
+<noscript>
+<style>#theme-toggle,.top-link{display:none}</style>
+</noscript><meta property="og:title" content="error-prone">
+<meta property="og:description" content>
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://hynn01.github.io/dslinter/tags/error-prone/"><meta property="og:site_name" content="DSLinter - Linter for Machine Learnig Application - Specific Code Smells">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="error-prone">
+<meta name=twitter:description content>
+</head>
+<body class=list id=top>
+<script>localStorage.getItem("pref-theme")==="dark"&&document.body.classList.add('dark')</script>
+<header class=header>
+<nav class=nav>
+<div class=logo>
+<a href=https://hynn01.github.io/dslinter/ accesskey=h title="DSLinter - Linter for Machine Learnig Application - Specific Code Smells (Alt + H)">DSLinter - Linter for Machine Learnig Application - Specific Code Smells</a>
+<span class=logo-switches>
+<button id=theme-toggle accesskey=t title="(Alt + T)"><svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+</button>
+</span>
+</div>
+<ul id=menu>
+<li>
+<a href=https://hynn01.github.io/dslinter/code-smells/ title="Code Smells">
+<span>Code Smells</span>
+</a>
+</li>
+<li>
+<a href=https://hynn01.github.io/dslinter/ title=Survey>
+<span>Survey</span>
+</a>
+</li>
+<li>
+<a href=https://hynn01.github.io/dslinter/tags/ title=Tags>
+<span>Tags</span>
+</a>
+</li>
+</ul>
+</nav>
+</header>
+<main class=main>
+<header class=page-header><div class=breadcrumbs><a href=https://hynn01.github.io/dslinter/>Home</a>&nbsp;»&nbsp;<a href=https://hynn01.github.io/dslinter/tags/>Tags</a></div>
+<h1>error-prone</h1>
+</header>
+<article class="post-entry tag-entry">
+<header class=entry-header>
+<h2>In Place APIs Misused
+</h2>
+</header>
+<section class=entry-content>
+<p>Description “In-place operation is an operation that directly changes the content of a given linear algebra, vector, matrices (Tensor) without making a copy.”\ref{grey:inplace} Due to the nature of the in-place operation, the in-place APIs are easily misused. Developers sometimes forget to set the in-place parameter in APIs to true while not assigning the new result to a variable, causing potential silent bugs. The data is not updated in this way, but the developer thinks it is and might not be able to find where the bug is....</p>
+</section>
+<footer class=entry-footer></footer>
+<a class=entry-link aria-label="post link to In Place APIs Misused" href=https://hynn01.github.io/dslinter/code-smells/in-place-apis-misused/></a>
+</article>
+<article class="post-entry tag-entry">
+<header class=entry-header>
+<h2>Counterintuitive Hyperparameter
+</h2>
+</header>
+<section class=entry-content>
+<p>Description Counterintuitive hyperparameters will also cause bugs. There are four posts \ref{grey:so_counterintuitive1}\ref{grey:so_counterintuitive2}\ref{grey:so_counterintuitive3}\ref{grey:so_counterintuitive4} on StackOverflow discussing where the bug in the program is, and it turns out that a large learning rate causes bugs. This implies that the developer should check whether the hyperparameters stay in the normal range when developing ML applications.
+Type Generic
+Existing Stage Model Training
+Effect Error-prone
+Example # TensorFlow import tensorflow as tf # Violated Code optimizer = tf....</p>
+</section>
+<footer class=entry-footer></footer>
+<a class=entry-link aria-label="post link to Counterintuitive Hyperparameter" href=https://hynn01.github.io/dslinter/code-smells/counterintuitive-hyperparameter/></a>
+</article>
+</main>
+<footer class=footer>
+<span>&copy; 2021 <a href=https://hynn01.github.io/dslinter/>DSLinter - Linter for Machine Learnig Application - Specific Code Smells</a></span>
+<span>
+Powered by
+<a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &
+        <a href=https://git.io/hugopapermod rel=noopener target=_blank>PaperMod</a>
+</span>
+</footer>
+<a href=#top aria-label="go to top" title="Go to Top (Alt + G)" class=top-link id=top-link accesskey=g><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentcolor"><path d="M12 6H0l6-6z"/></svg>
+</a>
+<script>let menu=document.getElementById('menu');menu&&(menu.scrollLeft=localStorage.getItem("menu-scroll-position"),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)}),document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener("click",function(b){b.preventDefault();var a=this.getAttribute("href").substr(1);window.matchMedia('(prefers-reduced-motion: reduce)').matches?document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView({behavior:"smooth"}),a==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${a}`)})})</script>
+<script>var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")}</script>
+<script>document.getElementById("theme-toggle").addEventListener("click",()=>{document.body.className.includes("dark")?(document.body.classList.remove('dark'),localStorage.setItem("pref-theme",'light')):(document.body.classList.add('dark'),localStorage.setItem("pref-theme",'dark'))})</script>
+</body>
+</html>

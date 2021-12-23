@@ -5,7 +5,11 @@
 <meta name=robots content="index, follow">
 <title>Initialization Order Misused | DSLinter - Linter for Machine Learnig Application - Specific Code Smells</title>
 <meta name=keywords content>
-<meta name=description content="Description Type Existing Stage Effect Example # Violated Code # Recommended Fix Source: Paper Grey Literature GitHub Commit Stack Overflow Documentation ">
+<meta name=description content="Description The \textit{AdamOptimizer} class in the TensorFlow creates additional variables named &ldquo;slots&rdquo;. The variables must be initialized before training the model. Therefore, if the developer call \textit{initialize_all_variables()} before calling \textit{AdamOptimizer} and does not call the initializer afterward, the variables created by \textit{AdamOptimizer} will not be initialized and might cause an error.
+Type API Specific
+Existing Stage Model Training
+Effect Error-prone
+Example # Violated Code init = tf.global_variables_initializer() train_op = tf.train.AdamOptimizer(1e-4).minimize(cross_entropy) sess = tf.">
 <meta name=author content>
 <link rel=canonical href=https://hynn01.github.io/dslinter/code-smells/initialization-order-misused/>
 <meta name=google-site-verification content="XYZabc">
@@ -20,19 +24,27 @@
 <link rel=mask-icon href=https://hynn01.github.io/dslinter/%3Clink%20/%20abs%20url%3E>
 <meta name=theme-color content="#2e2e33">
 <meta name=msapplication-TileColor content="#2e2e33">
-<meta name=generator content="Hugo 0.91.0">
+<meta name=generator content="Hugo 0.91.1">
 <noscript>
 <style>#theme-toggle,.top-link{display:none}</style>
 </noscript><meta property="og:title" content="Initialization Order Misused">
-<meta property="og:description" content="Description Type Existing Stage Effect Example # Violated Code # Recommended Fix Source: Paper Grey Literature GitHub Commit Stack Overflow Documentation ">
+<meta property="og:description" content="Description The \textit{AdamOptimizer} class in the TensorFlow creates additional variables named &ldquo;slots&rdquo;. The variables must be initialized before training the model. Therefore, if the developer call \textit{initialize_all_variables()} before calling \textit{AdamOptimizer} and does not call the initializer afterward, the variables created by \textit{AdamOptimizer} will not be initialized and might cause an error.
+Type API Specific
+Existing Stage Model Training
+Effect Error-prone
+Example # Violated Code init = tf.global_variables_initializer() train_op = tf.train.AdamOptimizer(1e-4).minimize(cross_entropy) sess = tf.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://hynn01.github.io/dslinter/code-smells/initialization-order-misused/"><meta property="article:section" content="Code Smells">
 <meta property="og:site_name" content="DSLinter - Linter for Machine Learnig Application - Specific Code Smells">
 <meta name=twitter:card content="summary">
 <meta name=twitter:title content="Initialization Order Misused">
-<meta name=twitter:description content="Description Type Existing Stage Effect Example # Violated Code # Recommended Fix Source: Paper Grey Literature GitHub Commit Stack Overflow Documentation ">
+<meta name=twitter:description content="Description The \textit{AdamOptimizer} class in the TensorFlow creates additional variables named &ldquo;slots&rdquo;. The variables must be initialized before training the model. Therefore, if the developer call \textit{initialize_all_variables()} before calling \textit{AdamOptimizer} and does not call the initializer afterward, the variables created by \textit{AdamOptimizer} will not be initialized and might cause an error.
+Type API Specific
+Existing Stage Model Training
+Effect Error-prone
+Example # Violated Code init = tf.global_variables_initializer() train_op = tf.train.AdamOptimizer(1e-4).minimize(cross_entropy) sess = tf.">
 <script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":2,"name":"Initialization Order Misused","item":"https://hynn01.github.io/dslinter/code-smells/initialization-order-misused/"}]}</script>
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Initialization Order Misused","name":"Initialization Order Misused","description":"Description Type Existing Stage Effect Example # Violated Code # Recommended Fix Source: Paper Grey Literature GitHub Commit Stack Overflow Documentation ","keywords":[],"articleBody":"Description Type Existing Stage Effect Example # Violated Code # Recommended Fix Source: Paper Grey Literature GitHub Commit Stack Overflow Documentation ","wordCount":"21","inLanguage":"en","datePublished":"0001-01-01T00:00:00Z","dateModified":"0001-01-01T00:00:00Z","mainEntityOfPage":{"@type":"WebPage","@id":"https://hynn01.github.io/dslinter/code-smells/initialization-order-misused/"},"publisher":{"@type":"Organization","name":"DSLinter - Linter for Machine Learnig Application - Specific Code Smells","logo":{"@type":"ImageObject","url":"https://hynn01.github.io/dslinter/%3Clink%20/%20abs%20url%3E"}}}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Initialization Order Misused","name":"Initialization Order Misused","description":"Description The \\textit{AdamOptimizer} class in the TensorFlow creates additional variables named \u0026ldquo;slots\u0026rdquo;. The variables must be initialized before training the model. Therefore, if the developer call \\textit{initialize_all_variables()} before calling \\textit{AdamOptimizer} and does not call the initializer afterward, the variables created by \\textit{AdamOptimizer} will not be initialized and might cause an error.\nType API Specific\nExisting Stage Model Training\nEffect Error-prone\nExample # Violated Code init = tf.global_variables_initializer() train_op = tf.train.AdamOptimizer(1e-4).minimize(cross_entropy) sess = tf.","keywords":[],"articleBody":"Description The \\textit{AdamOptimizer} class in the TensorFlow creates additional variables named “slots”. The variables must be initialized before training the model. Therefore, if the developer call \\textit{initialize_all_variables()} before calling \\textit{AdamOptimizer} and does not call the initializer afterward, the variables created by \\textit{AdamOptimizer} will not be initialized and might cause an error.\nType API Specific\nExisting Stage Model Training\nEffect Error-prone\nExample # Violated Code init = tf.global_variables_initializer() train_op = tf.train.AdamOptimizer(1e-4).minimize(cross_entropy) sess = tf.Session() sess.run(init) # Recommended Fix train_op = tf.train.AdamOptimizer(1e-4).minimize(cross_entropy) init = tf.global_variables_initializer() sess = tf.Session() sess.run(init) Source: Paper  Yuhao Zhang, Yifan Chen, Shing-Chi Cheung, Yingfei Xiong, and Lu Zhang. 2018.An empirical study on TensorFlow program bugs. InProceedings of the 27th ACMSIGSOFT International Symposium on Software Testing and Analysis. 129–140.  Grey Literature GitHub Commit Stack Overflow  https://stackoverflow.com/questions/33788989/tensorflow-using-adam-optimizer  Documentation ","wordCount":"128","inLanguage":"en","datePublished":"0001-01-01T00:00:00Z","dateModified":"0001-01-01T00:00:00Z","mainEntityOfPage":{"@type":"WebPage","@id":"https://hynn01.github.io/dslinter/code-smells/initialization-order-misused/"},"publisher":{"@type":"Organization","name":"DSLinter - Linter for Machine Learnig Application - Specific Code Smells","logo":{"@type":"ImageObject","url":"https://hynn01.github.io/dslinter/%3Clink%20/%20abs%20url%3E"}}}</script>
 </head>
 <body id=top>
 <script>localStorage.getItem("pref-theme")==="dark"&&document.body.classList.add('dark')</script>
@@ -49,6 +61,11 @@
 <li>
 <a href=https://hynn01.github.io/dslinter/code-smells/ title="Code Smells">
 <span>Code Smells</span>
+</a>
+</li>
+<li>
+<a href=https://hynn01.github.io/dslinter/ title=Survey>
+<span>Survey</span>
 </a>
 </li>
 <li>
@@ -70,19 +87,38 @@ Initialization Order Misused
 </div>
 </header>
 <div class=post-content><h3 id=description>Description<a hidden class=anchor aria-hidden=true href=#description>#</a></h3>
+<p>The \textit{AdamOptimizer} class in the TensorFlow creates additional variables named &ldquo;slots&rdquo;. The variables must be initialized before training the model. Therefore, if the developer call \textit{initialize_all_variables()} before calling \textit{AdamOptimizer} and does not call the initializer afterward, the variables created by \textit{AdamOptimizer} will not be initialized and might cause an error.</p>
 <h3 id=type>Type<a hidden class=anchor aria-hidden=true href=#type>#</a></h3>
+<p>API Specific</p>
 <h3 id=existing-stage>Existing Stage<a hidden class=anchor aria-hidden=true href=#existing-stage>#</a></h3>
+<p>Model Training</p>
 <h3 id=effect>Effect<a hidden class=anchor aria-hidden=true href=#effect>#</a></h3>
+<p>Error-prone</p>
 <h3 id=example>Example<a hidden class=anchor aria-hidden=true href=#example>#</a></h3>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#75715e># Violated Code</span>
+init <span style=color:#f92672>=</span> tf<span style=color:#f92672>.</span>global_variables_initializer()
+train_op <span style=color:#f92672>=</span> tf<span style=color:#f92672>.</span>train<span style=color:#f92672>.</span>AdamOptimizer(<span style=color:#ae81ff>1e-4</span>)<span style=color:#f92672>.</span>minimize(cross_entropy)
+sess <span style=color:#f92672>=</span> tf<span style=color:#f92672>.</span>Session()
+sess<span style=color:#f92672>.</span>run(init)
 
 <span style=color:#75715e># Recommended Fix</span>
+train_op <span style=color:#f92672>=</span> tf<span style=color:#f92672>.</span>train<span style=color:#f92672>.</span>AdamOptimizer(<span style=color:#ae81ff>1e-4</span>)<span style=color:#f92672>.</span>minimize(cross_entropy)
+init <span style=color:#f92672>=</span> tf<span style=color:#f92672>.</span>global_variables_initializer()
+sess <span style=color:#f92672>=</span> tf<span style=color:#f92672>.</span>Session()
+sess<span style=color:#f92672>.</span>run(init)
+
 
 </code></pre></div><h3 id=source>Source:<a hidden class=anchor aria-hidden=true href=#source>#</a></h3>
 <h4 id=paper>Paper<a hidden class=anchor aria-hidden=true href=#paper>#</a></h4>
+<ul>
+<li>Yuhao Zhang, Yifan Chen, Shing-Chi Cheung, Yingfei Xiong, and Lu Zhang. 2018.An empirical study on TensorFlow program bugs. InProceedings of the 27th ACMSIGSOFT International Symposium on Software Testing and Analysis. 129–140.</li>
+</ul>
 <h4 id=grey-literature>Grey Literature<a hidden class=anchor aria-hidden=true href=#grey-literature>#</a></h4>
 <h4 id=github-commit>GitHub Commit<a hidden class=anchor aria-hidden=true href=#github-commit>#</a></h4>
 <h4 id=stack-overflow>Stack Overflow<a hidden class=anchor aria-hidden=true href=#stack-overflow>#</a></h4>
+<ul>
+<li><a href=https://stackoverflow.com/questions/33788989/tensorflow-using-adam-optimizer>https://stackoverflow.com/questions/33788989/tensorflow-using-adam-optimizer</a></li>
+</ul>
 <h4 id=documentation>Documentation<a hidden class=anchor aria-hidden=true href=#documentation>#</a></h4>
 </div>
 <footer class=post-footer>

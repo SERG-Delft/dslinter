@@ -5,7 +5,7 @@
 <meta name=robots content="index, follow">
 <title>Chain Indexing Misused | DSLinter - Linter for Machine Learnig Application - Specific Code Smells</title>
 <meta name=keywords content>
-<meta name=description content="Description Type Existing Stage Effect Example # Violated Code # Recommended Fix Source: Paper Grey Literature GitHub Commit Stack Overflow Documentation ">
+<meta name=description content="Description As noted in documentation and posts \ref{grey:pandas_indexing}\ref{grey:so_indexing1}\ref{grey:so_indexing2}, chaining indexing in Pandas is considered a bad practice and should be avoided. Using chain indexing might cause performance issues as well as prone-to-bug code. For example, when using \textit{df[&ldquo;one&rdquo;][&ldquo;two&rdquo;]}, Pandas see this operation as two events: call \textit{df[&ldquo;one&rdquo;]} first and call \textit{[&ldquo;two&rdquo;]} based on the result the previous operation gets. On the contrary, \textit{df.loc[:,(&ldquo;one&rdquo;,&ldquo;two&rdquo;)]} only perform a single call. In this way, the second method can be significantly faster than the first one.">
 <meta name=author content>
 <link rel=canonical href=https://hynn01.github.io/dslinter/code-smells/chain-indexing-misused/>
 <meta name=google-site-verification content="XYZabc">
@@ -20,19 +20,19 @@
 <link rel=mask-icon href=https://hynn01.github.io/dslinter/%3Clink%20/%20abs%20url%3E>
 <meta name=theme-color content="#2e2e33">
 <meta name=msapplication-TileColor content="#2e2e33">
-<meta name=generator content="Hugo 0.91.0">
+<meta name=generator content="Hugo 0.91.1">
 <noscript>
 <style>#theme-toggle,.top-link{display:none}</style>
 </noscript><meta property="og:title" content="Chain Indexing Misused">
-<meta property="og:description" content="Description Type Existing Stage Effect Example # Violated Code # Recommended Fix Source: Paper Grey Literature GitHub Commit Stack Overflow Documentation ">
+<meta property="og:description" content="Description As noted in documentation and posts \ref{grey:pandas_indexing}\ref{grey:so_indexing1}\ref{grey:so_indexing2}, chaining indexing in Pandas is considered a bad practice and should be avoided. Using chain indexing might cause performance issues as well as prone-to-bug code. For example, when using \textit{df[&ldquo;one&rdquo;][&ldquo;two&rdquo;]}, Pandas see this operation as two events: call \textit{df[&ldquo;one&rdquo;]} first and call \textit{[&ldquo;two&rdquo;]} based on the result the previous operation gets. On the contrary, \textit{df.loc[:,(&ldquo;one&rdquo;,&ldquo;two&rdquo;)]} only perform a single call. In this way, the second method can be significantly faster than the first one.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://hynn01.github.io/dslinter/code-smells/chain-indexing-misused/"><meta property="article:section" content="Code Smells">
 <meta property="og:site_name" content="DSLinter - Linter for Machine Learnig Application - Specific Code Smells">
 <meta name=twitter:card content="summary">
 <meta name=twitter:title content="Chain Indexing Misused">
-<meta name=twitter:description content="Description Type Existing Stage Effect Example # Violated Code # Recommended Fix Source: Paper Grey Literature GitHub Commit Stack Overflow Documentation ">
+<meta name=twitter:description content="Description As noted in documentation and posts \ref{grey:pandas_indexing}\ref{grey:so_indexing1}\ref{grey:so_indexing2}, chaining indexing in Pandas is considered a bad practice and should be avoided. Using chain indexing might cause performance issues as well as prone-to-bug code. For example, when using \textit{df[&ldquo;one&rdquo;][&ldquo;two&rdquo;]}, Pandas see this operation as two events: call \textit{df[&ldquo;one&rdquo;]} first and call \textit{[&ldquo;two&rdquo;]} based on the result the previous operation gets. On the contrary, \textit{df.loc[:,(&ldquo;one&rdquo;,&ldquo;two&rdquo;)]} only perform a single call. In this way, the second method can be significantly faster than the first one.">
 <script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":2,"name":"Chain Indexing Misused","item":"https://hynn01.github.io/dslinter/code-smells/chain-indexing-misused/"}]}</script>
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Chain Indexing Misused","name":"Chain Indexing Misused","description":"Description Type Existing Stage Effect Example # Violated Code # Recommended Fix Source: Paper Grey Literature GitHub Commit Stack Overflow Documentation ","keywords":[],"articleBody":"Description Type Existing Stage Effect Example # Violated Code # Recommended Fix Source: Paper Grey Literature GitHub Commit Stack Overflow Documentation ","wordCount":"21","inLanguage":"en","datePublished":"0001-01-01T00:00:00Z","dateModified":"0001-01-01T00:00:00Z","mainEntityOfPage":{"@type":"WebPage","@id":"https://hynn01.github.io/dslinter/code-smells/chain-indexing-misused/"},"publisher":{"@type":"Organization","name":"DSLinter - Linter for Machine Learnig Application - Specific Code Smells","logo":{"@type":"ImageObject","url":"https://hynn01.github.io/dslinter/%3Clink%20/%20abs%20url%3E"}}}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Chain Indexing Misused","name":"Chain Indexing Misused","description":"Description As noted in documentation and posts \\ref{grey:pandas_indexing}\\ref{grey:so_indexing1}\\ref{grey:so_indexing2}, chaining indexing in Pandas is considered a bad practice and should be avoided. Using chain indexing might cause performance issues as well as prone-to-bug code. For example, when using \\textit{df[\u0026ldquo;one\u0026rdquo;][\u0026ldquo;two\u0026rdquo;]}, Pandas see this operation as two events: call \\textit{df[\u0026ldquo;one\u0026rdquo;]} first and call \\textit{[\u0026ldquo;two\u0026rdquo;]} based on the result the previous operation gets. On the contrary, \\textit{df.loc[:,(\u0026ldquo;one\u0026rdquo;,\u0026ldquo;two\u0026rdquo;)]} only perform a single call. In this way, the second method can be significantly faster than the first one.","keywords":[],"articleBody":"Description As noted in documentation and posts \\ref{grey:pandas_indexing}\\ref{grey:so_indexing1}\\ref{grey:so_indexing2}, chaining indexing in Pandas is considered a bad practice and should be avoided. Using chain indexing might cause performance issues as well as prone-to-bug code. For example, when using \\textit{df[“one”][“two”]}, Pandas see this operation as two events: call \\textit{df[“one”]} first and call \\textit{[“two”]} based on the result the previous operation gets. On the contrary, \\textit{df.loc[:,(“one”,“two”)]} only perform a single call. In this way, the second method can be significantly faster than the first one. Furthermore, assigning to the product of chain indexing has inherently unpredictable results. Since Pandas makes no guarantees on whether \\textit{df[“one”]} will return a view or a copy, the assignment might fail. Therefore, developers using Pandas should check this indexing problem carefully.\nType API Specific\nExisting Stage Data Preparation\nEffect Error-prone \u0026 Efficiency\nExample ### Pandas # Violated Code df[col][x] = 42 # Recommended Fix df.loc[x, col] = 42 Source: Paper Grey Literature GitHub Commit Stack Overflow  https://stackoverflow.com/questions/22491628/extrapolate-values-in-pandas-dataframe/35959909#35959909 https://stackoverflow.com/questions/53806570/why-does-one-use-of-iloc-give-a-settingwithcopywarning-but-the-other-doesnt/53807453#53807453  Documentation  https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#indexing-view-versus-copy  ","wordCount":"162","inLanguage":"en","datePublished":"0001-01-01T00:00:00Z","dateModified":"0001-01-01T00:00:00Z","mainEntityOfPage":{"@type":"WebPage","@id":"https://hynn01.github.io/dslinter/code-smells/chain-indexing-misused/"},"publisher":{"@type":"Organization","name":"DSLinter - Linter for Machine Learnig Application - Specific Code Smells","logo":{"@type":"ImageObject","url":"https://hynn01.github.io/dslinter/%3Clink%20/%20abs%20url%3E"}}}</script>
 </head>
 <body id=top>
 <script>localStorage.getItem("pref-theme")==="dark"&&document.body.classList.add('dark')</script>
@@ -49,6 +49,11 @@
 <li>
 <a href=https://hynn01.github.io/dslinter/code-smells/ title="Code Smells">
 <span>Code Smells</span>
+</a>
+</li>
+<li>
+<a href=https://hynn01.github.io/dslinter/ title=Survey>
+<span>Survey</span>
 </a>
 </li>
 <li>
@@ -70,20 +75,35 @@ Chain Indexing Misused
 </div>
 </header>
 <div class=post-content><h3 id=description>Description<a hidden class=anchor aria-hidden=true href=#description>#</a></h3>
+<p>As noted in documentation and posts \ref{grey:pandas_indexing}\ref{grey:so_indexing1}\ref{grey:so_indexing2}, chaining indexing in Pandas is considered a bad practice and should be avoided. Using chain indexing might cause performance issues as well as prone-to-bug code. For example, when using \textit{df[&ldquo;one&rdquo;][&ldquo;two&rdquo;]}, Pandas see this operation as two events: call \textit{df[&ldquo;one&rdquo;]} first and call \textit{[&ldquo;two&rdquo;]} based on the result the previous operation gets. On the contrary, \textit{df.loc[:,(&ldquo;one&rdquo;,&ldquo;two&rdquo;)]} only perform a single call. In this way, the second method can be significantly faster than the first one. Furthermore, assigning to the product of chain indexing has inherently unpredictable results. Since Pandas makes no guarantees on whether \textit{df[&ldquo;one&rdquo;]} will return a view or a copy, the assignment might fail. Therefore, developers using Pandas should check this indexing problem carefully.</p>
 <h3 id=type>Type<a hidden class=anchor aria-hidden=true href=#type>#</a></h3>
+<p>API Specific</p>
 <h3 id=existing-stage>Existing Stage<a hidden class=anchor aria-hidden=true href=#existing-stage>#</a></h3>
+<p>Data Preparation</p>
 <h3 id=effect>Effect<a hidden class=anchor aria-hidden=true href=#effect>#</a></h3>
+<p>Error-prone & Efficiency</p>
 <h3 id=example>Example<a hidden class=anchor aria-hidden=true href=#example>#</a></h3>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#75715e># Violated Code</span>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python>
+<span style=color:#75715e>### Pandas</span>
+<span style=color:#75715e># Violated Code</span>
+df[col][x] <span style=color:#f92672>=</span> <span style=color:#ae81ff>42</span>
 
 <span style=color:#75715e># Recommended Fix</span>
+df<span style=color:#f92672>.</span>loc[x, col] <span style=color:#f92672>=</span> <span style=color:#ae81ff>42</span>
 
 </code></pre></div><h3 id=source>Source:<a hidden class=anchor aria-hidden=true href=#source>#</a></h3>
 <h4 id=paper>Paper<a hidden class=anchor aria-hidden=true href=#paper>#</a></h4>
 <h4 id=grey-literature>Grey Literature<a hidden class=anchor aria-hidden=true href=#grey-literature>#</a></h4>
 <h4 id=github-commit>GitHub Commit<a hidden class=anchor aria-hidden=true href=#github-commit>#</a></h4>
 <h4 id=stack-overflow>Stack Overflow<a hidden class=anchor aria-hidden=true href=#stack-overflow>#</a></h4>
+<ul>
+<li><a href=https://stackoverflow.com/questions/22491628/extrapolate-values-in-pandas-dataframe/35959909#35959909>https://stackoverflow.com/questions/22491628/extrapolate-values-in-pandas-dataframe/35959909#35959909</a></li>
+<li><a href=https://stackoverflow.com/questions/53806570/why-does-one-use-of-iloc-give-a-settingwithcopywarning-but-the-other-doesnt/53807453#53807453>https://stackoverflow.com/questions/53806570/why-does-one-use-of-iloc-give-a-settingwithcopywarning-but-the-other-doesnt/53807453#53807453</a></li>
+</ul>
 <h4 id=documentation>Documentation<a hidden class=anchor aria-hidden=true href=#documentation>#</a></h4>
+<ul>
+<li><a href=https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#indexing-view-versus-copy>https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#indexing-view-versus-copy</a></li>
+</ul>
 </div>
 <footer class=post-footer>
 </footer>

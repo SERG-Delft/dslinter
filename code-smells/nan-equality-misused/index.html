@@ -5,7 +5,10 @@
 <meta name=robots content="index, follow">
 <title>Nan Equality Misused | DSLinter - Linter for Machine Learnig Application - Specific Code Smells</title>
 <meta name=keywords content>
-<meta name=description content="Description Type Existing Stage Effect Example # Violated Code # Recommended Fix Source: Paper Grey Literature GitHub Commit Stack Overflow Documentation ">
+<meta name=description content="Description While \textit{None} == \textit{None} evaluates to \textit{True}, \textit{numpy.nan} == \textit{numpy.nan} evaluates to \textit{False}. As Pandas treats \textit{None} like \textit{numpy.nan} for simplicity and performance reasons, a comparison of DataFrame elements with \textit{numpy.nan} always return \textit{False} \cite{haakman2020studying}. Therefore, developers need to be careful when using the \textit{NaN} comparision in Numpy and Pandas. Otherwise, it may lead to unintentional behavior in the code.
+Type API Specific
+Existing Stage Data Preparation
+Effect Error-prone">
 <meta name=author content>
 <link rel=canonical href=https://hynn01.github.io/dslinter/code-smells/nan-equality-misused/>
 <meta name=google-site-verification content="XYZabc">
@@ -20,19 +23,25 @@
 <link rel=mask-icon href=https://hynn01.github.io/dslinter/%3Clink%20/%20abs%20url%3E>
 <meta name=theme-color content="#2e2e33">
 <meta name=msapplication-TileColor content="#2e2e33">
-<meta name=generator content="Hugo 0.91.0">
+<meta name=generator content="Hugo 0.91.1">
 <noscript>
 <style>#theme-toggle,.top-link{display:none}</style>
 </noscript><meta property="og:title" content="Nan Equality Misused">
-<meta property="og:description" content="Description Type Existing Stage Effect Example # Violated Code # Recommended Fix Source: Paper Grey Literature GitHub Commit Stack Overflow Documentation ">
+<meta property="og:description" content="Description While \textit{None} == \textit{None} evaluates to \textit{True}, \textit{numpy.nan} == \textit{numpy.nan} evaluates to \textit{False}. As Pandas treats \textit{None} like \textit{numpy.nan} for simplicity and performance reasons, a comparison of DataFrame elements with \textit{numpy.nan} always return \textit{False} \cite{haakman2020studying}. Therefore, developers need to be careful when using the \textit{NaN} comparision in Numpy and Pandas. Otherwise, it may lead to unintentional behavior in the code.
+Type API Specific
+Existing Stage Data Preparation
+Effect Error-prone">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://hynn01.github.io/dslinter/code-smells/nan-equality-misused/"><meta property="article:section" content="Code Smells">
 <meta property="og:site_name" content="DSLinter - Linter for Machine Learnig Application - Specific Code Smells">
 <meta name=twitter:card content="summary">
 <meta name=twitter:title content="Nan Equality Misused">
-<meta name=twitter:description content="Description Type Existing Stage Effect Example # Violated Code # Recommended Fix Source: Paper Grey Literature GitHub Commit Stack Overflow Documentation ">
+<meta name=twitter:description content="Description While \textit{None} == \textit{None} evaluates to \textit{True}, \textit{numpy.nan} == \textit{numpy.nan} evaluates to \textit{False}. As Pandas treats \textit{None} like \textit{numpy.nan} for simplicity and performance reasons, a comparison of DataFrame elements with \textit{numpy.nan} always return \textit{False} \cite{haakman2020studying}. Therefore, developers need to be careful when using the \textit{NaN} comparision in Numpy and Pandas. Otherwise, it may lead to unintentional behavior in the code.
+Type API Specific
+Existing Stage Data Preparation
+Effect Error-prone">
 <script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":2,"name":"Nan Equality Misused","item":"https://hynn01.github.io/dslinter/code-smells/nan-equality-misused/"}]}</script>
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Nan Equality Misused","name":"Nan Equality Misused","description":"Description Type Existing Stage Effect Example # Violated Code # Recommended Fix Source: Paper Grey Literature GitHub Commit Stack Overflow Documentation ","keywords":[],"articleBody":"Description Type Existing Stage Effect Example # Violated Code # Recommended Fix Source: Paper Grey Literature GitHub Commit Stack Overflow Documentation ","wordCount":"21","inLanguage":"en","datePublished":"0001-01-01T00:00:00Z","dateModified":"0001-01-01T00:00:00Z","mainEntityOfPage":{"@type":"WebPage","@id":"https://hynn01.github.io/dslinter/code-smells/nan-equality-misused/"},"publisher":{"@type":"Organization","name":"DSLinter - Linter for Machine Learnig Application - Specific Code Smells","logo":{"@type":"ImageObject","url":"https://hynn01.github.io/dslinter/%3Clink%20/%20abs%20url%3E"}}}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Nan Equality Misused","name":"Nan Equality Misused","description":"Description While \\textit{None} == \\textit{None} evaluates to \\textit{True}, \\textit{numpy.nan} == \\textit{numpy.nan} evaluates to \\textit{False}. As Pandas treats \\textit{None} like \\textit{numpy.nan} for simplicity and performance reasons, a comparison of DataFrame elements with \\textit{numpy.nan} always return \\textit{False} \\cite{haakman2020studying}. Therefore, developers need to be careful when using the \\textit{NaN} comparision in Numpy and Pandas. Otherwise, it may lead to unintentional behavior in the code.\nType API Specific\nExisting Stage Data Preparation\nEffect Error-prone","keywords":[],"articleBody":"Description While \\textit{None} == \\textit{None} evaluates to \\textit{True}, \\textit{numpy.nan} == \\textit{numpy.nan} evaluates to \\textit{False}. As Pandas treats \\textit{None} like \\textit{numpy.nan} for simplicity and performance reasons, a comparison of DataFrame elements with \\textit{numpy.nan} always return \\textit{False} \\cite{haakman2020studying}. Therefore, developers need to be careful when using the \\textit{NaN} comparision in Numpy and Pandas. Otherwise, it may lead to unintentional behavior in the code.\nType API Specific\nExisting Stage Data Preparation\nEffect Error-prone\nExample ### Pandas \u0026 NumPy import pandas as pd import numpy as np df = pd.DataFrame([1, None, 3]) # Violated Code df_is_nan = df == np.nan # Recommended Fix df_is_nan = df.isna() Source: Paper  MPA Haakman. 2020. Studying the Machine Learning Lifecycle and ImprovingCode Quality of Machine Learning Application. (2020).  Grey Literature GitHub Commit Stack Overflow Documentation ","wordCount":"127","inLanguage":"en","datePublished":"0001-01-01T00:00:00Z","dateModified":"0001-01-01T00:00:00Z","mainEntityOfPage":{"@type":"WebPage","@id":"https://hynn01.github.io/dslinter/code-smells/nan-equality-misused/"},"publisher":{"@type":"Organization","name":"DSLinter - Linter for Machine Learnig Application - Specific Code Smells","logo":{"@type":"ImageObject","url":"https://hynn01.github.io/dslinter/%3Clink%20/%20abs%20url%3E"}}}</script>
 </head>
 <body id=top>
 <script>localStorage.getItem("pref-theme")==="dark"&&document.body.classList.add('dark')</script>
@@ -49,6 +58,11 @@
 <li>
 <a href=https://hynn01.github.io/dslinter/code-smells/ title="Code Smells">
 <span>Code Smells</span>
+</a>
+</li>
+<li>
+<a href=https://hynn01.github.io/dslinter/ title=Survey>
+<span>Survey</span>
 </a>
 </li>
 <li>
@@ -70,16 +84,31 @@ Nan Equality Misused
 </div>
 </header>
 <div class=post-content><h3 id=description>Description<a hidden class=anchor aria-hidden=true href=#description>#</a></h3>
+<p>While \textit{None} == \textit{None} evaluates to \textit{True}, \textit{numpy.nan} == \textit{numpy.nan} evaluates to \textit{False}. As Pandas treats \textit{None} like \textit{numpy.nan} for simplicity and performance reasons, a comparison of DataFrame elements with \textit{numpy.nan} always return \textit{False} \cite{haakman2020studying}. Therefore, developers need to be careful when using the \textit{NaN} comparision in Numpy and Pandas. Otherwise, it may lead to unintentional behavior in the code.</p>
 <h3 id=type>Type<a hidden class=anchor aria-hidden=true href=#type>#</a></h3>
+<p>API Specific</p>
 <h3 id=existing-stage>Existing Stage<a hidden class=anchor aria-hidden=true href=#existing-stage>#</a></h3>
+<p>Data Preparation</p>
 <h3 id=effect>Effect<a hidden class=anchor aria-hidden=true href=#effect>#</a></h3>
+<p>Error-prone</p>
 <h3 id=example>Example<a hidden class=anchor aria-hidden=true href=#example>#</a></h3>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#75715e># Violated Code</span>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python>
+<span style=color:#75715e>### Pandas &amp; NumPy</span>
+<span style=color:#f92672>import</span> pandas <span style=color:#66d9ef>as</span> pd
+<span style=color:#f92672>import</span> numpy <span style=color:#66d9ef>as</span> np
+df <span style=color:#f92672>=</span> pd<span style=color:#f92672>.</span>DataFrame([<span style=color:#ae81ff>1</span>, <span style=color:#66d9ef>None</span>, <span style=color:#ae81ff>3</span>])
+
+<span style=color:#75715e># Violated Code</span>
+df_is_nan <span style=color:#f92672>=</span> df <span style=color:#f92672>==</span> np<span style=color:#f92672>.</span>nan
 
 <span style=color:#75715e># Recommended Fix</span>
+df_is_nan <span style=color:#f92672>=</span> df<span style=color:#f92672>.</span>isna()
 
 </code></pre></div><h3 id=source>Source:<a hidden class=anchor aria-hidden=true href=#source>#</a></h3>
 <h4 id=paper>Paper<a hidden class=anchor aria-hidden=true href=#paper>#</a></h4>
+<ul>
+<li>MPA Haakman. 2020. Studying the Machine Learning Lifecycle and ImprovingCode Quality of Machine Learning Application. (2020).</li>
+</ul>
 <h4 id=grey-literature>Grey Literature<a hidden class=anchor aria-hidden=true href=#grey-literature>#</a></h4>
 <h4 id=github-commit>GitHub Commit<a hidden class=anchor aria-hidden=true href=#github-commit>#</a></h4>
 <h4 id=stack-overflow>Stack Overflow<a hidden class=anchor aria-hidden=true href=#stack-overflow>#</a></h4>

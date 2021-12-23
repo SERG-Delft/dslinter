@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>error-prone on DSLinter - Linter for Machine Learnig Application - Specific Code Smells</title>
+    <link>https://hynn01.github.io/dslinter/tags/error-prone/</link>
+    <description>Recent content in error-prone on DSLinter - Linter for Machine Learnig Application - Specific Code Smells</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="https://hynn01.github.io/dslinter/tags/error-prone/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>In Place APIs Misused</title>
+      <link>https://hynn01.github.io/dslinter/code-smells/in-place-apis-misused/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://hynn01.github.io/dslinter/code-smells/in-place-apis-misused/</guid>
+      <description>Description “In-place operation is an operation that directly changes the content of a given linear algebra, vector, matrices (Tensor) without making a copy.”\ref{grey:inplace} Due to the nature of the in-place operation, the in-place APIs are easily misused. Developers sometimes forget to set the in-place parameter in APIs to true while not assigning the new result to a variable, causing potential silent bugs. The data is not updated in this way, but the developer thinks it is and might not be able to find where the bug is.</description>
+    </item>
+    
+    <item>
+      <title>Counterintuitive Hyperparameter</title>
+      <link>https://hynn01.github.io/dslinter/code-smells/counterintuitive-hyperparameter/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://hynn01.github.io/dslinter/code-smells/counterintuitive-hyperparameter/</guid>
+      <description>Description Counterintuitive hyperparameters will also cause bugs. There are four posts \ref{grey:so_counterintuitive1}\ref{grey:so_counterintuitive2}\ref{grey:so_counterintuitive3}\ref{grey:so_counterintuitive4} on StackOverflow discussing where the bug in the program is, and it turns out that a large learning rate causes bugs. This implies that the developer should check whether the hyperparameters stay in the normal range when developing ML applications.
+Type Generic
+Existing Stage Model Training
+Effect Error-prone
+Example # TensorFlow import tensorflow as tf # Violated Code optimizer = tf.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -5,7 +5,7 @@
 <meta name=robots content="index, follow">
 <title>Hyperparameter Not Set | DSLinter - Linter for Machine Learnig Application - Specific Code Smells</title>
 <meta name=keywords content>
-<meta name=description content="Description Type Existing Stage Effect Example # Violated Code # Recommended Fix Source: Paper Grey Literature GitHub Commit Stack Overflow Documentation ">
+<meta name=description content="Description Hyperparameters are ML algorithm parameters used to control the learning process and are usually determined before the actual process starts \cite{haakman2020studying}. Hyperparameters should be set and tuned because they improve prediction quality and reproducibility. Tuning hyperparameters can lead to higher prediction quality because the default parameters of the learning algorithm may not be optimal for a given data or problem, and may lead to local optima. These parameters directly control the behavior of the training algorithm and therefore have a significant impact on the performance of the model.">
 <meta name=author content>
 <link rel=canonical href=https://hynn01.github.io/dslinter/code-smells/hyperparameter-not-set/>
 <meta name=google-site-verification content="XYZabc">
@@ -20,19 +20,19 @@
 <link rel=mask-icon href=https://hynn01.github.io/dslinter/%3Clink%20/%20abs%20url%3E>
 <meta name=theme-color content="#2e2e33">
 <meta name=msapplication-TileColor content="#2e2e33">
-<meta name=generator content="Hugo 0.91.0">
+<meta name=generator content="Hugo 0.91.1">
 <noscript>
 <style>#theme-toggle,.top-link{display:none}</style>
 </noscript><meta property="og:title" content="Hyperparameter Not Set">
-<meta property="og:description" content="Description Type Existing Stage Effect Example # Violated Code # Recommended Fix Source: Paper Grey Literature GitHub Commit Stack Overflow Documentation ">
+<meta property="og:description" content="Description Hyperparameters are ML algorithm parameters used to control the learning process and are usually determined before the actual process starts \cite{haakman2020studying}. Hyperparameters should be set and tuned because they improve prediction quality and reproducibility. Tuning hyperparameters can lead to higher prediction quality because the default parameters of the learning algorithm may not be optimal for a given data or problem, and may lead to local optima. These parameters directly control the behavior of the training algorithm and therefore have a significant impact on the performance of the model.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://hynn01.github.io/dslinter/code-smells/hyperparameter-not-set/"><meta property="article:section" content="Code Smells">
 <meta property="og:site_name" content="DSLinter - Linter for Machine Learnig Application - Specific Code Smells">
 <meta name=twitter:card content="summary">
 <meta name=twitter:title content="Hyperparameter Not Set">
-<meta name=twitter:description content="Description Type Existing Stage Effect Example # Violated Code # Recommended Fix Source: Paper Grey Literature GitHub Commit Stack Overflow Documentation ">
+<meta name=twitter:description content="Description Hyperparameters are ML algorithm parameters used to control the learning process and are usually determined before the actual process starts \cite{haakman2020studying}. Hyperparameters should be set and tuned because they improve prediction quality and reproducibility. Tuning hyperparameters can lead to higher prediction quality because the default parameters of the learning algorithm may not be optimal for a given data or problem, and may lead to local optima. These parameters directly control the behavior of the training algorithm and therefore have a significant impact on the performance of the model.">
 <script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":2,"name":"Hyperparameter Not Set","item":"https://hynn01.github.io/dslinter/code-smells/hyperparameter-not-set/"}]}</script>
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Hyperparameter Not Set","name":"Hyperparameter Not Set","description":"Description Type Existing Stage Effect Example # Violated Code # Recommended Fix Source: Paper Grey Literature GitHub Commit Stack Overflow Documentation ","keywords":[],"articleBody":"Description Type Existing Stage Effect Example # Violated Code # Recommended Fix Source: Paper Grey Literature GitHub Commit Stack Overflow Documentation ","wordCount":"21","inLanguage":"en","datePublished":"0001-01-01T00:00:00Z","dateModified":"0001-01-01T00:00:00Z","mainEntityOfPage":{"@type":"WebPage","@id":"https://hynn01.github.io/dslinter/code-smells/hyperparameter-not-set/"},"publisher":{"@type":"Organization","name":"DSLinter - Linter for Machine Learnig Application - Specific Code Smells","logo":{"@type":"ImageObject","url":"https://hynn01.github.io/dslinter/%3Clink%20/%20abs%20url%3E"}}}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Hyperparameter Not Set","name":"Hyperparameter Not Set","description":"Description Hyperparameters are ML algorithm parameters used to control the learning process and are usually determined before the actual process starts \\cite{haakman2020studying}. Hyperparameters should be set and tuned because they improve prediction quality and reproducibility. Tuning hyperparameters can lead to higher prediction quality because the default parameters of the learning algorithm may not be optimal for a given data or problem, and may lead to local optima. These parameters directly control the behavior of the training algorithm and therefore have a significant impact on the performance of the model.","keywords":[],"articleBody":"Description Hyperparameters are ML algorithm parameters used to control the learning process and are usually determined before the actual process starts \\cite{haakman2020studying}. Hyperparameters should be set and tuned because they improve prediction quality and reproducibility. Tuning hyperparameters can lead to higher prediction quality because the default parameters of the learning algorithm may not be optimal for a given data or problem, and may lead to local optima. These parameters directly control the behavior of the training algorithm and therefore have a significant impact on the performance of the model.\nThe second reason for defining hyperparameters for learning algorithms is that it improves reproducibility. While the default parameters of a machine learning library may be perfect for some time, these default parameters of the library may change in new versions of the library. In addition, setting all hyperparameters explicitly allows replicating the model in a different programming language. Therefore, it is easier to reproduce the results if hyperparameters are set.\nType Generic\nExisting Stage Data Preparation\nEffect Error-prone \u0026 Reproducibility\nExample ### Scikit-Learn from sklearn.cluster import KMeans # Violated Code kmeans = KMeans() # Recommended Fix kmeans = KMeans(n_clusters=8, random_state=0) # Or, ideally: kmeans = KMeans(n_clusters=8, init='k-means++', n_init=10, max_iter=300, tol=0.0001, precompute_distances='auto', verbose=0, random_state=0, copy_x=True, n_jobs=1, algorithm='auto') Source: Paper  MPA Haakman. 2020. Studying the Machine Learning Lifecycle and ImprovingCode Quality of Machine Learning Applications. (2020). Eric Breck, Shanqing Cai, Eric Nielsen, Michael Salib, and D Sculley. 2017. TheML test score: A rubric for ML production readiness and technical debt reduction.In2017 IEEE International Conference on Big Data (Big Data). IEEE, 1123–1132. Gopi Krishnan Rajbahadur, Gustavo Ansaldi Oliva, Ahmed E Hassan, and Juer-gen Dingel. 2019. Pitfalls Analyzer: Quality Control for Model-Driven DataScience Pipelines. In2019 ACM/IEEE 22nd International Conference on ModelDriven Engineering Languages and Systems (MODELS). IEEE, 12–22. Nargiz Humbatova, Gunel Jahangirova, Gabriele Bavota, Vincenzo Riccio, AndreaStocco, and Paolo Tonella. 2020. Taxonomy of real faults in deep learning sys-tems. InProceedings of the ACM/IEEE 42nd International Conference on SoftwareEngineering. 1110–1121.  Grey Literature GitHub Commit Stack Overflow Documentation ","wordCount":"331","inLanguage":"en","datePublished":"0001-01-01T00:00:00Z","dateModified":"0001-01-01T00:00:00Z","mainEntityOfPage":{"@type":"WebPage","@id":"https://hynn01.github.io/dslinter/code-smells/hyperparameter-not-set/"},"publisher":{"@type":"Organization","name":"DSLinter - Linter for Machine Learnig Application - Specific Code Smells","logo":{"@type":"ImageObject","url":"https://hynn01.github.io/dslinter/%3Clink%20/%20abs%20url%3E"}}}</script>
 </head>
 <body id=top>
 <script>localStorage.getItem("pref-theme")==="dark"&&document.body.classList.add('dark')</script>
@@ -49,6 +49,11 @@
 <li>
 <a href=https://hynn01.github.io/dslinter/code-smells/ title="Code Smells">
 <span>Code Smells</span>
+</a>
+</li>
+<li>
+<a href=https://hynn01.github.io/dslinter/ title=Survey>
+<span>Survey</span>
 </a>
 </li>
 <li>
@@ -70,16 +75,45 @@ Hyperparameter Not Set
 </div>
 </header>
 <div class=post-content><h3 id=description>Description<a hidden class=anchor aria-hidden=true href=#description>#</a></h3>
+<p>Hyperparameters are ML algorithm parameters used to control the learning process and are usually determined before the actual process starts \cite{haakman2020studying}. Hyperparameters should be set and tuned because they improve prediction quality
+and reproducibility. Tuning hyperparameters can lead to higher prediction quality because the default
+parameters of the learning algorithm may not be optimal for a given data or problem, and may lead to local optima. These parameters directly control the behavior of the training algorithm and therefore have a significant impact on the performance of the model.</p>
+<p>The second reason for defining hyperparameters for learning algorithms is that it improves reproducibility. While the default parameters of a machine learning library may be perfect for some time, these default parameters of the library may change in new versions of the library. In addition, setting all hyperparameters explicitly allows replicating the model in a different programming language. Therefore, it is easier to reproduce the results if hyperparameters are set.</p>
 <h3 id=type>Type<a hidden class=anchor aria-hidden=true href=#type>#</a></h3>
+<p>Generic</p>
 <h3 id=existing-stage>Existing Stage<a hidden class=anchor aria-hidden=true href=#existing-stage>#</a></h3>
+<p>Data Preparation</p>
 <h3 id=effect>Effect<a hidden class=anchor aria-hidden=true href=#effect>#</a></h3>
+<p>Error-prone & Reproducibility</p>
 <h3 id=example>Example<a hidden class=anchor aria-hidden=true href=#example>#</a></h3>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#75715e># Violated Code</span>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python>
+<span style=color:#75715e>### Scikit-Learn</span>
+
+<span style=color:#f92672>from</span> sklearn.cluster <span style=color:#f92672>import</span> KMeans
+
+<span style=color:#75715e># Violated Code</span>
+kmeans <span style=color:#f92672>=</span> KMeans()
 
 <span style=color:#75715e># Recommended Fix</span>
 
+kmeans <span style=color:#f92672>=</span> KMeans(n_clusters<span style=color:#f92672>=</span><span style=color:#ae81ff>8</span>, random_state<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>)
+<span style=color:#75715e># Or, ideally:</span>
+kmeans <span style=color:#f92672>=</span> KMeans(n_clusters<span style=color:#f92672>=</span><span style=color:#ae81ff>8</span>,
+init<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;k-means++&#39;</span>, n_init<span style=color:#f92672>=</span><span style=color:#ae81ff>10</span>,
+max_iter<span style=color:#f92672>=</span><span style=color:#ae81ff>300</span>, tol<span style=color:#f92672>=</span><span style=color:#ae81ff>0.0001</span>,
+precompute_distances<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;auto&#39;</span>,
+verbose<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>, random_state<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>,
+copy_x<span style=color:#f92672>=</span><span style=color:#66d9ef>True</span>, n_jobs<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>,
+algorithm<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;auto&#39;</span>)
+
 </code></pre></div><h3 id=source>Source:<a hidden class=anchor aria-hidden=true href=#source>#</a></h3>
 <h4 id=paper>Paper<a hidden class=anchor aria-hidden=true href=#paper>#</a></h4>
+<ul>
+<li>MPA Haakman. 2020. Studying the Machine Learning Lifecycle and ImprovingCode Quality of Machine Learning Applications. (2020).</li>
+<li>Eric Breck, Shanqing Cai, Eric Nielsen, Michael Salib, and D Sculley. 2017. TheML test score: A rubric for ML production readiness and technical debt reduction.In2017 IEEE International Conference on Big Data (Big Data). IEEE, 1123–1132.</li>
+<li>Gopi Krishnan Rajbahadur, Gustavo Ansaldi Oliva, Ahmed E Hassan, and Juer-gen Dingel. 2019. Pitfalls Analyzer: Quality Control for Model-Driven DataScience Pipelines. In2019 ACM/IEEE 22nd International Conference on ModelDriven Engineering Languages and Systems (MODELS). IEEE, 12–22.</li>
+<li>Nargiz Humbatova, Gunel Jahangirova, Gabriele Bavota, Vincenzo Riccio, AndreaStocco, and Paolo Tonella. 2020. Taxonomy of real faults in deep learning sys-tems. InProceedings of the ACM/IEEE 42nd International Conference on SoftwareEngineering. 1110–1121.</li>
+</ul>
 <h4 id=grey-literature>Grey Literature<a hidden class=anchor aria-hidden=true href=#grey-literature>#</a></h4>
 <h4 id=github-commit>GitHub Commit<a hidden class=anchor aria-hidden=true href=#github-commit>#</a></h4>
 <h4 id=stack-overflow>Stack Overflow<a hidden class=anchor aria-hidden=true href=#stack-overflow>#</a></h4>

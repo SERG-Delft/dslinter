@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>efficiency on DSLinter - Linter for Machine Learnig Application - Specific Code Smells</title>
+    <link>https://hynn01.github.io/dslinter/tags/efficiency/</link>
+    <description>Recent content in efficiency on DSLinter - Linter for Machine Learnig Application - Specific Code Smells</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="https://hynn01.github.io/dslinter/tags/efficiency/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Vectorized Solution Unused</title>
+      <link>https://hynn01.github.io/dslinter/code-smells/vectorized-solution-unused/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://hynn01.github.io/dslinter/code-smells/vectorized-solution-unused/</guid>
+      <description>Description &amp;ldquo;Vectorization is the process of converting an algorithm from operating on a single value at a time to operating on a set of values (vector) at one time.&amp;quot;\ref{grey:vectorized_blog} ML applications are often data-intensive and need to apply an operation on a dataset. Therefore, it is better to adopt vectorized solution instead of iterating over data. As stated in the Pandas documentation \ref{grey:pandas_vectorized}: ”Iterating through pandas objects is generally slow. In many cases, iterating manually over the rows is not needed and can be avoided”.</description>
+    </item>
+    
+    <item>
+      <title>No Scaling Before Scaling Sensitive Operation</title>
+      <link>https://hynn01.github.io/dslinter/code-smells/no-scaling-before-scaling-sensitive-operation/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://hynn01.github.io/dslinter/code-smells/no-scaling-before-scaling-sensitive-operation/</guid>
+      <description>Description Principle Component Analysis (PCA) is used for finding the components that maximize the data&amp;rsquo;s variation and reduce its dimensions, which is an essential data processing method. Scaling is pretty crucial to PCA because of the way the principal components are calculated. If one variable is on a larger scale than another, it will dominate the PCA procedure. Similarly, there are some other scaling-sensitive operations. Support Vector Machine (SVM), Stochastic Gradient Descent (SGD), Multi-layer Perceptron classifier, L1 and L2 regularization are all sensitive to feature scaling.</description>
+    </item>
+    
+  </channel>
+</rss>

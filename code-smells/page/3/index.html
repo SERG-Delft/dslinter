@@ -19,7 +19,7 @@
 <link rel=mask-icon href=https://hynn01.github.io/dslinter/%3Clink%20/%20abs%20url%3E>
 <meta name=theme-color content="#2e2e33">
 <meta name=msapplication-TileColor content="#2e2e33">
-<meta name=generator content="Hugo 0.91.0">
+<meta name=generator content="Hugo 0.91.1">
 <link rel=alternate type=application/rss+xml href=https://hynn01.github.io/dslinter/code-smells/index.xml>
 <noscript>
 <style>#theme-toggle,.top-link{display:none}</style>
@@ -50,6 +50,11 @@
 </a>
 </li>
 <li>
+<a href=https://hynn01.github.io/dslinter/ title=Survey>
+<span>Survey</span>
+</a>
+</li>
+<li>
 <a href=https://hynn01.github.io/dslinter/tags/ title=Tags>
 <span>Tags</span>
 </a>
@@ -67,7 +72,11 @@
 </h2>
 </header>
 <section class=entry-content>
-<p>Description Type Existing Stage Effect Example # Violated Code # Recommended Fix Source: Paper Grey Literature GitHub Commit Stack Overflow Documentation </p>
+<p>Description In PyTorch, \textit{self.nn()} is different than \textit{self.nn.forward()}. \textit{self.nn()} also deals with all the register hooks, which would not be considered when calling the plain \textit{forward} \ref{grey:pytorch_styleguide}. Thus, it is recommended to use \textit{self.nn()} than \textit{self.nn.forward()}.
+Type API Specific
+Existing Stage Model Training
+Effect Robustness
+Example ### PyTorch # Violated Code output = self.net.forward(input) # Recommended Fix output = self.net(input) Source: Paper Grey Literature https://github.com/IgorSusmelj/pytorch-styleguide GitHub Commit Stack Overflow Documentation </p>
 </section>
 <footer class=entry-footer></footer>
 <a class=entry-link aria-label="post link to Pytorch Call Method Misused" href=https://hynn01.github.io/dslinter/code-smells/pytorch-call-method-misused/></a>
@@ -78,7 +87,7 @@
 </h2>
 </header>
 <section class=entry-content>
-<p>Description Type Existing Stage Effect Example # Violated Code # Recommended Fix Source: Paper Grey Literature GitHub Commit Stack Overflow Documentation </p>
+<p>Description In PyTorch, calling \textit{.eval()} means we are going into the evaluation mode and the Dropout layer will be deactivated. If the training mode did not toggle back in time, the Dropout layer would not be used in some data training and thus affect the training result \ref{grey:nn_common_mistakes}. Therefore, we suggest to “have the training mode set as close as possible to the inference step to avoid forgetting to set it”....</p>
 </section>
 <footer class=entry-footer></footer>
 <a class=entry-link aria-label="post link to Train Eval Mode Improper Toggling" href=https://hynn01.github.io/dslinter/code-smells/train-eval-mode-improper-toggling/></a>
@@ -89,7 +98,11 @@
 </h2>
 </header>
 <section class=entry-content>
-<p>Description Type Existing Stage Effect Example # Violated Code # Recommended Fix Source: Paper Grey Literature GitHub Commit Stack Overflow Documentation </p>
+<p>Description Developers should use \textit{optimizer.zero_grad()}, \textit{loss_fn.backward()}, \textit{optimizer.step()} together and should be forget to use \textit{optimizer.zero_grad()} before \textit{loss_fn.backward()}. \textit{optimizer.zero_grad()} clears the old gradients from last step. If this API is not used, the gradients will be accumulated from all \textit{loss.backward()} calls and it will lead to the gradient explosion, which fails the training.
+Type API Specific
+Existing Stage Model Training
+Effect Error-prone
+Example ### PyTorch # Violated Code output = model(input) # forward-pass loss_fn....</p>
 </section>
 <footer class=entry-footer></footer>
 <a class=entry-link aria-label="post link to Zero_grad Not Used Before Backward" href=https://hynn01.github.io/dslinter/code-smells/zero_grad-not-used-before-backward/></a>
@@ -100,7 +113,11 @@
 </h2>
 </header>
 <section class=entry-content>
-<p>Description Type Existing Stage Effect Example # Violated Code # Recommended Fix Source: Paper Grey Literature GitHub Commit Stack Overflow Documentation </p>
+<p>Description Different loss APIs take different input formats, but the difference is not clarified in some documentations, so it is easy to misuse. For example, in PyTorch, the \textit{NLLLoss} takes the output of \textit{LogSoftmax} as the input. If the input given to \textit{NLLLoss} has not been processed by \textit{LogSoftmax}, it might lead to a wrong result.
+Type API Specific
+Existing Stage Model Training
+Effect Error-prone
+Example ### PyTorch # Violated Code loss = nn....</p>
 </section>
 <footer class=entry-footer></footer>
 <a class=entry-link aria-label="post link to Loss API Misused" href=https://hynn01.github.io/dslinter/code-smells/loss-api-misused/></a>
