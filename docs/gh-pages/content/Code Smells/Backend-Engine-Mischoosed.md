@@ -8,7 +8,7 @@ weight: 17
 
 ### Description
 
-As noted in \ref{grey:so_backend}, when using \textit{pd.eval()} in Pandas library, the "\textit{numexpr}" is optimized for performance and "\textit{python}" options offer no performance benefit over "\textit{numexpr}". Generally, it is not recommended to set the parameter to "\textit{python}". The developers should be careful when explicitly set this parameter.
+When using `pd.eval()` in Pandas library, the `numexpr` is optimized for performance and `python` options offer no performance benefit over `numexpr`. Generally, it is not recommended to set the parameter to `python`. The developers should be careful when explicitly set this parameter.
 
 ### Type
 

@@ -2,13 +2,13 @@
 title: "Randomness Uncontrolled"
 disableShare: true
 # ShowReadingTime: true
-tags: ["can be automated","generic","reproducibility"]
+tags: ["generic","general","reproducibility"]
 weight: 1
 ---
 
 ### Description
 
-Debugging is easier if the results are reproducible when developing ML systems. Also, reproducibility helps conduct studies based on previous models. Setting random seeds significantly contributes to the reproducibility of ML applications. There are several scenes that a random seed is involved. In Scikit-Learn, randomness is inherently involved in some estimators(e.g., Random Forest) and cross-validation splitters. If the random seed is not set, the random forest algorithm might provide a different result every time it runs, and the dataset split by cross-validation splitter will also be different next time it runs \ref{grey:sklearn_best_practice}. In Pytorch and Numpy, it is also recommended to set global random seed first for reproducible result \ref{grey:pytorch_randomness}. Specifically, \textit{DataLoader} in PyTorch needs the setting of random seed to ensure the data splitted and loaded in the same way every time running the code. In various grey literature \ref{grey:ml_perfect}, \ref{grey:pytorch_randomness}, the importance of setting random seed is noted. Therefore, we suggest the developers set random seed explicitly during the development process whenever a possible random procedure is involved in the application.
+Debugging is easier if the results are reproducible when developing ML systems. Also, reproducibility helps conduct studies based on previous models. Setting random seeds significantly contributes to the reproducibility of ML applications. There are several scenes that a random seed is involved. In Scikit-Learn, randomness is inherently involved in some estimators(e.g., Random Forest) and cross-validation splitters. If the random seed is not set, the random forest algorithm might provide a different result every time it runs, and the dataset split by cross-validation splitter will also be different next time it runs. In Pytorch and Numpy, it is also recommended to set global random seed first for reproducible result. Specifically, `DataLoader` in PyTorch needs the setting of random seed to ensure the data splitted and loaded in the same way every time running the code. In various grey literature, the importance of setting random seed is noted. Therefore, we suggest the developers set random seed explicitly during the development process whenever a possible random procedure is involved in the application.
 
 
 ### Type

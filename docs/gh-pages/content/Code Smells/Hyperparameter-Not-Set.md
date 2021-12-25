@@ -2,13 +2,13 @@
 title: "Hyperparameter Not Set"
 disableShare: true
 # ShowReadingTime: true
-tags: 
+tags: ["generic", "data preparation", "error-prone","reproducibility"]
 weight: 6
 ---
 
 ### Description
 
-Hyperparameters are ML algorithm parameters used to control the learning process and are usually determined before the actual process starts \cite{haakman2020studying}. Hyperparameters should be set and tuned because they improve prediction quality
+Hyperparameters are ML algorithm parameters used to control the learning process and are usually determined before the actual process starts. Hyperparameters should be set and tuned because they improve prediction quality
 and reproducibility. Tuning hyperparameters can lead to higher prediction quality because the default
 parameters of the learning algorithm may not be optimal for a given data or problem, and may lead to local optima.  These parameters directly control the behavior of the training algorithm and therefore have a significant impact on the performance of the model.
 
@@ -38,7 +38,6 @@ from sklearn.cluster import KMeans
 kmeans = KMeans()
 
 # Recommended Fix
-
 kmeans = KMeans(n_clusters=8, random_state=0)
 # Or, ideally:
 kmeans = KMeans(n_clusters=8,
@@ -48,6 +47,20 @@ precompute_distances='auto',
 verbose=0, random_state=0,
 copy_x=True, n_jobs=1,
 algorithm='auto')
+
+### PyTorch
+from fast_pytorch_kmeans import KMeans
+import torch
+
+# Violated Code
+kmeans = KMeans()
+x = torch.randn(100000, 64, device='cuda')
+labels = kmeans.fit_predict(x)
+
+# Recommended Fix
+kmeans = KMeans(n_clusters=8, mode='euclidean', verbose=1)
+x = torch.randn(100000, 64, device='cuda')
+labels = kmeans.fit_predict(x)
 
 ```
 

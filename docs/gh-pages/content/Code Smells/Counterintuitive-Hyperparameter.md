@@ -2,13 +2,13 @@
 title: "Counterintuitive Hyperparameter"
 disableShare: true
 # ShowReadingTime: true
-tags: ["can be automated", "generic", "model training", "error-prone"]
+tags: ["generic", "model training", "error-prone"]
 weight: 8
 ---
 
 ### Description
 
-Counterintuitive hyperparameters will also cause bugs. There are four posts \ref{grey:so_counterintuitive1}\ref{grey:so_counterintuitive2}\ref{grey:so_counterintuitive3}\ref{grey:so_counterintuitive4} on StackOverflow discussing where the bug in the program is, and it turns out that a large learning rate causes bugs. This implies that the developer should check whether the hyperparameters stay in the normal range when developing ML applications.  
+Counterintuitive hyperparameters will also cause bugs. There are four posts on StackOverflow discussing where the bug in the program is, and it turns out that a large learning rate causes bugs. This implies that the developer should check whether the hyperparameters stay in the normal range when developing ML applications.  
 
 
 ### Type

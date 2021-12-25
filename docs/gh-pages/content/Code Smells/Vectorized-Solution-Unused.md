@@ -2,13 +2,13 @@
 title: "Vectorized Solution Unused"
 disableShare: true
 # ShowReadingTime: true
-tags: ["can be automated", "generic","data preparation","efficiency"]
+tags: ["generic","data preparation","efficiency"]
 weight: 3
 ---
 
 ### Description
 
-"Vectorization is the process of converting an algorithm from operating on a single value at a time to operating on a set of values (vector) at one time."\ref{grey:vectorized_blog} ML applications are often data-intensive and need to apply an operation on a dataset. Therefore, it is better to adopt vectorized solution instead of iterating over data. As stated in the Pandas documentation \ref{grey:pandas_vectorized}: ”Iterating through pandas objects is generally slow. In many cases, iterating manually over the rows is not needed and can be avoided”. The built-in methods (e.g., join, groupby) in Pandas are vectorized. Thus, it is recommended to use Pandas built-in methods. Another advantage of using the vectorized solution is that code complexity is reduced, resulting in less prone-to-bugs code\cite{haakman2020studying}.
+"Vectorization is the process of converting an algorithm from operating on a single value at a time to operating on a set of values (vector) at one time." ML applications are often data-intensive and need to apply an operation on a dataset. Therefore, it is better to adopt vectorized solution instead of iterating over data. As stated in the Pandas documentation : ”Iterating through pandas objects is generally slow. In many cases, iterating manually over the rows is not needed and can be avoided”. The built-in methods (e.g., join, groupby) in Pandas are vectorized. Thus, it is recommended to use Pandas built-in methods. Another advantage of using the vectorized solution is that code complexity is reduced, resulting in less prone-to-bugs code.
 
 ### Type
 
@@ -33,8 +33,8 @@ df = pd.DataFrame([1, 2, 3])
 # Violated Code
 result = []
 for index, row in df.iterrows():
-result.append(row[0] + 1)
-result = pd.DataFrame(result)
+	result.append(row[0] + 1)
+	result = pd.DataFrame(result)
 
 # Recommended Fix
 result = df.add(1)

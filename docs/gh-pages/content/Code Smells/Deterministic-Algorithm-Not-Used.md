@@ -2,13 +2,13 @@
 title: "Deterministic Algorithm Not Used"
 disableShare: true
 # ShowReadingTime: true
-tags: ["can be automated", "generic", "model training", "reproducibility"]
+tags: ["generic", "model training", "reproducibility"]
 weight: 10
 ---
 
 ### Description
 
-Some libraries provide APIs for developers to use the deterministic algorithm. Using deterministic algorithms is another effort that can be made to improve reproducibility. In PyTorch, it is suggested to set \textit{torch.use\_deterministic\_algorithms(True)} when debugging. However, the application will perform slower if this option is set, so it is suggested not to use it in the deploy stage. Developers should be aware of this setting during the development process.
+Some libraries provide APIs for developers to use the deterministic algorithm. Using deterministic algorithms is another effort that can be made to improve reproducibility. In PyTorch, it is suggested to set `torch.use_deterministic_algorithms(True)` when debugging. However, the application will perform slower if this option is set, so it is suggested not to use it in the deploy stage. Developers should be aware of this setting during the development process.
 
 ### Type
 Generic

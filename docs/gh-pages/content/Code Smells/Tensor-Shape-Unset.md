@@ -2,7 +2,7 @@
 title: "Tensor Shape Unset"
 disableShare: true
 # ShowReadingTime: true
-tags: ["not sure"]
+tags: []
 weight: 16
 ---
 

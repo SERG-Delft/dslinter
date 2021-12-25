@@ -2,13 +2,13 @@
 title: "Excessive Hyperparameter"
 disableShare: true
 # ShowReadingTime: true
-tags: 
+tags: ["generic", "model training", "error-prone"]
 weight: 7
 ---
 
 ### Description
 
-Excessive hyperparameter precision is a potential risk for overtuning \ref{grey:ml_perfect}. Overtuning occurs if an overly high precision hyperparameter value allows the model to perform particularly well while values in close range of it do not. Further, the choice of such a hyperparameter might be uninterpretable to users, which leads to an untrustworthy result.
+Excessive hyperparameter precision is a potential risk for overtuning. Overtuning occurs if an overly high precision hyperparameter value allows the model to perform particularly well while values in close range of it do not. Further, the choice of such a hyperparameter might be uninterpretable to users, which leads to an untrustworthy result.
 
 ### Type
 

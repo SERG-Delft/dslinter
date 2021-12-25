@@ -2,13 +2,13 @@
 title: "Memory Not Freed"
 disableShare: true
 # ShowReadingTime: true
-tags: ["can be automated", "generic", "model training", "memory issue"]
+tags: ["generic", "model training", "memory issue"]
 weight: 9
 ---
 
 ### Description
 
-ML application training is memory-consuming, and thus, it is essential to free memory in time. Some APIs are provided to alleviate the run-out-of-memory issue in deep learning libraries.  TensorFlow's documentation notes that if the model is created in a loop, it is suggested to use \textit{clear\_session()} in the loop. Meanwhile, the GitHub repository "Pytorch best practice" recommends using \textit{.detach()} to detach the tensor whenever possible. We suggest developers check whether they use these APIs to free the memory whenever possible in their code.  
+ML application training is memory-consuming, and thus, it is essential to free memory in time. Some APIs are provided to alleviate the run-out-of-memory issue in deep learning libraries.  TensorFlow's documentation notes that if the model is created in a loop, it is suggested to use `clear\_session()` in the loop. Meanwhile, the GitHub repository "Pytorch best practice" recommends using `.detach()` to detach the tensor whenever possible. We suggest developers check whether they use these APIs to free the memory whenever possible in their code.  
 
 ### Type
 
@@ -27,6 +27,7 @@ Memory Issue
 ```python
 
 ### TensorFlow
+import tensorflow as tf
 
 # Violated Code
 for _ in range(100):
@@ -45,10 +46,11 @@ for _ in range(100):
 ### PyTorch
 
 # Violated Code
-a
+acc = accuracy(output, label)
 
 # Recommended Fix
-a.detach() 
+acc = accuracy(output, label)
+acc = float(acc.cpu().detach().numpy())
 
 ```
 

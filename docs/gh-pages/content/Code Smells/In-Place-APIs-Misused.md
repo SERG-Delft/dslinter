@@ -2,15 +2,15 @@
 title: "In Place APIs Misused"
 disableShare: true
 # ShowReadingTime: true
-tags: ["can be automated", "generic", "data preparation", "error-prone"]
+tags: ["generic", "data preparation", "error-prone"]
 weight: 2
 ---
 
 ### Description
 
-“In-place operation is an operation that directly changes the content of a given linear algebra, vector, matrices (Tensor) without making a copy.”\ref{grey:inplace} Due to the nature of the in-place operation, the in-place APIs are easily misused. Developers sometimes forget to set the in-place parameter in APIs to true while not assigning the new result to a variable, causing potential silent bugs. The data is not updated in this way, but the developer thinks it is and might not be able to find where the bug is. For example, when using Pandas library, sometimes the developers do not assign the new result to a DataFrame without setting the in-place parameter to be true, causing the DataFrame not to be updated. In the TensorFlow dataset, we also found an example \ref{grey:githubcommit_inplace} that the developer thought \textit{np.clip()} is an in-place operation and used it without assigning it to a new variable.
+“In-place operation is an operation that directly changes the content of a given linear algebra, vector, matrices (Tensor) without making a copy.” Due to the nature of the in-place operation, the in-place APIs are easily misused. Developers sometimes forget to set the in-place parameter in APIs to true while not assigning the new result to a variable, causing potential silent bugs. The data is not updated in this way, but the developer thinks it is and might not be able to find where the bug is. For example, when using Pandas library, sometimes the developers do not assign the new result to a DataFrame without setting the in-place parameter to be true, causing the DataFrame not to be updated. In the TensorFlow dataset, we also found an example that the developer thought `np.clip()` is an in-place operation and used it without assigning it to a new variable.
 
-Some developers hold the view that in-place operation will save memory. However, in Pandas library, this is a misconception because the copy of the data is still created. In PyTorch, the in-place operation does save GPU memory, but it can potentially overwrite values required to compute gradients \ref{grey:pytorch_inplace}. Therefore, we suggest developers be careful with the in-place operation.
+Some developers hold the view that in-place operation will save memory. However, in Pandas library, this is a misconception because the copy of the data is still created. In PyTorch, the in-place operation does save GPU memory, but it can potentially overwrite values required to compute gradients. Therefore, we suggest developers be careful with the in-place operation.
 
 ### Type
 

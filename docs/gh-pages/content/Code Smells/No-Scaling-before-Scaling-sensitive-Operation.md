@@ -2,7 +2,7 @@
 title: "No Scaling Before Scaling Sensitive Operation"
 disableShare: true
 # ShowReadingTime: true
-tags: ["can be automated", "generic", "data preparation", "efficiency"]
+tags: ["generic", "data preparation", "efficiency"]
 weight: 4
 ---
 
@@ -23,18 +23,28 @@ Efficiency
 
 ```python
 
-### Scikit-Learn
+### Scikit-Learn PCA
 from sklearn.pipeline import make_pipeline
 from sklearn.decomposition import PCA
 from sklearn.naive_bayes import Gaussia
 
 # Violated Code
-unscaled_clf = make_pipeline(PCA(n_components=2),GaussianNB())
+clf = make_pipeline(PCA(n_components=2),GaussianNB())
 
 # Recommended Fix
 from sklearn.preprocessing import StandardSca
-std_clf = make_pipeline(StandardScaler(),PCA(n_components=2), GaussianNB())
+clf = make_pipeline(StandardScaler(),PCA(n_components=2), GaussianNB())
 
+### Scikit-Learn SVC
+from sklearn.svm import SVC
+
+# Violated Code
+clf = SVC()
+
+# Recommended Fix
+from sklearn.pipeline import make_pipeline
+from sklearn.preprocessing import StandardScaler
+clf = make_pipeline(StandardScaler(), SVC())
 ```
 
 ### Source:
