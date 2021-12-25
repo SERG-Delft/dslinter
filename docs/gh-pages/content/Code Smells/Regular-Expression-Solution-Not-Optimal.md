@@ -8,7 +8,7 @@ weight: 15
 
 ### Description
 
-\ref{grey:so_regx} provides a better coding solution for the regular expression, which might be able to apply to the Nature Language Processing (NLP) preprocessing process. NLP tasks are data-intensive and often take a long time to clean the data, so it would be good to save some time when preprocessing the data. The posts noted that \textit{regex.sub()} and \textit{str.translate()} work faster than \textit{str.replace()} in practice in Pandas library. The more efficient solution is worth considering.
+A post provides a better coding solution for the regular expression, which might be able to apply to the Nature Language Processing (NLP) preprocessing process. NLP tasks are data-intensive and often take a long time to clean the data, so it would be good to save some time when preprocessing the data. The post noted that `regex.sub()` and `str.translate()` work faster than `str.replace()` in practice in Pandas library. The more efficient solution is worth considering.
 
 ### Type
 

@@ -2,13 +2,13 @@
 title: "Matrix Multiplication API Misused"
 disableShare: true
 # ShowReadingTime: true
-tags: ["not sure"]
+tags: ["not sure", "api-specific", "model training", "readability"]
 weight: 19
 ---
 
 ### Description
 
-\textit{np.matmul()} in Numpy library is more readable than \textit{np.dot()} in the semantic way. While \textit{np.dot()} provides heterogeneous behaviors depending on the shape of the data, \textit{np.matmul()} behaves in a consistent way. When the multiply operation is performed on two-dimension matrixes, two APIs give a same result. However, \textit{np.matmul()} is preferred than \textit{np.dot()} for its clear semantic.
+`np.matmul()` in Numpy library is more readable than `np.dot()` in the semantic way. While`np.dot()` provides heterogeneous behaviors depending on the shape of the data, `np.matmul()` behaves in a consistent way. When the multiply operation is performed on two-dimension matrixes, two APIs give a same result. However, `np.matmul()` is preferred than `np.dot()` for its clear semantic.
 
 ### Type
 

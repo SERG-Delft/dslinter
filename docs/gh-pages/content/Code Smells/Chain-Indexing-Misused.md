@@ -2,7 +2,7 @@
 title: "Chain Indexing Misused"
 disableShare: true
 # ShowReadingTime: true
-tags: 
+tags: ["api-specific", "data prepaation", "error-prone", "efficiency"]
 weight: 13
 ---
 
@@ -27,6 +27,11 @@ Error-prone & Efficiency
 ```python
 
 ### Pandas
+import pandas as pd
+df = pd.DataFrame([[1,2,3],[4,5,6]])
+col = 1
+x = 0
+
 # Violated Code
 df[col][x] = 42
 

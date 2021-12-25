@@ -2,13 +2,13 @@
 title: "Dataframe Coversion API Misused"
 disableShare: true
 # ShowReadingTime: true
-tags: 
+tags: ["api-specific", "data preparation", "consistency"]
 weight: 14
 ---
 
 ### Description
 
-When converting DataFrame to NumPy array, it is better to use \textit{df.to\_numpy()} than \textit{df.values()}. As noted in \ref{grey:so_df_conversion}, \textit{df.values()} has inconsistency problem. With \textit{.values} it is unclear whether the returned value would be the actual array, some transformation of it, or one of the Pandas custom arrays. However, \textit{.values} is not deprecated yet. Although the library developers note it as a warning in the documentation, it does not log a warning or error when compiling if we use \textit{.value}. 
+When converting DataFrame to NumPy array, it is better to use `df.to\_numpy()` than `df.values()`. As noted in a post, `df.values()` has inconsistency problem. With `.values` it is unclear whether the returned value would be the actual array, some transformation of it, or one of the Pandas custom arrays. However, `.values` is not deprecated yet. Although the library developers note it as a warning in the documentation, it does not log a warning or error when compiling if we use `.value`. 
 
 ### Type
 

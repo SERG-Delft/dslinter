@@ -2,13 +2,13 @@
 title: "Log Parameter Approaching Zero"
 disableShare: true
 # ShowReadingTime: true
-tags: ["can be automated"]
+tags: ["generic", "model training", "error-prone"]
 weight: 11
 ---
 
 ### Description
 
-Several posts on Stack Overflow talk about the bugs that are not easy to discover caused by the log parameter approaching zero \ref{grey:so_log1}\ref{grey:so_log2}\ref{grey:so_log3}\ref{grey:so_log4}. In this kind of program, the log function variable turns to zero and raises an error during the training process. However, the error's stack trace did not directly point to the line of code that the bug exist \cite{zhang2018empirical}. This kind of problem is not easy to debug and might take a long training time to find. Therefore, the developer should check the log parameter and may add a very small number to the log parameter in the code before running it. It will save time and effort if the developer could identify this smell before the code run into errors.
+Several posts on Stack Overflow talk about the bugs that are not easy to discover caused by the log parameter approaching zero. In this kind of program, the log function variable turns to zero and raises an error during the training process. However, the error's stack trace did not directly point to the line of code that the bug exist. This kind of problem is not easy to debug and might take a long training time to find. Therefore, the developer should check the log parameter and may add a very small number to the log parameter in the code before running it. It will save time and effort if the developer could identify this smell before the code run into errors.
 
 ### Type
 

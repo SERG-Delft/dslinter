@@ -2,12 +2,12 @@
 title: "Tensor Shape Unset"
 disableShare: true
 # ShowReadingTime: true
-tags: []
+tags: ["not sure", "api-specific", "data preparation", "error-prone"]
 weight: 16
 ---
 
 ### Description
-Several bugs can be caused by tensor unaligned. Usually, the unaligned tensor problems cannot be identified at the code level, but we can explicitly control one. It is recommended to explicitly set the shape of the input for \textit{tf.Variable()} to make the tensor aligned. In this way, we can alleviate the unaligned tensor problem.
+Several bugs can be caused by tensor unaligned. Usually, the unaligned tensor problems cannot be identified at the code level, but we can explicitly control one. It is recommended to explicitly set the shape of the input for `tf.Variable()` to make the tensor aligned. In this way, we can alleviate the unaligned tensor problem.
 
 ### Type
 API Specific

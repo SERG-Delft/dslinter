@@ -2,7 +2,7 @@
 title: "Backend Engine Mischoosed"
 disableShare: true
 # ShowReadingTime: true
-tags: ["not sure"]
+tags: ["not sure", "api-specific", "data preparation", "efficiency"]
 weight: 17
 ---
 
@@ -25,10 +25,14 @@ Efficiency
 ### Example
 
 ```python
+### Pandas
+import pandas as pd
+
 # Violated Code
+pd.eval('df.A.str.contains("ab")', engine='python')
 
 # Recommended Fix
-
+pd.eval('df.A.str.contains("ab")')
 ```
 
 ### Source:

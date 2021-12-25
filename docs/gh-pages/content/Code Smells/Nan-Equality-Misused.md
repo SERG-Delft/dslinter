@@ -2,13 +2,13 @@
 title: "Nan Equality Misused"
 disableShare: true
 # ShowReadingTime: true
-tags: 
+tags: ["api-specific", "data preparation", "error-prone"]
 weight: 12
 ---
 
 ### Description
 
-While \textit{None} == \textit{None} evaluates to \textit{True}, \textit{numpy.nan} == \textit{numpy.nan} evaluates to \textit{False}. As Pandas treats \textit{None} like \textit{numpy.nan} for simplicity and performance reasons, a comparison of DataFrame elements with \textit{numpy.nan} always return \textit{False} \cite{haakman2020studying}. Therefore, developers need to be careful when using the \textit{NaN} comparision in Numpy and Pandas. Otherwise, it may lead to unintentional behavior in the code.
+While `None` == `None` evaluates to `True`, `numpy.nan` == `numpy.nan` evaluates to `False`. As Pandas treats `None` like `numpy.nan` for simplicity and performance reasons, a comparison of DataFrame elements with `numpy.nan` always return `False` . Therefore, developers need to be careful when using the `NaN` comparision in Numpy and Pandas. Otherwise, it may lead to unintentional behavior in the code.
 
 ### Type
 

@@ -2,13 +2,13 @@
 title: "Initialization Order Misused"
 disableShare: true
 # ShowReadingTime: true
-tags: 
+tags: ["api-specific", "model training", "error-prone"]
 weight: 20
 ---
 
 ### Description
 
-The \textit{AdamOptimizer} class in the TensorFlow creates additional variables named "slots". The variables must be initialized before training the model. Therefore, if the developer call \textit{initialize\_all\_variables()} before calling \textit{AdamOptimizer} and does not call the initializer afterward, the variables created by \textit{AdamOptimizer} will not be initialized and might cause an error.
+The `AdamOptimizer` class in the TensorFlow creates additional variables named "slots". The variables must be initialized before training the model. Therefore, if the developer call `initialize_all_variables()` before calling `AdamOptimizer` and does not call the initializer afterward, the variables created by `AdamOptimizer` will not be initialized and might cause an error.
 
 ### Type
 
@@ -25,6 +25,9 @@ Error-prone
 ### Example
 
 ```python
+### TensorFlow
+import tensorflow as tf
+
 # Violated Code
 init = tf.global_variables_initializer()
 train_op = tf.train.AdamOptimizer(1e-4).minimize(cross_entropy)
@@ -36,7 +39,6 @@ train_op = tf.train.AdamOptimizer(1e-4).minimize(cross_entropy)
 init = tf.global_variables_initializer()
 sess = tf.Session()
 sess.run(init)
-
 
 ```
 
