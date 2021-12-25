@@ -16,29 +16,16 @@
     </item>
     
     <item>
-      <title>Tensor Shape Unset</title>
-      <link>https://hynn01.github.io/dslinter/code-smells/tensor-shape-unset/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://hynn01.github.io/dslinter/code-smells/tensor-shape-unset/</guid>
-      <description>Description Several bugs can be caused by tensor unaligned. Usually, the unaligned tensor problems cannot be identified at the code level, but we can explicitly control one. It is recommended to explicitly set the shape of the input for \textit{tf.Variable()} to make the tensor aligned. In this way, we can alleviate the unaligned tensor problem.
-Type API Specific
-Existing Stage Data Preparation
-Effect Error-prone
-Example ### TensorFlow import Tensorflow as tf # Violated Code normal_dist = tf.</description>
-    </item>
-    
-    <item>
       <title>Backend Engine Mischoosed</title>
       <link>https://hynn01.github.io/dslinter/code-smells/backend-engine-mischoosed/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://hynn01.github.io/dslinter/code-smells/backend-engine-mischoosed/</guid>
-      <description>Description As noted in \ref{grey:so_backend}, when using \textit{pd.eval()} in Pandas library, the &amp;ldquo;\textit{numexpr}&amp;rdquo; is optimized for performance and &amp;ldquo;\textit{python}&amp;rdquo; options offer no performance benefit over &amp;ldquo;\textit{numexpr}&amp;rdquo;. Generally, it is not recommended to set the parameter to &amp;ldquo;\textit{python}&amp;rdquo;. The developers should be careful when explicitly set this parameter.
+      <description>Description When using pd.eval() in Pandas library, the numexpr is optimized for performance and python options offer no performance benefit over numexpr. Generally, it is not recommended to set the parameter to python. The developers should be careful when explicitly set this parameter.
 Type API Specific
 Existing Stage Data Preparation
 Effect Efficiency
-Example # Violated Code # Recommended Fix Source: Paper Grey Literature GitHub Commit Stack Overflow  https://stackoverflow.</description>
+Example # Violated Code # Recommended Fix Source: Paper Grey Literature GitHub Commit Stack Overflow  https://stackoverflow.com/questions/53779986/dynamically-evaluate-an-expression-from-a-formula-in-pandas/53779987#53779987  Documentation </description>
     </item>
     
     <item>

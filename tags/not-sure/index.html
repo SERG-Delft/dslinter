@@ -11,7 +11,7 @@
 <meta name=google-site-verification content="XYZabc">
 <meta name=yandex-verification content="XYZabc">
 <meta name=msvalidate.01 content="XYZabc">
-<link crossorigin=anonymous href=/dslinter/assets/css/stylesheet.min.ccf63c2001f333f5fe878d473648051efe3aea1e5baceba8797e9f94daa448e6.css integrity="sha256-zPY8IAHzM/X+h41HNkgFHv466h5brOuoeX6flNqkSOY=" rel="preload stylesheet" as=style>
+<link crossorigin=anonymous href=/dslinter/assets/css/stylesheet.min.548091f41dc92b4a213f8dc4a49e22545a96b7d1b4ae4ad73c2ab3a70e4e8ea1.css integrity="sha256-VICR9B3JK0ohP43EpJ4iVFqWt9G0rkrXPCqzpw5OjqE=" rel="preload stylesheet" as=style>
 <link rel=icon href=https://hynn01.github.io/dslinter/%3Clink%20/%20abs%20url%3E>
 <link rel=icon type=image/png sizes=16x16 href=https://hynn01.github.io/dslinter/%3Clink%20/%20abs%20url%3E>
 <link rel=icon type=image/png sizes=32x32 href=https://hynn01.github.io/dslinter/%3Clink%20/%20abs%20url%3E>
@@ -19,7 +19,7 @@
 <link rel=mask-icon href=https://hynn01.github.io/dslinter/%3Clink%20/%20abs%20url%3E>
 <meta name=theme-color content="#2e2e33">
 <meta name=msapplication-TileColor content="#2e2e33">
-<meta name=generator content="Hugo 0.91.1">
+<meta name=generator content="Hugo 0.91.2">
 <link rel=alternate type=application/rss+xml href=https://hynn01.github.io/dslinter/tags/not-sure/index.xml>
 <noscript>
 <style>#theme-toggle,.top-link{display:none}</style>
@@ -78,30 +78,15 @@
 </article>
 <article class="post-entry tag-entry">
 <header class=entry-header>
-<h2>Tensor Shape Unset
-</h2>
-</header>
-<section class=entry-content>
-<p>Description Several bugs can be caused by tensor unaligned. Usually, the unaligned tensor problems cannot be identified at the code level, but we can explicitly control one. It is recommended to explicitly set the shape of the input for \textit{tf.Variable()} to make the tensor aligned. In this way, we can alleviate the unaligned tensor problem.
-Type API Specific
-Existing Stage Data Preparation
-Effect Error-prone
-Example ### TensorFlow import Tensorflow as tf # Violated Code normal_dist = tf....</p>
-</section>
-<footer class=entry-footer></footer>
-<a class=entry-link aria-label="post link to Tensor Shape Unset" href=https://hynn01.github.io/dslinter/code-smells/tensor-shape-unset/></a>
-</article>
-<article class="post-entry tag-entry">
-<header class=entry-header>
 <h2>Backend Engine Mischoosed
 </h2>
 </header>
 <section class=entry-content>
-<p>Description As noted in \ref{grey:so_backend}, when using \textit{pd.eval()} in Pandas library, the “\textit{numexpr}” is optimized for performance and “\textit{python}” options offer no performance benefit over “\textit{numexpr}”. Generally, it is not recommended to set the parameter to “\textit{python}”. The developers should be careful when explicitly set this parameter.
+<p>Description When using pd.eval() in Pandas library, the numexpr is optimized for performance and python options offer no performance benefit over numexpr. Generally, it is not recommended to set the parameter to python. The developers should be careful when explicitly set this parameter.
 Type API Specific
 Existing Stage Data Preparation
 Effect Efficiency
-Example # Violated Code # Recommended Fix Source: Paper Grey Literature GitHub Commit Stack Overflow https://stackoverflow....</p>
+Example # Violated Code # Recommended Fix Source: Paper Grey Literature GitHub Commit Stack Overflow https://stackoverflow.com/questions/53779986/dynamically-evaluate-an-expression-from-a-formula-in-pandas/53779987#53779987 Documentation </p>
 </section>
 <footer class=entry-footer></footer>
 <a class=entry-link aria-label="post link to Backend Engine Mischoosed" href=https://hynn01.github.io/dslinter/code-smells/backend-engine-mischoosed/></a>

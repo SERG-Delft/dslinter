@@ -12,7 +12,7 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://hynn01.github.io/dslinter/code-smells/memory-not-freed/</guid>
-      <description>Description ML application training is memory-consuming, and thus, it is essential to free memory in time. Some APIs are provided to alleviate the run-out-of-memory issue in deep learning libraries. TensorFlow&amp;rsquo;s documentation notes that if the model is created in a loop, it is suggested to use \textit{clear_session()} in the loop. Meanwhile, the GitHub repository &amp;ldquo;Pytorch best practice&amp;rdquo; recommends using \textit{.detach()} to detach the tensor whenever possible. We suggest developers check whether they use these APIs to free the memory whenever possible in their code.</description>
+      <description>Description ML application training is memory-consuming, and thus, it is essential to free memory in time. Some APIs are provided to alleviate the run-out-of-memory issue in deep learning libraries. TensorFlow&amp;rsquo;s documentation notes that if the model is created in a loop, it is suggested to use clear\_session() in the loop. Meanwhile, the GitHub repository &amp;ldquo;Pytorch best practice&amp;rdquo; recommends using .detach() to detach the tensor whenever possible. We suggest developers check whether they use these APIs to free the memory whenever possible in their code.</description>
     </item>
     
   </channel>

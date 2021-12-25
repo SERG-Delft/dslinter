@@ -4,14 +4,14 @@
 <meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
 <meta name=robots content="index, follow">
 <title>No Scaling Before Scaling Sensitive Operation | DSLinter - Linter for Machine Learnig Application - Specific Code Smells</title>
-<meta name=keywords content="can be automated,generic,data preparation,efficiency">
+<meta name=keywords content="generic,data preparation,efficiency">
 <meta name=description content="Description Principle Component Analysis (PCA) is used for finding the components that maximize the data&rsquo;s variation and reduce its dimensions, which is an essential data processing method. Scaling is pretty crucial to PCA because of the way the principal components are calculated. If one variable is on a larger scale than another, it will dominate the PCA procedure. Similarly, there are some other scaling-sensitive operations. Support Vector Machine (SVM), Stochastic Gradient Descent (SGD), Multi-layer Perceptron classifier, L1 and L2 regularization are all sensitive to feature scaling.">
 <meta name=author content>
 <link rel=canonical href=https://hynn01.github.io/dslinter/code-smells/no-scaling-before-scaling-sensitive-operation/>
 <meta name=google-site-verification content="XYZabc">
 <meta name=yandex-verification content="XYZabc">
 <meta name=msvalidate.01 content="XYZabc">
-<link crossorigin=anonymous href=/dslinter/assets/css/stylesheet.min.ccf63c2001f333f5fe878d473648051efe3aea1e5baceba8797e9f94daa448e6.css integrity="sha256-zPY8IAHzM/X+h41HNkgFHv466h5brOuoeX6flNqkSOY=" rel="preload stylesheet" as=style>
+<link crossorigin=anonymous href=/dslinter/assets/css/stylesheet.min.548091f41dc92b4a213f8dc4a49e22545a96b7d1b4ae4ad73c2ab3a70e4e8ea1.css integrity="sha256-VICR9B3JK0ohP43EpJ4iVFqWt9G0rkrXPCqzpw5OjqE=" rel="preload stylesheet" as=style>
 <script defer crossorigin=anonymous src=/dslinter/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5+kdJvBz5iKbt6B5PJI=" onload=hljs.initHighlightingOnLoad()></script>
 <link rel=icon href=https://hynn01.github.io/dslinter/%3Clink%20/%20abs%20url%3E>
 <link rel=icon type=image/png sizes=16x16 href=https://hynn01.github.io/dslinter/%3Clink%20/%20abs%20url%3E>
@@ -20,7 +20,7 @@
 <link rel=mask-icon href=https://hynn01.github.io/dslinter/%3Clink%20/%20abs%20url%3E>
 <meta name=theme-color content="#2e2e33">
 <meta name=msapplication-TileColor content="#2e2e33">
-<meta name=generator content="Hugo 0.91.1">
+<meta name=generator content="Hugo 0.91.2">
 <noscript>
 <style>#theme-toggle,.top-link{display:none}</style>
 </noscript><meta property="og:title" content="No Scaling Before Scaling Sensitive Operation">
@@ -32,7 +32,7 @@
 <meta name=twitter:title content="No Scaling Before Scaling Sensitive Operation">
 <meta name=twitter:description content="Description Principle Component Analysis (PCA) is used for finding the components that maximize the data&rsquo;s variation and reduce its dimensions, which is an essential data processing method. Scaling is pretty crucial to PCA because of the way the principal components are calculated. If one variable is on a larger scale than another, it will dominate the PCA procedure. Similarly, there are some other scaling-sensitive operations. Support Vector Machine (SVM), Stochastic Gradient Descent (SGD), Multi-layer Perceptron classifier, L1 and L2 regularization are all sensitive to feature scaling.">
 <script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":2,"name":"No Scaling Before Scaling Sensitive Operation","item":"https://hynn01.github.io/dslinter/code-smells/no-scaling-before-scaling-sensitive-operation/"}]}</script>
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"No Scaling Before Scaling Sensitive Operation","name":"No Scaling Before Scaling Sensitive Operation","description":"Description Principle Component Analysis (PCA) is used for finding the components that maximize the data\u0026rsquo;s variation and reduce its dimensions, which is an essential data processing method. Scaling is pretty crucial to PCA because of the way the principal components are calculated. If one variable is on a larger scale than another, it will dominate the PCA procedure. Similarly, there are some other scaling-sensitive operations. Support Vector Machine (SVM), Stochastic Gradient Descent (SGD), Multi-layer Perceptron classifier, L1 and L2 regularization are all sensitive to feature scaling.","keywords":["can be automated","generic","data preparation","efficiency"],"articleBody":"Description Principle Component Analysis (PCA) is used for finding the components that maximize the data’s variation and reduce its dimensions, which is an essential data processing method. Scaling is pretty crucial to PCA because of the way the principal components are calculated. If one variable is on a larger scale than another, it will dominate the PCA procedure. Similarly, there are some other scaling-sensitive operations. Support Vector Machine (SVM), Stochastic Gradient Descent (SGD), Multi-layer Perceptron classifier, L1 and L2 regularization are all sensitive to feature scaling. To avoid bugs, whether feature scaling is added before these operations should be checked.\nType Generic\nExisting Stage Data Preparation\nEffect Efficiency\nExample ### Scikit-Learn from sklearn.pipeline import make_pipeline from sklearn.decomposition import PCA from sklearn.naive_bayes import Gaussia # Violated Code unscaled_clf = make_pipeline(PCA(n_components=2),GaussianNB()) # Recommended Fix from sklearn.preprocessing import StandardSca std_clf = make_pipeline(StandardScaler(),PCA(n_components=2), GaussianNB()) Source: Paper Grey Literature  https://towardsdatascience.com/my-machine-learning-model-is-perfect-9a7928e0f604 https://ml.posthaven.com/machine-learning-done-wrong  GitHub Commit Stack Overflow  https://stackoverflow.com/questions/17455302/gridsearchcv-extremely-slow-on-small-dataset-in-scikit-learn/23813876#23813876  Documentation  https://scikit-learn.org/stable/modules/preprocessing.html  ","wordCount":"153","inLanguage":"en","datePublished":"0001-01-01T00:00:00Z","dateModified":"0001-01-01T00:00:00Z","mainEntityOfPage":{"@type":"WebPage","@id":"https://hynn01.github.io/dslinter/code-smells/no-scaling-before-scaling-sensitive-operation/"},"publisher":{"@type":"Organization","name":"DSLinter - Linter for Machine Learnig Application - Specific Code Smells","logo":{"@type":"ImageObject","url":"https://hynn01.github.io/dslinter/%3Clink%20/%20abs%20url%3E"}}}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"No Scaling Before Scaling Sensitive Operation","name":"No Scaling Before Scaling Sensitive Operation","description":"Description Principle Component Analysis (PCA) is used for finding the components that maximize the data\u0026rsquo;s variation and reduce its dimensions, which is an essential data processing method. Scaling is pretty crucial to PCA because of the way the principal components are calculated. If one variable is on a larger scale than another, it will dominate the PCA procedure. Similarly, there are some other scaling-sensitive operations. Support Vector Machine (SVM), Stochastic Gradient Descent (SGD), Multi-layer Perceptron classifier, L1 and L2 regularization are all sensitive to feature scaling.","keywords":["generic","data preparation","efficiency"],"articleBody":"Description Principle Component Analysis (PCA) is used for finding the components that maximize the data’s variation and reduce its dimensions, which is an essential data processing method. Scaling is pretty crucial to PCA because of the way the principal components are calculated. If one variable is on a larger scale than another, it will dominate the PCA procedure. Similarly, there are some other scaling-sensitive operations. Support Vector Machine (SVM), Stochastic Gradient Descent (SGD), Multi-layer Perceptron classifier, L1 and L2 regularization are all sensitive to feature scaling. To avoid bugs, whether feature scaling is added before these operations should be checked.\nType Generic\nExisting Stage Data Preparation\nEffect Efficiency\nExample ### Scikit-Learn PCA from sklearn.pipeline import make_pipeline from sklearn.decomposition import PCA from sklearn.naive_bayes import Gaussia # Violated Code clf = make_pipeline(PCA(n_components=2),GaussianNB()) # Recommended Fix from sklearn.preprocessing import StandardSca clf = make_pipeline(StandardScaler(),PCA(n_components=2), GaussianNB()) ### Scikit-Learn SVC from sklearn.svm import SVC # Violated Code clf = SVC() # Recommended Fix from sklearn.pipeline import make_pipeline from sklearn.preprocessing import StandardScaler clf = make_pipeline(StandardScaler(), SVC()) Source: Paper Grey Literature  https://towardsdatascience.com/my-machine-learning-model-is-perfect-9a7928e0f604 https://ml.posthaven.com/machine-learning-done-wrong  GitHub Commit Stack Overflow  https://stackoverflow.com/questions/17455302/gridsearchcv-extremely-slow-on-small-dataset-in-scikit-learn/23813876#23813876  Documentation  https://scikit-learn.org/stable/modules/preprocessing.html  ","wordCount":"182","inLanguage":"en","datePublished":"0001-01-01T00:00:00Z","dateModified":"0001-01-01T00:00:00Z","mainEntityOfPage":{"@type":"WebPage","@id":"https://hynn01.github.io/dslinter/code-smells/no-scaling-before-scaling-sensitive-operation/"},"publisher":{"@type":"Organization","name":"DSLinter - Linter for Machine Learnig Application - Specific Code Smells","logo":{"@type":"ImageObject","url":"https://hynn01.github.io/dslinter/%3Clink%20/%20abs%20url%3E"}}}</script>
 </head>
 <body id=top>
 <script>localStorage.getItem("pref-theme")==="dark"&&document.body.classList.add('dark')</script>
@@ -84,18 +84,28 @@ No Scaling Before Scaling Sensitive Operation
 <p>Efficiency</p>
 <h3 id=example>Example<a hidden class=anchor aria-hidden=true href=#example>#</a></h3>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python>
-<span style=color:#75715e>### Scikit-Learn</span>
+<span style=color:#75715e>### Scikit-Learn PCA</span>
 <span style=color:#f92672>from</span> sklearn.pipeline <span style=color:#f92672>import</span> make_pipeline
 <span style=color:#f92672>from</span> sklearn.decomposition <span style=color:#f92672>import</span> PCA
 <span style=color:#f92672>from</span> sklearn.naive_bayes <span style=color:#f92672>import</span> Gaussia
 
 <span style=color:#75715e># Violated Code</span>
-unscaled_clf <span style=color:#f92672>=</span> make_pipeline(PCA(n_components<span style=color:#f92672>=</span><span style=color:#ae81ff>2</span>),GaussianNB())
+clf <span style=color:#f92672>=</span> make_pipeline(PCA(n_components<span style=color:#f92672>=</span><span style=color:#ae81ff>2</span>),GaussianNB())
 
 <span style=color:#75715e># Recommended Fix</span>
 <span style=color:#f92672>from</span> sklearn.preprocessing <span style=color:#f92672>import</span> StandardSca
-std_clf <span style=color:#f92672>=</span> make_pipeline(StandardScaler(),PCA(n_components<span style=color:#f92672>=</span><span style=color:#ae81ff>2</span>), GaussianNB())
+clf <span style=color:#f92672>=</span> make_pipeline(StandardScaler(),PCA(n_components<span style=color:#f92672>=</span><span style=color:#ae81ff>2</span>), GaussianNB())
 
+<span style=color:#75715e>### Scikit-Learn SVC</span>
+<span style=color:#f92672>from</span> sklearn.svm <span style=color:#f92672>import</span> SVC
+
+<span style=color:#75715e># Violated Code</span>
+clf <span style=color:#f92672>=</span> SVC()
+
+<span style=color:#75715e># Recommended Fix</span>
+<span style=color:#f92672>from</span> sklearn.pipeline <span style=color:#f92672>import</span> make_pipeline
+<span style=color:#f92672>from</span> sklearn.preprocessing <span style=color:#f92672>import</span> StandardScaler
+clf <span style=color:#f92672>=</span> make_pipeline(StandardScaler(), SVC())
 </code></pre></div><h3 id=source>Source:<a hidden class=anchor aria-hidden=true href=#source>#</a></h3>
 <h4 id=paper>Paper<a hidden class=anchor aria-hidden=true href=#paper>#</a></h4>
 <h4 id=grey-literature>Grey Literature<a hidden class=anchor aria-hidden=true href=#grey-literature>#</a></h4>
@@ -115,7 +125,6 @@ std_clf <span style=color:#f92672>=</span> make_pipeline(StandardScaler(),PCA(n_
 </div>
 <footer class=post-footer>
 <ul class=post-tags>
-<li><a href=https://hynn01.github.io/dslinter/tags/can-be-automated/>can be automated</a></li>
 <li><a href=https://hynn01.github.io/dslinter/tags/generic/>generic</a></li>
 <li><a href=https://hynn01.github.io/dslinter/tags/data-preparation/>data preparation</a></li>
 <li><a href=https://hynn01.github.io/dslinter/tags/efficiency/>efficiency</a></li>

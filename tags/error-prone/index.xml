@@ -12,7 +12,38 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://hynn01.github.io/dslinter/code-smells/in-place-apis-misused/</guid>
-      <description>Description “In-place operation is an operation that directly changes the content of a given linear algebra, vector, matrices (Tensor) without making a copy.”\ref{grey:inplace} Due to the nature of the in-place operation, the in-place APIs are easily misused. Developers sometimes forget to set the in-place parameter in APIs to true while not assigning the new result to a variable, causing potential silent bugs. The data is not updated in this way, but the developer thinks it is and might not be able to find where the bug is.</description>
+      <description>Description “In-place operation is an operation that directly changes the content of a given linear algebra, vector, matrices (Tensor) without making a copy.” Due to the nature of the in-place operation, the in-place APIs are easily misused. Developers sometimes forget to set the in-place parameter in APIs to true while not assigning the new result to a variable, causing potential silent bugs. The data is not updated in this way, but the developer thinks it is and might not be able to find where the bug is.</description>
+    </item>
+    
+    <item>
+      <title>Data Leakage</title>
+      <link>https://hynn01.github.io/dslinter/code-smells/data-leakage/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://hynn01.github.io/dslinter/code-smells/data-leakage/</guid>
+      <description>Description &amp;ldquo;Data Leakage happens when the data you are using to train a machine learning algorithm happens to have the information you are trying to predict.&amp;rdquo; It results in overly optimistic performance during testing and poor performance in real-world usage. There are two main sources of data leakage: leaky predictors and a leaky validation strategy. Leaky predictors refer to the situation where some features updated or created after the target value is realized are included.</description>
+    </item>
+    
+    <item>
+      <title>Hyperparameter Not Set</title>
+      <link>https://hynn01.github.io/dslinter/code-smells/hyperparameter-not-set/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://hynn01.github.io/dslinter/code-smells/hyperparameter-not-set/</guid>
+      <description>Description Hyperparameters are ML algorithm parameters used to control the learning process and are usually determined before the actual process starts. Hyperparameters should be set and tuned because they improve prediction quality and reproducibility. Tuning hyperparameters can lead to higher prediction quality because the default parameters of the learning algorithm may not be optimal for a given data or problem, and may lead to local optima. These parameters directly control the behavior of the training algorithm and therefore have a significant impact on the performance of the model.</description>
+    </item>
+    
+    <item>
+      <title>Excessive Hyperparameter</title>
+      <link>https://hynn01.github.io/dslinter/code-smells/excessive-hyperparameter/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://hynn01.github.io/dslinter/code-smells/excessive-hyperparameter/</guid>
+      <description>Description Excessive hyperparameter precision is a potential risk for overtuning. Overtuning occurs if an overly high precision hyperparameter value allows the model to perform particularly well while values in close range of it do not. Further, the choice of such a hyperparameter might be uninterpretable to users, which leads to an untrustworthy result.
+Type Generic
+Existing Stage Model Training
+Effect Error-prone
+Example ### Scikit-Learn from sklearn.naive_bayes import MultinomialN # Violated Code mnb = MultinomialNB(alpha = 0.</description>
     </item>
     
     <item>
@@ -21,7 +52,7 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://hynn01.github.io/dslinter/code-smells/counterintuitive-hyperparameter/</guid>
-      <description>Description Counterintuitive hyperparameters will also cause bugs. There are four posts \ref{grey:so_counterintuitive1}\ref{grey:so_counterintuitive2}\ref{grey:so_counterintuitive3}\ref{grey:so_counterintuitive4} on StackOverflow discussing where the bug in the program is, and it turns out that a large learning rate causes bugs. This implies that the developer should check whether the hyperparameters stay in the normal range when developing ML applications.
+      <description>Description Counterintuitive hyperparameters will also cause bugs. There are four posts on StackOverflow discussing where the bug in the program is, and it turns out that a large learning rate causes bugs. This implies that the developer should check whether the hyperparameters stay in the normal range when developing ML applications.
 Type Generic
 Existing Stage Model Training
 Effect Error-prone

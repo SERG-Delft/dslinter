@@ -12,7 +12,7 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://hynn01.github.io/dslinter/code-smells/vectorized-solution-unused/</guid>
-      <description>Description &amp;ldquo;Vectorization is the process of converting an algorithm from operating on a single value at a time to operating on a set of values (vector) at one time.&amp;quot;\ref{grey:vectorized_blog} ML applications are often data-intensive and need to apply an operation on a dataset. Therefore, it is better to adopt vectorized solution instead of iterating over data. As stated in the Pandas documentation \ref{grey:pandas_vectorized}: ”Iterating through pandas objects is generally slow. In many cases, iterating manually over the rows is not needed and can be avoided”.</description>
+      <description>Description &amp;ldquo;Vectorization is the process of converting an algorithm from operating on a single value at a time to operating on a set of values (vector) at one time.&amp;rdquo; ML applications are often data-intensive and need to apply an operation on a dataset. Therefore, it is better to adopt vectorized solution instead of iterating over data. As stated in the Pandas documentation : ”Iterating through pandas objects is generally slow. In many cases, iterating manually over the rows is not needed and can be avoided”.</description>
     </item>
     
     <item>

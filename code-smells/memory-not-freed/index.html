@@ -4,14 +4,14 @@
 <meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
 <meta name=robots content="index, follow">
 <title>Memory Not Freed | DSLinter - Linter for Machine Learnig Application - Specific Code Smells</title>
-<meta name=keywords content="can be automated,generic,model training,memory issue">
-<meta name=description content="Description ML application training is memory-consuming, and thus, it is essential to free memory in time. Some APIs are provided to alleviate the run-out-of-memory issue in deep learning libraries. TensorFlow&rsquo;s documentation notes that if the model is created in a loop, it is suggested to use \textit{clear_session()} in the loop. Meanwhile, the GitHub repository &ldquo;Pytorch best practice&rdquo; recommends using \textit{.detach()} to detach the tensor whenever possible. We suggest developers check whether they use these APIs to free the memory whenever possible in their code.">
+<meta name=keywords content="generic,model training,memory issue">
+<meta name=description content="Description ML application training is memory-consuming, and thus, it is essential to free memory in time. Some APIs are provided to alleviate the run-out-of-memory issue in deep learning libraries. TensorFlow&rsquo;s documentation notes that if the model is created in a loop, it is suggested to use clear\_session() in the loop. Meanwhile, the GitHub repository &ldquo;Pytorch best practice&rdquo; recommends using .detach() to detach the tensor whenever possible. We suggest developers check whether they use these APIs to free the memory whenever possible in their code.">
 <meta name=author content>
 <link rel=canonical href=https://hynn01.github.io/dslinter/code-smells/memory-not-freed/>
 <meta name=google-site-verification content="XYZabc">
 <meta name=yandex-verification content="XYZabc">
 <meta name=msvalidate.01 content="XYZabc">
-<link crossorigin=anonymous href=/dslinter/assets/css/stylesheet.min.ccf63c2001f333f5fe878d473648051efe3aea1e5baceba8797e9f94daa448e6.css integrity="sha256-zPY8IAHzM/X+h41HNkgFHv466h5brOuoeX6flNqkSOY=" rel="preload stylesheet" as=style>
+<link crossorigin=anonymous href=/dslinter/assets/css/stylesheet.min.548091f41dc92b4a213f8dc4a49e22545a96b7d1b4ae4ad73c2ab3a70e4e8ea1.css integrity="sha256-VICR9B3JK0ohP43EpJ4iVFqWt9G0rkrXPCqzpw5OjqE=" rel="preload stylesheet" as=style>
 <script defer crossorigin=anonymous src=/dslinter/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5+kdJvBz5iKbt6B5PJI=" onload=hljs.initHighlightingOnLoad()></script>
 <link rel=icon href=https://hynn01.github.io/dslinter/%3Clink%20/%20abs%20url%3E>
 <link rel=icon type=image/png sizes=16x16 href=https://hynn01.github.io/dslinter/%3Clink%20/%20abs%20url%3E>
@@ -20,19 +20,19 @@
 <link rel=mask-icon href=https://hynn01.github.io/dslinter/%3Clink%20/%20abs%20url%3E>
 <meta name=theme-color content="#2e2e33">
 <meta name=msapplication-TileColor content="#2e2e33">
-<meta name=generator content="Hugo 0.91.1">
+<meta name=generator content="Hugo 0.91.2">
 <noscript>
 <style>#theme-toggle,.top-link{display:none}</style>
 </noscript><meta property="og:title" content="Memory Not Freed">
-<meta property="og:description" content="Description ML application training is memory-consuming, and thus, it is essential to free memory in time. Some APIs are provided to alleviate the run-out-of-memory issue in deep learning libraries. TensorFlow&rsquo;s documentation notes that if the model is created in a loop, it is suggested to use \textit{clear_session()} in the loop. Meanwhile, the GitHub repository &ldquo;Pytorch best practice&rdquo; recommends using \textit{.detach()} to detach the tensor whenever possible. We suggest developers check whether they use these APIs to free the memory whenever possible in their code.">
+<meta property="og:description" content="Description ML application training is memory-consuming, and thus, it is essential to free memory in time. Some APIs are provided to alleviate the run-out-of-memory issue in deep learning libraries. TensorFlow&rsquo;s documentation notes that if the model is created in a loop, it is suggested to use clear\_session() in the loop. Meanwhile, the GitHub repository &ldquo;Pytorch best practice&rdquo; recommends using .detach() to detach the tensor whenever possible. We suggest developers check whether they use these APIs to free the memory whenever possible in their code.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://hynn01.github.io/dslinter/code-smells/memory-not-freed/"><meta property="article:section" content="Code Smells">
 <meta property="og:site_name" content="DSLinter - Linter for Machine Learnig Application - Specific Code Smells">
 <meta name=twitter:card content="summary">
 <meta name=twitter:title content="Memory Not Freed">
-<meta name=twitter:description content="Description ML application training is memory-consuming, and thus, it is essential to free memory in time. Some APIs are provided to alleviate the run-out-of-memory issue in deep learning libraries. TensorFlow&rsquo;s documentation notes that if the model is created in a loop, it is suggested to use \textit{clear_session()} in the loop. Meanwhile, the GitHub repository &ldquo;Pytorch best practice&rdquo; recommends using \textit{.detach()} to detach the tensor whenever possible. We suggest developers check whether they use these APIs to free the memory whenever possible in their code.">
+<meta name=twitter:description content="Description ML application training is memory-consuming, and thus, it is essential to free memory in time. Some APIs are provided to alleviate the run-out-of-memory issue in deep learning libraries. TensorFlow&rsquo;s documentation notes that if the model is created in a loop, it is suggested to use clear\_session() in the loop. Meanwhile, the GitHub repository &ldquo;Pytorch best practice&rdquo; recommends using .detach() to detach the tensor whenever possible. We suggest developers check whether they use these APIs to free the memory whenever possible in their code.">
 <script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":2,"name":"Memory Not Freed","item":"https://hynn01.github.io/dslinter/code-smells/memory-not-freed/"}]}</script>
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Memory Not Freed","name":"Memory Not Freed","description":"Description ML application training is memory-consuming, and thus, it is essential to free memory in time. Some APIs are provided to alleviate the run-out-of-memory issue in deep learning libraries. TensorFlow\u0026rsquo;s documentation notes that if the model is created in a loop, it is suggested to use \\textit{clear_session()} in the loop. Meanwhile, the GitHub repository \u0026ldquo;Pytorch best practice\u0026rdquo; recommends using \\textit{.detach()} to detach the tensor whenever possible. We suggest developers check whether they use these APIs to free the memory whenever possible in their code.","keywords":["can be automated","generic","model training","memory issue"],"articleBody":"Description ML application training is memory-consuming, and thus, it is essential to free memory in time. Some APIs are provided to alleviate the run-out-of-memory issue in deep learning libraries. TensorFlow’s documentation notes that if the model is created in a loop, it is suggested to use \\textit{clear_session()} in the loop. Meanwhile, the GitHub repository “Pytorch best practice” recommends using \\textit{.detach()} to detach the tensor whenever possible. We suggest developers check whether they use these APIs to free the memory whenever possible in their code.\nType Generic\nExisting Stage Model Training\nEffect Memory Issue\nExample ### TensorFlow # Violated Code for _ in range(100): # Without `clear_session()`, each iteration of this loop will # slightly increase the size of the global state managed by Keras model = tf.keras.Sequential([tf.keras.layers.Dense(10) for _ in range(10)]) # Recommended Fix for _ in range(100): # With `clear_session()` called at the beginning, # Keras starts with a blank state at each iteration # and memory consumption is constant over time. tf.keras.backend.clear_session() model = tf.keras.Sequential([tf.keras.layers.Dense(10) for _ in range(10)]) ### PyTorch # Violated Code a # Recommended Fix a.detach() Source: Paper Grey Literature  https://github.com/IgorSusmelj/pytorch-styleguide  GitHub Commit Stack Overflow Documentation  https://www.tensorflow.org/api_docs/python/tf/keras/backend/clear_session https://stackoverflow.com/questions/42495930/tensorflow-oom-on-gpu  ","wordCount":"193","inLanguage":"en","datePublished":"0001-01-01T00:00:00Z","dateModified":"0001-01-01T00:00:00Z","mainEntityOfPage":{"@type":"WebPage","@id":"https://hynn01.github.io/dslinter/code-smells/memory-not-freed/"},"publisher":{"@type":"Organization","name":"DSLinter - Linter for Machine Learnig Application - Specific Code Smells","logo":{"@type":"ImageObject","url":"https://hynn01.github.io/dslinter/%3Clink%20/%20abs%20url%3E"}}}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Memory Not Freed","name":"Memory Not Freed","description":"Description ML application training is memory-consuming, and thus, it is essential to free memory in time. Some APIs are provided to alleviate the run-out-of-memory issue in deep learning libraries. TensorFlow\u0026rsquo;s documentation notes that if the model is created in a loop, it is suggested to use clear\\_session() in the loop. Meanwhile, the GitHub repository \u0026ldquo;Pytorch best practice\u0026rdquo; recommends using .detach() to detach the tensor whenever possible. We suggest developers check whether they use these APIs to free the memory whenever possible in their code.","keywords":["generic","model training","memory issue"],"articleBody":"Description ML application training is memory-consuming, and thus, it is essential to free memory in time. Some APIs are provided to alleviate the run-out-of-memory issue in deep learning libraries. TensorFlow’s documentation notes that if the model is created in a loop, it is suggested to use clear\\_session() in the loop. Meanwhile, the GitHub repository “Pytorch best practice” recommends using .detach() to detach the tensor whenever possible. We suggest developers check whether they use these APIs to free the memory whenever possible in their code.\nType Generic\nExisting Stage Model Training\nEffect Memory Issue\nExample ### TensorFlow import tensorflow as tf # Violated Code for _ in range(100): # Without `clear_session()`, each iteration of this loop will # slightly increase the size of the global state managed by Keras model = tf.keras.Sequential([tf.keras.layers.Dense(10) for _ in range(10)]) # Recommended Fix for _ in range(100): # With `clear_session()` called at the beginning, # Keras starts with a blank state at each iteration # and memory consumption is constant over time. tf.keras.backend.clear_session() model = tf.keras.Sequential([tf.keras.layers.Dense(10) for _ in range(10)]) ### PyTorch # Violated Code acc = accuracy(output, label) # Recommended Fix acc = accuracy(output, label) acc = float(acc.cpu().detach().numpy()) Source: Paper Grey Literature  https://github.com/IgorSusmelj/pytorch-styleguide  GitHub Commit Stack Overflow Documentation  https://www.tensorflow.org/api_docs/python/tf/keras/backend/clear_session https://stackoverflow.com/questions/42495930/tensorflow-oom-on-gpu  ","wordCount":"206","inLanguage":"en","datePublished":"0001-01-01T00:00:00Z","dateModified":"0001-01-01T00:00:00Z","mainEntityOfPage":{"@type":"WebPage","@id":"https://hynn01.github.io/dslinter/code-smells/memory-not-freed/"},"publisher":{"@type":"Organization","name":"DSLinter - Linter for Machine Learnig Application - Specific Code Smells","logo":{"@type":"ImageObject","url":"https://hynn01.github.io/dslinter/%3Clink%20/%20abs%20url%3E"}}}</script>
 </head>
 <body id=top>
 <script>localStorage.getItem("pref-theme")==="dark"&&document.body.classList.add('dark')</script>
@@ -75,7 +75,7 @@ Memory Not Freed
 </div>
 </header>
 <div class=post-content><h3 id=description>Description<a hidden class=anchor aria-hidden=true href=#description>#</a></h3>
-<p>ML application training is memory-consuming, and thus, it is essential to free memory in time. Some APIs are provided to alleviate the run-out-of-memory issue in deep learning libraries. TensorFlow&rsquo;s documentation notes that if the model is created in a loop, it is suggested to use \textit{clear_session()} in the loop. Meanwhile, the GitHub repository &ldquo;Pytorch best practice&rdquo; recommends using \textit{.detach()} to detach the tensor whenever possible. We suggest developers check whether they use these APIs to free the memory whenever possible in their code.</p>
+<p>ML application training is memory-consuming, and thus, it is essential to free memory in time. Some APIs are provided to alleviate the run-out-of-memory issue in deep learning libraries. TensorFlow&rsquo;s documentation notes that if the model is created in a loop, it is suggested to use <code>clear\_session()</code> in the loop. Meanwhile, the GitHub repository &ldquo;Pytorch best practice&rdquo; recommends using <code>.detach()</code> to detach the tensor whenever possible. We suggest developers check whether they use these APIs to free the memory whenever possible in their code.</p>
 <h3 id=type>Type<a hidden class=anchor aria-hidden=true href=#type>#</a></h3>
 <p>Generic</p>
 <h3 id=existing-stage>Existing Stage<a hidden class=anchor aria-hidden=true href=#existing-stage>#</a></h3>
@@ -85,6 +85,7 @@ Memory Not Freed
 <h3 id=example>Example<a hidden class=anchor aria-hidden=true href=#example>#</a></h3>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python>
 <span style=color:#75715e>### TensorFlow</span>
+<span style=color:#f92672>import</span> tensorflow <span style=color:#66d9ef>as</span> tf
 
 <span style=color:#75715e># Violated Code</span>
 <span style=color:#66d9ef>for</span> _ <span style=color:#f92672>in</span> range(<span style=color:#ae81ff>100</span>):
@@ -103,10 +104,11 @@ Memory Not Freed
 <span style=color:#75715e>### PyTorch</span>
 
 <span style=color:#75715e># Violated Code</span>
-a
+acc <span style=color:#f92672>=</span> accuracy(output, label)
 
 <span style=color:#75715e># Recommended Fix</span>
-a<span style=color:#f92672>.</span>detach() 
+acc <span style=color:#f92672>=</span> accuracy(output, label)
+acc <span style=color:#f92672>=</span> float(acc<span style=color:#f92672>.</span>cpu()<span style=color:#f92672>.</span>detach()<span style=color:#f92672>.</span>numpy())
 
 </code></pre></div><h3 id=source>Source:<a hidden class=anchor aria-hidden=true href=#source>#</a></h3>
 <h4 id=paper>Paper<a hidden class=anchor aria-hidden=true href=#paper>#</a></h4>
@@ -124,7 +126,6 @@ a<span style=color:#f92672>.</span>detach()
 </div>
 <footer class=post-footer>
 <ul class=post-tags>
-<li><a href=https://hynn01.github.io/dslinter/tags/can-be-automated/>can be automated</a></li>
 <li><a href=https://hynn01.github.io/dslinter/tags/generic/>generic</a></li>
 <li><a href=https://hynn01.github.io/dslinter/tags/model-training/>model training</a></li>
 <li><a href=https://hynn01.github.io/dslinter/tags/memory-issue/>memory issue</a></li>

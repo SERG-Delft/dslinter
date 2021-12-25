@@ -4,15 +4,15 @@
 <meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
 <meta name=robots content="index, follow">
 <title>Deterministic Algorithm Not Used | DSLinter - Linter for Machine Learnig Application - Specific Code Smells</title>
-<meta name=keywords content="can be automated,generic,model training,reproducibility">
-<meta name=description content="Description Some libraries provide APIs for developers to use the deterministic algorithm. Using deterministic algorithms is another effort that can be made to improve reproducibility. In PyTorch, it is suggested to set \textit{torch.use_deterministic_algorithms(True)} when debugging. However, the application will perform slower if this option is set, so it is suggested not to use it in the deploy stage. Developers should be aware of this setting during the development process.
+<meta name=keywords content="generic,model training,reproducibility">
+<meta name=description content="Description Some libraries provide APIs for developers to use the deterministic algorithm. Using deterministic algorithms is another effort that can be made to improve reproducibility. In PyTorch, it is suggested to set torch.use_deterministic_algorithms(True) when debugging. However, the application will perform slower if this option is set, so it is suggested not to use it in the deploy stage. Developers should be aware of this setting during the development process.
 Type Generic">
 <meta name=author content>
 <link rel=canonical href=https://hynn01.github.io/dslinter/code-smells/deterministic-algorithm-not-used/>
 <meta name=google-site-verification content="XYZabc">
 <meta name=yandex-verification content="XYZabc">
 <meta name=msvalidate.01 content="XYZabc">
-<link crossorigin=anonymous href=/dslinter/assets/css/stylesheet.min.ccf63c2001f333f5fe878d473648051efe3aea1e5baceba8797e9f94daa448e6.css integrity="sha256-zPY8IAHzM/X+h41HNkgFHv466h5brOuoeX6flNqkSOY=" rel="preload stylesheet" as=style>
+<link crossorigin=anonymous href=/dslinter/assets/css/stylesheet.min.548091f41dc92b4a213f8dc4a49e22545a96b7d1b4ae4ad73c2ab3a70e4e8ea1.css integrity="sha256-VICR9B3JK0ohP43EpJ4iVFqWt9G0rkrXPCqzpw5OjqE=" rel="preload stylesheet" as=style>
 <script defer crossorigin=anonymous src=/dslinter/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5+kdJvBz5iKbt6B5PJI=" onload=hljs.initHighlightingOnLoad()></script>
 <link rel=icon href=https://hynn01.github.io/dslinter/%3Clink%20/%20abs%20url%3E>
 <link rel=icon type=image/png sizes=16x16 href=https://hynn01.github.io/dslinter/%3Clink%20/%20abs%20url%3E>
@@ -21,21 +21,21 @@ Type Generic">
 <link rel=mask-icon href=https://hynn01.github.io/dslinter/%3Clink%20/%20abs%20url%3E>
 <meta name=theme-color content="#2e2e33">
 <meta name=msapplication-TileColor content="#2e2e33">
-<meta name=generator content="Hugo 0.91.1">
+<meta name=generator content="Hugo 0.91.2">
 <noscript>
 <style>#theme-toggle,.top-link{display:none}</style>
 </noscript><meta property="og:title" content="Deterministic Algorithm Not Used">
-<meta property="og:description" content="Description Some libraries provide APIs for developers to use the deterministic algorithm. Using deterministic algorithms is another effort that can be made to improve reproducibility. In PyTorch, it is suggested to set \textit{torch.use_deterministic_algorithms(True)} when debugging. However, the application will perform slower if this option is set, so it is suggested not to use it in the deploy stage. Developers should be aware of this setting during the development process.
+<meta property="og:description" content="Description Some libraries provide APIs for developers to use the deterministic algorithm. Using deterministic algorithms is another effort that can be made to improve reproducibility. In PyTorch, it is suggested to set torch.use_deterministic_algorithms(True) when debugging. However, the application will perform slower if this option is set, so it is suggested not to use it in the deploy stage. Developers should be aware of this setting during the development process.
 Type Generic">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://hynn01.github.io/dslinter/code-smells/deterministic-algorithm-not-used/"><meta property="article:section" content="Code Smells">
 <meta property="og:site_name" content="DSLinter - Linter for Machine Learnig Application - Specific Code Smells">
 <meta name=twitter:card content="summary">
 <meta name=twitter:title content="Deterministic Algorithm Not Used">
-<meta name=twitter:description content="Description Some libraries provide APIs for developers to use the deterministic algorithm. Using deterministic algorithms is another effort that can be made to improve reproducibility. In PyTorch, it is suggested to set \textit{torch.use_deterministic_algorithms(True)} when debugging. However, the application will perform slower if this option is set, so it is suggested not to use it in the deploy stage. Developers should be aware of this setting during the development process.
+<meta name=twitter:description content="Description Some libraries provide APIs for developers to use the deterministic algorithm. Using deterministic algorithms is another effort that can be made to improve reproducibility. In PyTorch, it is suggested to set torch.use_deterministic_algorithms(True) when debugging. However, the application will perform slower if this option is set, so it is suggested not to use it in the deploy stage. Developers should be aware of this setting during the development process.
 Type Generic">
 <script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":2,"name":"Deterministic Algorithm Not Used","item":"https://hynn01.github.io/dslinter/code-smells/deterministic-algorithm-not-used/"}]}</script>
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Deterministic Algorithm Not Used","name":"Deterministic Algorithm Not Used","description":"Description Some libraries provide APIs for developers to use the deterministic algorithm. Using deterministic algorithms is another effort that can be made to improve reproducibility. In PyTorch, it is suggested to set \\textit{torch.use_deterministic_algorithms(True)} when debugging. However, the application will perform slower if this option is set, so it is suggested not to use it in the deploy stage. Developers should be aware of this setting during the development process.\nType Generic","keywords":["can be automated","generic","model training","reproducibility"],"articleBody":"Description Some libraries provide APIs for developers to use the deterministic algorithm. Using deterministic algorithms is another effort that can be made to improve reproducibility. In PyTorch, it is suggested to set \\textit{torch.use_deterministic_algorithms(True)} when debugging. However, the application will perform slower if this option is set, so it is suggested not to use it in the deploy stage. Developers should be aware of this setting during the development process.\nType Generic\nExisting Stage Model Training\nEffect Reproducibility\nExample ### PyTorch import torch # Violated Code # torch.use_deterministic_algorithms(True) not used # Recommended Fix torch.use_deterministic_algorithms(True) Source: Paper Grey Literature GitHub Commit Stack Overflow Documentation  https://pytorch.org/docs/stable/notes/randomness.html  ","wordCount":"103","inLanguage":"en","datePublished":"0001-01-01T00:00:00Z","dateModified":"0001-01-01T00:00:00Z","mainEntityOfPage":{"@type":"WebPage","@id":"https://hynn01.github.io/dslinter/code-smells/deterministic-algorithm-not-used/"},"publisher":{"@type":"Organization","name":"DSLinter - Linter for Machine Learnig Application - Specific Code Smells","logo":{"@type":"ImageObject","url":"https://hynn01.github.io/dslinter/%3Clink%20/%20abs%20url%3E"}}}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Deterministic Algorithm Not Used","name":"Deterministic Algorithm Not Used","description":"Description Some libraries provide APIs for developers to use the deterministic algorithm. Using deterministic algorithms is another effort that can be made to improve reproducibility. In PyTorch, it is suggested to set torch.use_deterministic_algorithms(True) when debugging. However, the application will perform slower if this option is set, so it is suggested not to use it in the deploy stage. Developers should be aware of this setting during the development process.\nType Generic","keywords":["generic","model training","reproducibility"],"articleBody":"Description Some libraries provide APIs for developers to use the deterministic algorithm. Using deterministic algorithms is another effort that can be made to improve reproducibility. In PyTorch, it is suggested to set torch.use_deterministic_algorithms(True) when debugging. However, the application will perform slower if this option is set, so it is suggested not to use it in the deploy stage. Developers should be aware of this setting during the development process.\nType Generic\nExisting Stage Model Training\nEffect Reproducibility\nExample ### PyTorch import torch # Violated Code # torch.use_deterministic_algorithms(True) not used # Recommended Fix torch.use_deterministic_algorithms(True) Source: Paper Grey Literature GitHub Commit Stack Overflow Documentation  https://pytorch.org/docs/stable/notes/randomness.html  ","wordCount":"103","inLanguage":"en","datePublished":"0001-01-01T00:00:00Z","dateModified":"0001-01-01T00:00:00Z","mainEntityOfPage":{"@type":"WebPage","@id":"https://hynn01.github.io/dslinter/code-smells/deterministic-algorithm-not-used/"},"publisher":{"@type":"Organization","name":"DSLinter - Linter for Machine Learnig Application - Specific Code Smells","logo":{"@type":"ImageObject","url":"https://hynn01.github.io/dslinter/%3Clink%20/%20abs%20url%3E"}}}</script>
 </head>
 <body id=top>
 <script>localStorage.getItem("pref-theme")==="dark"&&document.body.classList.add('dark')</script>
@@ -78,7 +78,7 @@ Deterministic Algorithm Not Used
 </div>
 </header>
 <div class=post-content><h3 id=description>Description<a hidden class=anchor aria-hidden=true href=#description>#</a></h3>
-<p>Some libraries provide APIs for developers to use the deterministic algorithm. Using deterministic algorithms is another effort that can be made to improve reproducibility. In PyTorch, it is suggested to set \textit{torch.use_deterministic_algorithms(True)} when debugging. However, the application will perform slower if this option is set, so it is suggested not to use it in the deploy stage. Developers should be aware of this setting during the development process.</p>
+<p>Some libraries provide APIs for developers to use the deterministic algorithm. Using deterministic algorithms is another effort that can be made to improve reproducibility. In PyTorch, it is suggested to set <code>torch.use_deterministic_algorithms(True)</code> when debugging. However, the application will perform slower if this option is set, so it is suggested not to use it in the deploy stage. Developers should be aware of this setting during the development process.</p>
 <h3 id=type>Type<a hidden class=anchor aria-hidden=true href=#type>#</a></h3>
 <p>Generic</p>
 <h3 id=existing-stage>Existing Stage<a hidden class=anchor aria-hidden=true href=#existing-stage>#</a></h3>
@@ -108,7 +108,6 @@ torch<span style=color:#f92672>.</span>use_deterministic_algorithms(<span style=
 </div>
 <footer class=post-footer>
 <ul class=post-tags>
-<li><a href=https://hynn01.github.io/dslinter/tags/can-be-automated/>can be automated</a></li>
 <li><a href=https://hynn01.github.io/dslinter/tags/generic/>generic</a></li>
 <li><a href=https://hynn01.github.io/dslinter/tags/model-training/>model training</a></li>
 <li><a href=https://hynn01.github.io/dslinter/tags/reproducibility/>reproducibility</a></li>

@@ -7,12 +7,25 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language><atom:link href="https://hynn01.github.io/dslinter/tags/model-training/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>Excessive Hyperparameter</title>
+      <link>https://hynn01.github.io/dslinter/code-smells/excessive-hyperparameter/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://hynn01.github.io/dslinter/code-smells/excessive-hyperparameter/</guid>
+      <description>Description Excessive hyperparameter precision is a potential risk for overtuning. Overtuning occurs if an overly high precision hyperparameter value allows the model to perform particularly well while values in close range of it do not. Further, the choice of such a hyperparameter might be uninterpretable to users, which leads to an untrustworthy result.
+Type Generic
+Existing Stage Model Training
+Effect Error-prone
+Example ### Scikit-Learn from sklearn.naive_bayes import MultinomialN # Violated Code mnb = MultinomialNB(alpha = 0.</description>
+    </item>
+    
+    <item>
       <title>Counterintuitive Hyperparameter</title>
       <link>https://hynn01.github.io/dslinter/code-smells/counterintuitive-hyperparameter/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://hynn01.github.io/dslinter/code-smells/counterintuitive-hyperparameter/</guid>
-      <description>Description Counterintuitive hyperparameters will also cause bugs. There are four posts \ref{grey:so_counterintuitive1}\ref{grey:so_counterintuitive2}\ref{grey:so_counterintuitive3}\ref{grey:so_counterintuitive4} on StackOverflow discussing where the bug in the program is, and it turns out that a large learning rate causes bugs. This implies that the developer should check whether the hyperparameters stay in the normal range when developing ML applications.
+      <description>Description Counterintuitive hyperparameters will also cause bugs. There are four posts on StackOverflow discussing where the bug in the program is, and it turns out that a large learning rate causes bugs. This implies that the developer should check whether the hyperparameters stay in the normal range when developing ML applications.
 Type Generic
 Existing Stage Model Training
 Effect Error-prone
@@ -25,7 +38,7 @@ Example # TensorFlow import tensorflow as tf # Violated Code optimizer = tf.</de
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://hynn01.github.io/dslinter/code-smells/memory-not-freed/</guid>
-      <description>Description ML application training is memory-consuming, and thus, it is essential to free memory in time. Some APIs are provided to alleviate the run-out-of-memory issue in deep learning libraries. TensorFlow&amp;rsquo;s documentation notes that if the model is created in a loop, it is suggested to use \textit{clear_session()} in the loop. Meanwhile, the GitHub repository &amp;ldquo;Pytorch best practice&amp;rdquo; recommends using \textit{.detach()} to detach the tensor whenever possible. We suggest developers check whether they use these APIs to free the memory whenever possible in their code.</description>
+      <description>Description ML application training is memory-consuming, and thus, it is essential to free memory in time. Some APIs are provided to alleviate the run-out-of-memory issue in deep learning libraries. TensorFlow&amp;rsquo;s documentation notes that if the model is created in a loop, it is suggested to use clear\_session() in the loop. Meanwhile, the GitHub repository &amp;ldquo;Pytorch best practice&amp;rdquo; recommends using .detach() to detach the tensor whenever possible. We suggest developers check whether they use these APIs to free the memory whenever possible in their code.</description>
     </item>
     
     <item>
@@ -34,7 +47,7 @@ Example # TensorFlow import tensorflow as tf # Violated Code optimizer = tf.</de
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://hynn01.github.io/dslinter/code-smells/deterministic-algorithm-not-used/</guid>
-      <description>Description Some libraries provide APIs for developers to use the deterministic algorithm. Using deterministic algorithms is another effort that can be made to improve reproducibility. In PyTorch, it is suggested to set \textit{torch.use_deterministic_algorithms(True)} when debugging. However, the application will perform slower if this option is set, so it is suggested not to use it in the deploy stage. Developers should be aware of this setting during the development process.
+      <description>Description Some libraries provide APIs for developers to use the deterministic algorithm. Using deterministic algorithms is another effort that can be made to improve reproducibility. In PyTorch, it is suggested to set torch.use_deterministic_algorithms(True) when debugging. However, the application will perform slower if this option is set, so it is suggested not to use it in the deploy stage. Developers should be aware of this setting during the development process.
 Type Generic</description>
     </item>
     

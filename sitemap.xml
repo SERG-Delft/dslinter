@@ -48,6 +48,16 @@
   </url><url>
     <loc>https://hynn01.github.io/dslinter/code-smells/zero_grad-not-used-before-backward/</loc>
   </url><url>
+    <loc>https://hynn01.github.io/dslinter/code-smells/loss-api-misused/</loc>
+  </url><url>
+    <loc>https://hynn01.github.io/dslinter/code-smells/initialize-weight-to-zero/</loc>
+  </url><url>
+    <loc>https://hynn01.github.io/dslinter/code-smells/missing-regularization/</loc>
+  </url><url>
+    <loc>https://hynn01.github.io/dslinter/code-smells/threshold-dependent-validation/</loc>
+  </url><url>
+    <loc>https://hynn01.github.io/dslinter/tags/added/</loc>
+  </url><url>
     <loc>https://hynn01.github.io/dslinter/tags/can-be-automated/</loc>
   </url><url>
     <loc>https://hynn01.github.io/dslinter/code-smell/</loc>
@@ -62,9 +72,9 @@
   </url><url>
     <loc>https://hynn01.github.io/dslinter/tags/error-prone/</loc>
   </url><url>
-    <loc>https://hynn01.github.io/dslinter/tags/generic/</loc>
+    <loc>https://hynn01.github.io/dslinter/tags/general/</loc>
   </url><url>
-    <loc>https://hynn01.github.io/dslinter/code-smells/loss-api-misused/</loc>
+    <loc>https://hynn01.github.io/dslinter/tags/generic/</loc>
   </url><url>
     <loc>https://hynn01.github.io/dslinter/tags/memory-issue/</loc>
   </url><url>
