@@ -16,11 +16,38 @@
     </item>
     
     <item>
-      <title>can be automated</title>
-      <link>https://hynn01.github.io/dslinter/tags/can-be-automated/</link>
+      <title>api-specifc</title>
+      <link>https://hynn01.github.io/dslinter/tags/api-specifc/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://hynn01.github.io/dslinter/tags/can-be-automated/</guid>
+      <guid>https://hynn01.github.io/dslinter/tags/api-specifc/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>api-specific</title>
+      <link>https://hynn01.github.io/dslinter/tags/api-specific/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://hynn01.github.io/dslinter/tags/api-specific/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>consistency</title>
+      <link>https://hynn01.github.io/dslinter/tags/consistency/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://hynn01.github.io/dslinter/tags/consistency/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>data prepaation</title>
+      <link>https://hynn01.github.io/dslinter/tags/data-prepaation/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://hynn01.github.io/dslinter/tags/data-prepaation/</guid>
       <description></description>
     </item>
     
@@ -30,6 +57,15 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://hynn01.github.io/dslinter/tags/data-preparation/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>data segregation</title>
+      <link>https://hynn01.github.io/dslinter/tags/data-segregation/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://hynn01.github.io/dslinter/tags/data-segregation/</guid>
       <description></description>
     </item>
     
@@ -97,11 +133,29 @@
     </item>
     
     <item>
+      <title>readability</title>
+      <link>https://hynn01.github.io/dslinter/tags/readability/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://hynn01.github.io/dslinter/tags/readability/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>reproducibility</title>
       <link>https://hynn01.github.io/dslinter/tags/reproducibility/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://hynn01.github.io/dslinter/tags/reproducibility/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>robustness</title>
+      <link>https://hynn01.github.io/dslinter/tags/robustness/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://hynn01.github.io/dslinter/tags/robustness/</guid>
       <description></description>
     </item>
     

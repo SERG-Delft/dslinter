@@ -72,7 +72,7 @@
 </h2>
 </header>
 <section class=entry-content>
-<p>Description Several posts on Stack Overflow talk about the bugs that are not easy to discover caused by the log parameter approaching zero \ref{grey:so_log1}\ref{grey:so_log2}\ref{grey:so_log3}\ref{grey:so_log4}. In this kind of program, the log function variable turns to zero and raises an error during the training process. However, the error’s stack trace did not directly point to the line of code that the bug exist \cite{zhang2018empirical}. This kind of problem is not easy to debug and might take a long training time to find....</p>
+<p>Description Several posts on Stack Overflow talk about the bugs that are not easy to discover caused by the log parameter approaching zero. In this kind of program, the log function variable turns to zero and raises an error during the training process. However, the error’s stack trace did not directly point to the line of code that the bug exist. This kind of problem is not easy to debug and might take a long training time to find....</p>
 </section>
 <footer class=entry-footer></footer>
 <a class=entry-link aria-label="post link to Log Parameter Approaching Zero" href=https://hynn01.github.io/dslinter/code-smells/log-parameter-approaching-zero/></a>
@@ -83,7 +83,7 @@
 </h2>
 </header>
 <section class=entry-content>
-<p>Description While \textit{None} == \textit{None} evaluates to \textit{True}, \textit{numpy.nan} == \textit{numpy.nan} evaluates to \textit{False}. As Pandas treats \textit{None} like \textit{numpy.nan} for simplicity and performance reasons, a comparison of DataFrame elements with \textit{numpy.nan} always return \textit{False} \cite{haakman2020studying}. Therefore, developers need to be careful when using the \textit{NaN} comparision in Numpy and Pandas. Otherwise, it may lead to unintentional behavior in the code.
+<p>Description While None == None evaluates to True, numpy.nan == numpy.nan evaluates to False. As Pandas treats None like numpy.nan for simplicity and performance reasons, a comparison of DataFrame elements with numpy.nan always return False . Therefore, developers need to be careful when using the NaN comparision in Numpy and Pandas. Otherwise, it may lead to unintentional behavior in the code.
 Type API Specific
 Existing Stage Data Preparation
 Effect Error-prone...</p>
@@ -108,7 +108,7 @@ Effect Error-prone...</p>
 </h2>
 </header>
 <section class=entry-content>
-<p>Description When converting DataFrame to NumPy array, it is better to use \textit{df.to_numpy()} than \textit{df.values()}. As noted in \ref{grey:so_df_conversion}, \textit{df.values()} has inconsistency problem. With \textit{.values} it is unclear whether the returned value would be the actual array, some transformation of it, or one of the Pandas custom arrays. However, \textit{.values} is not deprecated yet. Although the library developers note it as a warning in the documentation, it does not log a warning or error when compiling if we use \textit{....</p>
+<p>Description When converting DataFrame to NumPy array, it is better to use df.to\_numpy() than df.values(). As noted in a post, df.values() has inconsistency problem. With .values it is unclear whether the returned value would be the actual array, some transformation of it, or one of the Pandas custom arrays. However, .values is not deprecated yet. Although the library developers note it as a warning in the documentation, it does not log a warning or error when compiling if we use ....</p>
 </section>
 <footer class=entry-footer></footer>
 <a class=entry-link aria-label="post link to Dataframe Coversion API Misused" href=https://hynn01.github.io/dslinter/code-smells/dataframe-coversion-api-misused/></a>
@@ -119,7 +119,7 @@ Effect Error-prone...</p>
 </h2>
 </header>
 <section class=entry-content>
-<p>Description \ref{grey:so_regx} provides a better coding solution for the regular expression, which might be able to apply to the Nature Language Processing (NLP) preprocessing process. NLP tasks are data-intensive and often take a long time to clean the data, so it would be good to save some time when preprocessing the data. The posts noted that \textit{regex.sub()} and \textit{str.translate()} work faster than \textit{str.replace()} in practice in Pandas library. The more efficient solution is worth considering....</p>
+<p>Description A post provides a better coding solution for the regular expression, which might be able to apply to the Nature Language Processing (NLP) preprocessing process. NLP tasks are data-intensive and often take a long time to clean the data, so it would be good to save some time when preprocessing the data. The post noted that regex.sub() and str.translate() work faster than str.replace() in practice in Pandas library. The more efficient solution is worth considering....</p>
 </section>
 <footer class=entry-footer></footer>
 <a class=entry-link aria-label="post link to Regular Expression Solution Not Optimal" href=https://hynn01.github.io/dslinter/code-smells/regular-expression-solution-not-optimal/></a>
@@ -130,7 +130,7 @@ Effect Error-prone...</p>
 </h2>
 </header>
 <section class=entry-content>
-<p>Description Several bugs can be caused by tensor unaligned. Usually, the unaligned tensor problems cannot be identified at the code level, but we can explicitly control one. It is recommended to explicitly set the shape of the input for \textit{tf.Variable()} to make the tensor aligned. In this way, we can alleviate the unaligned tensor problem.
+<p>Description Several bugs can be caused by tensor unaligned. Usually, the unaligned tensor problems cannot be identified at the code level, but we can explicitly control one. It is recommended to explicitly set the shape of the input for tf.Variable() to make the tensor aligned. In this way, we can alleviate the unaligned tensor problem.
 Type API Specific
 Existing Stage Data Preparation
 Effect Error-prone
@@ -149,7 +149,7 @@ Example ### TensorFlow import Tensorflow as tf # Violated Code normal_dist = tf.
 Type API Specific
 Existing Stage Data Preparation
 Effect Efficiency
-Example # Violated Code # Recommended Fix Source: Paper Grey Literature GitHub Commit Stack Overflow https://stackoverflow.com/questions/53779986/dynamically-evaluate-an-expression-from-a-formula-in-pandas/53779987#53779987 Documentation </p>
+Example ### Pandas import pandas as pd # Violated Code pd.eval('df.A.str.contains("ab")', engine='python') # Recommended Fix pd.eval('df.A.str.contains("ab")') Source: Paper Grey Literature GitHub Commit Stack Overflow https://stackoverflow....</p>
 </section>
 <footer class=entry-footer></footer>
 <a class=entry-link aria-label="post link to Backend Engine Mischoosed" href=https://hynn01.github.io/dslinter/code-smells/backend-engine-mischoosed/></a>
@@ -160,7 +160,7 @@ Example # Violated Code # Recommended Fix Source: Paper Grey Literature GitHub C
 </h2>
 </header>
 <section class=entry-content>
-<p>Description Some new developers are not aware of using the existing function and writing the function by themselves. However, it is recommended to use the APIs because the APIs provided by the library often consider more things. For instance, in \ref{grey:so_dataloader}, the developer does not use the DataLoader and feeds the data directly to the network. The answerer noted that using DataLoader has several benefits: 1) It allows the developers to sample the data randomly....</p>
+<p>Description Some new developers are not aware of using the existing function and writing the function by themselves. However, it is recommended to use the APIs because the APIs provided by the library often consider more things. For instance, in a post, the developer does not use the DataLoader and feeds the data directly to the network. The answerer noted that using DataLoader has several benefits: 1) It allows the developers to sample the data randomly....</p>
 </section>
 <footer class=entry-footer></footer>
 <a class=entry-link aria-label="post link to DataLoader Unused" href=https://hynn01.github.io/dslinter/code-smells/dataloader-unused/></a>
@@ -171,7 +171,7 @@ Example # Violated Code # Recommended Fix Source: Paper Grey Literature GitHub C
 </h2>
 </header>
 <section class=entry-content>
-<p>Description \textit{np.matmul()} in Numpy library is more readable than \textit{np.dot()} in the semantic way. While \textit{np.dot()} provides heterogeneous behaviors depending on the shape of the data, \textit{np.matmul()} behaves in a consistent way. When the multiply operation is performed on two-dimension matrixes, two APIs give a same result. However, \textit{np.matmul()} is preferred than \textit{np.dot()} for its clear semantic.
+<p>Description np.matmul() in Numpy library is more readable than np.dot() in the semantic way. Whilenp.dot() provides heterogeneous behaviors depending on the shape of the data, np.matmul() behaves in a consistent way. When the multiply operation is performed on two-dimension matrixes, two APIs give a same result. However, np.matmul() is preferred than np.dot() for its clear semantic.
 Type API Specific
 Existing Stage Model Training
 Effect Readability
@@ -186,11 +186,11 @@ Example ### NumPy import numpy as np a = [[1, 0], [0, 1]] b = [[4, 1], [2, 2]] #
 </h2>
 </header>
 <section class=entry-content>
-<p>Description The \textit{AdamOptimizer} class in the TensorFlow creates additional variables named “slots”. The variables must be initialized before training the model. Therefore, if the developer call \textit{initialize_all_variables()} before calling \textit{AdamOptimizer} and does not call the initializer afterward, the variables created by \textit{AdamOptimizer} will not be initialized and might cause an error.
+<p>Description The AdamOptimizer class in the TensorFlow creates additional variables named “slots”. The variables must be initialized before training the model. Therefore, if the developer call initialize_all_variables() before calling AdamOptimizer and does not call the initializer afterward, the variables created by AdamOptimizer will not be initialized and might cause an error.
 Type API Specific
 Existing Stage Model Training
 Effect Error-prone
-Example # Violated Code init = tf.global_variables_initializer() train_op = tf.train.AdamOptimizer(1e-4).minimize(cross_entropy) sess = tf....</p>
+Example ### TensorFlow import tensorflow as tf # Violated Code init = tf....</p>
 </section>
 <footer class=entry-footer></footer>
 <a class=entry-link aria-label="post link to Initialization Order Misused" href=https://hynn01.github.io/dslinter/code-smells/initialization-order-misused/></a>

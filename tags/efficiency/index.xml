@@ -24,5 +24,27 @@
       <description>Description Principle Component Analysis (PCA) is used for finding the components that maximize the data&amp;rsquo;s variation and reduce its dimensions, which is an essential data processing method. Scaling is pretty crucial to PCA because of the way the principal components are calculated. If one variable is on a larger scale than another, it will dominate the PCA procedure. Similarly, there are some other scaling-sensitive operations. Support Vector Machine (SVM), Stochastic Gradient Descent (SGD), Multi-layer Perceptron classifier, L1 and L2 regularization are all sensitive to feature scaling.</description>
     </item>
     
+    <item>
+      <title>Chain Indexing Misused</title>
+      <link>https://hynn01.github.io/dslinter/code-smells/chain-indexing-misused/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://hynn01.github.io/dslinter/code-smells/chain-indexing-misused/</guid>
+      <description>Description Chaining indexing in Pandas is considered a bad practice and should be avoided. Using chain indexing might cause performance issues as well as prone-to-bug code. For example, when using df[&amp;quot;one&amp;quot;][&amp;quot;two&amp;quot;], Pandas see this operation as two events: call df[&amp;quot;one&amp;quot;] first and call [&amp;quot;two&amp;quot;] based on the result the previous operation gets. On the contrary, df.loc[:,(&amp;quot;one&amp;quot;,&amp;quot;two&amp;quot;)] only perform a single call. In this way, the second method can be significantly faster than the first one.</description>
+    </item>
+    
+    <item>
+      <title>Backend Engine Mischoosed</title>
+      <link>https://hynn01.github.io/dslinter/code-smells/backend-engine-mischoosed/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://hynn01.github.io/dslinter/code-smells/backend-engine-mischoosed/</guid>
+      <description>Description When using pd.eval() in Pandas library, the numexpr is optimized for performance and python options offer no performance benefit over numexpr. Generally, it is not recommended to set the parameter to python. The developers should be careful when explicitly set this parameter.
+Type API Specific
+Existing Stage Data Preparation
+Effect Efficiency
+Example ### Pandas import pandas as pd # Violated Code pd.eval(&amp;#39;df.A.str.contains(&amp;#34;ab&amp;#34;)&amp;#39;, engine=&amp;#39;python&amp;#39;) # Recommended Fix pd.eval(&amp;#39;df.A.str.contains(&amp;#34;ab&amp;#34;)&amp;#39;) Source: Paper Grey Literature GitHub Commit Stack Overflow  https://stackoverflow.</description>
+    </item>
+    
   </channel>
 </rss>

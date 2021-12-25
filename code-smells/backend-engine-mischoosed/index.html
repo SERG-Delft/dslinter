@@ -4,12 +4,12 @@
 <meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
 <meta name=robots content="index, follow">
 <title>Backend Engine Mischoosed | DSLinter - Linter for Machine Learnig Application - Specific Code Smells</title>
-<meta name=keywords content="not sure">
+<meta name=keywords content="not sure,api-specific,data preparation,efficiency">
 <meta name=description content="Description When using pd.eval() in Pandas library, the numexpr is optimized for performance and python options offer no performance benefit over numexpr. Generally, it is not recommended to set the parameter to python. The developers should be careful when explicitly set this parameter.
 Type API Specific
 Existing Stage Data Preparation
 Effect Efficiency
-Example # Violated Code # Recommended Fix Source: Paper Grey Literature GitHub Commit Stack Overflow  https://stackoverflow.com/questions/53779986/dynamically-evaluate-an-expression-from-a-formula-in-pandas/53779987#53779987  Documentation ">
+Example ### Pandas import pandas as pd # Violated Code pd.eval('df.A.str.contains(&#34;ab&#34;)', engine='python') # Recommended Fix pd.eval('df.A.str.contains(&#34;ab&#34;)') Source: Paper Grey Literature GitHub Commit Stack Overflow  https://stackoverflow.">
 <meta name=author content>
 <link rel=canonical href=https://hynn01.github.io/dslinter/code-smells/backend-engine-mischoosed/>
 <meta name=google-site-verification content="XYZabc">
@@ -32,7 +32,7 @@ Example # Violated Code # Recommended Fix Source: Paper Grey Literature GitHub C
 Type API Specific
 Existing Stage Data Preparation
 Effect Efficiency
-Example # Violated Code # Recommended Fix Source: Paper Grey Literature GitHub Commit Stack Overflow  https://stackoverflow.com/questions/53779986/dynamically-evaluate-an-expression-from-a-formula-in-pandas/53779987#53779987  Documentation ">
+Example ### Pandas import pandas as pd # Violated Code pd.eval('df.A.str.contains(&#34;ab&#34;)', engine='python') # Recommended Fix pd.eval('df.A.str.contains(&#34;ab&#34;)') Source: Paper Grey Literature GitHub Commit Stack Overflow  https://stackoverflow.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://hynn01.github.io/dslinter/code-smells/backend-engine-mischoosed/"><meta property="article:section" content="Code Smells">
 <meta property="og:site_name" content="DSLinter - Linter for Machine Learnig Application - Specific Code Smells">
@@ -42,9 +42,9 @@ Example # Violated Code # Recommended Fix Source: Paper Grey Literature GitHub C
 Type API Specific
 Existing Stage Data Preparation
 Effect Efficiency
-Example # Violated Code # Recommended Fix Source: Paper Grey Literature GitHub Commit Stack Overflow  https://stackoverflow.com/questions/53779986/dynamically-evaluate-an-expression-from-a-formula-in-pandas/53779987#53779987  Documentation ">
+Example ### Pandas import pandas as pd # Violated Code pd.eval('df.A.str.contains(&#34;ab&#34;)', engine='python') # Recommended Fix pd.eval('df.A.str.contains(&#34;ab&#34;)') Source: Paper Grey Literature GitHub Commit Stack Overflow  https://stackoverflow.">
 <script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":2,"name":"Backend Engine Mischoosed","item":"https://hynn01.github.io/dslinter/code-smells/backend-engine-mischoosed/"}]}</script>
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Backend Engine Mischoosed","name":"Backend Engine Mischoosed","description":"Description When using pd.eval() in Pandas library, the numexpr is optimized for performance and python options offer no performance benefit over numexpr. Generally, it is not recommended to set the parameter to python. The developers should be careful when explicitly set this parameter.\nType API Specific\nExisting Stage Data Preparation\nEffect Efficiency\nExample # Violated Code # Recommended Fix Source: Paper Grey Literature GitHub Commit Stack Overflow  https://stackoverflow.com/questions/53779986/dynamically-evaluate-an-expression-from-a-formula-in-pandas/53779987#53779987  Documentation ","keywords":["not sure"],"articleBody":"Description When using pd.eval() in Pandas library, the numexpr is optimized for performance and python options offer no performance benefit over numexpr. Generally, it is not recommended to set the parameter to python. The developers should be careful when explicitly set this parameter.\nType API Specific\nExisting Stage Data Preparation\nEffect Efficiency\nExample # Violated Code # Recommended Fix Source: Paper Grey Literature GitHub Commit Stack Overflow  https://stackoverflow.com/questions/53779986/dynamically-evaluate-an-expression-from-a-formula-in-pandas/53779987#53779987  Documentation ","wordCount":"69","inLanguage":"en","datePublished":"0001-01-01T00:00:00Z","dateModified":"0001-01-01T00:00:00Z","mainEntityOfPage":{"@type":"WebPage","@id":"https://hynn01.github.io/dslinter/code-smells/backend-engine-mischoosed/"},"publisher":{"@type":"Organization","name":"DSLinter - Linter for Machine Learnig Application - Specific Code Smells","logo":{"@type":"ImageObject","url":"https://hynn01.github.io/dslinter/%3Clink%20/%20abs%20url%3E"}}}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Backend Engine Mischoosed","name":"Backend Engine Mischoosed","description":"Description When using pd.eval() in Pandas library, the numexpr is optimized for performance and python options offer no performance benefit over numexpr. Generally, it is not recommended to set the parameter to python. The developers should be careful when explicitly set this parameter.\nType API Specific\nExisting Stage Data Preparation\nEffect Efficiency\nExample ### Pandas import pandas as pd # Violated Code pd.eval(\u0026#39;df.A.str.contains(\u0026#34;ab\u0026#34;)\u0026#39;, engine=\u0026#39;python\u0026#39;) # Recommended Fix pd.eval(\u0026#39;df.A.str.contains(\u0026#34;ab\u0026#34;)\u0026#39;) Source: Paper Grey Literature GitHub Commit Stack Overflow  https://stackoverflow.","keywords":["not sure","api-specific","data preparation","efficiency"],"articleBody":"Description When using pd.eval() in Pandas library, the numexpr is optimized for performance and python options offer no performance benefit over numexpr. Generally, it is not recommended to set the parameter to python. The developers should be careful when explicitly set this parameter.\nType API Specific\nExisting Stage Data Preparation\nEffect Efficiency\nExample ### Pandas import pandas as pd # Violated Code pd.eval('df.A.str.contains(\"ab\")', engine='python') # Recommended Fix pd.eval('df.A.str.contains(\"ab\")') Source: Paper Grey Literature GitHub Commit Stack Overflow  https://stackoverflow.com/questions/53779986/dynamically-evaluate-an-expression-from-a-formula-in-pandas/53779987#53779987  Documentation ","wordCount":"78","inLanguage":"en","datePublished":"0001-01-01T00:00:00Z","dateModified":"0001-01-01T00:00:00Z","mainEntityOfPage":{"@type":"WebPage","@id":"https://hynn01.github.io/dslinter/code-smells/backend-engine-mischoosed/"},"publisher":{"@type":"Organization","name":"DSLinter - Linter for Machine Learnig Application - Specific Code Smells","logo":{"@type":"ImageObject","url":"https://hynn01.github.io/dslinter/%3Clink%20/%20abs%20url%3E"}}}</script>
 </head>
 <body id=top>
 <script>localStorage.getItem("pref-theme")==="dark"&&document.body.classList.add('dark')</script>
@@ -95,10 +95,14 @@ Backend Engine Mischoosed
 <h3 id=effect>Effect<a hidden class=anchor aria-hidden=true href=#effect>#</a></h3>
 <p>Efficiency</p>
 <h3 id=example>Example<a hidden class=anchor aria-hidden=true href=#example>#</a></h3>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#75715e># Violated Code</span>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#75715e>### Pandas</span>
+<span style=color:#f92672>import</span> pandas <span style=color:#66d9ef>as</span> pd
+
+<span style=color:#75715e># Violated Code</span>
+pd<span style=color:#f92672>.</span>eval(<span style=color:#e6db74>&#39;df.A.str.contains(&#34;ab&#34;)&#39;</span>, engine<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;python&#39;</span>)
 
 <span style=color:#75715e># Recommended Fix</span>
-
+pd<span style=color:#f92672>.</span>eval(<span style=color:#e6db74>&#39;df.A.str.contains(&#34;ab&#34;)&#39;</span>)
 </code></pre></div><h3 id=source>Source:<a hidden class=anchor aria-hidden=true href=#source>#</a></h3>
 <h4 id=paper>Paper<a hidden class=anchor aria-hidden=true href=#paper>#</a></h4>
 <h4 id=grey-literature>Grey Literature<a hidden class=anchor aria-hidden=true href=#grey-literature>#</a></h4>
@@ -112,6 +116,9 @@ Backend Engine Mischoosed
 <footer class=post-footer>
 <ul class=post-tags>
 <li><a href=https://hynn01.github.io/dslinter/tags/not-sure/>not sure</a></li>
+<li><a href=https://hynn01.github.io/dslinter/tags/api-specific/>api-specific</a></li>
+<li><a href=https://hynn01.github.io/dslinter/tags/data-preparation/>data preparation</a></li>
+<li><a href=https://hynn01.github.io/dslinter/tags/efficiency/>efficiency</a></li>
 </ul>
 </footer>
 </article>

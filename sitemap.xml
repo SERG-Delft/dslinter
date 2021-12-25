@@ -58,13 +58,21 @@
   </url><url>
     <loc>https://hynn01.github.io/dslinter/tags/added/</loc>
   </url><url>
-    <loc>https://hynn01.github.io/dslinter/tags/can-be-automated/</loc>
+    <loc>https://hynn01.github.io/dslinter/tags/api-specifc/</loc>
+  </url><url>
+    <loc>https://hynn01.github.io/dslinter/tags/api-specific/</loc>
   </url><url>
     <loc>https://hynn01.github.io/dslinter/code-smell/</loc>
   </url><url>
     <loc>https://hynn01.github.io/dslinter/code-smells/</loc>
   </url><url>
+    <loc>https://hynn01.github.io/dslinter/tags/consistency/</loc>
+  </url><url>
+    <loc>https://hynn01.github.io/dslinter/tags/data-prepaation/</loc>
+  </url><url>
     <loc>https://hynn01.github.io/dslinter/tags/data-preparation/</loc>
+  </url><url>
+    <loc>https://hynn01.github.io/dslinter/tags/data-segregation/</loc>
   </url><url>
     <loc>https://hynn01.github.io/dslinter/</loc>
   </url><url>
@@ -82,7 +90,11 @@
   </url><url>
     <loc>https://hynn01.github.io/dslinter/tags/not-sure/</loc>
   </url><url>
+    <loc>https://hynn01.github.io/dslinter/tags/readability/</loc>
+  </url><url>
     <loc>https://hynn01.github.io/dslinter/tags/reproducibility/</loc>
+  </url><url>
+    <loc>https://hynn01.github.io/dslinter/tags/robustness/</loc>
   </url><url>
     <loc>https://hynn01.github.io/dslinter/tags/</loc>
   </url>

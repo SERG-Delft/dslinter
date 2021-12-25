@@ -51,5 +51,40 @@ Example # TensorFlow import tensorflow as tf # Violated Code optimizer = tf.</de
 Type Generic</description>
     </item>
     
+    <item>
+      <title>Log Parameter Approaching Zero</title>
+      <link>https://hynn01.github.io/dslinter/code-smells/log-parameter-approaching-zero/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://hynn01.github.io/dslinter/code-smells/log-parameter-approaching-zero/</guid>
+      <description>Description Several posts on Stack Overflow talk about the bugs that are not easy to discover caused by the log parameter approaching zero. In this kind of program, the log function variable turns to zero and raises an error during the training process. However, the error&amp;rsquo;s stack trace did not directly point to the line of code that the bug exist. This kind of problem is not easy to debug and might take a long training time to find.</description>
+    </item>
+    
+    <item>
+      <title>Matrix Multiplication API Misused</title>
+      <link>https://hynn01.github.io/dslinter/code-smells/matrix-multiplication-api-misused/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://hynn01.github.io/dslinter/code-smells/matrix-multiplication-api-misused/</guid>
+      <description>Description np.matmul() in Numpy library is more readable than np.dot() in the semantic way. Whilenp.dot() provides heterogeneous behaviors depending on the shape of the data, np.matmul() behaves in a consistent way. When the multiply operation is performed on two-dimension matrixes, two APIs give a same result. However, np.matmul() is preferred than np.dot() for its clear semantic.
+Type API Specific
+Existing Stage Model Training
+Effect Readability
+Example ### NumPy import numpy as np a = [[1, 0], [0, 1]] b = [[4, 1], [2, 2]] # Violated Code np.</description>
+    </item>
+    
+    <item>
+      <title>Initialization Order Misused</title>
+      <link>https://hynn01.github.io/dslinter/code-smells/initialization-order-misused/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://hynn01.github.io/dslinter/code-smells/initialization-order-misused/</guid>
+      <description>Description The AdamOptimizer class in the TensorFlow creates additional variables named &amp;ldquo;slots&amp;rdquo;. The variables must be initialized before training the model. Therefore, if the developer call initialize_all_variables() before calling AdamOptimizer and does not call the initializer afterward, the variables created by AdamOptimizer will not be initialized and might cause an error.
+Type API Specific
+Existing Stage Model Training
+Effect Error-prone
+Example ### TensorFlow import tensorflow as tf # Violated Code init = tf.</description>
+    </item>
+    
   </channel>
 </rss>
