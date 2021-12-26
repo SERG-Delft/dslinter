@@ -2,13 +2,13 @@
 title: "Pytorch Call Method Misused"
 disableShare: true
 # ShowReadingTime: true
-tags: 
+tags: ["api-specific", "modeling training", "robustness"]
 weight: 21
 ---
 
 ### Description
 
-In PyTorch, \textit{self.nn()} is different than \textit{self.nn.forward()}. \textit{self.nn()} also deals with all the register hooks, which would not be considered when calling the plain \textit{forward} \ref{grey:pytorch_styleguide}. Thus, it is recommended to use \textit{self.nn()} than \textit{self.nn.forward()}. 
+In PyTorch, `self.nn()` is different than `self.nn.forward()`. `self.nn()` also deals with all the register hooks, which would not be considered when calling the plain `forward`. Thus, it is recommended to use `self.nn()` than `self.nn.forward()`. 
 
 ### Type
 

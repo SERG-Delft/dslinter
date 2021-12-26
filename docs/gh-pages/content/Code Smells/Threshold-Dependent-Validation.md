@@ -2,7 +2,7 @@
 title: "Threshold Dependent Validation"
 disableShare: true
 # ShowReadingTime: true
-tags: ["added"]
+tags: ["added", "generic", "model evaluation", "robustness"]
 weight: 25
 ---
 
@@ -17,7 +17,7 @@ Generic
 
 ### Existing Stage
 
-Canndidate Model Evaluation
+Model Evaluation
 
 ### Effect
 
@@ -36,11 +36,6 @@ sklearn.metrics.f1_score()
 # Recommended Fix
 sklearn.metrics.auc(fpr, tpr)
 
-
-### TensorFlow
-# Violated Code
-
-# Recommended Fix
 
 ```
 

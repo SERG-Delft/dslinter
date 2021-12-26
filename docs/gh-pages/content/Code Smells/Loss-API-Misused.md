@@ -2,13 +2,13 @@
 title: "Loss API Misused"
 disableShare: true
 # ShowReadingTime: true
-tags: 
+tags: ["api-specific", "model training", "error-prone"]
 weight: 24
 ---
 
 ### Description
 
-Different loss APIs take different input formats, but the difference is not clarified in some documentations, so it is easy to misuse. For example, in PyTorch, the \textit{NLLLoss} takes the output of \textit{LogSoftmax} as the input. If the input given to \textit{NLLLoss} has not been processed by \textit{LogSoftmax}, it might lead to a wrong result.
+Different loss APIs take different input formats, but the difference is not clarified in some documentations, so it is easy to misuse. For example, in PyTorch, the `NLLLoss` takes the output of `LogSoftmax` as the input. If the input given to `NLLLoss` has not been processed by `LogSoftmax`, it might lead to a wrong result.
 
 ### Type
 

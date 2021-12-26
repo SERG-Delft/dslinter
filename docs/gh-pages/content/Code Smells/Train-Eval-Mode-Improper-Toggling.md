@@ -2,13 +2,13 @@
 title: "Train Eval Mode Improper Toggling"
 disableShare: true
 # ShowReadingTime: true
-tags: 
+tags: ["api-specific", "model training", "error-prone"]
 weight: 22
 ---
 
 ### Description
 
-In PyTorch, calling \textit{.eval()} means we are going into the evaluation mode and the Dropout layer will be deactivated. If the training mode did not toggle back in time, the Dropout layer would not be used in some data training and thus affect the training result \ref{grey:nn_common_mistakes}. Therefore, we suggest to "have the training mode set as close as possible to the inference step to avoid forgetting to set it".
+In PyTorch, calling `.eval()` means we are going into the evaluation mode and the Dropout layer will be deactivated. If the training mode did not toggle back in time, the Dropout layer would not be used in some data training and thus affect the training result. Therefore, we suggest to "have the training mode set as close as possible to the inference step to avoid forgetting to set it".
 
 ### Type
 

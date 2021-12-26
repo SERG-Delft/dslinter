@@ -2,7 +2,7 @@
 title: "Missing Regularization"
 disableShare: true
 # ShowReadingTime: true
-tags: ["added"]
+tags: ["added","generic", "model training", "efficiency"]
 weight: 25
 ---
 
@@ -12,11 +12,21 @@ In deep learning, regularization can help control overfitting, speed up the trai
 
 ### Type
 
+Generic
+
+
 
 ### Existing Stage
 
+Model Training
+
+
 
 ### Effect
+
+Efficiency
+
+
 
 
 ### Example

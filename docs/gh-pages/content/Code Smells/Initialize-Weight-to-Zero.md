@@ -1,8 +1,8 @@
 ---
-title: "Initialize Weight to A Constant"
+title: "Initialize Weight to a Constant"
 disableShare: true
 # ShowReadingTime: true
-tags: ["added"]
+tags: ["added","generic","model training","error-prone"]
 weight: 25
 ---
 
@@ -12,11 +12,21 @@ In neural network, if all the weights are initialized to a constant, i.e., all t
 
 ### Type
 
+Generic
+
+
 
 ### Existing Stage
 
+Model Training
+
+
 
 ### Effect
+
+Error-prone
+
+
 
 
 ### Example
