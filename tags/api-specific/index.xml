@@ -37,6 +37,15 @@ Effect Error-prone</description>
     </item>
     
     <item>
+      <title>Regular Expression Solution Not Optimal</title>
+      <link>https://hynn01.github.io/dslinter/code-smells/regular-expression-solution-not-optimal/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://hynn01.github.io/dslinter/code-smells/regular-expression-solution-not-optimal/</guid>
+      <description>Description A post provides a better coding solution for the regular expression, which might be able to apply to the Nature Language Processing (NLP) preprocessing process. NLP tasks are data-intensive and often take a long time to clean the data, so it would be good to save some time when preprocessing the data. The post noted that regex.sub() and str.translate() work faster than str.replace() in practice in Pandas library. The more efficient solution is worth considering.</description>
+    </item>
+    
+    <item>
       <title>Tensor Shape Unset</title>
       <link>https://hynn01.github.io/dslinter/code-smells/tensor-shape-unset/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -86,6 +95,54 @@ Type API Specific
 Existing Stage Model Training
 Effect Error-prone
 Example ### TensorFlow import tensorflow as tf # Violated Code init = tf.</description>
+    </item>
+    
+    <item>
+      <title>Pytorch Call Method Misused</title>
+      <link>https://hynn01.github.io/dslinter/code-smells/pytorch-call-method-misused/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://hynn01.github.io/dslinter/code-smells/pytorch-call-method-misused/</guid>
+      <description>Description In PyTorch, self.nn() is different than self.nn.forward(). self.nn() also deals with all the register hooks, which would not be considered when calling the plain forward. Thus, it is recommended to use self.nn() than self.nn.forward().
+Type API Specific
+Existing Stage Model Training
+Effect Robustness
+Example ### PyTorch # Violated Code output = self.net.forward(input) # Recommended Fix output = self.net(input) Source: Paper Grey Literature  https://github.com/IgorSusmelj/pytorch-styleguide  GitHub Commit Stack Overflow Documentation </description>
+    </item>
+    
+    <item>
+      <title>Train Eval Mode Improper Toggling</title>
+      <link>https://hynn01.github.io/dslinter/code-smells/train-eval-mode-improper-toggling/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://hynn01.github.io/dslinter/code-smells/train-eval-mode-improper-toggling/</guid>
+      <description>Description In PyTorch, calling .eval() means we are going into the evaluation mode and the Dropout layer will be deactivated. If the training mode did not toggle back in time, the Dropout layer would not be used in some data training and thus affect the training result. Therefore, we suggest to &amp;ldquo;have the training mode set as close as possible to the inference step to avoid forgetting to set it&amp;rdquo;.</description>
+    </item>
+    
+    <item>
+      <title>Zero_grad Not Used Before Backward</title>
+      <link>https://hynn01.github.io/dslinter/code-smells/zero_grad-not-used-before-backward/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://hynn01.github.io/dslinter/code-smells/zero_grad-not-used-before-backward/</guid>
+      <description>Description Developers should use optimizer.zero_grad(), loss_fn.backward(), optimizer.step() together and should be forget to use optimizer.zero_grad() before loss_fn.backward(). optimizer.zero_grad() clears the old gradients from last step. If this API is not used, the gradients will be accumulated from all loss.backward() calls and it will lead to the gradient explosion, which fails the training.
+Type API Specific
+Existing Stage Model Training
+Effect Error-prone
+Example ### PyTorch # Violated Code output = model(input) # forward-pass loss_fn.</description>
+    </item>
+    
+    <item>
+      <title>Loss API Misused</title>
+      <link>https://hynn01.github.io/dslinter/code-smells/loss-api-misused/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://hynn01.github.io/dslinter/code-smells/loss-api-misused/</guid>
+      <description>Description Different loss APIs take different input formats, but the difference is not clarified in some documentations, so it is easy to misuse. For example, in PyTorch, the NLLLoss takes the output of LogSoftmax as the input. If the input given to NLLLoss has not been processed by LogSoftmax, it might lead to a wrong result.
+Type API Specific
+Existing Stage Model Training
+Effect Error-prone
+Example ### PyTorch # Violated Code loss = nn.</description>
     </item>
     
   </channel>

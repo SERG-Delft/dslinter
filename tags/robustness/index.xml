@@ -15,5 +15,31 @@
       <description>Description Some new developers are not aware of using the existing function and writing the function by themselves. However, it is recommended to use the APIs because the APIs provided by the library often consider more things. For instance, in a post, the developer does not use the DataLoader and feeds the data directly to the network. The answerer noted that using DataLoader has several benefits: 1) It allows the developers to sample the data randomly.</description>
     </item>
     
+    <item>
+      <title>Pytorch Call Method Misused</title>
+      <link>https://hynn01.github.io/dslinter/code-smells/pytorch-call-method-misused/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://hynn01.github.io/dslinter/code-smells/pytorch-call-method-misused/</guid>
+      <description>Description In PyTorch, self.nn() is different than self.nn.forward(). self.nn() also deals with all the register hooks, which would not be considered when calling the plain forward. Thus, it is recommended to use self.nn() than self.nn.forward().
+Type API Specific
+Existing Stage Model Training
+Effect Robustness
+Example ### PyTorch # Violated Code output = self.net.forward(input) # Recommended Fix output = self.net(input) Source: Paper Grey Literature  https://github.com/IgorSusmelj/pytorch-styleguide  GitHub Commit Stack Overflow Documentation </description>
+    </item>
+    
+    <item>
+      <title>Threshold Dependent Validation</title>
+      <link>https://hynn01.github.io/dslinter/code-smells/threshold-dependent-validation/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://hynn01.github.io/dslinter/code-smells/threshold-dependent-validation/</guid>
+      <description>Description The performance of the machine learning model can be measured by different metrics, including threshold-dependent metrics(e.g., F-measure) or threshold-independent metrics(e.g., Area Under the receiver operating characteristic curve (AUC)). Choosing a specific threshold is tricky and can lead to a less-interpretable result. Therefore, threshold-independent is more robust and should be preferred over threshold-independent metrics.
+Type Generic
+Existing Stage Model Evaluation
+Effect Robustness
+Example ### Scikit-Learn import sklearn # Violated Code sklearn.</description>
+    </item>
+    
   </channel>
 </rss>

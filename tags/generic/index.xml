@@ -114,5 +114,44 @@ Type Generic</description>
       <description>Description Several posts on Stack Overflow talk about the bugs that are not easy to discover caused by the log parameter approaching zero. In this kind of program, the log function variable turns to zero and raises an error during the training process. However, the error&amp;rsquo;s stack trace did not directly point to the line of code that the bug exist. This kind of problem is not easy to debug and might take a long training time to find.</description>
     </item>
     
+    <item>
+      <title>Initialize Weight to a Constant</title>
+      <link>https://hynn01.github.io/dslinter/code-smells/initialize-weight-to-zero/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://hynn01.github.io/dslinter/code-smells/initialize-weight-to-zero/</guid>
+      <description>Description In neural network, if all the weights are initialized to a constant, i.e., all the neurons starts with the same weight, all the neurons will follow the same gradient during the backward propagation update. As a result, neurons will learn same features in each iterations. In this way, the nueral netwok will provide a poor result.
+Type Generic
+Existing Stage Model Training
+Effect Error-prone
+Example # Violated Code # Use PyTorch&amp;#39;s defaault init or initialize to 0 def conv(ni, nf, ks=3, stride=1, padding=1, **kwargs): _conv = nn.</description>
+    </item>
+    
+    <item>
+      <title>Missing Regularization</title>
+      <link>https://hynn01.github.io/dslinter/code-smells/missing-regularization/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://hynn01.github.io/dslinter/code-smells/missing-regularization/</guid>
+      <description>Description In deep learning, regularization can help control overfitting, speed up the training process by dealing with noise and outliers. Developers should check whether they are able to make use of regularization to improve performance.
+Type Generic
+Existing Stage Model Training
+Effect Efficiency
+Example ### TensorFlow # Violated Code layer = tf.keras.layers.Dense( 5, input_dim=5, kernel_initializer=&amp;#39;ones&amp;#39;, kernel_regularizer=tf.keras.regularizers.L1(0.01), activity_regularizer=tf.keras.regularizers.L2(0.01)) # Recommended Fix layer = tf.keras.layers.Dense( 5, input_dim=5, kernel_initializer=&amp;#39;ones&amp;#39;) ### PyTorch # Violated Code optimizer = torch.</description>
+    </item>
+    
+    <item>
+      <title>Threshold Dependent Validation</title>
+      <link>https://hynn01.github.io/dslinter/code-smells/threshold-dependent-validation/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://hynn01.github.io/dslinter/code-smells/threshold-dependent-validation/</guid>
+      <description>Description The performance of the machine learning model can be measured by different metrics, including threshold-dependent metrics(e.g., F-measure) or threshold-independent metrics(e.g., Area Under the receiver operating characteristic curve (AUC)). Choosing a specific threshold is tricky and can lead to a less-interpretable result. Therefore, threshold-independent is more robust and should be preferred over threshold-independent metrics.
+Type Generic
+Existing Stage Model Evaluation
+Effect Robustness
+Example ### Scikit-Learn import sklearn # Violated Code sklearn.</description>
+    </item>
+    
   </channel>
 </rss>

@@ -4,9 +4,12 @@
 <meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
 <meta name=robots content="index, follow">
 <title>Missing Regularization | DSLinter - Linter for Machine Learnig Application - Specific Code Smells</title>
-<meta name=keywords content="added">
+<meta name=keywords content="added,generic,model training,efficiency">
 <meta name=description content="Description In deep learning, regularization can help control overfitting, speed up the training process by dealing with noise and outliers. Developers should check whether they are able to make use of regularization to improve performance.
-Type Existing Stage Effect Example ### TensorFlow # Violated Code layer = tf.keras.layers.Dense( 5, input_dim=5, kernel_initializer='ones', kernel_regularizer=tf.keras.regularizers.L1(0.01), activity_regularizer=tf.keras.regularizers.L2(0.01)) # Recommended Fix layer = tf.keras.layers.Dense( 5, input_dim=5, kernel_initializer='ones') ### PyTorch # Violated Code optimizer = torch.optim.Adam(model.parameters(), lr=1e-4) # Recommended Fix optimizer = torch.">
+Type Generic
+Existing Stage Model Training
+Effect Efficiency
+Example ### TensorFlow # Violated Code layer = tf.keras.layers.Dense( 5, input_dim=5, kernel_initializer='ones', kernel_regularizer=tf.keras.regularizers.L1(0.01), activity_regularizer=tf.keras.regularizers.L2(0.01)) # Recommended Fix layer = tf.keras.layers.Dense( 5, input_dim=5, kernel_initializer='ones') ### PyTorch # Violated Code optimizer = torch.">
 <meta name=author content>
 <link rel=canonical href=https://hynn01.github.io/dslinter/code-smells/missing-regularization/>
 <meta name=google-site-verification content="XYZabc">
@@ -26,16 +29,22 @@ Type Existing Stage Effect Example ### TensorFlow # Violated Code layer = tf.ker
 <style>#theme-toggle,.top-link{display:none}</style>
 </noscript><meta property="og:title" content="Missing Regularization">
 <meta property="og:description" content="Description In deep learning, regularization can help control overfitting, speed up the training process by dealing with noise and outliers. Developers should check whether they are able to make use of regularization to improve performance.
-Type Existing Stage Effect Example ### TensorFlow # Violated Code layer = tf.keras.layers.Dense( 5, input_dim=5, kernel_initializer='ones', kernel_regularizer=tf.keras.regularizers.L1(0.01), activity_regularizer=tf.keras.regularizers.L2(0.01)) # Recommended Fix layer = tf.keras.layers.Dense( 5, input_dim=5, kernel_initializer='ones') ### PyTorch # Violated Code optimizer = torch.optim.Adam(model.parameters(), lr=1e-4) # Recommended Fix optimizer = torch.">
+Type Generic
+Existing Stage Model Training
+Effect Efficiency
+Example ### TensorFlow # Violated Code layer = tf.keras.layers.Dense( 5, input_dim=5, kernel_initializer='ones', kernel_regularizer=tf.keras.regularizers.L1(0.01), activity_regularizer=tf.keras.regularizers.L2(0.01)) # Recommended Fix layer = tf.keras.layers.Dense( 5, input_dim=5, kernel_initializer='ones') ### PyTorch # Violated Code optimizer = torch.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://hynn01.github.io/dslinter/code-smells/missing-regularization/"><meta property="article:section" content="Code Smells">
 <meta property="og:site_name" content="DSLinter - Linter for Machine Learnig Application - Specific Code Smells">
 <meta name=twitter:card content="summary">
 <meta name=twitter:title content="Missing Regularization">
 <meta name=twitter:description content="Description In deep learning, regularization can help control overfitting, speed up the training process by dealing with noise and outliers. Developers should check whether they are able to make use of regularization to improve performance.
-Type Existing Stage Effect Example ### TensorFlow # Violated Code layer = tf.keras.layers.Dense( 5, input_dim=5, kernel_initializer='ones', kernel_regularizer=tf.keras.regularizers.L1(0.01), activity_regularizer=tf.keras.regularizers.L2(0.01)) # Recommended Fix layer = tf.keras.layers.Dense( 5, input_dim=5, kernel_initializer='ones') ### PyTorch # Violated Code optimizer = torch.optim.Adam(model.parameters(), lr=1e-4) # Recommended Fix optimizer = torch.">
+Type Generic
+Existing Stage Model Training
+Effect Efficiency
+Example ### TensorFlow # Violated Code layer = tf.keras.layers.Dense( 5, input_dim=5, kernel_initializer='ones', kernel_regularizer=tf.keras.regularizers.L1(0.01), activity_regularizer=tf.keras.regularizers.L2(0.01)) # Recommended Fix layer = tf.keras.layers.Dense( 5, input_dim=5, kernel_initializer='ones') ### PyTorch # Violated Code optimizer = torch.">
 <script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":2,"name":"Missing Regularization","item":"https://hynn01.github.io/dslinter/code-smells/missing-regularization/"}]}</script>
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Missing Regularization","name":"Missing Regularization","description":"Description In deep learning, regularization can help control overfitting, speed up the training process by dealing with noise and outliers. Developers should check whether they are able to make use of regularization to improve performance.\nType Existing Stage Effect Example ### TensorFlow # Violated Code layer = tf.keras.layers.Dense( 5, input_dim=5, kernel_initializer=\u0026#39;ones\u0026#39;, kernel_regularizer=tf.keras.regularizers.L1(0.01), activity_regularizer=tf.keras.regularizers.L2(0.01)) # Recommended Fix layer = tf.keras.layers.Dense( 5, input_dim=5, kernel_initializer=\u0026#39;ones\u0026#39;) ### PyTorch # Violated Code optimizer = torch.optim.Adam(model.parameters(), lr=1e-4) # Recommended Fix optimizer = torch.","keywords":["added"],"articleBody":"Description In deep learning, regularization can help control overfitting, speed up the training process by dealing with noise and outliers. Developers should check whether they are able to make use of regularization to improve performance.\nType Existing Stage Effect Example ### TensorFlow # Violated Code layer = tf.keras.layers.Dense( 5, input_dim=5, kernel_initializer='ones', kernel_regularizer=tf.keras.regularizers.L1(0.01), activity_regularizer=tf.keras.regularizers.L2(0.01)) # Recommended Fix layer = tf.keras.layers.Dense( 5, input_dim=5, kernel_initializer='ones') ### PyTorch # Violated Code optimizer = torch.optim.Adam(model.parameters(), lr=1e-4) # Recommended Fix optimizer = torch.optim.Adam(model.parameters(), lr=1e-4, weight_decay=1e-5) Source: Paper Grey Literature GitHub Commit Stack Overflow Documentation ","wordCount":"88","inLanguage":"en","datePublished":"0001-01-01T00:00:00Z","dateModified":"0001-01-01T00:00:00Z","mainEntityOfPage":{"@type":"WebPage","@id":"https://hynn01.github.io/dslinter/code-smells/missing-regularization/"},"publisher":{"@type":"Organization","name":"DSLinter - Linter for Machine Learnig Application - Specific Code Smells","logo":{"@type":"ImageObject","url":"https://hynn01.github.io/dslinter/%3Clink%20/%20abs%20url%3E"}}}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Missing Regularization","name":"Missing Regularization","description":"Description In deep learning, regularization can help control overfitting, speed up the training process by dealing with noise and outliers. Developers should check whether they are able to make use of regularization to improve performance.\nType Generic\nExisting Stage Model Training\nEffect Efficiency\nExample ### TensorFlow # Violated Code layer = tf.keras.layers.Dense( 5, input_dim=5, kernel_initializer=\u0026#39;ones\u0026#39;, kernel_regularizer=tf.keras.regularizers.L1(0.01), activity_regularizer=tf.keras.regularizers.L2(0.01)) # Recommended Fix layer = tf.keras.layers.Dense( 5, input_dim=5, kernel_initializer=\u0026#39;ones\u0026#39;) ### PyTorch # Violated Code optimizer = torch.","keywords":["added","generic","model training","efficiency"],"articleBody":"Description In deep learning, regularization can help control overfitting, speed up the training process by dealing with noise and outliers. Developers should check whether they are able to make use of regularization to improve performance.\nType Generic\nExisting Stage Model Training\nEffect Efficiency\nExample ### TensorFlow # Violated Code layer = tf.keras.layers.Dense( 5, input_dim=5, kernel_initializer='ones', kernel_regularizer=tf.keras.regularizers.L1(0.01), activity_regularizer=tf.keras.regularizers.L2(0.01)) # Recommended Fix layer = tf.keras.layers.Dense( 5, input_dim=5, kernel_initializer='ones') ### PyTorch # Violated Code optimizer = torch.optim.Adam(model.parameters(), lr=1e-4) # Recommended Fix optimizer = torch.optim.Adam(model.parameters(), lr=1e-4, weight_decay=1e-5) Source: Paper Grey Literature GitHub Commit Stack Overflow Documentation ","wordCount":"92","inLanguage":"en","datePublished":"0001-01-01T00:00:00Z","dateModified":"0001-01-01T00:00:00Z","mainEntityOfPage":{"@type":"WebPage","@id":"https://hynn01.github.io/dslinter/code-smells/missing-regularization/"},"publisher":{"@type":"Organization","name":"DSLinter - Linter for Machine Learnig Application - Specific Code Smells","logo":{"@type":"ImageObject","url":"https://hynn01.github.io/dslinter/%3Clink%20/%20abs%20url%3E"}}}</script>
 </head>
 <body id=top>
 <script>localStorage.getItem("pref-theme")==="dark"&&document.body.classList.add('dark')</script>
@@ -80,8 +89,11 @@ Missing Regularization
 <div class=post-content><h3 id=description>Description<a hidden class=anchor aria-hidden=true href=#description>#</a></h3>
 <p>In deep learning, regularization can help control overfitting, speed up the training process by dealing with noise and outliers. Developers should check whether they are able to make use of regularization to improve performance.</p>
 <h3 id=type>Type<a hidden class=anchor aria-hidden=true href=#type>#</a></h3>
+<p>Generic</p>
 <h3 id=existing-stage>Existing Stage<a hidden class=anchor aria-hidden=true href=#existing-stage>#</a></h3>
+<p>Model Training</p>
 <h3 id=effect>Effect<a hidden class=anchor aria-hidden=true href=#effect>#</a></h3>
+<p>Efficiency</p>
 <h3 id=example>Example<a hidden class=anchor aria-hidden=true href=#example>#</a></h3>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#75715e>### TensorFlow</span>
 <span style=color:#75715e># Violated Code</span>
@@ -112,6 +124,9 @@ optimizer <span style=color:#f92672>=</span> torch<span style=color:#f92672>.</s
 <footer class=post-footer>
 <ul class=post-tags>
 <li><a href=https://hynn01.github.io/dslinter/tags/added/>added</a></li>
+<li><a href=https://hynn01.github.io/dslinter/tags/generic/>generic</a></li>
+<li><a href=https://hynn01.github.io/dslinter/tags/model-training/>model training</a></li>
+<li><a href=https://hynn01.github.io/dslinter/tags/efficiency/>efficiency</a></li>
 </ul>
 </footer>
 </article>

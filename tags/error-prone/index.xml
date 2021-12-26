@@ -115,5 +115,53 @@ Effect Error-prone
 Example ### TensorFlow import tensorflow as tf # Violated Code init = tf.</description>
     </item>
     
+    <item>
+      <title>Train Eval Mode Improper Toggling</title>
+      <link>https://hynn01.github.io/dslinter/code-smells/train-eval-mode-improper-toggling/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://hynn01.github.io/dslinter/code-smells/train-eval-mode-improper-toggling/</guid>
+      <description>Description In PyTorch, calling .eval() means we are going into the evaluation mode and the Dropout layer will be deactivated. If the training mode did not toggle back in time, the Dropout layer would not be used in some data training and thus affect the training result. Therefore, we suggest to &amp;ldquo;have the training mode set as close as possible to the inference step to avoid forgetting to set it&amp;rdquo;.</description>
+    </item>
+    
+    <item>
+      <title>Zero_grad Not Used Before Backward</title>
+      <link>https://hynn01.github.io/dslinter/code-smells/zero_grad-not-used-before-backward/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://hynn01.github.io/dslinter/code-smells/zero_grad-not-used-before-backward/</guid>
+      <description>Description Developers should use optimizer.zero_grad(), loss_fn.backward(), optimizer.step() together and should be forget to use optimizer.zero_grad() before loss_fn.backward(). optimizer.zero_grad() clears the old gradients from last step. If this API is not used, the gradients will be accumulated from all loss.backward() calls and it will lead to the gradient explosion, which fails the training.
+Type API Specific
+Existing Stage Model Training
+Effect Error-prone
+Example ### PyTorch # Violated Code output = model(input) # forward-pass loss_fn.</description>
+    </item>
+    
+    <item>
+      <title>Loss API Misused</title>
+      <link>https://hynn01.github.io/dslinter/code-smells/loss-api-misused/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://hynn01.github.io/dslinter/code-smells/loss-api-misused/</guid>
+      <description>Description Different loss APIs take different input formats, but the difference is not clarified in some documentations, so it is easy to misuse. For example, in PyTorch, the NLLLoss takes the output of LogSoftmax as the input. If the input given to NLLLoss has not been processed by LogSoftmax, it might lead to a wrong result.
+Type API Specific
+Existing Stage Model Training
+Effect Error-prone
+Example ### PyTorch # Violated Code loss = nn.</description>
+    </item>
+    
+    <item>
+      <title>Initialize Weight to a Constant</title>
+      <link>https://hynn01.github.io/dslinter/code-smells/initialize-weight-to-zero/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://hynn01.github.io/dslinter/code-smells/initialize-weight-to-zero/</guid>
+      <description>Description In neural network, if all the weights are initialized to a constant, i.e., all the neurons starts with the same weight, all the neurons will follow the same gradient during the backward propagation update. As a result, neurons will learn same features in each iterations. In this way, the nueral netwok will provide a poor result.
+Type Generic
+Existing Stage Model Training
+Effect Error-prone
+Example # Violated Code # Use PyTorch&amp;#39;s defaault init or initialize to 0 def conv(ni, nf, ks=3, stride=1, padding=1, **kwargs): _conv = nn.</description>
+    </item>
+    
   </channel>
 </rss>

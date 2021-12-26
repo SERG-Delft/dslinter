@@ -3,11 +3,11 @@
 <meta http-equiv=x-ua-compatible content="IE=edge">
 <meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
 <meta name=robots content="index, follow">
-<title>robustness | DSLinter - Linter for Machine Learnig Application - Specific Code Smells</title>
+<title>api-specific | DSLinter - Linter for Machine Learnig Application - Specific Code Smells</title>
 <meta name=keywords content>
 <meta name=description content>
 <meta name=author content>
-<link rel=canonical href=https://hynn01.github.io/dslinter/tags/robustness/>
+<link rel=canonical href=https://hynn01.github.io/dslinter/tags/api-specific/>
 <meta name=google-site-verification content="XYZabc">
 <meta name=yandex-verification content="XYZabc">
 <meta name=msvalidate.01 content="XYZabc">
@@ -20,15 +20,15 @@
 <meta name=theme-color content="#2e2e33">
 <meta name=msapplication-TileColor content="#2e2e33">
 <meta name=generator content="Hugo 0.91.2">
-<link rel=alternate type=application/rss+xml href=https://hynn01.github.io/dslinter/tags/robustness/index.xml>
+<link rel=alternate type=application/rss+xml href=https://hynn01.github.io/dslinter/tags/api-specific/index.xml>
 <noscript>
 <style>#theme-toggle,.top-link{display:none}</style>
-</noscript><meta property="og:title" content="robustness">
+</noscript><meta property="og:title" content="api-specific">
 <meta property="og:description" content>
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://hynn01.github.io/dslinter/tags/robustness/"><meta property="og:site_name" content="DSLinter - Linter for Machine Learnig Application - Specific Code Smells">
+<meta property="og:url" content="https://hynn01.github.io/dslinter/tags/api-specific/"><meta property="og:site_name" content="DSLinter - Linter for Machine Learnig Application - Specific Code Smells">
 <meta name=twitter:card content="summary">
-<meta name=twitter:title content="robustness">
+<meta name=twitter:title content="api-specific">
 <meta name=twitter:description content>
 </head>
 <body class=list id=top>
@@ -63,49 +63,43 @@
 </header>
 <main class=main>
 <header class=page-header><div class=breadcrumbs><a href=https://hynn01.github.io/dslinter/>Home</a>&nbsp;»&nbsp;<a href=https://hynn01.github.io/dslinter/tags/>Tags</a></div>
-<h1>robustness</h1>
+<h1>api-specific</h1>
 </header>
 <article class="post-entry tag-entry">
 <header class=entry-header>
-<h2>DataLoader Unused
+<h2>Zero_grad Not Used Before Backward
 </h2>
 </header>
 <section class=entry-content>
-<p>Description Some new developers are not aware of using the existing function and writing the function by themselves. However, it is recommended to use the APIs because the APIs provided by the library often consider more things. For instance, in a post, the developer does not use the DataLoader and feeds the data directly to the network. The answerer noted that using DataLoader has several benefits: 1) It allows the developers to sample the data randomly....</p>
-</section>
-<footer class=entry-footer></footer>
-<a class=entry-link aria-label="post link to DataLoader Unused" href=https://hynn01.github.io/dslinter/code-smells/dataloader-unused/></a>
-</article>
-<article class="post-entry tag-entry">
-<header class=entry-header>
-<h2>Pytorch Call Method Misused
-</h2>
-</header>
-<section class=entry-content>
-<p>Description In PyTorch, self.nn() is different than self.nn.forward(). self.nn() also deals with all the register hooks, which would not be considered when calling the plain forward. Thus, it is recommended to use self.nn() than self.nn.forward().
+<p>Description Developers should use optimizer.zero_grad(), loss_fn.backward(), optimizer.step() together and should be forget to use optimizer.zero_grad() before loss_fn.backward(). optimizer.zero_grad() clears the old gradients from last step. If this API is not used, the gradients will be accumulated from all loss.backward() calls and it will lead to the gradient explosion, which fails the training.
 Type API Specific
 Existing Stage Model Training
-Effect Robustness
-Example ### PyTorch # Violated Code output = self.net.forward(input) # Recommended Fix output = self.net(input) Source: Paper Grey Literature https://github.com/IgorSusmelj/pytorch-styleguide GitHub Commit Stack Overflow Documentation </p>
+Effect Error-prone
+Example ### PyTorch # Violated Code output = model(input) # forward-pass loss_fn....</p>
 </section>
 <footer class=entry-footer></footer>
-<a class=entry-link aria-label="post link to Pytorch Call Method Misused" href=https://hynn01.github.io/dslinter/code-smells/pytorch-call-method-misused/></a>
+<a class=entry-link aria-label="post link to Zero_grad Not Used Before Backward" href=https://hynn01.github.io/dslinter/code-smells/zero_grad-not-used-before-backward/></a>
 </article>
 <article class="post-entry tag-entry">
 <header class=entry-header>
-<h2>Threshold Dependent Validation
+<h2>Loss API Misused
 </h2>
 </header>
 <section class=entry-content>
-<p>Description The performance of the machine learning model can be measured by different metrics, including threshold-dependent metrics(e.g., F-measure) or threshold-independent metrics(e.g., Area Under the receiver operating characteristic curve (AUC)). Choosing a specific threshold is tricky and can lead to a less-interpretable result. Therefore, threshold-independent is more robust and should be preferred over threshold-independent metrics.
-Type Generic
-Existing Stage Model Evaluation
-Effect Robustness
-Example ### Scikit-Learn import sklearn # Violated Code sklearn....</p>
+<p>Description Different loss APIs take different input formats, but the difference is not clarified in some documentations, so it is easy to misuse. For example, in PyTorch, the NLLLoss takes the output of LogSoftmax as the input. If the input given to NLLLoss has not been processed by LogSoftmax, it might lead to a wrong result.
+Type API Specific
+Existing Stage Model Training
+Effect Error-prone
+Example ### PyTorch # Violated Code loss = nn....</p>
 </section>
 <footer class=entry-footer></footer>
-<a class=entry-link aria-label="post link to Threshold Dependent Validation" href=https://hynn01.github.io/dslinter/code-smells/threshold-dependent-validation/></a>
+<a class=entry-link aria-label="post link to Loss API Misused" href=https://hynn01.github.io/dslinter/code-smells/loss-api-misused/></a>
 </article>
+<footer class=page-footer>
+<nav class=pagination>
+<a class=prev href=https://hynn01.github.io/dslinter/tags/api-specific/>« Prev Page</a>
+</nav>
+</footer>
 </main>
 <footer class=footer>
 <span>&copy; 2021 <a href=https://hynn01.github.io/dslinter/>DSLinter - Linter for Machine Learnig Application - Specific Code Smells</a></span>

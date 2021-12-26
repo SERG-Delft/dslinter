@@ -4,8 +4,8 @@
 <meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
 <meta name=robots content="index, follow">
 <title>Loss API Misused | DSLinter - Linter for Machine Learnig Application - Specific Code Smells</title>
-<meta name=keywords content>
-<meta name=description content="Description Different loss APIs take different input formats, but the difference is not clarified in some documentations, so it is easy to misuse. For example, in PyTorch, the \textit{NLLLoss} takes the output of \textit{LogSoftmax} as the input. If the input given to \textit{NLLLoss} has not been processed by \textit{LogSoftmax}, it might lead to a wrong result.
+<meta name=keywords content="api-specific,model training,error-prone">
+<meta name=description content="Description Different loss APIs take different input formats, but the difference is not clarified in some documentations, so it is easy to misuse. For example, in PyTorch, the NLLLoss takes the output of LogSoftmax as the input. If the input given to NLLLoss has not been processed by LogSoftmax, it might lead to a wrong result.
 Type API Specific
 Existing Stage Model Training
 Effect Error-prone
@@ -28,7 +28,7 @@ Example ### PyTorch # Violated Code loss = nn.">
 <noscript>
 <style>#theme-toggle,.top-link{display:none}</style>
 </noscript><meta property="og:title" content="Loss API Misused">
-<meta property="og:description" content="Description Different loss APIs take different input formats, but the difference is not clarified in some documentations, so it is easy to misuse. For example, in PyTorch, the \textit{NLLLoss} takes the output of \textit{LogSoftmax} as the input. If the input given to \textit{NLLLoss} has not been processed by \textit{LogSoftmax}, it might lead to a wrong result.
+<meta property="og:description" content="Description Different loss APIs take different input formats, but the difference is not clarified in some documentations, so it is easy to misuse. For example, in PyTorch, the NLLLoss takes the output of LogSoftmax as the input. If the input given to NLLLoss has not been processed by LogSoftmax, it might lead to a wrong result.
 Type API Specific
 Existing Stage Model Training
 Effect Error-prone
@@ -38,13 +38,13 @@ Example ### PyTorch # Violated Code loss = nn.">
 <meta property="og:site_name" content="DSLinter - Linter for Machine Learnig Application - Specific Code Smells">
 <meta name=twitter:card content="summary">
 <meta name=twitter:title content="Loss API Misused">
-<meta name=twitter:description content="Description Different loss APIs take different input formats, but the difference is not clarified in some documentations, so it is easy to misuse. For example, in PyTorch, the \textit{NLLLoss} takes the output of \textit{LogSoftmax} as the input. If the input given to \textit{NLLLoss} has not been processed by \textit{LogSoftmax}, it might lead to a wrong result.
+<meta name=twitter:description content="Description Different loss APIs take different input formats, but the difference is not clarified in some documentations, so it is easy to misuse. For example, in PyTorch, the NLLLoss takes the output of LogSoftmax as the input. If the input given to NLLLoss has not been processed by LogSoftmax, it might lead to a wrong result.
 Type API Specific
 Existing Stage Model Training
 Effect Error-prone
 Example ### PyTorch # Violated Code loss = nn.">
 <script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":2,"name":"Loss API Misused","item":"https://hynn01.github.io/dslinter/code-smells/loss-api-misused/"}]}</script>
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Loss API Misused","name":"Loss API Misused","description":"Description Different loss APIs take different input formats, but the difference is not clarified in some documentations, so it is easy to misuse. For example, in PyTorch, the \\textit{NLLLoss} takes the output of \\textit{LogSoftmax} as the input. If the input given to \\textit{NLLLoss} has not been processed by \\textit{LogSoftmax}, it might lead to a wrong result.\nType API Specific\nExisting Stage Model Training\nEffect Error-prone\nExample ### PyTorch # Violated Code loss = nn.","keywords":[],"articleBody":"Description Different loss APIs take different input formats, but the difference is not clarified in some documentations, so it is easy to misuse. For example, in PyTorch, the \\textit{NLLLoss} takes the output of \\textit{LogSoftmax} as the input. If the input given to \\textit{NLLLoss} has not been processed by \\textit{LogSoftmax}, it might lead to a wrong result.\nType API Specific\nExisting Stage Model Training\nEffect Error-prone\nExample ### PyTorch # Violated Code loss = nn.NLLLoss() # input is of size N x C = 3 x 5 input = torch.randn(3, 5, requires_grad=True) # each element in target has to have 0 target = torch.tensor([1, 0, 4]) output = loss(input, target) output.backward() # Recommended Fix m = nn.LogSoftmax(dim=1) loss = nn.NLLLoss() # input is of size N x C = 3 x 5 input = torch.randn(3, 5, requires_grad=True) # each element in target has to have 0 target = torch.tensor([1, 0, 4]) output = loss(m(input), target) output.backward() Source: Paper Grey Literature  https://medium.com/missinglink-deep-learning-platform/most-common-neural-net-pytorch-mistakes-456560ada037  GitHub Commit Stack Overflow Documentation ","wordCount":"173","inLanguage":"en","datePublished":"0001-01-01T00:00:00Z","dateModified":"0001-01-01T00:00:00Z","mainEntityOfPage":{"@type":"WebPage","@id":"https://hynn01.github.io/dslinter/code-smells/loss-api-misused/"},"publisher":{"@type":"Organization","name":"DSLinter - Linter for Machine Learnig Application - Specific Code Smells","logo":{"@type":"ImageObject","url":"https://hynn01.github.io/dslinter/%3Clink%20/%20abs%20url%3E"}}}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Loss API Misused","name":"Loss API Misused","description":"Description Different loss APIs take different input formats, but the difference is not clarified in some documentations, so it is easy to misuse. For example, in PyTorch, the NLLLoss takes the output of LogSoftmax as the input. If the input given to NLLLoss has not been processed by LogSoftmax, it might lead to a wrong result.\nType API Specific\nExisting Stage Model Training\nEffect Error-prone\nExample ### PyTorch # Violated Code loss = nn.","keywords":["api-specific","model training","error-prone"],"articleBody":"Description Different loss APIs take different input formats, but the difference is not clarified in some documentations, so it is easy to misuse. For example, in PyTorch, the NLLLoss takes the output of LogSoftmax as the input. If the input given to NLLLoss has not been processed by LogSoftmax, it might lead to a wrong result.\nType API Specific\nExisting Stage Model Training\nEffect Error-prone\nExample ### PyTorch # Violated Code loss = nn.NLLLoss() # input is of size N x C = 3 x 5 input = torch.randn(3, 5, requires_grad=True) # each element in target has to have 0 target = torch.tensor([1, 0, 4]) output = loss(input, target) output.backward() # Recommended Fix m = nn.LogSoftmax(dim=1) loss = nn.NLLLoss() # input is of size N x C = 3 x 5 input = torch.randn(3, 5, requires_grad=True) # each element in target has to have 0 target = torch.tensor([1, 0, 4]) output = loss(m(input), target) output.backward() Source: Paper Grey Literature  https://medium.com/missinglink-deep-learning-platform/most-common-neural-net-pytorch-mistakes-456560ada037  GitHub Commit Stack Overflow Documentation ","wordCount":"173","inLanguage":"en","datePublished":"0001-01-01T00:00:00Z","dateModified":"0001-01-01T00:00:00Z","mainEntityOfPage":{"@type":"WebPage","@id":"https://hynn01.github.io/dslinter/code-smells/loss-api-misused/"},"publisher":{"@type":"Organization","name":"DSLinter - Linter for Machine Learnig Application - Specific Code Smells","logo":{"@type":"ImageObject","url":"https://hynn01.github.io/dslinter/%3Clink%20/%20abs%20url%3E"}}}</script>
 </head>
 <body id=top>
 <script>localStorage.getItem("pref-theme")==="dark"&&document.body.classList.add('dark')</script>
@@ -87,7 +87,7 @@ Loss API Misused
 </div>
 </header>
 <div class=post-content><h3 id=description>Description<a hidden class=anchor aria-hidden=true href=#description>#</a></h3>
-<p>Different loss APIs take different input formats, but the difference is not clarified in some documentations, so it is easy to misuse. For example, in PyTorch, the \textit{NLLLoss} takes the output of \textit{LogSoftmax} as the input. If the input given to \textit{NLLLoss} has not been processed by \textit{LogSoftmax}, it might lead to a wrong result.</p>
+<p>Different loss APIs take different input formats, but the difference is not clarified in some documentations, so it is easy to misuse. For example, in PyTorch, the <code>NLLLoss</code> takes the output of <code>LogSoftmax</code> as the input. If the input given to <code>NLLLoss</code> has not been processed by <code>LogSoftmax</code>, it might lead to a wrong result.</p>
 <h3 id=type>Type<a hidden class=anchor aria-hidden=true href=#type>#</a></h3>
 <p>API Specific</p>
 <h3 id=existing-stage>Existing Stage<a hidden class=anchor aria-hidden=true href=#existing-stage>#</a></h3>
@@ -130,6 +130,11 @@ output<span style=color:#f92672>.</span>backward()
 <h4 id=documentation>Documentation<a hidden class=anchor aria-hidden=true href=#documentation>#</a></h4>
 </div>
 <footer class=post-footer>
+<ul class=post-tags>
+<li><a href=https://hynn01.github.io/dslinter/tags/api-specific/>api-specific</a></li>
+<li><a href=https://hynn01.github.io/dslinter/tags/model-training/>model training</a></li>
+<li><a href=https://hynn01.github.io/dslinter/tags/error-prone/>error-prone</a></li>
+</ul>
 </footer>
 </article>
 </main>

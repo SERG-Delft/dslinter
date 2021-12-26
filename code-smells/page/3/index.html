@@ -72,7 +72,7 @@
 </h2>
 </header>
 <section class=entry-content>
-<p>Description In PyTorch, \textit{self.nn()} is different than \textit{self.nn.forward()}. \textit{self.nn()} also deals with all the register hooks, which would not be considered when calling the plain \textit{forward} \ref{grey:pytorch_styleguide}. Thus, it is recommended to use \textit{self.nn()} than \textit{self.nn.forward()}.
+<p>Description In PyTorch, self.nn() is different than self.nn.forward(). self.nn() also deals with all the register hooks, which would not be considered when calling the plain forward. Thus, it is recommended to use self.nn() than self.nn.forward().
 Type API Specific
 Existing Stage Model Training
 Effect Robustness
@@ -87,7 +87,7 @@ Example ### PyTorch # Violated Code output = self.net.forward(input) # Recommend
 </h2>
 </header>
 <section class=entry-content>
-<p>Description In PyTorch, calling \textit{.eval()} means we are going into the evaluation mode and the Dropout layer will be deactivated. If the training mode did not toggle back in time, the Dropout layer would not be used in some data training and thus affect the training result \ref{grey:nn_common_mistakes}. Therefore, we suggest to “have the training mode set as close as possible to the inference step to avoid forgetting to set it”....</p>
+<p>Description In PyTorch, calling .eval() means we are going into the evaluation mode and the Dropout layer will be deactivated. If the training mode did not toggle back in time, the Dropout layer would not be used in some data training and thus affect the training result. Therefore, we suggest to “have the training mode set as close as possible to the inference step to avoid forgetting to set it”....</p>
 </section>
 <footer class=entry-footer></footer>
 <a class=entry-link aria-label="post link to Train Eval Mode Improper Toggling" href=https://hynn01.github.io/dslinter/code-smells/train-eval-mode-improper-toggling/></a>
@@ -98,7 +98,7 @@ Example ### PyTorch # Violated Code output = self.net.forward(input) # Recommend
 </h2>
 </header>
 <section class=entry-content>
-<p>Description Developers should use \textit{optimizer.zero_grad()}, \textit{loss_fn.backward()}, \textit{optimizer.step()} together and should be forget to use \textit{optimizer.zero_grad()} before \textit{loss_fn.backward()}. \textit{optimizer.zero_grad()} clears the old gradients from last step. If this API is not used, the gradients will be accumulated from all \textit{loss.backward()} calls and it will lead to the gradient explosion, which fails the training.
+<p>Description Developers should use optimizer.zero_grad(), loss_fn.backward(), optimizer.step() together and should be forget to use optimizer.zero_grad() before loss_fn.backward(). optimizer.zero_grad() clears the old gradients from last step. If this API is not used, the gradients will be accumulated from all loss.backward() calls and it will lead to the gradient explosion, which fails the training.
 Type API Specific
 Existing Stage Model Training
 Effect Error-prone
@@ -113,7 +113,7 @@ Example ### PyTorch # Violated Code output = model(input) # forward-pass loss_fn
 </h2>
 </header>
 <section class=entry-content>
-<p>Description Different loss APIs take different input formats, but the difference is not clarified in some documentations, so it is easy to misuse. For example, in PyTorch, the \textit{NLLLoss} takes the output of \textit{LogSoftmax} as the input. If the input given to \textit{NLLLoss} has not been processed by \textit{LogSoftmax}, it might lead to a wrong result.
+<p>Description Different loss APIs take different input formats, but the difference is not clarified in some documentations, so it is easy to misuse. For example, in PyTorch, the NLLLoss takes the output of LogSoftmax as the input. If the input given to NLLLoss has not been processed by LogSoftmax, it might lead to a wrong result.
 Type API Specific
 Existing Stage Model Training
 Effect Error-prone
@@ -124,15 +124,18 @@ Example ### PyTorch # Violated Code loss = nn....</p>
 </article>
 <article class=post-entry>
 <header class=entry-header>
-<h2>Initialize Weight to A Constant
+<h2>Initialize Weight to a Constant
 </h2>
 </header>
 <section class=entry-content>
 <p>Description In neural network, if all the weights are initialized to a constant, i.e., all the neurons starts with the same weight, all the neurons will follow the same gradient during the backward propagation update. As a result, neurons will learn same features in each iterations. In this way, the nueral netwok will provide a poor result.
-Type Existing Stage Effect Example # Violated Code # Use PyTorch's defaault init or initialize to 0 def conv(ni, nf, ks=3, stride=1, padding=1, **kwargs): _conv = nn....</p>
+Type Generic
+Existing Stage Model Training
+Effect Error-prone
+Example # Violated Code # Use PyTorch's defaault init or initialize to 0 def conv(ni, nf, ks=3, stride=1, padding=1, **kwargs): _conv = nn....</p>
 </section>
 <footer class=entry-footer></footer>
-<a class=entry-link aria-label="post link to Initialize Weight to A Constant" href=https://hynn01.github.io/dslinter/code-smells/initialize-weight-to-zero/></a>
+<a class=entry-link aria-label="post link to Initialize Weight to a Constant" href=https://hynn01.github.io/dslinter/code-smells/initialize-weight-to-zero/></a>
 </article>
 <article class=post-entry>
 <header class=entry-header>
@@ -141,7 +144,10 @@ Type Existing Stage Effect Example # Violated Code # Use PyTorch's defaault init
 </header>
 <section class=entry-content>
 <p>Description In deep learning, regularization can help control overfitting, speed up the training process by dealing with noise and outliers. Developers should check whether they are able to make use of regularization to improve performance.
-Type Existing Stage Effect Example ### TensorFlow # Violated Code layer = tf.keras.layers.Dense( 5, input_dim=5, kernel_initializer='ones', kernel_regularizer=tf.keras.regularizers.L1(0.01), activity_regularizer=tf.keras.regularizers.L2(0.01)) # Recommended Fix layer = tf.keras.layers.Dense( 5, input_dim=5, kernel_initializer='ones') ### PyTorch # Violated Code optimizer = torch.optim.Adam(model.parameters(), lr=1e-4) # Recommended Fix optimizer = torch....</p>
+Type Generic
+Existing Stage Model Training
+Effect Efficiency
+Example ### TensorFlow # Violated Code layer = tf.keras.layers.Dense( 5, input_dim=5, kernel_initializer='ones', kernel_regularizer=tf.keras.regularizers.L1(0.01), activity_regularizer=tf.keras.regularizers.L2(0.01)) # Recommended Fix layer = tf.keras.layers.Dense( 5, input_dim=5, kernel_initializer='ones') ### PyTorch # Violated Code optimizer = torch....</p>
 </section>
 <footer class=entry-footer></footer>
 <a class=entry-link aria-label="post link to Missing Regularization" href=https://hynn01.github.io/dslinter/code-smells/missing-regularization/></a>
@@ -154,7 +160,7 @@ Type Existing Stage Effect Example ### TensorFlow # Violated Code layer = tf.ker
 <section class=entry-content>
 <p>Description The performance of the machine learning model can be measured by different metrics, including threshold-dependent metrics(e.g., F-measure) or threshold-independent metrics(e.g., Area Under the receiver operating characteristic curve (AUC)). Choosing a specific threshold is tricky and can lead to a less-interpretable result. Therefore, threshold-independent is more robust and should be preferred over threshold-independent metrics.
 Type Generic
-Existing Stage Canndidate Model Evaluation
+Existing Stage Model Evaluation
 Effect Robustness
 Example ### Scikit-Learn import sklearn # Violated Code sklearn....</p>
 </section>

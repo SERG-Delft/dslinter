@@ -7,13 +7,16 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language><atom:link href="https://hynn01.github.io/dslinter/tags/added/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Initialize Weight to A Constant</title>
+      <title>Initialize Weight to a Constant</title>
       <link>https://hynn01.github.io/dslinter/code-smells/initialize-weight-to-zero/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://hynn01.github.io/dslinter/code-smells/initialize-weight-to-zero/</guid>
       <description>Description In neural network, if all the weights are initialized to a constant, i.e., all the neurons starts with the same weight, all the neurons will follow the same gradient during the backward propagation update. As a result, neurons will learn same features in each iterations. In this way, the nueral netwok will provide a poor result.
-Type Existing Stage Effect Example # Violated Code # Use PyTorch&amp;#39;s defaault init or initialize to 0 def conv(ni, nf, ks=3, stride=1, padding=1, **kwargs): _conv = nn.</description>
+Type Generic
+Existing Stage Model Training
+Effect Error-prone
+Example # Violated Code # Use PyTorch&amp;#39;s defaault init or initialize to 0 def conv(ni, nf, ks=3, stride=1, padding=1, **kwargs): _conv = nn.</description>
     </item>
     
     <item>
@@ -23,7 +26,10 @@ Type Existing Stage Effect Example # Violated Code # Use PyTorch&amp;#39;s defaa
       
       <guid>https://hynn01.github.io/dslinter/code-smells/missing-regularization/</guid>
       <description>Description In deep learning, regularization can help control overfitting, speed up the training process by dealing with noise and outliers. Developers should check whether they are able to make use of regularization to improve performance.
-Type Existing Stage Effect Example ### TensorFlow # Violated Code layer = tf.keras.layers.Dense( 5, input_dim=5, kernel_initializer=&amp;#39;ones&amp;#39;, kernel_regularizer=tf.keras.regularizers.L1(0.01), activity_regularizer=tf.keras.regularizers.L2(0.01)) # Recommended Fix layer = tf.keras.layers.Dense( 5, input_dim=5, kernel_initializer=&amp;#39;ones&amp;#39;) ### PyTorch # Violated Code optimizer = torch.optim.Adam(model.parameters(), lr=1e-4) # Recommended Fix optimizer = torch.</description>
+Type Generic
+Existing Stage Model Training
+Effect Efficiency
+Example ### TensorFlow # Violated Code layer = tf.keras.layers.Dense( 5, input_dim=5, kernel_initializer=&amp;#39;ones&amp;#39;, kernel_regularizer=tf.keras.regularizers.L1(0.01), activity_regularizer=tf.keras.regularizers.L2(0.01)) # Recommended Fix layer = tf.keras.layers.Dense( 5, input_dim=5, kernel_initializer=&amp;#39;ones&amp;#39;) ### PyTorch # Violated Code optimizer = torch.</description>
     </item>
     
     <item>
@@ -34,7 +40,7 @@ Type Existing Stage Effect Example ### TensorFlow # Violated Code layer = tf.ker
       <guid>https://hynn01.github.io/dslinter/code-smells/threshold-dependent-validation/</guid>
       <description>Description The performance of the machine learning model can be measured by different metrics, including threshold-dependent metrics(e.g., F-measure) or threshold-independent metrics(e.g., Area Under the receiver operating characteristic curve (AUC)). Choosing a specific threshold is tricky and can lead to a less-interpretable result. Therefore, threshold-independent is more robust and should be preferred over threshold-independent metrics.
 Type Generic
-Existing Stage Canndidate Model Evaluation
+Existing Stage Model Evaluation
 Effect Robustness
 Example ### Scikit-Learn import sklearn # Violated Code sklearn.</description>
     </item>
