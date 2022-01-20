@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>added on DSLinter - Linter for Machine Learnig Application - Specific Code Smells</title>
+    <title>added on DSLinter - Linter for Machine Learning - Specific Code Smells</title>
     <link>https://hynn01.github.io/dslinter/tags/added/</link>
-    <description>Recent content in added on DSLinter - Linter for Machine Learnig Application - Specific Code Smells</description>
+    <description>Recent content in added on DSLinter - Linter for Machine Learning - Specific Code Smells</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language><atom:link href="https://hynn01.github.io/dslinter/tags/added/index.xml" rel="self" type="application/rss+xml" />
     <item>
@@ -16,15 +16,15 @@
 Type Generic
 Existing Stage Model Training
 Effect Error-prone
-Example # Violated Code # Use PyTorch&amp;#39;s defaault init or initialize to 0 def conv(ni, nf, ks=3, stride=1, padding=1, **kwargs): _conv = nn.</description>
+Example # https://github.com/aladdinpersson/Machine-Learning-Collection/blob/a2ee9271b5280be6994660c7982d0f44c67c3b63/ML/Projects/Exploring_MNIST/networks/lenet.py import torch import torch.</description>
     </item>
     
     <item>
       <title>Missing Regularization</title>
-      <link>https://hynn01.github.io/dslinter/code-smells/missing-regularization/</link>
+      <link>https://hynn01.github.io/dslinter/deprecated/missing-regularization/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://hynn01.github.io/dslinter/code-smells/missing-regularization/</guid>
+      <guid>https://hynn01.github.io/dslinter/deprecated/missing-regularization/</guid>
       <description>Description In deep learning, regularization can help control overfitting, speed up the training process by dealing with noise and outliers. Developers should check whether they are able to make use of regularization to improve performance.
 Type Generic
 Existing Stage Model Training
@@ -42,7 +42,7 @@ Example ### TensorFlow # Violated Code layer = tf.keras.layers.Dense( 5, input_d
 Type Generic
 Existing Stage Model Evaluation
 Effect Robustness
-Example ### Scikit-Learn import sklearn # Violated Code sklearn.</description>
+Example ### Scikit-Learn from sklearn import metrics y_true = [0, 1, 2, 0, 1, 2] y_pred = [0, 2, 1, 0, 0, 1] metrics.</description>
     </item>
     
   </channel>

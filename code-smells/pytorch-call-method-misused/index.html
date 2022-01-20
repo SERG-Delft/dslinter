@@ -3,7 +3,7 @@
 <meta http-equiv=x-ua-compatible content="IE=edge">
 <meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
 <meta name=robots content="index, follow">
-<title>Pytorch Call Method Misused | DSLinter - Linter for Machine Learnig Application - Specific Code Smells</title>
+<title>Pytorch Call Method Misused | DSLinter - Linter for Machine Learning - Specific Code Smells</title>
 <meta name=keywords content="api-specific,modeling training,robustness">
 <meta name=description content="Description In PyTorch, self.nn() is different than self.nn.forward(). self.nn() also deals with all the register hooks, which would not be considered when calling the plain forward. Thus, it is recommended to use self.nn() than self.nn.forward().
 Type API Specific
@@ -24,7 +24,7 @@ Example ### PyTorch # Violated Code output = self.net.forward(input) # Recommend
 <link rel=mask-icon href=https://hynn01.github.io/dslinter/%3Clink%20/%20abs%20url%3E>
 <meta name=theme-color content="#2e2e33">
 <meta name=msapplication-TileColor content="#2e2e33">
-<meta name=generator content="Hugo 0.91.2">
+<meta name=generator content="Hugo 0.92.0">
 <noscript>
 <style>#theme-toggle,.top-link{display:none}</style>
 </noscript><meta property="og:title" content="Pytorch Call Method Misused">
@@ -35,7 +35,7 @@ Effect Robustness
 Example ### PyTorch # Violated Code output = self.net.forward(input) # Recommended Fix output = self.net(input) Source: Paper Grey Literature  https://github.com/IgorSusmelj/pytorch-styleguide  GitHub Commit Stack Overflow Documentation ">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://hynn01.github.io/dslinter/code-smells/pytorch-call-method-misused/"><meta property="article:section" content="Code Smells">
-<meta property="og:site_name" content="DSLinter - Linter for Machine Learnig Application - Specific Code Smells">
+<meta property="og:site_name" content="DSLinter - Linter for Machine Learning Application - Specific Code Smells">
 <meta name=twitter:card content="summary">
 <meta name=twitter:title content="Pytorch Call Method Misused">
 <meta name=twitter:description content="Description In PyTorch, self.nn() is different than self.nn.forward(). self.nn() also deals with all the register hooks, which would not be considered when calling the plain forward. Thus, it is recommended to use self.nn() than self.nn.forward().
@@ -44,14 +44,14 @@ Existing Stage Model Training
 Effect Robustness
 Example ### PyTorch # Violated Code output = self.net.forward(input) # Recommended Fix output = self.net(input) Source: Paper Grey Literature  https://github.com/IgorSusmelj/pytorch-styleguide  GitHub Commit Stack Overflow Documentation ">
 <script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":2,"name":"Pytorch Call Method Misused","item":"https://hynn01.github.io/dslinter/code-smells/pytorch-call-method-misused/"}]}</script>
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Pytorch Call Method Misused","name":"Pytorch Call Method Misused","description":"Description In PyTorch, self.nn() is different than self.nn.forward(). self.nn() also deals with all the register hooks, which would not be considered when calling the plain forward. Thus, it is recommended to use self.nn() than self.nn.forward().\nType API Specific\nExisting Stage Model Training\nEffect Robustness\nExample ### PyTorch # Violated Code output = self.net.forward(input) # Recommended Fix output = self.net(input) Source: Paper Grey Literature  https://github.com/IgorSusmelj/pytorch-styleguide  GitHub Commit Stack Overflow Documentation ","keywords":["api-specific","modeling training","robustness"],"articleBody":"Description In PyTorch, self.nn() is different than self.nn.forward(). self.nn() also deals with all the register hooks, which would not be considered when calling the plain forward. Thus, it is recommended to use self.nn() than self.nn.forward().\nType API Specific\nExisting Stage Model Training\nEffect Robustness\nExample ### PyTorch # Violated Code output = self.net.forward(input) # Recommended Fix output = self.net(input) Source: Paper Grey Literature  https://github.com/IgorSusmelj/pytorch-styleguide  GitHub Commit Stack Overflow Documentation ","wordCount":"69","inLanguage":"en","datePublished":"0001-01-01T00:00:00Z","dateModified":"0001-01-01T00:00:00Z","mainEntityOfPage":{"@type":"WebPage","@id":"https://hynn01.github.io/dslinter/code-smells/pytorch-call-method-misused/"},"publisher":{"@type":"Organization","name":"DSLinter - Linter for Machine Learnig Application - Specific Code Smells","logo":{"@type":"ImageObject","url":"https://hynn01.github.io/dslinter/%3Clink%20/%20abs%20url%3E"}}}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Pytorch Call Method Misused","name":"Pytorch Call Method Misused","description":"Description In PyTorch, self.nn() is different than self.nn.forward(). self.nn() also deals with all the register hooks, which would not be considered when calling the plain forward. Thus, it is recommended to use self.nn() than self.nn.forward().\nType API Specific\nExisting Stage Model Training\nEffect Robustness\nExample ### PyTorch # Violated Code output = self.net.forward(input) # Recommended Fix output = self.net(input) Source: Paper Grey Literature  https://github.com/IgorSusmelj/pytorch-styleguide  GitHub Commit Stack Overflow Documentation ","keywords":["api-specific","modeling training","robustness"],"articleBody":"Description In PyTorch, self.nn() is different than self.nn.forward(). self.nn() also deals with all the register hooks, which would not be considered when calling the plain forward. Thus, it is recommended to use self.nn() than self.nn.forward().\nType API Specific\nExisting Stage Model Training\nEffect Robustness\nExample ### PyTorch # Violated Code output = self.net.forward(input) # Recommended Fix output = self.net(input) Source: Paper Grey Literature  https://github.com/IgorSusmelj/pytorch-styleguide  GitHub Commit Stack Overflow Documentation ","wordCount":"69","inLanguage":"en","datePublished":"0001-01-01T00:00:00Z","dateModified":"0001-01-01T00:00:00Z","mainEntityOfPage":{"@type":"WebPage","@id":"https://hynn01.github.io/dslinter/code-smells/pytorch-call-method-misused/"},"publisher":{"@type":"Organization","name":"DSLinter - Linter for Machine Learning - Specific Code Smells","logo":{"@type":"ImageObject","url":"https://hynn01.github.io/dslinter/%3Clink%20/%20abs%20url%3E"}}}</script>
 </head>
 <body id=top>
 <script>localStorage.getItem("pref-theme")==="dark"&&document.body.classList.add('dark')</script>
 <header class=header>
 <nav class=nav>
 <div class=logo>
-<a href=https://hynn01.github.io/dslinter/ accesskey=h title="DSLinter - Linter for Machine Learnig Application - Specific Code Smells (Alt + H)">DSLinter - Linter for Machine Learnig Application - Specific Code Smells</a>
+<a href=https://hynn01.github.io/dslinter/ accesskey=h title="DSLinter - Linter for Machine Learning - Specific Code Smells (Alt + H)">DSLinter - Linter for Machine Learning - Specific Code Smells</a>
 <span class=logo-switches>
 <button id=theme-toggle accesskey=t title="(Alt + T)"><svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
 </button>
@@ -61,6 +61,11 @@ Example ### PyTorch # Violated Code output = self.net.forward(input) # Recommend
 <li>
 <a href=https://hynn01.github.io/dslinter/code-smells/ title="Code Smells">
 <span>Code Smells</span>
+</a>
+</li>
+<li>
+<a href=https://hynn01.github.io/dslinter/search/ title="Search (Alt + /)" accesskey=/>
+<span>Search</span>
 </a>
 </li>
 <li>
@@ -124,7 +129,7 @@ output <span style=color:#f92672>=</span> self<span style=color:#f92672>.</span>
 </article>
 </main>
 <footer class=footer>
-<span>&copy; 2021 <a href=https://hynn01.github.io/dslinter/>DSLinter - Linter for Machine Learnig Application - Specific Code Smells</a></span>
+<span>&copy; 2022 <a href=https://hynn01.github.io/dslinter/>DSLinter - Linter for Machine Learning - Specific Code Smells</a></span>
 <span>
 Powered by
 <a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &

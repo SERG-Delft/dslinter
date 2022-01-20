@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>model training on DSLinter - Linter for Machine Learnig Application - Specific Code Smells</title>
+    <title>model training on DSLinter - Linter for Machine Learning - Specific Code Smells</title>
     <link>https://hynn01.github.io/dslinter/tags/model-training/</link>
-    <description>Recent content in model training on DSLinter - Linter for Machine Learnig Application - Specific Code Smells</description>
+    <description>Recent content in model training on DSLinter - Linter for Machine Learning - Specific Code Smells</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language><atom:link href="https://hynn01.github.io/dslinter/tags/model-training/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Excessive Hyperparameter</title>
-      <link>https://hynn01.github.io/dslinter/code-smells/excessive-hyperparameter/</link>
+      <link>https://hynn01.github.io/dslinter/deprecated/excessive-hyperparameter/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://hynn01.github.io/dslinter/code-smells/excessive-hyperparameter/</guid>
+      <guid>https://hynn01.github.io/dslinter/deprecated/excessive-hyperparameter/</guid>
       <description>Description Excessive hyperparameter precision is a potential risk for overtuning. Overtuning occurs if an overly high precision hyperparameter value allows the model to perform particularly well while values in close range of it do not. Further, the choice of such a hyperparameter might be uninterpretable to users, which leads to an untrustworthy result.
 Type Generic
 Existing Stage Model Training
@@ -21,10 +21,10 @@ Example ### Scikit-Learn from sklearn.naive_bayes import MultinomialN # Violated
     
     <item>
       <title>Counterintuitive Hyperparameter</title>
-      <link>https://hynn01.github.io/dslinter/code-smells/counterintuitive-hyperparameter/</link>
+      <link>https://hynn01.github.io/dslinter/deprecated/counterintuitive-hyperparameter/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://hynn01.github.io/dslinter/code-smells/counterintuitive-hyperparameter/</guid>
+      <guid>https://hynn01.github.io/dslinter/deprecated/counterintuitive-hyperparameter/</guid>
       <description>Description Counterintuitive hyperparameters will also cause bugs. There are four posts on StackOverflow discussing where the bug in the program is, and it turns out that a large learning rate causes bugs. This implies that the developer should check whether the hyperparameters stay in the normal range when developing ML applications.
 Type Generic
 Existing Stage Model Training
@@ -33,7 +33,7 @@ Example # TensorFlow import tensorflow as tf # Violated Code optimizer = tf.</de
     </item>
     
     <item>
-      <title>Memory Not Freed</title>
+      <title>Memory not Freed</title>
       <link>https://hynn01.github.io/dslinter/code-smells/memory-not-freed/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
@@ -52,11 +52,11 @@ Type Generic</description>
     </item>
     
     <item>
-      <title>Log Parameter Approaching Zero</title>
-      <link>https://hynn01.github.io/dslinter/code-smells/log-parameter-approaching-zero/</link>
+      <title>Missing the Mask of Invalid Value</title>
+      <link>https://hynn01.github.io/dslinter/code-smells/missing-the-mask-of-invalid-value/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://hynn01.github.io/dslinter/code-smells/log-parameter-approaching-zero/</guid>
+      <guid>https://hynn01.github.io/dslinter/code-smells/missing-the-mask-of-invalid-value/</guid>
       <description>Description Several posts on Stack Overflow talk about the bugs that are not easy to discover caused by the log parameter approaching zero. In this kind of program, the log function variable turns to zero and raises an error during the training process. However, the error&amp;rsquo;s stack trace did not directly point to the line of code that the bug exist. This kind of problem is not easy to debug and might take a long training time to find.</description>
     </item>
     
@@ -75,10 +75,10 @@ Example ### NumPy import numpy as np a = [[1, 0], [0, 1]] b = [[4, 1], [2, 2]] #
     
     <item>
       <title>Initialization Order Misused</title>
-      <link>https://hynn01.github.io/dslinter/code-smells/initialization-order-misused/</link>
+      <link>https://hynn01.github.io/dslinter/deprecated/initialization-order-misused/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://hynn01.github.io/dslinter/code-smells/initialization-order-misused/</guid>
+      <guid>https://hynn01.github.io/dslinter/deprecated/initialization-order-misused/</guid>
       <description>Description The AdamOptimizer class in the TensorFlow creates additional variables named &amp;ldquo;slots&amp;rdquo;. The variables must be initialized before training the model. Therefore, if the developer call initialize_all_variables() before calling AdamOptimizer and does not call the initializer afterward, the variables created by AdamOptimizer will not be initialized and might cause an error.
 Type API Specific
 Existing Stage Model Training
@@ -131,15 +131,15 @@ Example ### PyTorch # Violated Code loss = nn.</description>
 Type Generic
 Existing Stage Model Training
 Effect Error-prone
-Example # Violated Code # Use PyTorch&amp;#39;s defaault init or initialize to 0 def conv(ni, nf, ks=3, stride=1, padding=1, **kwargs): _conv = nn.</description>
+Example # https://github.com/aladdinpersson/Machine-Learning-Collection/blob/a2ee9271b5280be6994660c7982d0f44c67c3b63/ML/Projects/Exploring_MNIST/networks/lenet.py import torch import torch.</description>
     </item>
     
     <item>
       <title>Missing Regularization</title>
-      <link>https://hynn01.github.io/dslinter/code-smells/missing-regularization/</link>
+      <link>https://hynn01.github.io/dslinter/deprecated/missing-regularization/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://hynn01.github.io/dslinter/code-smells/missing-regularization/</guid>
+      <guid>https://hynn01.github.io/dslinter/deprecated/missing-regularization/</guid>
       <description>Description In deep learning, regularization can help control overfitting, speed up the training process by dealing with noise and outliers. Developers should check whether they are able to make use of regularization to improve performance.
 Type Generic
 Existing Stage Model Training

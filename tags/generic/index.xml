@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>generic on DSLinter - Linter for Machine Learnig Application - Specific Code Smells</title>
+    <title>generic on DSLinter - Linter for Machine Learning - Specific Code Smells</title>
     <link>https://hynn01.github.io/dslinter/tags/generic/</link>
-    <description>Recent content in generic on DSLinter - Linter for Machine Learnig Application - Specific Code Smells</description>
+    <description>Recent content in generic on DSLinter - Linter for Machine Learning - Specific Code Smells</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language><atom:link href="https://hynn01.github.io/dslinter/tags/generic/index.xml" rel="self" type="application/rss+xml" />
     <item>
@@ -25,16 +25,16 @@
     </item>
     
     <item>
-      <title>Vectorized Solution Unused</title>
-      <link>https://hynn01.github.io/dslinter/code-smells/vectorized-solution-unused/</link>
+      <title>Unnecessary Iteration</title>
+      <link>https://hynn01.github.io/dslinter/code-smells/unnecessary-iteration/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://hynn01.github.io/dslinter/code-smells/vectorized-solution-unused/</guid>
+      <guid>https://hynn01.github.io/dslinter/code-smells/unnecessary-iteration/</guid>
       <description>Description &amp;ldquo;Vectorization is the process of converting an algorithm from operating on a single value at a time to operating on a set of values (vector) at one time.&amp;rdquo; ML applications are often data-intensive and need to apply an operation on a dataset. Therefore, it is better to adopt vectorized solution instead of iterating over data. As stated in the Pandas documentation : ”Iterating through pandas objects is generally slow. In many cases, iterating manually over the rows is not needed and can be avoided”.</description>
     </item>
     
     <item>
-      <title>No Scaling Before Scaling Sensitive Operation</title>
+      <title>No Scaling Before Scaling-sensitive Operation</title>
       <link>https://hynn01.github.io/dslinter/code-smells/no-scaling-before-scaling-sensitive-operation/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
@@ -52,20 +52,20 @@
     </item>
     
     <item>
-      <title>Hyperparameter Not Set</title>
-      <link>https://hynn01.github.io/dslinter/code-smells/hyperparameter-not-set/</link>
+      <title>Hyperparameter not Explicitly Set</title>
+      <link>https://hynn01.github.io/dslinter/code-smells/hyperparameter-not-explicitly-set/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://hynn01.github.io/dslinter/code-smells/hyperparameter-not-set/</guid>
+      <guid>https://hynn01.github.io/dslinter/code-smells/hyperparameter-not-explicitly-set/</guid>
       <description>Description Hyperparameters are ML algorithm parameters used to control the learning process and are usually determined before the actual process starts. Hyperparameters should be set and tuned because they improve prediction quality and reproducibility. Tuning hyperparameters can lead to higher prediction quality because the default parameters of the learning algorithm may not be optimal for a given data or problem, and may lead to local optima. These parameters directly control the behavior of the training algorithm and therefore have a significant impact on the performance of the model.</description>
     </item>
     
     <item>
       <title>Excessive Hyperparameter</title>
-      <link>https://hynn01.github.io/dslinter/code-smells/excessive-hyperparameter/</link>
+      <link>https://hynn01.github.io/dslinter/deprecated/excessive-hyperparameter/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://hynn01.github.io/dslinter/code-smells/excessive-hyperparameter/</guid>
+      <guid>https://hynn01.github.io/dslinter/deprecated/excessive-hyperparameter/</guid>
       <description>Description Excessive hyperparameter precision is a potential risk for overtuning. Overtuning occurs if an overly high precision hyperparameter value allows the model to perform particularly well while values in close range of it do not. Further, the choice of such a hyperparameter might be uninterpretable to users, which leads to an untrustworthy result.
 Type Generic
 Existing Stage Model Training
@@ -75,10 +75,10 @@ Example ### Scikit-Learn from sklearn.naive_bayes import MultinomialN # Violated
     
     <item>
       <title>Counterintuitive Hyperparameter</title>
-      <link>https://hynn01.github.io/dslinter/code-smells/counterintuitive-hyperparameter/</link>
+      <link>https://hynn01.github.io/dslinter/deprecated/counterintuitive-hyperparameter/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://hynn01.github.io/dslinter/code-smells/counterintuitive-hyperparameter/</guid>
+      <guid>https://hynn01.github.io/dslinter/deprecated/counterintuitive-hyperparameter/</guid>
       <description>Description Counterintuitive hyperparameters will also cause bugs. There are four posts on StackOverflow discussing where the bug in the program is, and it turns out that a large learning rate causes bugs. This implies that the developer should check whether the hyperparameters stay in the normal range when developing ML applications.
 Type Generic
 Existing Stage Model Training
@@ -87,7 +87,7 @@ Example # TensorFlow import tensorflow as tf # Violated Code optimizer = tf.</de
     </item>
     
     <item>
-      <title>Memory Not Freed</title>
+      <title>Memory not Freed</title>
       <link>https://hynn01.github.io/dslinter/code-smells/memory-not-freed/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
@@ -106,11 +106,11 @@ Type Generic</description>
     </item>
     
     <item>
-      <title>Log Parameter Approaching Zero</title>
-      <link>https://hynn01.github.io/dslinter/code-smells/log-parameter-approaching-zero/</link>
+      <title>Missing the Mask of Invalid Value</title>
+      <link>https://hynn01.github.io/dslinter/code-smells/missing-the-mask-of-invalid-value/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://hynn01.github.io/dslinter/code-smells/log-parameter-approaching-zero/</guid>
+      <guid>https://hynn01.github.io/dslinter/code-smells/missing-the-mask-of-invalid-value/</guid>
       <description>Description Several posts on Stack Overflow talk about the bugs that are not easy to discover caused by the log parameter approaching zero. In this kind of program, the log function variable turns to zero and raises an error during the training process. However, the error&amp;rsquo;s stack trace did not directly point to the line of code that the bug exist. This kind of problem is not easy to debug and might take a long training time to find.</description>
     </item>
     
@@ -124,15 +124,15 @@ Type Generic</description>
 Type Generic
 Existing Stage Model Training
 Effect Error-prone
-Example # Violated Code # Use PyTorch&amp;#39;s defaault init or initialize to 0 def conv(ni, nf, ks=3, stride=1, padding=1, **kwargs): _conv = nn.</description>
+Example # https://github.com/aladdinpersson/Machine-Learning-Collection/blob/a2ee9271b5280be6994660c7982d0f44c67c3b63/ML/Projects/Exploring_MNIST/networks/lenet.py import torch import torch.</description>
     </item>
     
     <item>
       <title>Missing Regularization</title>
-      <link>https://hynn01.github.io/dslinter/code-smells/missing-regularization/</link>
+      <link>https://hynn01.github.io/dslinter/deprecated/missing-regularization/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://hynn01.github.io/dslinter/code-smells/missing-regularization/</guid>
+      <guid>https://hynn01.github.io/dslinter/deprecated/missing-regularization/</guid>
       <description>Description In deep learning, regularization can help control overfitting, speed up the training process by dealing with noise and outliers. Developers should check whether they are able to make use of regularization to improve performance.
 Type Generic
 Existing Stage Model Training
@@ -150,7 +150,7 @@ Example ### TensorFlow # Violated Code layer = tf.keras.layers.Dense( 5, input_d
 Type Generic
 Existing Stage Model Evaluation
 Effect Robustness
-Example ### Scikit-Learn import sklearn # Violated Code sklearn.</description>
+Example ### Scikit-Learn from sklearn import metrics y_true = [0, 1, 2, 0, 1, 2] y_pred = [0, 2, 1, 0, 0, 1] metrics.</description>
     </item>
     
   </channel>

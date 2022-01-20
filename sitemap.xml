@@ -6,23 +6,23 @@
   </url><url>
     <loc>https://hynn01.github.io/dslinter/code-smells/in-place-apis-misused/</loc>
   </url><url>
-    <loc>https://hynn01.github.io/dslinter/code-smells/vectorized-solution-unused/</loc>
+    <loc>https://hynn01.github.io/dslinter/code-smells/unnecessary-iteration/</loc>
   </url><url>
     <loc>https://hynn01.github.io/dslinter/code-smells/no-scaling-before-scaling-sensitive-operation/</loc>
   </url><url>
     <loc>https://hynn01.github.io/dslinter/code-smells/data-leakage/</loc>
   </url><url>
-    <loc>https://hynn01.github.io/dslinter/code-smells/hyperparameter-not-set/</loc>
+    <loc>https://hynn01.github.io/dslinter/code-smells/hyperparameter-not-explicitly-set/</loc>
   </url><url>
-    <loc>https://hynn01.github.io/dslinter/code-smells/excessive-hyperparameter/</loc>
+    <loc>https://hynn01.github.io/dslinter/deprecated/excessive-hyperparameter/</loc>
   </url><url>
-    <loc>https://hynn01.github.io/dslinter/code-smells/counterintuitive-hyperparameter/</loc>
+    <loc>https://hynn01.github.io/dslinter/deprecated/counterintuitive-hyperparameter/</loc>
   </url><url>
     <loc>https://hynn01.github.io/dslinter/code-smells/memory-not-freed/</loc>
   </url><url>
     <loc>https://hynn01.github.io/dslinter/code-smells/deterministic-algorithm-not-used/</loc>
   </url><url>
-    <loc>https://hynn01.github.io/dslinter/code-smells/log-parameter-approaching-zero/</loc>
+    <loc>https://hynn01.github.io/dslinter/code-smells/missing-the-mask-of-invalid-value/</loc>
   </url><url>
     <loc>https://hynn01.github.io/dslinter/code-smells/nan-equality-misused/</loc>
   </url><url>
@@ -30,17 +30,17 @@
   </url><url>
     <loc>https://hynn01.github.io/dslinter/code-smells/dataframe-coversion-api-misused/</loc>
   </url><url>
-    <loc>https://hynn01.github.io/dslinter/code-smells/regular-expression-solution-not-optimal/</loc>
+    <loc>https://hynn01.github.io/dslinter/deprecated/regular-expression-solution-not-optimal/</loc>
   </url><url>
-    <loc>https://hynn01.github.io/dslinter/code-smells/tensor-shape-unset/</loc>
+    <loc>https://hynn01.github.io/dslinter/deprecated/tensor-shape-unset/</loc>
   </url><url>
-    <loc>https://hynn01.github.io/dslinter/code-smells/backend-engine-mischoosed/</loc>
+    <loc>https://hynn01.github.io/dslinter/deprecated/backend-engine-mischoosed/</loc>
   </url><url>
     <loc>https://hynn01.github.io/dslinter/code-smells/dataloader-unused/</loc>
   </url><url>
     <loc>https://hynn01.github.io/dslinter/code-smells/matrix-multiplication-api-misused/</loc>
   </url><url>
-    <loc>https://hynn01.github.io/dslinter/code-smells/initialization-order-misused/</loc>
+    <loc>https://hynn01.github.io/dslinter/deprecated/initialization-order-misused/</loc>
   </url><url>
     <loc>https://hynn01.github.io/dslinter/code-smells/pytorch-call-method-misused/</loc>
   </url><url>
@@ -52,7 +52,7 @@
   </url><url>
     <loc>https://hynn01.github.io/dslinter/code-smells/initialize-weight-to-zero/</loc>
   </url><url>
-    <loc>https://hynn01.github.io/dslinter/code-smells/missing-regularization/</loc>
+    <loc>https://hynn01.github.io/dslinter/deprecated/missing-regularization/</loc>
   </url><url>
     <loc>https://hynn01.github.io/dslinter/code-smells/threshold-dependent-validation/</loc>
   </url><url>
@@ -73,6 +73,8 @@
     <loc>https://hynn01.github.io/dslinter/tags/data-preparation/</loc>
   </url><url>
     <loc>https://hynn01.github.io/dslinter/tags/data-segregation/</loc>
+  </url><url>
+    <loc>https://hynn01.github.io/dslinter/deprecated/</loc>
   </url><url>
     <loc>https://hynn01.github.io/dslinter/</loc>
   </url><url>
@@ -99,6 +101,8 @@
     <loc>https://hynn01.github.io/dslinter/tags/reproducibility/</loc>
   </url><url>
     <loc>https://hynn01.github.io/dslinter/tags/robustness/</loc>
+  </url><url>
+    <loc>https://hynn01.github.io/dslinter/search/</loc>
   </url><url>
     <loc>https://hynn01.github.io/dslinter/tags/</loc>
   </url>

@@ -3,7 +3,7 @@
 <meta http-equiv=x-ua-compatible content="IE=edge">
 <meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
 <meta name=robots content="index, follow">
-<title>Matrix Multiplication API Misused | DSLinter - Linter for Machine Learnig Application - Specific Code Smells</title>
+<title>Matrix Multiplication API Misused | DSLinter - Linter for Machine Learning - Specific Code Smells</title>
 <meta name=keywords content="not sure,api-specific,model training,readability">
 <meta name=description content="Description np.matmul() in Numpy library is more readable than np.dot() in the semantic way. Whilenp.dot() provides heterogeneous behaviors depending on the shape of the data, np.matmul() behaves in a consistent way. When the multiply operation is performed on two-dimension matrixes, two APIs give a same result. However, np.matmul() is preferred than np.dot() for its clear semantic.
 Type API Specific
@@ -24,7 +24,7 @@ Example ### NumPy import numpy as np a = [[1, 0], [0, 1]] b = [[4, 1], [2, 2]] #
 <link rel=mask-icon href=https://hynn01.github.io/dslinter/%3Clink%20/%20abs%20url%3E>
 <meta name=theme-color content="#2e2e33">
 <meta name=msapplication-TileColor content="#2e2e33">
-<meta name=generator content="Hugo 0.91.2">
+<meta name=generator content="Hugo 0.92.0">
 <noscript>
 <style>#theme-toggle,.top-link{display:none}</style>
 </noscript><meta property="og:title" content="Matrix Multiplication API Misused">
@@ -35,7 +35,7 @@ Effect Readability
 Example ### NumPy import numpy as np a = [[1, 0], [0, 1]] b = [[4, 1], [2, 2]] # Violated Code np.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://hynn01.github.io/dslinter/code-smells/matrix-multiplication-api-misused/"><meta property="article:section" content="Code Smells">
-<meta property="og:site_name" content="DSLinter - Linter for Machine Learnig Application - Specific Code Smells">
+<meta property="og:site_name" content="DSLinter - Linter for Machine Learning Application - Specific Code Smells">
 <meta name=twitter:card content="summary">
 <meta name=twitter:title content="Matrix Multiplication API Misused">
 <meta name=twitter:description content="Description np.matmul() in Numpy library is more readable than np.dot() in the semantic way. Whilenp.dot() provides heterogeneous behaviors depending on the shape of the data, np.matmul() behaves in a consistent way. When the multiply operation is performed on two-dimension matrixes, two APIs give a same result. However, np.matmul() is preferred than np.dot() for its clear semantic.
@@ -44,14 +44,14 @@ Existing Stage Model Training
 Effect Readability
 Example ### NumPy import numpy as np a = [[1, 0], [0, 1]] b = [[4, 1], [2, 2]] # Violated Code np.">
 <script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":2,"name":"Matrix Multiplication API Misused","item":"https://hynn01.github.io/dslinter/code-smells/matrix-multiplication-api-misused/"}]}</script>
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Matrix Multiplication API Misused","name":"Matrix Multiplication API Misused","description":"Description np.matmul() in Numpy library is more readable than np.dot() in the semantic way. Whilenp.dot() provides heterogeneous behaviors depending on the shape of the data, np.matmul() behaves in a consistent way. When the multiply operation is performed on two-dimension matrixes, two APIs give a same result. However, np.matmul() is preferred than np.dot() for its clear semantic.\nType API Specific\nExisting Stage Model Training\nEffect Readability\nExample ### NumPy import numpy as np a = [[1, 0], [0, 1]] b = [[4, 1], [2, 2]] # Violated Code np.","keywords":["not sure","api-specific","model training","readability"],"articleBody":"Description np.matmul() in Numpy library is more readable than np.dot() in the semantic way. Whilenp.dot() provides heterogeneous behaviors depending on the shape of the data, np.matmul() behaves in a consistent way. When the multiply operation is performed on two-dimension matrixes, two APIs give a same result. However, np.matmul() is preferred than np.dot() for its clear semantic.\nType API Specific\nExisting Stage Model Training\nEffect Readability\nExample ### NumPy import numpy as np a = [[1, 0], [0, 1]] b = [[4, 1], [2, 2]] # Violated Code np.dot(a, b) # Recommended Fix np.matmul(a, b) Source: Paper Grey Literature GitHub Commit Stack Overflow  https://stackoverflow.com/questions/54160155/does-np-dot-automatically-transpose-vectors/54161169#54161169  Documentation  https://numpy.org/doc/stable/reference/generated/numpy.dot.html#numpy.dot  ","wordCount":"105","inLanguage":"en","datePublished":"0001-01-01T00:00:00Z","dateModified":"0001-01-01T00:00:00Z","mainEntityOfPage":{"@type":"WebPage","@id":"https://hynn01.github.io/dslinter/code-smells/matrix-multiplication-api-misused/"},"publisher":{"@type":"Organization","name":"DSLinter - Linter for Machine Learnig Application - Specific Code Smells","logo":{"@type":"ImageObject","url":"https://hynn01.github.io/dslinter/%3Clink%20/%20abs%20url%3E"}}}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Matrix Multiplication API Misused","name":"Matrix Multiplication API Misused","description":"Description np.matmul() in Numpy library is more readable than np.dot() in the semantic way. Whilenp.dot() provides heterogeneous behaviors depending on the shape of the data, np.matmul() behaves in a consistent way. When the multiply operation is performed on two-dimension matrixes, two APIs give a same result. However, np.matmul() is preferred than np.dot() for its clear semantic.\nType API Specific\nExisting Stage Model Training\nEffect Readability\nExample ### NumPy import numpy as np a = [[1, 0], [0, 1]] b = [[4, 1], [2, 2]] # Violated Code np.","keywords":["not sure","api-specific","model training","readability"],"articleBody":"Description np.matmul() in Numpy library is more readable than np.dot() in the semantic way. Whilenp.dot() provides heterogeneous behaviors depending on the shape of the data, np.matmul() behaves in a consistent way. When the multiply operation is performed on two-dimension matrixes, two APIs give a same result. However, np.matmul() is preferred than np.dot() for its clear semantic.\nType API Specific\nExisting Stage Model Training\nEffect Readability\nExample ### NumPy import numpy as np a = [[1, 0], [0, 1]] b = [[4, 1], [2, 2]] # Violated Code np.dot(a, b) # Recommended Fix np.matmul(a, b) Source: Paper Grey Literature GitHub Commit Stack Overflow  https://stackoverflow.com/questions/54160155/does-np-dot-automatically-transpose-vectors/54161169#54161169  Documentation  https://numpy.org/doc/stable/reference/generated/numpy.dot.html#numpy.dot  ","wordCount":"105","inLanguage":"en","datePublished":"0001-01-01T00:00:00Z","dateModified":"0001-01-01T00:00:00Z","mainEntityOfPage":{"@type":"WebPage","@id":"https://hynn01.github.io/dslinter/code-smells/matrix-multiplication-api-misused/"},"publisher":{"@type":"Organization","name":"DSLinter - Linter for Machine Learning - Specific Code Smells","logo":{"@type":"ImageObject","url":"https://hynn01.github.io/dslinter/%3Clink%20/%20abs%20url%3E"}}}</script>
 </head>
 <body id=top>
 <script>localStorage.getItem("pref-theme")==="dark"&&document.body.classList.add('dark')</script>
 <header class=header>
 <nav class=nav>
 <div class=logo>
-<a href=https://hynn01.github.io/dslinter/ accesskey=h title="DSLinter - Linter for Machine Learnig Application - Specific Code Smells (Alt + H)">DSLinter - Linter for Machine Learnig Application - Specific Code Smells</a>
+<a href=https://hynn01.github.io/dslinter/ accesskey=h title="DSLinter - Linter for Machine Learning - Specific Code Smells (Alt + H)">DSLinter - Linter for Machine Learning - Specific Code Smells</a>
 <span class=logo-switches>
 <button id=theme-toggle accesskey=t title="(Alt + T)"><svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
 </button>
@@ -61,6 +61,11 @@ Example ### NumPy import numpy as np a = [[1, 0], [0, 1]] b = [[4, 1], [2, 2]] #
 <li>
 <a href=https://hynn01.github.io/dslinter/code-smells/ title="Code Smells">
 <span>Code Smells</span>
+</a>
+</li>
+<li>
+<a href=https://hynn01.github.io/dslinter/search/ title="Search (Alt + /)" accesskey=/>
+<span>Search</span>
 </a>
 </li>
 <li>
@@ -132,7 +137,7 @@ np<span style=color:#f92672>.</span>matmul(a, b)
 </article>
 </main>
 <footer class=footer>
-<span>&copy; 2021 <a href=https://hynn01.github.io/dslinter/>DSLinter - Linter for Machine Learnig Application - Specific Code Smells</a></span>
+<span>&copy; 2022 <a href=https://hynn01.github.io/dslinter/>DSLinter - Linter for Machine Learning - Specific Code Smells</a></span>
 <span>
 Powered by
 <a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &

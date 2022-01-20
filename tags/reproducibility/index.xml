@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>reproducibility on DSLinter - Linter for Machine Learnig Application - Specific Code Smells</title>
+    <title>reproducibility on DSLinter - Linter for Machine Learning - Specific Code Smells</title>
     <link>https://hynn01.github.io/dslinter/tags/reproducibility/</link>
-    <description>Recent content in reproducibility on DSLinter - Linter for Machine Learnig Application - Specific Code Smells</description>
+    <description>Recent content in reproducibility on DSLinter - Linter for Machine Learning - Specific Code Smells</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language><atom:link href="https://hynn01.github.io/dslinter/tags/reproducibility/index.xml" rel="self" type="application/rss+xml" />
     <item>
@@ -16,11 +16,11 @@
     </item>
     
     <item>
-      <title>Hyperparameter Not Set</title>
-      <link>https://hynn01.github.io/dslinter/code-smells/hyperparameter-not-set/</link>
+      <title>Hyperparameter not Explicitly Set</title>
+      <link>https://hynn01.github.io/dslinter/code-smells/hyperparameter-not-explicitly-set/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://hynn01.github.io/dslinter/code-smells/hyperparameter-not-set/</guid>
+      <guid>https://hynn01.github.io/dslinter/code-smells/hyperparameter-not-explicitly-set/</guid>
       <description>Description Hyperparameters are ML algorithm parameters used to control the learning process and are usually determined before the actual process starts. Hyperparameters should be set and tuned because they improve prediction quality and reproducibility. Tuning hyperparameters can lead to higher prediction quality because the default parameters of the learning algorithm may not be optimal for a given data or problem, and may lead to local optima. These parameters directly control the behavior of the training algorithm and therefore have a significant impact on the performance of the model.</description>
     </item>
     

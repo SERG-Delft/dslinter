@@ -3,7 +3,7 @@
 <meta http-equiv=x-ua-compatible content="IE=edge">
 <meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
 <meta name=robots content="index, follow">
-<title>No Scaling Before Scaling Sensitive Operation | DSLinter - Linter for Machine Learnig Application - Specific Code Smells</title>
+<title>No Scaling Before Scaling-sensitive Operation | DSLinter - Linter for Machine Learning - Specific Code Smells</title>
 <meta name=keywords content="generic,data preparation,efficiency">
 <meta name=description content="Description Principle Component Analysis (PCA) is used for finding the components that maximize the data&rsquo;s variation and reduce its dimensions, which is an essential data processing method. Scaling is pretty crucial to PCA because of the way the principal components are calculated. If one variable is on a larger scale than another, it will dominate the PCA procedure. Similarly, there are some other scaling-sensitive operations. Support Vector Machine (SVM), Stochastic Gradient Descent (SGD), Multi-layer Perceptron classifier, L1 and L2 regularization are all sensitive to feature scaling.">
 <meta name=author content>
@@ -20,26 +20,26 @@
 <link rel=mask-icon href=https://hynn01.github.io/dslinter/%3Clink%20/%20abs%20url%3E>
 <meta name=theme-color content="#2e2e33">
 <meta name=msapplication-TileColor content="#2e2e33">
-<meta name=generator content="Hugo 0.91.2">
+<meta name=generator content="Hugo 0.92.0">
 <noscript>
 <style>#theme-toggle,.top-link{display:none}</style>
-</noscript><meta property="og:title" content="No Scaling Before Scaling Sensitive Operation">
+</noscript><meta property="og:title" content="No Scaling Before Scaling-sensitive Operation">
 <meta property="og:description" content="Description Principle Component Analysis (PCA) is used for finding the components that maximize the data&rsquo;s variation and reduce its dimensions, which is an essential data processing method. Scaling is pretty crucial to PCA because of the way the principal components are calculated. If one variable is on a larger scale than another, it will dominate the PCA procedure. Similarly, there are some other scaling-sensitive operations. Support Vector Machine (SVM), Stochastic Gradient Descent (SGD), Multi-layer Perceptron classifier, L1 and L2 regularization are all sensitive to feature scaling.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://hynn01.github.io/dslinter/code-smells/no-scaling-before-scaling-sensitive-operation/"><meta property="article:section" content="Code Smells">
-<meta property="og:site_name" content="DSLinter - Linter for Machine Learnig Application - Specific Code Smells">
+<meta property="og:site_name" content="DSLinter - Linter for Machine Learning Application - Specific Code Smells">
 <meta name=twitter:card content="summary">
-<meta name=twitter:title content="No Scaling Before Scaling Sensitive Operation">
+<meta name=twitter:title content="No Scaling Before Scaling-sensitive Operation">
 <meta name=twitter:description content="Description Principle Component Analysis (PCA) is used for finding the components that maximize the data&rsquo;s variation and reduce its dimensions, which is an essential data processing method. Scaling is pretty crucial to PCA because of the way the principal components are calculated. If one variable is on a larger scale than another, it will dominate the PCA procedure. Similarly, there are some other scaling-sensitive operations. Support Vector Machine (SVM), Stochastic Gradient Descent (SGD), Multi-layer Perceptron classifier, L1 and L2 regularization are all sensitive to feature scaling.">
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":2,"name":"No Scaling Before Scaling Sensitive Operation","item":"https://hynn01.github.io/dslinter/code-smells/no-scaling-before-scaling-sensitive-operation/"}]}</script>
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"No Scaling Before Scaling Sensitive Operation","name":"No Scaling Before Scaling Sensitive Operation","description":"Description Principle Component Analysis (PCA) is used for finding the components that maximize the data\u0026rsquo;s variation and reduce its dimensions, which is an essential data processing method. Scaling is pretty crucial to PCA because of the way the principal components are calculated. If one variable is on a larger scale than another, it will dominate the PCA procedure. Similarly, there are some other scaling-sensitive operations. Support Vector Machine (SVM), Stochastic Gradient Descent (SGD), Multi-layer Perceptron classifier, L1 and L2 regularization are all sensitive to feature scaling.","keywords":["generic","data preparation","efficiency"],"articleBody":"Description Principle Component Analysis (PCA) is used for finding the components that maximize the data’s variation and reduce its dimensions, which is an essential data processing method. Scaling is pretty crucial to PCA because of the way the principal components are calculated. If one variable is on a larger scale than another, it will dominate the PCA procedure. Similarly, there are some other scaling-sensitive operations. Support Vector Machine (SVM), Stochastic Gradient Descent (SGD), Multi-layer Perceptron classifier, L1 and L2 regularization are all sensitive to feature scaling. To avoid bugs, whether feature scaling is added before these operations should be checked.\nType Generic\nExisting Stage Data Preparation\nEffect Efficiency\nExample ### Scikit-Learn PCA from sklearn.pipeline import make_pipeline from sklearn.decomposition import PCA from sklearn.naive_bayes import Gaussia # Violated Code clf = make_pipeline(PCA(n_components=2),GaussianNB()) # Recommended Fix from sklearn.preprocessing import StandardSca clf = make_pipeline(StandardScaler(),PCA(n_components=2), GaussianNB()) ### Scikit-Learn SVC from sklearn.svm import SVC # Violated Code clf = SVC() # Recommended Fix from sklearn.pipeline import make_pipeline from sklearn.preprocessing import StandardScaler clf = make_pipeline(StandardScaler(), SVC()) Source: Paper Grey Literature  https://towardsdatascience.com/my-machine-learning-model-is-perfect-9a7928e0f604 https://ml.posthaven.com/machine-learning-done-wrong  GitHub Commit Stack Overflow  https://stackoverflow.com/questions/17455302/gridsearchcv-extremely-slow-on-small-dataset-in-scikit-learn/23813876#23813876  Documentation  https://scikit-learn.org/stable/modules/preprocessing.html  ","wordCount":"182","inLanguage":"en","datePublished":"0001-01-01T00:00:00Z","dateModified":"0001-01-01T00:00:00Z","mainEntityOfPage":{"@type":"WebPage","@id":"https://hynn01.github.io/dslinter/code-smells/no-scaling-before-scaling-sensitive-operation/"},"publisher":{"@type":"Organization","name":"DSLinter - Linter for Machine Learnig Application - Specific Code Smells","logo":{"@type":"ImageObject","url":"https://hynn01.github.io/dslinter/%3Clink%20/%20abs%20url%3E"}}}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":2,"name":"No Scaling Before Scaling-sensitive Operation","item":"https://hynn01.github.io/dslinter/code-smells/no-scaling-before-scaling-sensitive-operation/"}]}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"No Scaling Before Scaling-sensitive Operation","name":"No Scaling Before Scaling-sensitive Operation","description":"Description Principle Component Analysis (PCA) is used for finding the components that maximize the data\u0026rsquo;s variation and reduce its dimensions, which is an essential data processing method. Scaling is pretty crucial to PCA because of the way the principal components are calculated. If one variable is on a larger scale than another, it will dominate the PCA procedure. Similarly, there are some other scaling-sensitive operations. Support Vector Machine (SVM), Stochastic Gradient Descent (SGD), Multi-layer Perceptron classifier, L1 and L2 regularization are all sensitive to feature scaling.","keywords":["generic","data preparation","efficiency"],"articleBody":"Description Principle Component Analysis (PCA) is used for finding the components that maximize the data’s variation and reduce its dimensions, which is an essential data processing method. Scaling is pretty crucial to PCA because of the way the principal components are calculated. If one variable is on a larger scale than another, it will dominate the PCA procedure. Similarly, there are some other scaling-sensitive operations. Support Vector Machine (SVM), Stochastic Gradient Descent (SGD), Multi-layer Perceptron classifier, L1 and L2 regularization are all sensitive to feature scaling. To avoid bugs, whether feature scaling is added before these operations should be checked.\nType Generic\nExisting Stage Data Preparation\nEffect Efficiency\nExample ### Scikit-Learn PCA from sklearn.datasets import load_wine from sklearn.model_selection import train_test_split from sklearn.pipeline import make_pipeline from sklearn.decomposition import PCA from sklearn.naive_bayes import GaussianNB from sklearn.metrics import accuracy_score + from sklearn.preprocessing import StandardScaler  # Code source: Tyler Lanigan  # Sebastian Raschka  # License: BSD 3 clause # Make a train/test split using 30% test size RANDOM_STATE = 42 features, target = load_wine(return_X_y=True) X_train, X_test, y_train, y_test = train_test_split( features, target, test_size=0.30, random_state=RANDOM_STATE ) # Fit to data and predict using pipeline - clf = make_pipeline(PCA(n_components=2), GaussianNB()) + clf = make_pipeline(StandardScaler(), PCA(n_components=2), GaussianNB()) clf.fit(X_train, y_train) pred_test = clf.predict(X_test) ac = accuracy_score(y_test, pred_test) ### Scikit-Learn SVC from sklearn.datasets import load_wine from sklearn.model_selection import train_test_split from sklearn.metrics import accuracy_score from sklearn.svm import SVC + from sklearn.pipeline import make_pipeline + from sklearn.preprocessing import StandardScaler  # Make a train/test split using 30% test size RANDOM_STATE = 42 features, target = load_wine(return_X_y=True) X_train, X_test, y_train, y_test = train_test_split( features, target, test_size=0.30, random_state=RANDOM_STATE ) # Fit to data and predict using pipelined GNB and PCA - clf = SVC() + clf = make_pipeline(StandardScaler(), SVC()) clf.fit(X_train, y_train) pred_test = clf.predict(X_test) ac = accuracy_score(y_test, pred_test) Source: Paper Grey Literature  https://towardsdatascience.com/my-machine-learning-model-is-perfect-9a7928e0f604 https://ml.posthaven.com/machine-learning-done-wrong  GitHub Commit Stack Overflow  https://stackoverflow.com/questions/17455302/gridsearchcv-extremely-slow-on-small-dataset-in-scikit-learn/23813876#23813876  Documentation  https://scikit-learn.org/stable/modules/preprocessing.html https://scikit-learn.org/stable/auto_examples/preprocessing/plot_scaling_importance.html#sphx-glr-download-auto-examples-preprocessing-plot-scaling-importance-py  ","wordCount":"310","inLanguage":"en","datePublished":"0001-01-01T00:00:00Z","dateModified":"0001-01-01T00:00:00Z","mainEntityOfPage":{"@type":"WebPage","@id":"https://hynn01.github.io/dslinter/code-smells/no-scaling-before-scaling-sensitive-operation/"},"publisher":{"@type":"Organization","name":"DSLinter - Linter for Machine Learning - Specific Code Smells","logo":{"@type":"ImageObject","url":"https://hynn01.github.io/dslinter/%3Clink%20/%20abs%20url%3E"}}}</script>
 </head>
 <body id=top>
 <script>localStorage.getItem("pref-theme")==="dark"&&document.body.classList.add('dark')</script>
 <header class=header>
 <nav class=nav>
 <div class=logo>
-<a href=https://hynn01.github.io/dslinter/ accesskey=h title="DSLinter - Linter for Machine Learnig Application - Specific Code Smells (Alt + H)">DSLinter - Linter for Machine Learnig Application - Specific Code Smells</a>
+<a href=https://hynn01.github.io/dslinter/ accesskey=h title="DSLinter - Linter for Machine Learning - Specific Code Smells (Alt + H)">DSLinter - Linter for Machine Learning - Specific Code Smells</a>
 <span class=logo-switches>
 <button id=theme-toggle accesskey=t title="(Alt + T)"><svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
 </button>
@@ -49,6 +49,11 @@
 <li>
 <a href=https://hynn01.github.io/dslinter/code-smells/ title="Code Smells">
 <span>Code Smells</span>
+</a>
+</li>
+<li>
+<a href=https://hynn01.github.io/dslinter/search/ title="Search (Alt + /)" accesskey=/>
+<span>Search</span>
 </a>
 </li>
 <li>
@@ -69,7 +74,7 @@
 <header class=post-header>
 <div class=breadcrumbs><a href=https://hynn01.github.io/dslinter/>Home</a></div>
 <h1 class=post-title>
-No Scaling Before Scaling Sensitive Operation
+No Scaling Before Scaling-sensitive Operation
 </h1>
 <div class=post-meta>
 </div>
@@ -83,29 +88,55 @@ No Scaling Before Scaling Sensitive Operation
 <h3 id=effect>Effect<a hidden class=anchor aria-hidden=true href=#effect>#</a></h3>
 <p>Efficiency</p>
 <h3 id=example>Example<a hidden class=anchor aria-hidden=true href=#example>#</a></h3>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python>
-<span style=color:#75715e>### Scikit-Learn PCA</span>
-<span style=color:#f92672>from</span> sklearn.pipeline <span style=color:#f92672>import</span> make_pipeline
-<span style=color:#f92672>from</span> sklearn.decomposition <span style=color:#f92672>import</span> PCA
-<span style=color:#f92672>from</span> sklearn.naive_bayes <span style=color:#f92672>import</span> Gaussia
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-diff data-lang=diff>### Scikit-Learn PCA
+from sklearn.datasets import load_wine
+from sklearn.model_selection import train_test_split
+from sklearn.pipeline import make_pipeline
+from sklearn.decomposition import PCA
+from sklearn.naive_bayes import GaussianNB
+from sklearn.metrics import accuracy_score
+<span style=color:#a6e22e>+ from sklearn.preprocessing import StandardScaler
+</span><span style=color:#a6e22e></span>
+# Code source: Tyler Lanigan &lt;tylerlanigan@gmail.com&gt;
+#              Sebastian Raschka &lt;mail@sebastianraschka.com&gt;
+# License: BSD 3 clause
 
-<span style=color:#75715e># Violated Code</span>
-clf <span style=color:#f92672>=</span> make_pipeline(PCA(n_components<span style=color:#f92672>=</span><span style=color:#ae81ff>2</span>),GaussianNB())
+# Make a train/test split using 30% test size
+RANDOM_STATE = 42
+features, target = load_wine(return_X_y=True)
+X_train, X_test, y_train, y_test = train_test_split(
+    features, target, test_size=0.30, random_state=RANDOM_STATE
+)
 
-<span style=color:#75715e># Recommended Fix</span>
-<span style=color:#f92672>from</span> sklearn.preprocessing <span style=color:#f92672>import</span> StandardSca
-clf <span style=color:#f92672>=</span> make_pipeline(StandardScaler(),PCA(n_components<span style=color:#f92672>=</span><span style=color:#ae81ff>2</span>), GaussianNB())
+# Fit to data and predict using pipeline
+<span style=color:#f92672>- clf = make_pipeline(PCA(n_components=2), GaussianNB())
+</span><span style=color:#f92672></span><span style=color:#a6e22e>+ clf = make_pipeline(StandardScaler(), PCA(n_components=2), GaussianNB())
+</span><span style=color:#a6e22e></span>clf.fit(X_train, y_train)
+pred_test = clf.predict(X_test)
+ac = accuracy_score(y_test, pred_test)
 
-<span style=color:#75715e>### Scikit-Learn SVC</span>
-<span style=color:#f92672>from</span> sklearn.svm <span style=color:#f92672>import</span> SVC
 
-<span style=color:#75715e># Violated Code</span>
-clf <span style=color:#f92672>=</span> SVC()
+### Scikit-Learn SVC
+from sklearn.datasets import load_wine
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+from sklearn.svm import SVC
+<span style=color:#a6e22e>+ from sklearn.pipeline import make_pipeline
+</span><span style=color:#a6e22e>+ from sklearn.preprocessing import StandardScaler
+</span><span style=color:#a6e22e></span>
+# Make a train/test split using 30% test size
+RANDOM_STATE = 42
+features, target = load_wine(return_X_y=True)
+X_train, X_test, y_train, y_test = train_test_split(
+    features, target, test_size=0.30, random_state=RANDOM_STATE
+)
 
-<span style=color:#75715e># Recommended Fix</span>
-<span style=color:#f92672>from</span> sklearn.pipeline <span style=color:#f92672>import</span> make_pipeline
-<span style=color:#f92672>from</span> sklearn.preprocessing <span style=color:#f92672>import</span> StandardScaler
-clf <span style=color:#f92672>=</span> make_pipeline(StandardScaler(), SVC())
+# Fit to data and predict using pipelined GNB and PCA
+<span style=color:#f92672>- clf = SVC()
+</span><span style=color:#f92672></span><span style=color:#a6e22e>+ clf = make_pipeline(StandardScaler(), SVC())
+</span><span style=color:#a6e22e></span>clf.fit(X_train, y_train)
+pred_test = clf.predict(X_test)
+ac = accuracy_score(y_test, pred_test)
 </code></pre></div><h3 id=source>Source:<a hidden class=anchor aria-hidden=true href=#source>#</a></h3>
 <h4 id=paper>Paper<a hidden class=anchor aria-hidden=true href=#paper>#</a></h4>
 <h4 id=grey-literature>Grey Literature<a hidden class=anchor aria-hidden=true href=#grey-literature>#</a></h4>
@@ -121,6 +152,7 @@ clf <span style=color:#f92672>=</span> make_pipeline(StandardScaler(), SVC())
 <h4 id=documentation>Documentation<a hidden class=anchor aria-hidden=true href=#documentation>#</a></h4>
 <ul>
 <li><a href=https://scikit-learn.org/stable/modules/preprocessing.html>https://scikit-learn.org/stable/modules/preprocessing.html</a></li>
+<li><a href=https://scikit-learn.org/stable/auto_examples/preprocessing/plot_scaling_importance.html#sphx-glr-download-auto-examples-preprocessing-plot-scaling-importance-py>https://scikit-learn.org/stable/auto_examples/preprocessing/plot_scaling_importance.html#sphx-glr-download-auto-examples-preprocessing-plot-scaling-importance-py</a></li>
 </ul>
 </div>
 <footer class=post-footer>
@@ -133,7 +165,7 @@ clf <span style=color:#f92672>=</span> make_pipeline(StandardScaler(), SVC())
 </article>
 </main>
 <footer class=footer>
-<span>&copy; 2021 <a href=https://hynn01.github.io/dslinter/>DSLinter - Linter for Machine Learnig Application - Specific Code Smells</a></span>
+<span>&copy; 2022 <a href=https://hynn01.github.io/dslinter/>DSLinter - Linter for Machine Learning - Specific Code Smells</a></span>
 <span>
 Powered by
 <a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &
