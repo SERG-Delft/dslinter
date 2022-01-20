@@ -1,4 +1,4 @@
-title: DSLinter - Linter for Machine Learnig Application - Specific Code Smells
+title: DSLinter - Linter for Machine Learning - Specific Code Smells
 baseURL: https://hynn01.github.io/dslinter/
 languageCode: en-us
 theme: "PaperMod"
@@ -29,14 +29,23 @@ menu:
       name: Survey
       url: 
       weight: 10
+    - name: Search
+      url: search/
+      weight: 10
 
+outputs:
+  home:
+      - HTML
+      - RSS
+      - JSON # is necessary
+      
 taxonomies:
     Code Smell: Code Smell
     tag: tags
 
 params:
   # env: production # to enable google analytics, opengraph, twitter-cards and schema.
-  title: DSLinter - Linter for Machine Learnig Application - Specific Code Smells
+  title: DSLinter - Linter for Machine Learning Application - Specific Code Smells
   description: ""
   # keywords: [Blog, Portfolio, PaperMod]
   # author: Me
@@ -67,7 +76,7 @@ params:
     safari_pinned_tab: "<link / abs url>"
 
   label:
-    text: "DSLinter - Linter for Machine Learnig Application - Specific Code Smells"
+    text: "DSLinter - Linter for Machine Learning - Specific Code Smells"
 
   # # profile-mode
   # profileMode:

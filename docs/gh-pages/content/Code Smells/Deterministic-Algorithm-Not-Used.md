@@ -22,17 +22,10 @@ Reproducibility
 
 ### Example
 
-```python
-
+```diff
 ### PyTorch
 import torch
-
-# Violated Code
-# torch.use_deterministic_algorithms(True) not used
-
-# Recommended Fix
-torch.use_deterministic_algorithms(True)
-
++ torch.use_deterministic_algorithms(True)
 ```
 
 ### Source:

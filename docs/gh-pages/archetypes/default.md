@@ -1,12 +1,19 @@
 ---
 title: "{{ replace .Name "-" " " | title }}"
 disableShare: true
-# ShowReadingTime: true
+summary:
 tags: 
 weight: 
+# ShowReadingTime: true	
 ---
 
 ### Description
+
+#### Context
+
+#### Problem
+
+#### Solution
 
 
 ### Type
@@ -20,10 +27,7 @@ weight:
 
 ### Example
 
-```python
-# Violated Code
-
-# Recommended Fix
+```diff
 
 ```
 

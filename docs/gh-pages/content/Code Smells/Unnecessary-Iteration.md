@@ -1,5 +1,5 @@
 ---
-title: "Vectorized Solution Unused"
+title: "Unnecessary Iteration"
 disableShare: true
 # ShowReadingTime: true
 tags: ["generic","data preparation","efficiency"]
@@ -24,21 +24,23 @@ Efficiency
 
 ### Example
 
-```python
-
+```diff
 ### Pandas
 import pandas as pd
 df = pd.DataFrame([1, 2, 3])
+- result = []
+- for index, row in df.iterrows():
+- 	result.append(row[0] + 1)
+- result = pd.DataFrame(result)
++ result = df.add(1)
 
-# Violated Code
-result = []
-for index, row in df.iterrows():
-	result.append(row[0] + 1)
-	result = pd.DataFrame(result)
-
-# Recommended Fix
-result = df.add(1)
-
+### TensorFlow 2
+import tensorflow as tf
+x = tf.random.uniform([500, 10])
+- z = tf.zeros([10])
+- for i in range(500):
+-    z += x[i]
++ z = tf.reduce_sum(x, axis=0)
 ```
 
 ### Source:

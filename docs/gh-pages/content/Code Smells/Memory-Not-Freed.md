@@ -1,5 +1,5 @@
 ---
-title: "Memory Not Freed"
+title: "Memory not Freed"
 disableShare: true
 # ShowReadingTime: true
 tags: ["generic", "model training", "memory issue"]
@@ -24,33 +24,15 @@ Memory Issue
 
 ### Example
 
-```python
+```diff
 
 ### TensorFlow
 import tensorflow as tf
 
 # Violated Code
 for _ in range(100):
-  # Without `clear_session()`, each iteration of this loop will
-  # slightly increase the size of the global state managed by Keras
-  model = tf.keras.Sequential([tf.keras.layers.Dense(10) for _ in range(10)])
-
-# Recommended Fix
-for _ in range(100):
-  # With `clear_session()` called at the beginning,
-  # Keras starts with a blank state at each iteration
-  # and memory consumption is constant over time.
-  tf.keras.backend.clear_session()
-  model = tf.keras.Sequential([tf.keras.layers.Dense(10) for _ in range(10)])
-
-### PyTorch
-
-# Violated Code
-acc = accuracy(output, label)
-
-# Recommended Fix
-acc = accuracy(output, label)
-acc = float(acc.cpu().detach().numpy())
++  tf.keras.backend.clear_session()
+   model = tf.keras.Sequential([tf.keras.layers.Dense(10) for _ in range(10)])
 
 ```
 

@@ -26,27 +26,18 @@ Error-prone
 
 ### Example
 
-```python
+```diff
 ### NumPy
 import numpy as np
 zhats = [2, 3, 1, 0]
-
-# Violated Code
-np.clip(zhats, -1, 1)
-
-# Recommended Fix
-zhats = np.clip(zhats, -1, 1)
+- np.clip(zhats, -1, 1)
++ zhats = np.clip(zhats, -1, 1)
 
 ### Pandas
 import pandas as pd
 df = pd.DataFrame([-1])
-
-# Violated Code
-df.abs()
-
-# Recommended Fix
-df_abs = df.abs()
-
+- df.abs()
++ df = df.abs()
 ```
 
 ### Source:

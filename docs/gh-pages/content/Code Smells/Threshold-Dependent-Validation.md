@@ -26,17 +26,17 @@ Robustness
 
 ### Example
 
-```python
+```diff
 ### Scikit-Learn
-import sklearn
+from sklearn import metrics
+y_true = [0, 1, 2, 0, 1, 2]
+y_pred = [0, 2, 1, 0, 0, 1]
+metrics.f1_score(y_true, y_pred, average='weighted')
 
-# Violated Code
-sklearn.metrics.f1_score()
-
-# Recommended Fix
-sklearn.metrics.auc(fpr, tpr)
-
-
++ y = [1, 1, 2, 2]
++ pred = [0.1, 0.4, 0.35, 0.8]
++ fpr, tpr, thresholds = metrics.roc_curve(y, pred, pos_label=2)
++ print(metrics.auc(fpr, tpr))
 ```
 
 ### Source:

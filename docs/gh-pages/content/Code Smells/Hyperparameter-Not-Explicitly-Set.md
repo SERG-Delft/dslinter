@@ -1,5 +1,5 @@
 ---
-title: "Hyperparameter Not Set"
+title: "Hyperparameter not Explicitly Set"
 disableShare: true
 # ShowReadingTime: true
 tags: ["generic", "data preparation", "error-prone","reproducibility"]
@@ -28,40 +28,36 @@ Error-prone & Reproducibility
 
 ### Example
 
-```python
-
+```diff
 ### Scikit-Learn
-
 from sklearn.cluster import KMeans
 
-# Violated Code
-kmeans = KMeans()
-
-# Recommended Fix
-kmeans = KMeans(n_clusters=8, random_state=0)
-# Or, ideally:
-kmeans = KMeans(n_clusters=8,
-init='k-means++', n_init=10,
-max_iter=300, tol=0.0001,
-precompute_distances='auto',
-verbose=0, random_state=0,
-copy_x=True, n_jobs=1,
-algorithm='auto')
+- kmeans = KMeans()
++ kmeans = KMeans(n_clusters=8, random_state=0)
++ # Or, ideally:
++ kmeans = KMeans(n_clusters=8,
++ init='k-means++', n_init=10,
++ max_iter=300, tol=0.0001,
++ precompute_distances='auto',
++ verbose=0, random_state=0,
++ copy_x=True, n_jobs=1,
++ algorithm='auto')
 
 ### PyTorch
-from fast_pytorch_kmeans import KMeans
 import torch
+import numpy as np
+from kmeans_pytorch import kmeans
 
-# Violated Code
-kmeans = KMeans()
-x = torch.randn(100000, 64, device='cuda')
-labels = kmeans.fit_predict(x)
+# data
+data_size, dims, num_clusters = 1000, 2, 3
+x = np.random.randn(data_size, dims) / 6
+x = torch.from_numpy(x)
 
-# Recommended Fix
-kmeans = KMeans(n_clusters=8, mode='euclidean', verbose=1)
-x = torch.randn(100000, 64, device='cuda')
-labels = kmeans.fit_predict(x)
-
+# kmeans
+- cluster_ids_x, cluster_centers = kmeans(X=x, num_clusters=num_clusters)
++ cluster_ids_x, cluster_centers = kmeans(
++     X=x, num_clusters=num_clusters, distance='euclidean', device=torch.device('cpu')
++ )
 ```
 
 ### Source:

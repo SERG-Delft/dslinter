@@ -25,55 +25,29 @@ Reproducibility
 
 ### Example
 
-```python
-
+```diff
 ### python in general
-
-# Violated Code
-# random seed not set
-
-# Recommended Fix
 import random
-random.seed(0)
++ random.seed(0)
 
 ### Tensorflow
-
-# Violated Code
-# random seed not set
-
-# Recommended Fix
 import tensoflow as tf
-tf.random.set_seed(0)
++ tf.random.set_seed(0)
 
 ### PyTorch
-
-# Violated Code
-# random seed not set
-
-# Recommended Fix
 import torch
-torch.manual_seed(0)
++ torch.manual_seed(0)
 
 ### Scikit-Learn
 from sklearn.model_selection 
 import KFold
-
-# Violated Code
-kf = KFold(random_state=None)
-
-# Recommended Fix
-rng = 0
-kf = KFold(random_state=rng)
++ rng = 0
+- kf = KFold(random_state=None)
++ kf = KFold(random_state=rng)
 
 ### NumPy
-
-# Violated Code
-# random seed not set
-
-# Recommended Fix
 import numpy as np
-np.random.seed(0)
-
++ np.random.seed(0)
 ```
 
 ### Source:
