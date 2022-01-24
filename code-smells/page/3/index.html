@@ -3,11 +3,11 @@
 <meta http-equiv=x-ua-compatible content="IE=edge">
 <meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
 <meta name=robots content="index, follow">
-<title>api-specific | DSLinter - Linter for Machine Learning - Specific Code Smells</title>
+<title>Code Smells | DSLinter - Linter for Machine Learning - Specific Code Smells</title>
 <meta name=keywords content>
-<meta name=description content>
+<meta name=description content="Code Smells - DSLinter - Linter for Machine Learning - Specific Code Smells">
 <meta name=author content>
-<link rel=canonical href=https://hynn01.github.io/dslinter/tags/api-specific/>
+<link rel=canonical href=https://hynn01.github.io/dslinter/code-smells/>
 <meta name=google-site-verification content="XYZabc">
 <meta name=yandex-verification content="XYZabc">
 <meta name=msvalidate.01 content="XYZabc">
@@ -20,16 +20,17 @@
 <meta name=theme-color content="#2e2e33">
 <meta name=msapplication-TileColor content="#2e2e33">
 <meta name=generator content="Hugo 0.92.0">
-<link rel=alternate type=application/rss+xml href=https://hynn01.github.io/dslinter/tags/api-specific/index.xml>
+<link rel=alternate type=application/rss+xml href=https://hynn01.github.io/dslinter/code-smells/index.xml>
 <noscript>
 <style>#theme-toggle,.top-link{display:none}</style>
-</noscript><meta property="og:title" content="api-specific">
+</noscript><meta property="og:title" content="Code Smells">
 <meta property="og:description" content>
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://hynn01.github.io/dslinter/tags/api-specific/"><meta property="og:site_name" content="DSLinter - Linter for Machine Learning Application - Specific Code Smells">
+<meta property="og:url" content="https://hynn01.github.io/dslinter/code-smells/"><meta property="og:site_name" content="DSLinter - Linter for Machine Learning Application - Specific Code Smells">
 <meta name=twitter:card content="summary">
-<meta name=twitter:title content="api-specific">
+<meta name=twitter:title content="Code Smells">
 <meta name=twitter:description content>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Code Smells","item":"https://hynn01.github.io/dslinter/code-smells/"}]}</script>
 </head>
 <body class=list id=top>
 <script>localStorage.getItem("pref-theme")==="dark"&&document.body.classList.add('dark')</script>
@@ -45,7 +46,7 @@
 <ul id=menu>
 <li>
 <a href=https://hynn01.github.io/dslinter/code-smells/ title="Code Smells">
-<span>Code Smells</span>
+<span class=active>Code Smells</span>
 </a>
 </li>
 <li>
@@ -67,42 +68,56 @@
 </nav>
 </header>
 <main class=main>
-<header class=page-header><div class=breadcrumbs><a href=https://hynn01.github.io/dslinter/>Home</a>&nbsp;»&nbsp;<a href=https://hynn01.github.io/dslinter/tags/>Tags</a></div>
-<h1>api-specific</h1>
+<header class=page-header><div class=breadcrumbs><a href=https://hynn01.github.io/dslinter/>Home</a></div>
+<h1>Code Smells</h1>
 </header>
-<article class="post-entry tag-entry">
+<article class=post-entry>
 <header class=entry-header>
-<h2>Zero_grad Not Used Before Backward
+<h2>Columns and DataType Not Explicitly Set
 </h2>
 </header>
 <section class=entry-content>
-<p>Description Developers should use optimizer.zero_grad(), loss_fn.backward(), optimizer.step() together and should be forget to use optimizer.zero_grad() before loss_fn.backward(). optimizer.zero_grad() clears the old gradients from last step. If this API is not used, the gradients will be accumulated from all loss.backward() calls and it will lead to the gradient explosion, which fails the training.
-Type API Specific
-Existing Stage Model Training
-Effect Error-prone
-Example # PyTorch # 1. Load and normalize CIFAR10 import torch import torchvision import torchvision....</p>
+<p>Description Context Problem Solution Type Existing Stage Effect Example import pandas as pd df = pd.read_csv('data.csv') + df = df[['col1', 'col2', 'col3']] Source: Paper Grey Literature GitHub Commit Stack Overflow Documentation </p>
 </section>
 <footer class=entry-footer></footer>
-<a class=entry-link aria-label="post link to Zero_grad Not Used Before Backward" href=https://hynn01.github.io/dslinter/code-smells/zero_grad-not-used-before-backward/></a>
+<a class=entry-link aria-label="post link to Columns and DataType Not Explicitly Set" href=https://hynn01.github.io/dslinter/code-smells/columns-and-datatype-not-explicitly-set/></a>
 </article>
-<article class="post-entry tag-entry">
+<article class=post-entry>
 <header class=entry-header>
-<h2>Loss API Misused
+<h2>Empty Column Misinitialization
 </h2>
 </header>
 <section class=entry-content>
-<p>Description Different loss APIs take different input formats, but the difference is not clarified in some documentations, so it is easy to misuse. For example, in PyTorch, the NLLLoss takes the output of LogSoftmax as the input. If the input given to NLLLoss has not been processed by LogSoftmax, it might lead to a wrong result.
-Type API Specific
-Existing Stage Model Training
-Effect Error-prone
-Example ### PyTorch import torch.nn as nn import torch + m = nn....</p>
+<p>Description Context Problem Solution Type Existing Stage Effect Example import pandas as pd + import numpy as np df = pd.DataFrame([]) - df['new_col_int'] = 0 - df['new_col_str'] = '' + df['new_col_float'] = np.nan + df['new_col_int'] = pd.Series(dtype='int') + df['new_col_str'] = pd.Series(dtype='object') Source: Paper Grey Literature GitHub Commit Stack Overflow Documentation </p>
 </section>
 <footer class=entry-footer></footer>
-<a class=entry-link aria-label="post link to Loss API Misused" href=https://hynn01.github.io/dslinter/code-smells/loss-api-misused/></a>
+<a class=entry-link aria-label="post link to Empty Column Misinitialization" href=https://hynn01.github.io/dslinter/code-smells/empty-column-misinitialization/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>Merge API Parameter Not Explicitly Set
+</h2>
+</header>
+<section class=entry-content>
+<p></p>
+</section>
+<footer class=entry-footer></footer>
+<a class=entry-link aria-label="post link to Merge API Parameter Not Explicitly Set" href=https://hynn01.github.io/dslinter/code-smells/merge-api-parameter-not-explicitly-set/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>TensorArray Not Used
+</h2>
+</header>
+<section class=entry-content>
+<p>Description Context Problem Solution Type Existing Stage Effect Example ### TensorFlow import tensorflow as tf @tf.function def fibonacci(n): a = tf.constant(1) b = tf.constant(1) - c = tf.constant([1, 1]) + c = tf.TensorArray(tf.int32, n) + c = c.write(0, a) + c = c.write(1, b) for i in range(2, n): a, b = b, a + b - c = tf.concat([c, [b]], 0) + c = c.write(i, b) - return c + return c....</p>
+</section>
+<footer class=entry-footer></footer>
+<a class=entry-link aria-label="post link to TensorArray Not Used" href=https://hynn01.github.io/dslinter/code-smells/tensorarray-not-used/></a>
 </article>
 <footer class=page-footer>
 <nav class=pagination>
-<a class=prev href=https://hynn01.github.io/dslinter/tags/api-specific/>« Prev Page</a>
+<a class=prev href=https://hynn01.github.io/dslinter/code-smells/page/2/>« Prev Page</a>
 </nav>
 </footer>
 </main>

@@ -26,10 +26,10 @@
     
     <item>
       <title>Chain Indexing Misused</title>
-      <link>https://hynn01.github.io/dslinter/code-smells/chain-indexing-misused/</link>
+      <link>https://hynn01.github.io/dslinter/code-smells/chain-indexing/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://hynn01.github.io/dslinter/code-smells/chain-indexing-misused/</guid>
+      <guid>https://hynn01.github.io/dslinter/code-smells/chain-indexing/</guid>
       <description>Avoid using chain indexing in Pandas.</description>
     </item>
     

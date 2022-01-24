@@ -82,10 +82,10 @@ Effect Error-prone</description>
     
     <item>
       <title>Chain Indexing Misused</title>
-      <link>https://hynn01.github.io/dslinter/code-smells/chain-indexing-misused/</link>
+      <link>https://hynn01.github.io/dslinter/code-smells/chain-indexing/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://hynn01.github.io/dslinter/code-smells/chain-indexing-misused/</guid>
+      <guid>https://hynn01.github.io/dslinter/code-smells/chain-indexing/</guid>
       <description>Avoid using chain indexing in Pandas.</description>
     </item>
     
@@ -134,7 +134,7 @@ Example ### TensorFlow import tensorflow as tf # Violated Code init = tf.</descr
 Type API Specific
 Existing Stage Model Training
 Effect Error-prone
-Example ### PyTorch # Violated Code output = model(input) # forward-pass loss_fn.</description>
+Example # PyTorch # 1. Load and normalize CIFAR10 import torch import torchvision import torchvision.</description>
     </item>
     
     <item>
@@ -147,15 +147,15 @@ Example ### PyTorch # Violated Code output = model(input) # forward-pass loss_fn
 Type API Specific
 Existing Stage Model Training
 Effect Error-prone
-Example ### PyTorch # Violated Code loss = nn.</description>
+Example ### PyTorch import torch.nn as nn import torch + m = nn.</description>
     </item>
     
     <item>
       <title>Initialize Weight to a Constant</title>
-      <link>https://hynn01.github.io/dslinter/code-smells/initialize-weight-to-zero/</link>
+      <link>https://hynn01.github.io/dslinter/deprecated/initialize-weight-to-zero/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://hynn01.github.io/dslinter/code-smells/initialize-weight-to-zero/</guid>
+      <guid>https://hynn01.github.io/dslinter/deprecated/initialize-weight-to-zero/</guid>
       <description>Description In neural network, if all the weights are initialized to a constant, i.e., all the neurons starts with the same weight, all the neurons will follow the same gradient during the backward propagation update. As a result, neurons will learn same features in each iterations. In this way, the nueral netwok will provide a poor result.
 Type Generic
 Existing Stage Model Training

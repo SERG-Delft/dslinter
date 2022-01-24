@@ -20,10 +20,10 @@ Effect Error-prone</description>
     
     <item>
       <title>Chain Indexing Misused</title>
-      <link>https://hynn01.github.io/dslinter/code-smells/chain-indexing-misused/</link>
+      <link>https://hynn01.github.io/dslinter/code-smells/chain-indexing/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://hynn01.github.io/dslinter/code-smells/chain-indexing-misused/</guid>
+      <guid>https://hynn01.github.io/dslinter/code-smells/chain-indexing/</guid>
       <description>Avoid using chain indexing in Pandas.</description>
     </item>
     
@@ -81,7 +81,7 @@ Example ### Pandas import pandas as pd # Violated Code pd.eval(&amp;#39;df.A.str
 Type API Specific
 Existing Stage Model Training
 Effect Readability
-Example ### NumPy import numpy as np a = [[1, 0], [0, 1]] b = [[4, 1], [2, 2]] # Violated Code np.</description>
+Example ### NumPy import numpy as np a = [[1, 0], [0, 1]] b = [[4, 1], [2, 2]] - np.</description>
     </item>
     
     <item>
@@ -107,7 +107,7 @@ Example ### TensorFlow import tensorflow as tf # Violated Code init = tf.</descr
 Type API Specific
 Existing Stage Model Training
 Effect Robustness
-Example ### PyTorch # Violated Code output = self.net.forward(input) # Recommended Fix output = self.net(input) Source: Paper Grey Literature  https://github.com/IgorSusmelj/pytorch-styleguide  GitHub Commit Stack Overflow Documentation </description>
+Example ### PyTorch # 1. Load and normalize CIFAR10 import torch import torchvision import torchvision.transforms as transforms transform = transforms.Compose( [transforms.ToTensor(), transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.</description>
     </item>
     
     <item>
@@ -129,7 +129,7 @@ Example ### PyTorch # Violated Code output = self.net.forward(input) # Recommend
 Type API Specific
 Existing Stage Model Training
 Effect Error-prone
-Example ### PyTorch # Violated Code output = model(input) # forward-pass loss_fn.</description>
+Example # PyTorch # 1. Load and normalize CIFAR10 import torch import torchvision import torchvision.</description>
     </item>
     
     <item>
@@ -142,7 +142,7 @@ Example ### PyTorch # Violated Code output = model(input) # forward-pass loss_fn
 Type API Specific
 Existing Stage Model Training
 Effect Error-prone
-Example ### PyTorch # Violated Code loss = nn.</description>
+Example ### PyTorch import torch.nn as nn import torch + m = nn.</description>
     </item>
     
   </channel>

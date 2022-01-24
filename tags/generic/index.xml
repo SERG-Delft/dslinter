@@ -116,10 +116,10 @@ Type Generic</description>
     
     <item>
       <title>Initialize Weight to a Constant</title>
-      <link>https://hynn01.github.io/dslinter/code-smells/initialize-weight-to-zero/</link>
+      <link>https://hynn01.github.io/dslinter/deprecated/initialize-weight-to-zero/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://hynn01.github.io/dslinter/code-smells/initialize-weight-to-zero/</guid>
+      <guid>https://hynn01.github.io/dslinter/deprecated/initialize-weight-to-zero/</guid>
       <description>Description In neural network, if all the weights are initialized to a constant, i.e., all the neurons starts with the same weight, all the neurons will follow the same gradient during the backward propagation update. As a result, neurons will learn same features in each iterations. In this way, the nueral netwok will provide a poor result.
 Type Generic
 Existing Stage Model Training

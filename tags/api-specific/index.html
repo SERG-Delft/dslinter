@@ -93,7 +93,7 @@ Effect Error-prone...</p>
 <p>Avoid using chain indexing in Pandas.</p>
 </section>
 <footer class=entry-footer></footer>
-<a class=entry-link aria-label="post link to Chain Indexing Misused" href=https://hynn01.github.io/dslinter/code-smells/chain-indexing-misused/></a>
+<a class=entry-link aria-label="post link to Chain Indexing Misused" href=https://hynn01.github.io/dslinter/code-smells/chain-indexing/></a>
 </article>
 <article class="post-entry tag-entry">
 <header class=entry-header>
@@ -157,7 +157,7 @@ Example ### Pandas import pandas as pd # Violated Code pd.eval('df.A.str.contain
 Type API Specific
 Existing Stage Model Training
 Effect Readability
-Example ### NumPy import numpy as np a = [[1, 0], [0, 1]] b = [[4, 1], [2, 2]] # Violated Code np....</p>
+Example ### NumPy import numpy as np a = [[1, 0], [0, 1]] b = [[4, 1], [2, 2]] - np....</p>
 </section>
 <footer class=entry-footer></footer>
 <a class=entry-link aria-label="post link to Matrix Multiplication API Misused" href=https://hynn01.github.io/dslinter/code-smells/matrix-multiplication-api-misused/></a>
@@ -187,7 +187,7 @@ Example ### TensorFlow import tensorflow as tf # Violated Code init = tf....</p>
 Type API Specific
 Existing Stage Model Training
 Effect Robustness
-Example ### PyTorch # Violated Code output = self.net.forward(input) # Recommended Fix output = self.net(input) Source: Paper Grey Literature https://github.com/IgorSusmelj/pytorch-styleguide GitHub Commit Stack Overflow Documentation </p>
+Example ### PyTorch # 1. Load and normalize CIFAR10 import torch import torchvision import torchvision.transforms as transforms transform = transforms.Compose( [transforms.ToTensor(), transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0....</p>
 </section>
 <footer class=entry-footer></footer>
 <a class=entry-link aria-label="post link to Pytorch Call Method Misused" href=https://hynn01.github.io/dslinter/code-smells/pytorch-call-method-misused/></a>

@@ -26,7 +26,7 @@
   </url><url>
     <loc>https://hynn01.github.io/dslinter/code-smells/nan-equality-misused/</loc>
   </url><url>
-    <loc>https://hynn01.github.io/dslinter/code-smells/chain-indexing-misused/</loc>
+    <loc>https://hynn01.github.io/dslinter/code-smells/chain-indexing/</loc>
   </url><url>
     <loc>https://hynn01.github.io/dslinter/code-smells/dataframe-coversion-api-misused/</loc>
   </url><url>
@@ -50,7 +50,7 @@
   </url><url>
     <loc>https://hynn01.github.io/dslinter/code-smells/loss-api-misused/</loc>
   </url><url>
-    <loc>https://hynn01.github.io/dslinter/code-smells/initialize-weight-to-zero/</loc>
+    <loc>https://hynn01.github.io/dslinter/deprecated/initialize-weight-to-zero/</loc>
   </url><url>
     <loc>https://hynn01.github.io/dslinter/deprecated/missing-regularization/</loc>
   </url><url>
@@ -62,9 +62,13 @@
   </url><url>
     <loc>https://hynn01.github.io/dslinter/tags/api-specific/</loc>
   </url><url>
+    <loc>https://hynn01.github.io/dslinter/code-smells/broadcasting-feature-not-used/</loc>
+  </url><url>
     <loc>https://hynn01.github.io/dslinter/code-smell/</loc>
   </url><url>
     <loc>https://hynn01.github.io/dslinter/code-smells/</loc>
+  </url><url>
+    <loc>https://hynn01.github.io/dslinter/code-smells/columns-and-datatype-not-explicitly-set/</loc>
   </url><url>
     <loc>https://hynn01.github.io/dslinter/tags/consistency/</loc>
   </url><url>
@@ -80,6 +84,8 @@
   </url><url>
     <loc>https://hynn01.github.io/dslinter/tags/efficiency/</loc>
   </url><url>
+    <loc>https://hynn01.github.io/dslinter/code-smells/empty-column-misinitialization/</loc>
+  </url><url>
     <loc>https://hynn01.github.io/dslinter/tags/error-prone/</loc>
   </url><url>
     <loc>https://hynn01.github.io/dslinter/tags/general/</loc>
@@ -87,6 +93,8 @@
     <loc>https://hynn01.github.io/dslinter/tags/generic/</loc>
   </url><url>
     <loc>https://hynn01.github.io/dslinter/tags/memory-issue/</loc>
+  </url><url>
+    <loc>https://hynn01.github.io/dslinter/code-smells/merge-api-parameter-not-explicitly-set/</loc>
   </url><url>
     <loc>https://hynn01.github.io/dslinter/tags/model-evaluation/</loc>
   </url><url>
@@ -105,5 +113,7 @@
     <loc>https://hynn01.github.io/dslinter/search/</loc>
   </url><url>
     <loc>https://hynn01.github.io/dslinter/tags/</loc>
+  </url><url>
+    <loc>https://hynn01.github.io/dslinter/code-smells/tensorarray-not-used/</loc>
   </url>
 </urlset>

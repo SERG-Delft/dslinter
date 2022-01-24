@@ -80,7 +80,7 @@
 <p>Avoid using chain indexing in Pandas.</p>
 </section>
 <footer class=entry-footer></footer>
-<a class=entry-link aria-label="post link to Chain Indexing Misused" href=https://hynn01.github.io/dslinter/code-smells/chain-indexing-misused/></a>
+<a class=entry-link aria-label="post link to Chain Indexing Misused" href=https://hynn01.github.io/dslinter/code-smells/chain-indexing/></a>
 </article>
 <article class=post-entry>
 <header class=entry-header>
@@ -114,7 +114,7 @@
 Type API Specific
 Existing Stage Model Training
 Effect Readability
-Example ### NumPy import numpy as np a = [[1, 0], [0, 1]] b = [[4, 1], [2, 2]] # Violated Code np....</p>
+Example ### NumPy import numpy as np a = [[1, 0], [0, 1]] b = [[4, 1], [2, 2]] - np....</p>
 </section>
 <footer class=entry-footer></footer>
 <a class=entry-link aria-label="post link to Matrix Multiplication API Misused" href=https://hynn01.github.io/dslinter/code-smells/matrix-multiplication-api-misused/></a>
@@ -129,7 +129,7 @@ Example ### NumPy import numpy as np a = [[1, 0], [0, 1]] b = [[4, 1], [2, 2]] #
 Type API Specific
 Existing Stage Model Training
 Effect Robustness
-Example ### PyTorch # Violated Code output = self.net.forward(input) # Recommended Fix output = self.net(input) Source: Paper Grey Literature https://github.com/IgorSusmelj/pytorch-styleguide GitHub Commit Stack Overflow Documentation </p>
+Example ### PyTorch # 1. Load and normalize CIFAR10 import torch import torchvision import torchvision.transforms as transforms transform = transforms.Compose( [transforms.ToTensor(), transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0....</p>
 </section>
 <footer class=entry-footer></footer>
 <a class=entry-link aria-label="post link to Pytorch Call Method Misused" href=https://hynn01.github.io/dslinter/code-smells/pytorch-call-method-misused/></a>
@@ -155,7 +155,7 @@ Example ### PyTorch # Violated Code output = self.net.forward(input) # Recommend
 Type API Specific
 Existing Stage Model Training
 Effect Error-prone
-Example ### PyTorch # Violated Code output = model(input) # forward-pass loss_fn....</p>
+Example # PyTorch # 1. Load and normalize CIFAR10 import torch import torchvision import torchvision....</p>
 </section>
 <footer class=entry-footer></footer>
 <a class=entry-link aria-label="post link to Zero_grad Not Used Before Backward" href=https://hynn01.github.io/dslinter/code-smells/zero_grad-not-used-before-backward/></a>
@@ -170,25 +170,10 @@ Example ### PyTorch # Violated Code output = model(input) # forward-pass loss_fn
 Type API Specific
 Existing Stage Model Training
 Effect Error-prone
-Example ### PyTorch # Violated Code loss = nn....</p>
+Example ### PyTorch import torch.nn as nn import torch + m = nn....</p>
 </section>
 <footer class=entry-footer></footer>
 <a class=entry-link aria-label="post link to Loss API Misused" href=https://hynn01.github.io/dslinter/code-smells/loss-api-misused/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>Initialize Weight to a Constant
-</h2>
-</header>
-<section class=entry-content>
-<p>Description In neural network, if all the weights are initialized to a constant, i.e., all the neurons starts with the same weight, all the neurons will follow the same gradient during the backward propagation update. As a result, neurons will learn same features in each iterations. In this way, the nueral netwok will provide a poor result.
-Type Generic
-Existing Stage Model Training
-Effect Error-prone
-Example # https://github.com/aladdinpersson/Machine-Learning-Collection/blob/a2ee9271b5280be6994660c7982d0f44c67c3b63/ML/Projects/Exploring_MNIST/networks/lenet.py import torch import torch....</p>
-</section>
-<footer class=entry-footer></footer>
-<a class=entry-link aria-label="post link to Initialize Weight to a Constant" href=https://hynn01.github.io/dslinter/code-smells/initialize-weight-to-zero/></a>
 </article>
 <article class=post-entry>
 <header class=entry-header>
@@ -205,9 +190,21 @@ Example ### Scikit-Learn from sklearn import metrics y_true = [0, 1, 2, 0, 1, 2]
 <footer class=entry-footer></footer>
 <a class=entry-link aria-label="post link to Threshold Dependent Validation" href=https://hynn01.github.io/dslinter/code-smells/threshold-dependent-validation/></a>
 </article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>Broadcasting Feature Not Used
+</h2>
+</header>
+<section class=entry-content>
+<p>Description Context Problem Solution Type Existing Stage Effect Example ### TensorFlow example 1 import tensorflow as tf a = tf.constant([[1., 2.], [3., 4.]]) b = tf.constant([[1.], [2.]]) - c = a + tf.tile(b, [1, 2]) + c = a + b ### TensorFlow example 2 import tensorflow as tf a = tf.random.uniform([5, 3, 5]) b = tf.random.uniform([5, 1, 6]) - tiled_b = tf.tile(b, [1, 3, 1]) - c = tf....</p>
+</section>
+<footer class=entry-footer></footer>
+<a class=entry-link aria-label="post link to Broadcasting Feature Not Used" href=https://hynn01.github.io/dslinter/code-smells/broadcasting-feature-not-used/></a>
+</article>
 <footer class=page-footer>
 <nav class=pagination>
 <a class=prev href=https://hynn01.github.io/dslinter/code-smells/>« Prev Page</a>
+<a class=next href=https://hynn01.github.io/dslinter/code-smells/page/3/>Next Page »</a>
 </nav>
 </footer>
 </main>
