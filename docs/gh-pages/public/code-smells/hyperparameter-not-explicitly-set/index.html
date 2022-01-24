@@ -1,0 +1,160 @@
+<!doctype html><html lang=en dir=auto>
+<head><meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
+<meta name=robots content="index, follow">
+<title>Hyperparameter not Explicitly Set | DSLinter - Linter for Machine Learning - Specific Code Smells</title>
+<meta name=keywords content="generic,data preparation,error-prone,reproducibility">
+<meta name=description content="Description Hyperparameters are ML algorithm parameters used to control the learning process and are usually determined before the actual process starts. Hyperparameters should be set and tuned because they improve prediction quality and reproducibility. Tuning hyperparameters can lead to higher prediction quality because the default parameters of the learning algorithm may not be optimal for a given data or problem, and may lead to local optima. These parameters directly control the behavior of the training algorithm and therefore have a significant impact on the performance of the model.">
+<meta name=author content>
+<link rel=canonical href=https://hynn01.github.io/dslinter/code-smells/hyperparameter-not-explicitly-set/>
+<meta name=google-site-verification content="XYZabc">
+<meta name=yandex-verification content="XYZabc">
+<meta name=msvalidate.01 content="XYZabc">
+<link crossorigin=anonymous href=/dslinter/assets/css/stylesheet.min.548091f41dc92b4a213f8dc4a49e22545a96b7d1b4ae4ad73c2ab3a70e4e8ea1.css integrity="sha256-VICR9B3JK0ohP43EpJ4iVFqWt9G0rkrXPCqzpw5OjqE=" rel="preload stylesheet" as=style>
+<script defer crossorigin=anonymous src=/dslinter/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5+kdJvBz5iKbt6B5PJI=" onload=hljs.initHighlightingOnLoad()></script>
+<link rel=icon href=https://hynn01.github.io/dslinter/%3Clink%20/%20abs%20url%3E>
+<link rel=icon type=image/png sizes=16x16 href=https://hynn01.github.io/dslinter/%3Clink%20/%20abs%20url%3E>
+<link rel=icon type=image/png sizes=32x32 href=https://hynn01.github.io/dslinter/%3Clink%20/%20abs%20url%3E>
+<link rel=apple-touch-icon href=https://hynn01.github.io/dslinter/%3Clink%20/%20abs%20url%3E>
+<link rel=mask-icon href=https://hynn01.github.io/dslinter/%3Clink%20/%20abs%20url%3E>
+<meta name=theme-color content="#2e2e33">
+<meta name=msapplication-TileColor content="#2e2e33">
+<meta name=generator content="Hugo 0.91.0">
+<noscript>
+<style>#theme-toggle,.top-link{display:none}</style>
+</noscript><meta property="og:title" content="Hyperparameter not Explicitly Set">
+<meta property="og:description" content="Description Hyperparameters are ML algorithm parameters used to control the learning process and are usually determined before the actual process starts. Hyperparameters should be set and tuned because they improve prediction quality and reproducibility. Tuning hyperparameters can lead to higher prediction quality because the default parameters of the learning algorithm may not be optimal for a given data or problem, and may lead to local optima. These parameters directly control the behavior of the training algorithm and therefore have a significant impact on the performance of the model.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://hynn01.github.io/dslinter/code-smells/hyperparameter-not-explicitly-set/"><meta property="article:section" content="Code Smells">
+<meta property="og:site_name" content="DSLinter - Linter for Machine Learning Application - Specific Code Smells">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="Hyperparameter not Explicitly Set">
+<meta name=twitter:description content="Description Hyperparameters are ML algorithm parameters used to control the learning process and are usually determined before the actual process starts. Hyperparameters should be set and tuned because they improve prediction quality and reproducibility. Tuning hyperparameters can lead to higher prediction quality because the default parameters of the learning algorithm may not be optimal for a given data or problem, and may lead to local optima. These parameters directly control the behavior of the training algorithm and therefore have a significant impact on the performance of the model.">
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":2,"name":"Hyperparameter not Explicitly Set","item":"https://hynn01.github.io/dslinter/code-smells/hyperparameter-not-explicitly-set/"}]}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Hyperparameter not Explicitly Set","name":"Hyperparameter not Explicitly Set","description":"Description Hyperparameters are ML algorithm parameters used to control the learning process and are usually determined before the actual process starts. Hyperparameters should be set and tuned because they improve prediction quality and reproducibility. Tuning hyperparameters can lead to higher prediction quality because the default parameters of the learning algorithm may not be optimal for a given data or problem, and may lead to local optima. These parameters directly control the behavior of the training algorithm and therefore have a significant impact on the performance of the model.","keywords":["generic","data preparation","error-prone","reproducibility"],"articleBody":"Description Hyperparameters are ML algorithm parameters used to control the learning process and are usually determined before the actual process starts. Hyperparameters should be set and tuned because they improve prediction quality and reproducibility. Tuning hyperparameters can lead to higher prediction quality because the default parameters of the learning algorithm may not be optimal for a given data or problem, and may lead to local optima. These parameters directly control the behavior of the training algorithm and therefore have a significant impact on the performance of the model.\nThe second reason for defining hyperparameters for learning algorithms is that it improves reproducibility. While the default parameters of a machine learning library may be perfect for some time, these default parameters of the library may change in new versions of the library. In addition, setting all hyperparameters explicitly allows replicating the model in a different programming language. Therefore, it is easier to reproduce the results if hyperparameters are set.\nType Generic\nExisting Stage Data Preparation\nEffect Error-prone \u0026 Reproducibility\nExample ### Scikit-Learn from sklearn.cluster import KMeans - kmeans = KMeans() + kmeans = KMeans(n_clusters=8, random_state=0) + # Or, ideally: + kmeans = KMeans(n_clusters=8, + init='k-means++', n_init=10, + max_iter=300, tol=0.0001, + precompute_distances='auto', + verbose=0, random_state=0, + copy_x=True, n_jobs=1, + algorithm='auto')  ### PyTorch import torch import numpy as np from kmeans_pytorch import kmeans # data data_size, dims, num_clusters = 1000, 2, 3 x = np.random.randn(data_size, dims) / 6 x = torch.from_numpy(x) # kmeans - cluster_ids_x, cluster_centers = kmeans(X=x, num_clusters=num_clusters) + cluster_ids_x, cluster_centers = kmeans( + X=x, num_clusters=num_clusters, distance='euclidean', device=torch.device('cpu') + ) Source: Paper  MPA Haakman. 2020. Studying the Machine Learning Lifecycle and ImprovingCode Quality of Machine Learning Applications. (2020). Eric Breck, Shanqing Cai, Eric Nielsen, Michael Salib, and D Sculley. 2017. TheML test score: A rubric for ML production readiness and technical debt reduction.In2017 IEEE International Conference on Big Data (Big Data). IEEE, 1123–1132. Gopi Krishnan Rajbahadur, Gustavo Ansaldi Oliva, Ahmed E Hassan, and Juer-gen Dingel. 2019. Pitfalls Analyzer: Quality Control for Model-Driven DataScience Pipelines. In2019 ACM/IEEE 22nd International Conference on ModelDriven Engineering Languages and Systems (MODELS). IEEE, 12–22. Nargiz Humbatova, Gunel Jahangirova, Gabriele Bavota, Vincenzo Riccio, AndreaStocco, and Paolo Tonella. 2020. Taxonomy of real faults in deep learning sys-tems. InProceedings of the ACM/IEEE 42nd International Conference on SoftwareEngineering. 1110–1121.  Grey Literature GitHub Commit Stack Overflow Documentation ","wordCount":"384","inLanguage":"en","datePublished":"0001-01-01T00:00:00Z","dateModified":"0001-01-01T00:00:00Z","mainEntityOfPage":{"@type":"WebPage","@id":"https://hynn01.github.io/dslinter/code-smells/hyperparameter-not-explicitly-set/"},"publisher":{"@type":"Organization","name":"DSLinter - Linter for Machine Learning - Specific Code Smells","logo":{"@type":"ImageObject","url":"https://hynn01.github.io/dslinter/%3Clink%20/%20abs%20url%3E"}}}</script>
+</head>
+<body id=top>
+<script>localStorage.getItem("pref-theme")==="dark"&&document.body.classList.add('dark')</script>
+<header class=header>
+<nav class=nav>
+<div class=logo>
+<a href=https://hynn01.github.io/dslinter/ accesskey=h title="DSLinter - Linter for Machine Learning - Specific Code Smells (Alt + H)">DSLinter - Linter for Machine Learning - Specific Code Smells</a>
+<span class=logo-switches>
+<button id=theme-toggle accesskey=t title="(Alt + T)"><svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+</button>
+</span>
+</div>
+<ul id=menu>
+<li>
+<a href=https://hynn01.github.io/dslinter/code-smells/ title="Code Smells">
+<span>Code Smells</span>
+</a>
+</li>
+<li>
+<a href=https://hynn01.github.io/dslinter/search/ title="Search (Alt + /)" accesskey=/>
+<span>Search</span>
+</a>
+</li>
+<li>
+<a href=https://hynn01.github.io/dslinter/ title=Survey>
+<span>Survey</span>
+</a>
+</li>
+<li>
+<a href=https://hynn01.github.io/dslinter/tags/ title=Tags>
+<span>Tags</span>
+</a>
+</li>
+</ul>
+</nav>
+</header>
+<main class=main>
+<article class=post-single>
+<header class=post-header>
+<div class=breadcrumbs><a href=https://hynn01.github.io/dslinter/>Home</a></div>
+<h1 class=post-title>
+Hyperparameter not Explicitly Set
+</h1>
+<div class=post-meta>
+</div>
+</header>
+<div class=post-content><h3 id=description>Description<a hidden class=anchor aria-hidden=true href=#description>#</a></h3>
+<p>Hyperparameters are ML algorithm parameters used to control the learning process and are usually determined before the actual process starts. Hyperparameters should be set and tuned because they improve prediction quality
+and reproducibility. Tuning hyperparameters can lead to higher prediction quality because the default
+parameters of the learning algorithm may not be optimal for a given data or problem, and may lead to local optima. These parameters directly control the behavior of the training algorithm and therefore have a significant impact on the performance of the model.</p>
+<p>The second reason for defining hyperparameters for learning algorithms is that it improves reproducibility. While the default parameters of a machine learning library may be perfect for some time, these default parameters of the library may change in new versions of the library. In addition, setting all hyperparameters explicitly allows replicating the model in a different programming language. Therefore, it is easier to reproduce the results if hyperparameters are set.</p>
+<h3 id=type>Type<a hidden class=anchor aria-hidden=true href=#type>#</a></h3>
+<p>Generic</p>
+<h3 id=existing-stage>Existing Stage<a hidden class=anchor aria-hidden=true href=#existing-stage>#</a></h3>
+<p>Data Preparation</p>
+<h3 id=effect>Effect<a hidden class=anchor aria-hidden=true href=#effect>#</a></h3>
+<p>Error-prone & Reproducibility</p>
+<h3 id=example>Example<a hidden class=anchor aria-hidden=true href=#example>#</a></h3>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-diff data-lang=diff>### Scikit-Learn
+from sklearn.cluster import KMeans
+
+<span style=color:#f92672>- kmeans = KMeans()
+</span><span style=color:#f92672></span><span style=color:#a6e22e>+ kmeans = KMeans(n_clusters=8, random_state=0)
+</span><span style=color:#a6e22e>+ # Or, ideally:
+</span><span style=color:#a6e22e>+ kmeans = KMeans(n_clusters=8,
+</span><span style=color:#a6e22e>+ init=&#39;k-means++&#39;, n_init=10,
+</span><span style=color:#a6e22e>+ max_iter=300, tol=0.0001,
+</span><span style=color:#a6e22e>+ precompute_distances=&#39;auto&#39;,
+</span><span style=color:#a6e22e>+ verbose=0, random_state=0,
+</span><span style=color:#a6e22e>+ copy_x=True, n_jobs=1,
+</span><span style=color:#a6e22e>+ algorithm=&#39;auto&#39;)
+</span><span style=color:#a6e22e></span>
+### PyTorch
+import torch
+import numpy as np
+from kmeans_pytorch import kmeans
+
+# data
+data_size, dims, num_clusters = 1000, 2, 3
+x = np.random.randn(data_size, dims) / 6
+x = torch.from_numpy(x)
+
+# kmeans
+<span style=color:#f92672>- cluster_ids_x, cluster_centers = kmeans(X=x, num_clusters=num_clusters)
+</span><span style=color:#f92672></span><span style=color:#a6e22e>+ cluster_ids_x, cluster_centers = kmeans(
+</span><span style=color:#a6e22e>+     X=x, num_clusters=num_clusters, distance=&#39;euclidean&#39;, device=torch.device(&#39;cpu&#39;)
+</span><span style=color:#a6e22e>+ )
+</span></code></pre></div><h3 id=source>Source:<a hidden class=anchor aria-hidden=true href=#source>#</a></h3>
+<h4 id=paper>Paper<a hidden class=anchor aria-hidden=true href=#paper>#</a></h4>
+<ul>
+<li>MPA Haakman. 2020. Studying the Machine Learning Lifecycle and ImprovingCode Quality of Machine Learning Applications. (2020).</li>
+<li>Eric Breck, Shanqing Cai, Eric Nielsen, Michael Salib, and D Sculley. 2017. TheML test score: A rubric for ML production readiness and technical debt reduction.In2017 IEEE International Conference on Big Data (Big Data). IEEE, 1123–1132.</li>
+<li>Gopi Krishnan Rajbahadur, Gustavo Ansaldi Oliva, Ahmed E Hassan, and Juer-gen Dingel. 2019. Pitfalls Analyzer: Quality Control for Model-Driven DataScience Pipelines. In2019 ACM/IEEE 22nd International Conference on ModelDriven Engineering Languages and Systems (MODELS). IEEE, 12–22.</li>
+<li>Nargiz Humbatova, Gunel Jahangirova, Gabriele Bavota, Vincenzo Riccio, AndreaStocco, and Paolo Tonella. 2020. Taxonomy of real faults in deep learning sys-tems. InProceedings of the ACM/IEEE 42nd International Conference on SoftwareEngineering. 1110–1121.</li>
+</ul>
+<h4 id=grey-literature>Grey Literature<a hidden class=anchor aria-hidden=true href=#grey-literature>#</a></h4>
+<h4 id=github-commit>GitHub Commit<a hidden class=anchor aria-hidden=true href=#github-commit>#</a></h4>
+<h4 id=stack-overflow>Stack Overflow<a hidden class=anchor aria-hidden=true href=#stack-overflow>#</a></h4>
+<h4 id=documentation>Documentation<a hidden class=anchor aria-hidden=true href=#documentation>#</a></h4>
+</div>
+<footer class=post-footer>
+<ul class=post-tags>
+<li><a href=https://hynn01.github.io/dslinter/tags/generic/>generic</a></li>
+<li><a href=https://hynn01.github.io/dslinter/tags/data-preparation/>data preparation</a></li>
+<li><a href=https://hynn01.github.io/dslinter/tags/error-prone/>error-prone</a></li>
+<li><a href=https://hynn01.github.io/dslinter/tags/reproducibility/>reproducibility</a></li>
+</ul>
+</footer>
+</article>
+</main>
+<footer class=footer>
+<span>&copy; 2022 <a href=https://hynn01.github.io/dslinter/>DSLinter - Linter for Machine Learning - Specific Code Smells</a></span>
+<span>
+Powered by
+<a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &
+        <a href=https://git.io/hugopapermod rel=noopener target=_blank>PaperMod</a>
+</span>
+</footer>
+<a href=#top aria-label="go to top" title="Go to Top (Alt + G)" class=top-link id=top-link accesskey=g><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentcolor"><path d="M12 6H0l6-6z"/></svg>
+</a>
+<script>let menu=document.getElementById('menu');menu&&(menu.scrollLeft=localStorage.getItem("menu-scroll-position"),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)}),document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener("click",function(b){b.preventDefault();var a=this.getAttribute("href").substr(1);window.matchMedia('(prefers-reduced-motion: reduce)').matches?document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView({behavior:"smooth"}),a==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${a}`)})})</script>
+<script>var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")}</script>
+<script>document.getElementById("theme-toggle").addEventListener("click",()=>{document.body.className.includes("dark")?(document.body.classList.remove('dark'),localStorage.setItem("pref-theme",'light')):(document.body.classList.add('dark'),localStorage.setItem("pref-theme",'dark'))})</script>
+</body>
+</html>

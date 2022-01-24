@@ -24,31 +24,18 @@ Error-prone
 
 ### Example
 
-```python
-
+```diff
 ### PyTorch
+import torch.nn as nn
+import torch
 
-# Violated Code
++ m = nn.LogSoftmax(dim=1)
 loss = nn.NLLLoss()
-# input is of size N x C = 3 x 5
 input = torch.randn(3, 5, requires_grad=True)
-# each element in target has to have 0 <= value < C
 target = torch.tensor([1, 0, 4])
-output = loss(input, target)
+- output = loss(input, target)
++ output = loss(m(input), target)
 output.backward()
-
-
-# Recommended Fix
-m = nn.LogSoftmax(dim=1)
-loss = nn.NLLLoss()
-# input is of size N x C = 3 x 5
-input = torch.randn(3, 5, requires_grad=True)
-# each element in target has to have 0 <= value < C
-target = torch.tensor([1, 0, 4])
-output = loss(m(input), target)
-output.backward()
-
-
 ```
 
 ### Source:

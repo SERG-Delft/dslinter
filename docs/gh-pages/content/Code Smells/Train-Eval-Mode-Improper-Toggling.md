@@ -24,67 +24,113 @@ Error-prone
 
 ### Example
 
-```python
+```diff
+# PyTorch
+# 1. Load and normalize CIFAR10
+import torch
+import torchvision
+import torchvision.transforms as transforms
 
-### PyTorch
+transform = transforms.Compose(
+    [transforms.ToTensor(),
+     transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
 
-# Violated Code
-def train(model, optimizer, epoch, train_loader, validation_loader):
-    model.train() # 👈👈👈
-    for batch_idx, (data, target) in experiment.batch_loop(iterable=train_loader):
-        data, target = Variable(data), Variable(target)
-        # Inference
-        output = model(data)
-        loss_t = F.nll_loss(output, target)
-        # The iconic grad-back-step trio
+batch_size = 4
+
+trainset = torchvision.datasets.CIFAR10(root='./data', train=True,
+                                        download=True, transform=transform)
+trainloader = torch.utils.data.DataLoader(trainset, batch_size=batch_size,
+                                          shuffle=True, num_workers=0)
+
+testset = torchvision.datasets.CIFAR10(root='./data', train=False,
+                                       download=True, transform=transform)
+testloader = torch.utils.data.DataLoader(testset, batch_size=batch_size,
+                                         shuffle=False, num_workers=0)
+
+classes = ('plane', 'car', 'bird', 'cat',
+           'deer', 'dog', 'frog', 'horse', 'ship', 'truck')
+
+# 2. Define a Convolutional Neural Network
+import torch.nn as nn
+import torch.nn.functional as F
+
+
+class Net(nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.conv1 = nn.Conv2d(3, 6, 5)
+        self.pool = nn.MaxPool2d(2, 2)
+        self.conv2 = nn.Conv2d(6, 16, 5)
+        self.fc1 = nn.Linear(16 * 5 * 5, 120)
+        self.fc2 = nn.Linear(120, 84)
+        self.fc3 = nn.Linear(84, 10)
+
+    def forward(self, x):
+        x = self.pool(F.relu(self.conv1(x)))
+        x = self.pool(F.relu(self.conv2(x)))
+        x = torch.flatten(x, 1) # flatten all dimensions except batch
+        x = F.relu(self.fc1(x))
+        x = F.relu(self.fc2(x))
+        x = self.fc3(x)
+        return x
+
+
+net = Net()
+
+# 3. Define a Loss function and optimizer
+import torch.optim as optim
+
+criterion = nn.CrossEntropyLoss()
+optimizer = optim.SGD(net.parameters(), lr=0.001, momentum=0.9)
+
+# 4. Train the network
+for epoch in range(2):  # loop over the dataset multiple times
+
+    running_loss = 0.0
+-   net.train()
+    for i, data in enumerate(trainloader, 0):
+        # get the inputs; data is a list of [inputs, labels]
++       net.train()        
+        inputs, labels = data
+
+        # zero the parameter gradients
         optimizer.zero_grad()
-        loss_t.backward()
+
+        # forward + backward + optimize
+        outputs = net(inputs)
+        loss = criterion(outputs, labels)
+        loss.backward()
         optimizer.step()
-        if batch_idx % args.log_interval == 0:
-            train_loss = loss_t.item()
-            train_accuracy = get_correct_count(output, target) * 100.0 / len(target)
-            experiment.add_metric(LOSS_METRIC, train_loss)
-            experiment.add_metric(ACC_METRIC, train_accuracy)
-            print('Train Epoch: {} [{}/{} ({:.0f}%)]\tLoss: {:.6f}'.format(
-                epoch, batch_idx, len(train_loader),
-                100. * batch_idx / len(train_loader), train_loss))
-            with experiment.validation():
-                val_loss, val_accuracy = test(model, validation_loader) # 👈👈👈
-                experiment.add_metric(LOSS_METRIC, val_loss)
-                experiment.add_metric(ACC_METRIC, val_accuracy)
 
-def test(model, test_loader):
-   model.eval()
+        # print statistics
+        running_loss += loss.item()
+        if i % 2000 == 1999:    # print every 2000 mini-batches
+            print(f'[{epoch + 1}, {i + 1:5d}] loss: {running_loss / 2000:.3f}')
+            running_loss = 0.0
+            # validation
+            net.eval()
+            #...
 
+print('Finished Training')
 
-# Recommended Fix
-def train(model, optimizer, epoch, train_loader, validation_loader):
-    for batch_idx, (data, target) in experiment.batch_loop(iterable=train_loader):
-        model.train() # 👈👈👈
-        data, target = Variable(data), Variable(target)
-        # Inference
-        output = model(data)
-        loss_t = F.nll_loss(output, target)
-        # The iconic grad-back-step trio
-        optimizer.zero_grad()
-        loss_t.backward()
-        optimizer.step()
-        if batch_idx % args.log_interval == 0:
-            train_loss = loss_t.item()
-            train_accuracy = get_correct_count(output, target) * 100.0 / len(target)
-            experiment.add_metric(LOSS_METRIC, train_loss)
-            experiment.add_metric(ACC_METRIC, train_accuracy)
-            print('Train Epoch: {} [{}/{} ({:.0f}%)]\tLoss: {:.6f}'.format(
-                epoch, batch_idx, len(train_loader),
-                100. * batch_idx / len(train_loader), train_loss))
-            with experiment.validation():
-                val_loss, val_accuracy = test(model, validation_loader) # 👈👈👈
-                experiment.add_metric(LOSS_METRIC, val_loss)
-                experiment.add_metric(ACC_METRIC, val_accuracy)
+PATH = './cifar_net.pth'
+torch.save(net.state_dict(), PATH)
 
-def test(model, test_loader):
-   model.eval()
+# 5. Test the network on the test data
+correct = 0
+total = 0
+# since we're not training, we don't need to calculate the gradients for our outputs
+with torch.no_grad():
+    for data in testloader:
+        images, labels = data
+        # calculate outputs by running images through the network
+        outputs = net(images)
+        # the class with the highest energy is what we choose as prediction
+        _, predicted = torch.max(outputs.data, 1)
+        total += labels.size(0)
+        correct += (predicted == labels).sum().item()
 
+print(f'Accuracy of the network on the 10000 test images: {100 * correct // total} %')
 ```
 
 ### Source:

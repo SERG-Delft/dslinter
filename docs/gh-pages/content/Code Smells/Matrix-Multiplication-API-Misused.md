@@ -24,20 +24,13 @@ Readability
 
 ### Example
 
-```python
-
+```diff
 ### NumPy
-
 import numpy as np
 a = [[1, 0], [0, 1]]
 b = [[4, 1], [2, 2]]
-
-# Violated Code
-np.dot(a, b)
-
-# Recommended Fix
-np.matmul(a, b)
-
+- np.dot(a, b)
++ np.matmul(a, b)
 ```
 
 ### Source:

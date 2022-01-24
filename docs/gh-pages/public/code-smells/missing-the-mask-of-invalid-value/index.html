@@ -1,0 +1,195 @@
+<!doctype html><html lang=en dir=auto>
+<head><meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
+<meta name=robots content="index, follow">
+<title>Missing the Mask of Invalid Value | DSLinter - Linter for Machine Learning - Specific Code Smells</title>
+<meta name=keywords content="generic,model training,error-prone">
+<meta name=description content="Description Several posts on Stack Overflow talk about the bugs that are not easy to discover caused by the log parameter approaching zero. In this kind of program, the log function variable turns to zero and raises an error during the training process. However, the error&rsquo;s stack trace did not directly point to the line of code that the bug exist. This kind of problem is not easy to debug and might take a long training time to find.">
+<meta name=author content>
+<link rel=canonical href=https://hynn01.github.io/dslinter/code-smells/missing-the-mask-of-invalid-value/>
+<meta name=google-site-verification content="XYZabc">
+<meta name=yandex-verification content="XYZabc">
+<meta name=msvalidate.01 content="XYZabc">
+<link crossorigin=anonymous href=/dslinter/assets/css/stylesheet.min.548091f41dc92b4a213f8dc4a49e22545a96b7d1b4ae4ad73c2ab3a70e4e8ea1.css integrity="sha256-VICR9B3JK0ohP43EpJ4iVFqWt9G0rkrXPCqzpw5OjqE=" rel="preload stylesheet" as=style>
+<script defer crossorigin=anonymous src=/dslinter/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5+kdJvBz5iKbt6B5PJI=" onload=hljs.initHighlightingOnLoad()></script>
+<link rel=icon href=https://hynn01.github.io/dslinter/%3Clink%20/%20abs%20url%3E>
+<link rel=icon type=image/png sizes=16x16 href=https://hynn01.github.io/dslinter/%3Clink%20/%20abs%20url%3E>
+<link rel=icon type=image/png sizes=32x32 href=https://hynn01.github.io/dslinter/%3Clink%20/%20abs%20url%3E>
+<link rel=apple-touch-icon href=https://hynn01.github.io/dslinter/%3Clink%20/%20abs%20url%3E>
+<link rel=mask-icon href=https://hynn01.github.io/dslinter/%3Clink%20/%20abs%20url%3E>
+<meta name=theme-color content="#2e2e33">
+<meta name=msapplication-TileColor content="#2e2e33">
+<meta name=generator content="Hugo 0.91.0">
+<noscript>
+<style>#theme-toggle,.top-link{display:none}</style>
+</noscript><meta property="og:title" content="Missing the Mask of Invalid Value">
+<meta property="og:description" content="Description Several posts on Stack Overflow talk about the bugs that are not easy to discover caused by the log parameter approaching zero. In this kind of program, the log function variable turns to zero and raises an error during the training process. However, the error&rsquo;s stack trace did not directly point to the line of code that the bug exist. This kind of problem is not easy to debug and might take a long training time to find.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://hynn01.github.io/dslinter/code-smells/missing-the-mask-of-invalid-value/"><meta property="article:section" content="Code Smells">
+<meta property="og:site_name" content="DSLinter - Linter for Machine Learning Application - Specific Code Smells">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="Missing the Mask of Invalid Value">
+<meta name=twitter:description content="Description Several posts on Stack Overflow talk about the bugs that are not easy to discover caused by the log parameter approaching zero. In this kind of program, the log function variable turns to zero and raises an error during the training process. However, the error&rsquo;s stack trace did not directly point to the line of code that the bug exist. This kind of problem is not easy to debug and might take a long training time to find.">
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":2,"name":"Missing the Mask of Invalid Value","item":"https://hynn01.github.io/dslinter/code-smells/missing-the-mask-of-invalid-value/"}]}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Missing the Mask of Invalid Value","name":"Missing the Mask of Invalid Value","description":"Description Several posts on Stack Overflow talk about the bugs that are not easy to discover caused by the log parameter approaching zero. In this kind of program, the log function variable turns to zero and raises an error during the training process. However, the error\u0026rsquo;s stack trace did not directly point to the line of code that the bug exist. This kind of problem is not easy to debug and might take a long training time to find.","keywords":["generic","model training","error-prone"],"articleBody":"Description Several posts on Stack Overflow talk about the bugs that are not easy to discover caused by the log parameter approaching zero. In this kind of program, the log function variable turns to zero and raises an error during the training process. However, the error’s stack trace did not directly point to the line of code that the bug exist. This kind of problem is not easy to debug and might take a long training time to find. Therefore, the developer should check the log parameter and may add a very small number to the log parameter in the code before running it. It will save time and effort if the developer could identify this smell before the code run into errors.\nType Generic\nExisting Stage Model Training\nEffect Error-prone\nExample ### TensorFlow 1.x from tensorflow.examples.tutorials.mnist import input_data import tensorflow as tf mnist = input_data.read_data_sets(\"MNIST_data/\", one_hot=True) sess = tf.InteractiveSession() def weight_variable(shape): initial = tf.truncated_normal(shape, stddev=0.1) return tf.Variable(initial) def bias_Variable(shape): initial = tf.constant(0.1, shape=shape) return tf.Variable(initial) def conv2d(x, W): return tf.nn.conv2d(x, W, strides=[1,1,1,1],padding=\"SAME\") def max_pool_2x2(x): return tf.nn.max_pool(x, ksize=[1,2,2,1], strides=[1,2,2,1],padding=\"SAME\") x = tf.placeholder(tf.float32, [None, 784]) y_ = tf.placeholder(tf.float32, [None, 10]) x_image = tf.reshape(x, [-1, 28, 28, 1]) W_conv1 = weight_variable([5,5,1,32]) b_conv1 = bias_Variable([32]) h_conv1 = tf.nn.relu(conv2d(x_image,W_conv1)+b_conv1) h_pool1 = max_pool_2x2(h_conv1) W_conv2 = weight_variable([5,5,32,64]) b_conv2 = bias_Variable([64]) h_conv2 = tf.nn.relu(conv2d(h_pool1,W_conv2)+b_conv2) h_pool2 = max_pool_2x2(h_conv2) W_fc1 = weight_variable([7*7*64,1024]) b_fc1 = bias_Variable([1024]) h_pool2_flat = tf.reshape(h_pool2,[-1,7*7*64]) h_fc1 = tf.nn.relu(tf.matmul(h_pool2_flat,W_fc1)+b_fc1) keep_prob = tf.placeholder(tf.float32) h_fc1_drop = tf.nn.dropout(h_fc1,keep_prob) W_fc2 = weight_variable([1024,10]) b_fc2 = bias_Variable([10]) y_conv = tf.nn.softmax(tf.matmul(h_fc1_drop,W_fc2)+b_fc2) - cross_entropy = tf.reduce_mean(-tf.reduce_sum(y_*tf.log(y_conv),reduction_indices=[1])) + cross_entropy = tf.reduce_mean(-tf.reduce_sum(y_*tf.log(tf.clip_by_value(y_conv,1e-10,1.0)),reduction_indices=[1])) train_step = tf.train.AdamOptimizer(1e-4).minimize(cross_entropy) correct_prediction = tf.equal(tf.argmax(y_conv,1),tf.argmax(y_,1)) accuracy = tf.reduce_mean(tf.cast(correct_prediction,tf.float32)) tf.global_variables_initializer().run() for i in range(20000): batch = mnist.train.next_batch(50) if i % 100 == 0: train_accuracy = accuracy.eval(feed_dict = {x:batch[0] , y_:batch[1], keep_prob: 1.0}) print(\"step %d,train accuracy %g\"%(i,train_accuracy)) train_step.run(feed_dict = {x:batch[0] , y_:batch[1], keep_prob: 0.5}) print(\"test accuracy %g\"%accuracy.eval(feed_dict = {x:mnist.test.images,y_:mnist.test.labels,keep_prob:1.0})) Source: Paper  Nargiz Humbatova, Gunel Jahangirova, Gabriele Bavota, Vincenzo Riccio, AndreaStocco, and Paolo Tonella. 2020. Taxonomy of real faults in deep learning sys-tems. InProceedings of the ACM/IEEE 42nd International Conference on SoftwareEngineering. 1110–1121. Yuhao Zhang, Yifan Chen, Shing-Chi Cheung, Yingfei Xiong, and Lu Zhang. 2018.An empirical study on TensorFlow program bugs. InProceedings of the 27th ACMSIGSOFT International Symposium on Software Testing and Analysis. 129–140.  Grey Literature GitHub Commit Stack Overflow  https://stackoverflow.com/questions/33712178/tensorflow-nan-bug https://stackoverflow.com/questions/33699174/tensorflows-relugrad-claims-input-is-not-finite https://stackoverflow.com/questions/39487825/tensorflow-convolutionary-net-grayscale-vs-black-white-training https://stackoverflow.com/questions/35078027/implement-mlp-in-tensorflow  Documentation ","wordCount":"378","inLanguage":"en","datePublished":"0001-01-01T00:00:00Z","dateModified":"0001-01-01T00:00:00Z","mainEntityOfPage":{"@type":"WebPage","@id":"https://hynn01.github.io/dslinter/code-smells/missing-the-mask-of-invalid-value/"},"publisher":{"@type":"Organization","name":"DSLinter - Linter for Machine Learning - Specific Code Smells","logo":{"@type":"ImageObject","url":"https://hynn01.github.io/dslinter/%3Clink%20/%20abs%20url%3E"}}}</script>
+</head>
+<body id=top>
+<script>localStorage.getItem("pref-theme")==="dark"&&document.body.classList.add('dark')</script>
+<header class=header>
+<nav class=nav>
+<div class=logo>
+<a href=https://hynn01.github.io/dslinter/ accesskey=h title="DSLinter - Linter for Machine Learning - Specific Code Smells (Alt + H)">DSLinter - Linter for Machine Learning - Specific Code Smells</a>
+<span class=logo-switches>
+<button id=theme-toggle accesskey=t title="(Alt + T)"><svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+</button>
+</span>
+</div>
+<ul id=menu>
+<li>
+<a href=https://hynn01.github.io/dslinter/code-smells/ title="Code Smells">
+<span>Code Smells</span>
+</a>
+</li>
+<li>
+<a href=https://hynn01.github.io/dslinter/search/ title="Search (Alt + /)" accesskey=/>
+<span>Search</span>
+</a>
+</li>
+<li>
+<a href=https://hynn01.github.io/dslinter/ title=Survey>
+<span>Survey</span>
+</a>
+</li>
+<li>
+<a href=https://hynn01.github.io/dslinter/tags/ title=Tags>
+<span>Tags</span>
+</a>
+</li>
+</ul>
+</nav>
+</header>
+<main class=main>
+<article class=post-single>
+<header class=post-header>
+<div class=breadcrumbs><a href=https://hynn01.github.io/dslinter/>Home</a></div>
+<h1 class=post-title>
+Missing the Mask of Invalid Value
+</h1>
+<div class=post-meta>
+</div>
+</header>
+<div class=post-content><h3 id=description>Description<a hidden class=anchor aria-hidden=true href=#description>#</a></h3>
+<p>Several posts on Stack Overflow talk about the bugs that are not easy to discover caused by the log parameter approaching zero. In this kind of program, the log function variable turns to zero and raises an error during the training process. However, the error&rsquo;s stack trace did not directly point to the line of code that the bug exist. This kind of problem is not easy to debug and might take a long training time to find. Therefore, the developer should check the log parameter and may add a very small number to the log parameter in the code before running it. It will save time and effort if the developer could identify this smell before the code run into errors.</p>
+<h3 id=type>Type<a hidden class=anchor aria-hidden=true href=#type>#</a></h3>
+<p>Generic</p>
+<h3 id=existing-stage>Existing Stage<a hidden class=anchor aria-hidden=true href=#existing-stage>#</a></h3>
+<p>Model Training</p>
+<h3 id=effect>Effect<a hidden class=anchor aria-hidden=true href=#effect>#</a></h3>
+<p>Error-prone</p>
+<h3 id=example>Example<a hidden class=anchor aria-hidden=true href=#example>#</a></h3>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-diff data-lang=diff>### TensorFlow 1.x
+from tensorflow.examples.tutorials.mnist import input_data
+import tensorflow as tf
+mnist = input_data.read_data_sets(&#34;MNIST_data/&#34;, one_hot=True)
+sess = tf.InteractiveSession()
+
+def weight_variable(shape):
+    initial = tf.truncated_normal(shape, stddev=0.1)
+    return tf.Variable(initial)
+
+def bias_Variable(shape):
+    initial = tf.constant(0.1, shape=shape)
+    return tf.Variable(initial)
+
+def conv2d(x, W):
+    return tf.nn.conv2d(x, W, strides=[1,1,1,1],padding=&#34;SAME&#34;)
+
+def max_pool_2x2(x):
+    return tf.nn.max_pool(x, ksize=[1,2,2,1], strides=[1,2,2,1],padding=&#34;SAME&#34;)
+
+x = tf.placeholder(tf.float32, [None, 784])
+y_ = tf.placeholder(tf.float32, [None, 10])
+
+x_image = tf.reshape(x, [-1, 28, 28, 1])
+
+W_conv1 = weight_variable([5,5,1,32])
+b_conv1 = bias_Variable([32])
+h_conv1 = tf.nn.relu(conv2d(x_image,W_conv1)+b_conv1)
+h_pool1 = max_pool_2x2(h_conv1)
+
+W_conv2 = weight_variable([5,5,32,64])
+b_conv2 = bias_Variable([64])
+h_conv2 = tf.nn.relu(conv2d(h_pool1,W_conv2)+b_conv2)
+h_pool2 = max_pool_2x2(h_conv2)
+
+W_fc1 = weight_variable([7*7*64,1024])
+b_fc1 = bias_Variable([1024])
+h_pool2_flat = tf.reshape(h_pool2,[-1,7*7*64])
+h_fc1 = tf.nn.relu(tf.matmul(h_pool2_flat,W_fc1)+b_fc1)
+
+keep_prob = tf.placeholder(tf.float32)
+h_fc1_drop = tf.nn.dropout(h_fc1,keep_prob)
+
+W_fc2 = weight_variable([1024,10])
+b_fc2 = bias_Variable([10])
+y_conv = tf.nn.softmax(tf.matmul(h_fc1_drop,W_fc2)+b_fc2)
+
+<span style=color:#f92672>- cross_entropy = tf.reduce_mean(-tf.reduce_sum(y_*tf.log(y_conv),reduction_indices=[1]))
+</span><span style=color:#f92672></span><span style=color:#a6e22e>+ cross_entropy = tf.reduce_mean(-tf.reduce_sum(y_*tf.log(tf.clip_by_value(y_conv,1e-10,1.0)),reduction_indices=[1]))
+</span><span style=color:#a6e22e></span>train_step = tf.train.AdamOptimizer(1e-4).minimize(cross_entropy)
+
+correct_prediction = tf.equal(tf.argmax(y_conv,1),tf.argmax(y_,1))
+accuracy = tf.reduce_mean(tf.cast(correct_prediction,tf.float32))
+
+tf.global_variables_initializer().run()
+
+for i in range(20000):
+    batch = mnist.train.next_batch(50)
+    if i % 100 == 0:
+        train_accuracy = accuracy.eval(feed_dict = {x:batch[0] , y_:batch[1], keep_prob: 1.0})
+        print(&#34;step %d,train accuracy %g&#34;%(i,train_accuracy))
+    train_step.run(feed_dict = {x:batch[0] , y_:batch[1], keep_prob: 0.5})
+
+print(&#34;test accuracy %g&#34;%accuracy.eval(feed_dict = {x:mnist.test.images,y_:mnist.test.labels,keep_prob:1.0}))
+</code></pre></div><h3 id=source>Source:<a hidden class=anchor aria-hidden=true href=#source>#</a></h3>
+<h4 id=paper>Paper<a hidden class=anchor aria-hidden=true href=#paper>#</a></h4>
+<ul>
+<li>Nargiz Humbatova, Gunel Jahangirova, Gabriele Bavota, Vincenzo Riccio, AndreaStocco, and Paolo Tonella. 2020. Taxonomy of real faults in deep learning sys-tems. InProceedings of the ACM/IEEE 42nd International Conference on SoftwareEngineering. 1110–1121.</li>
+<li>Yuhao Zhang, Yifan Chen, Shing-Chi Cheung, Yingfei Xiong, and Lu Zhang. 2018.An empirical study on TensorFlow program bugs. InProceedings of the 27th ACMSIGSOFT International Symposium on Software Testing and Analysis. 129–140.</li>
+</ul>
+<h4 id=grey-literature>Grey Literature<a hidden class=anchor aria-hidden=true href=#grey-literature>#</a></h4>
+<h4 id=github-commit>GitHub Commit<a hidden class=anchor aria-hidden=true href=#github-commit>#</a></h4>
+<h4 id=stack-overflow>Stack Overflow<a hidden class=anchor aria-hidden=true href=#stack-overflow>#</a></h4>
+<ul>
+<li><a href=https://stackoverflow.com/questions/33712178/tensorflow-nan-bug>https://stackoverflow.com/questions/33712178/tensorflow-nan-bug</a></li>
+<li><a href=https://stackoverflow.com/questions/33699174/tensorflows-relugrad-claims-input-is-not-finite>https://stackoverflow.com/questions/33699174/tensorflows-relugrad-claims-input-is-not-finite</a></li>
+<li><a href=https://stackoverflow.com/questions/39487825/tensorflow-convolutionary-net-grayscale-vs-black-white-training>https://stackoverflow.com/questions/39487825/tensorflow-convolutionary-net-grayscale-vs-black-white-training</a></li>
+<li><a href=https://stackoverflow.com/questions/35078027/implement-mlp-in-tensorflow>https://stackoverflow.com/questions/35078027/implement-mlp-in-tensorflow</a></li>
+</ul>
+<h4 id=documentation>Documentation<a hidden class=anchor aria-hidden=true href=#documentation>#</a></h4>
+</div>
+<footer class=post-footer>
+<ul class=post-tags>
+<li><a href=https://hynn01.github.io/dslinter/tags/generic/>generic</a></li>
+<li><a href=https://hynn01.github.io/dslinter/tags/model-training/>model training</a></li>
+<li><a href=https://hynn01.github.io/dslinter/tags/error-prone/>error-prone</a></li>
+</ul>
+</footer>
+</article>
+</main>
+<footer class=footer>
+<span>&copy; 2022 <a href=https://hynn01.github.io/dslinter/>DSLinter - Linter for Machine Learning - Specific Code Smells</a></span>
+<span>
+Powered by
+<a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &
+        <a href=https://git.io/hugopapermod rel=noopener target=_blank>PaperMod</a>
+</span>
+</footer>
+<a href=#top aria-label="go to top" title="Go to Top (Alt + G)" class=top-link id=top-link accesskey=g><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentcolor"><path d="M12 6H0l6-6z"/></svg>
+</a>
+<script>let menu=document.getElementById('menu');menu&&(menu.scrollLeft=localStorage.getItem("menu-scroll-position"),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)}),document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener("click",function(b){b.preventDefault();var a=this.getAttribute("href").substr(1);window.matchMedia('(prefers-reduced-motion: reduce)').matches?document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView({behavior:"smooth"}),a==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${a}`)})})</script>
+<script>var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")}</script>
+<script>document.getElementById("theme-toggle").addEventListener("click",()=>{document.body.className.includes("dark")?(document.body.classList.remove('dark'),localStorage.setItem("pref-theme",'light')):(document.body.classList.add('dark'),localStorage.setItem("pref-theme",'dark'))})</script>
+</body>
+</html>

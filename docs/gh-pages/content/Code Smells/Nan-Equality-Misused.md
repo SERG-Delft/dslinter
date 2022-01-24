@@ -24,19 +24,14 @@ Error-prone
 
 ### Example
 
-```python
-
+```diff
 ### Pandas & NumPy
 import pandas as pd
-import numpy as np
+- import numpy as np
+
 df = pd.DataFrame([1, None, 3])
-
-# Violated Code
-df_is_nan = df == np.nan
-
-# Recommended Fix
-df_is_nan = df.isna()
-
+- df_is_nan = df == np.nan
++ df_is_nan = df.isna()
 ```
 
 ### Source:
