@@ -49,6 +49,11 @@
 </a>
 </li>
 <li>
+<a href=https://hynn01.github.io/dslinter/tags/ title=Tags>
+<span>Tags</span>
+</a>
+</li>
+<li>
 <a href=https://hynn01.github.io/dslinter/search/ title="Search (Alt + /)" accesskey=/>
 <span>Search</span>
 </a>
@@ -56,11 +61,6 @@
 <li>
 <a href=https://hynn01.github.io/dslinter/ title=Survey>
 <span>Survey</span>
-</a>
-</li>
-<li>
-<a href=https://hynn01.github.io/dslinter/tags/ title=Tags>
-<span>Tags</span>
 </a>
 </li>
 </ul>
@@ -76,14 +76,32 @@
 </h2>
 </header>
 <section class=entry-content>
-<p>Description np.matmul() in Numpy library is more readable than np.dot() in the semantic way. Whilenp.dot() provides heterogeneous behaviors depending on the shape of the data, np.matmul() behaves in a consistent way. When the multiply operation is performed on two-dimension matrixes, two APIs give a same result. However, np.matmul() is preferred than np.dot() for its clear semantic.
-Type API Specific
-Existing Stage Model Training
-Effect Readability
-Example ### NumPy import numpy as np a = [[1, 0], [0, 1]] b = [[4, 1], [2, 2]] - np....</p>
+<p>When the multiply operation is performed on two-dimensional matrixes, use np.matmul() instead of np.dot() in NumPy for better semantics.</p>
 </section>
 <footer class=entry-footer></footer>
-<a class=entry-link aria-label="post link to Matrix Multiplication API Misused" href=https://hynn01.github.io/dslinter/code-smells/matrix-multiplication-api-misused/></a>
+<a class=entry-link aria-label="post link to Matrix Multiplication API Misused" href=https://hynn01.github.io/dslinter/code-smells/14-matrix-multiplication-api-misused/></a>
+</article>
+<article class="post-entry tag-entry">
+<header class=entry-header>
+<h2>Columns and DataType Not Explicitly Set
+</h2>
+</header>
+<section class=entry-content>
+<p>Explicitly select columns and set DataType in Pandas.</p>
+</section>
+<footer class=entry-footer></footer>
+<a class=entry-link aria-label="post link to Columns and DataType Not Explicitly Set" href=https://hynn01.github.io/dslinter/code-smells/15-columns-and-datatype-not-explicitly-set/></a>
+</article>
+<article class="post-entry tag-entry">
+<header class=entry-header>
+<h2>Merge API Parameter Not Explicitly Set
+</h2>
+</header>
+<section class=entry-content>
+<p>Explicitly specify on, how and validate parameter for df.merge() API in Pandas for better readability.</p>
+</section>
+<footer class=entry-footer></footer>
+<a class=entry-link aria-label="post link to Merge API Parameter Not Explicitly Set" href=https://hynn01.github.io/dslinter/code-smells/17-merge-api-parameter-not-explicitly-set/></a>
 </article>
 </main>
 <footer class=footer>

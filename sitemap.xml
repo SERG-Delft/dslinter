@@ -2,67 +2,55 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://hynn01.github.io/dslinter/code-smells/randomness-uncontrolled/</loc>
+    <loc>https://hynn01.github.io/dslinter/code-smells/1-in-place-apis-misused/</loc>
   </url><url>
-    <loc>https://hynn01.github.io/dslinter/code-smells/in-place-apis-misused/</loc>
+    <loc>https://hynn01.github.io/dslinter/code-smells/2-unnecessary-iteration/</loc>
   </url><url>
-    <loc>https://hynn01.github.io/dslinter/code-smells/unnecessary-iteration/</loc>
+    <loc>https://hynn01.github.io/dslinter/code-smells/3-no-scaling-before-scaling-sensitive-operation/</loc>
   </url><url>
-    <loc>https://hynn01.github.io/dslinter/code-smells/no-scaling-before-scaling-sensitive-operation/</loc>
+    <loc>https://hynn01.github.io/dslinter/code-smells/4-hyperparameter-not-explicitly-set/</loc>
   </url><url>
-    <loc>https://hynn01.github.io/dslinter/code-smells/data-leakage/</loc>
+    <loc>https://hynn01.github.io/dslinter/code-smells/5-memory-not-freed/</loc>
   </url><url>
-    <loc>https://hynn01.github.io/dslinter/code-smells/hyperparameter-not-explicitly-set/</loc>
+    <loc>https://hynn01.github.io/dslinter/code-smells/6-deterministic-algorithm-option-not-used/</loc>
   </url><url>
-    <loc>https://hynn01.github.io/dslinter/deprecated/excessive-hyperparameter/</loc>
+    <loc>https://hynn01.github.io/dslinter/code-smells/7-missing-the-mask-of-invalid-value/</loc>
   </url><url>
-    <loc>https://hynn01.github.io/dslinter/deprecated/counterintuitive-hyperparameter/</loc>
+    <loc>https://hynn01.github.io/dslinter/code-smells/8-randomness-uncontrolled/</loc>
   </url><url>
-    <loc>https://hynn01.github.io/dslinter/code-smells/memory-not-freed/</loc>
+    <loc>https://hynn01.github.io/dslinter/code-smells/9-data-leakage/</loc>
   </url><url>
-    <loc>https://hynn01.github.io/dslinter/code-smells/deterministic-algorithm-not-used/</loc>
+    <loc>https://hynn01.github.io/dslinter/code-smells/10-threshold-dependent-validation/</loc>
   </url><url>
-    <loc>https://hynn01.github.io/dslinter/code-smells/missing-the-mask-of-invalid-value/</loc>
+    <loc>https://hynn01.github.io/dslinter/code-smells/11-nan-equivalence-comparison-misused/</loc>
   </url><url>
-    <loc>https://hynn01.github.io/dslinter/code-smells/nan-equality-misused/</loc>
+    <loc>https://hynn01.github.io/dslinter/code-smells/12-chain-indexing/</loc>
   </url><url>
-    <loc>https://hynn01.github.io/dslinter/code-smells/chain-indexing/</loc>
+    <loc>https://hynn01.github.io/dslinter/code-smells/13-dataframe-coversion-api-misused/</loc>
   </url><url>
-    <loc>https://hynn01.github.io/dslinter/code-smells/dataframe-coversion-api-misused/</loc>
+    <loc>https://hynn01.github.io/dslinter/code-smells/14-matrix-multiplication-api-misused/</loc>
   </url><url>
-    <loc>https://hynn01.github.io/dslinter/deprecated/regular-expression-solution-not-optimal/</loc>
+    <loc>https://hynn01.github.io/dslinter/code-smells/15-columns-and-datatype-not-explicitly-set/</loc>
   </url><url>
-    <loc>https://hynn01.github.io/dslinter/deprecated/tensor-shape-unset/</loc>
+    <loc>https://hynn01.github.io/dslinter/code-smells/16-empty-column-misinitialization/</loc>
   </url><url>
-    <loc>https://hynn01.github.io/dslinter/deprecated/backend-engine-mischoosed/</loc>
+    <loc>https://hynn01.github.io/dslinter/code-smells/17-merge-api-parameter-not-explicitly-set/</loc>
   </url><url>
-    <loc>https://hynn01.github.io/dslinter/code-smells/dataloader-unused/</loc>
+    <loc>https://hynn01.github.io/dslinter/code-smells/18-broadcasting-feature-not-used/</loc>
   </url><url>
-    <loc>https://hynn01.github.io/dslinter/code-smells/matrix-multiplication-api-misused/</loc>
+    <loc>https://hynn01.github.io/dslinter/code-smells/19-tensorarray-not-used/</loc>
   </url><url>
-    <loc>https://hynn01.github.io/dslinter/deprecated/initialization-order-misused/</loc>
+    <loc>https://hynn01.github.io/dslinter/code-smells/20-pytorch-call-method-misused/</loc>
   </url><url>
-    <loc>https://hynn01.github.io/dslinter/code-smells/pytorch-call-method-misused/</loc>
+    <loc>https://hynn01.github.io/dslinter/code-smells/21-training-evaluation-mode-improper-toggling/</loc>
   </url><url>
-    <loc>https://hynn01.github.io/dslinter/code-smells/train-eval-mode-improper-toggling/</loc>
+    <loc>https://hynn01.github.io/dslinter/code-smells/22-gradients-not-cleared-before-backward-propagation/</loc>
   </url><url>
-    <loc>https://hynn01.github.io/dslinter/code-smells/zero_grad-not-used-before-backward/</loc>
+    <loc>https://hynn01.github.io/dslinter/code-smells/23-loss-api-misused/</loc>
   </url><url>
-    <loc>https://hynn01.github.io/dslinter/code-smells/loss-api-misused/</loc>
-  </url><url>
-    <loc>https://hynn01.github.io/dslinter/deprecated/initialize-weight-to-zero/</loc>
-  </url><url>
-    <loc>https://hynn01.github.io/dslinter/deprecated/missing-regularization/</loc>
-  </url><url>
-    <loc>https://hynn01.github.io/dslinter/code-smells/threshold-dependent-validation/</loc>
-  </url><url>
-    <loc>https://hynn01.github.io/dslinter/tags/added/</loc>
-  </url><url>
-    <loc>https://hynn01.github.io/dslinter/tags/api-specifc/</loc>
+    <loc>https://hynn01.github.io/dslinter/code-smells/24-dataloader-unused/</loc>
   </url><url>
     <loc>https://hynn01.github.io/dslinter/tags/api-specific/</loc>
-  </url><url>
-    <loc>https://hynn01.github.io/dslinter/code-smells/broadcasting-feature-not-used/</loc>
   </url><url>
     <loc>https://hynn01.github.io/dslinter/code-smell/</loc>
   </url><url>
@@ -70,39 +58,23 @@
   </url><url>
     <loc>https://hynn01.github.io/dslinter/</loc>
   </url><url>
-    <loc>https://hynn01.github.io/dslinter/code-smells/columns-and-datatype-not-explicitly-set/</loc>
-  </url><url>
     <loc>https://hynn01.github.io/dslinter/tags/consistency/</loc>
   </url><url>
-    <loc>https://hynn01.github.io/dslinter/tags/data-prepaation/</loc>
-  </url><url>
-    <loc>https://hynn01.github.io/dslinter/tags/data-preparation/</loc>
-  </url><url>
-    <loc>https://hynn01.github.io/dslinter/tags/data-segregation/</loc>
-  </url><url>
-    <loc>https://hynn01.github.io/dslinter/deprecated/</loc>
+    <loc>https://hynn01.github.io/dslinter/tags/data-cleaning/</loc>
   </url><url>
     <loc>https://hynn01.github.io/dslinter/tags/efficiency/</loc>
   </url><url>
-    <loc>https://hynn01.github.io/dslinter/code-smells/empty-column-misinitialization/</loc>
-  </url><url>
     <loc>https://hynn01.github.io/dslinter/tags/error-prone/</loc>
   </url><url>
-    <loc>https://hynn01.github.io/dslinter/tags/general/</loc>
+    <loc>https://hynn01.github.io/dslinter/tags/feature-engineering/</loc>
   </url><url>
     <loc>https://hynn01.github.io/dslinter/tags/generic/</loc>
   </url><url>
     <loc>https://hynn01.github.io/dslinter/tags/memory-issue/</loc>
   </url><url>
-    <loc>https://hynn01.github.io/dslinter/code-smells/merge-api-parameter-not-explicitly-set/</loc>
-  </url><url>
     <loc>https://hynn01.github.io/dslinter/tags/model-evaluation/</loc>
   </url><url>
     <loc>https://hynn01.github.io/dslinter/tags/model-training/</loc>
-  </url><url>
-    <loc>https://hynn01.github.io/dslinter/tags/modeling-training/</loc>
-  </url><url>
-    <loc>https://hynn01.github.io/dslinter/tags/not-sure/</loc>
   </url><url>
     <loc>https://hynn01.github.io/dslinter/tags/readability/</loc>
   </url><url>
@@ -113,7 +85,5 @@
     <loc>https://hynn01.github.io/dslinter/search/</loc>
   </url><url>
     <loc>https://hynn01.github.io/dslinter/tags/</loc>
-  </url><url>
-    <loc>https://hynn01.github.io/dslinter/code-smells/tensorarray-not-used/</loc>
   </url>
 </urlset>

@@ -49,6 +49,11 @@
 </a>
 </li>
 <li>
+<a href=https://hynn01.github.io/dslinter/tags/ title=Tags>
+<span>Tags</span>
+</a>
+</li>
+<li>
 <a href=https://hynn01.github.io/dslinter/search/ title="Search (Alt + /)" accesskey=/>
 <span>Search</span>
 </a>
@@ -56,11 +61,6 @@
 <li>
 <a href=https://hynn01.github.io/dslinter/ title=Survey>
 <span>Survey</span>
-</a>
-</li>
-<li>
-<a href=https://hynn01.github.io/dslinter/tags/ title=Tags>
-<span>Tags</span>
 </a>
 </li>
 </ul>
@@ -72,25 +72,25 @@
 </header>
 <article class="post-entry tag-entry">
 <header class=entry-header>
-<h2>In Place APIs Misused
+<h2>In-Place APIs Misused
 </h2>
 </header>
 <section class=entry-content>
-<p>Description “In-place operation is an operation that directly changes the content of a given linear algebra, vector, matrices (Tensor) without making a copy.” Due to the nature of the in-place operation, the in-place APIs are easily misused. Developers sometimes forget to set the in-place parameter in APIs to true while not assigning the new result to a variable, causing potential silent bugs. The data is not updated in this way, but the developer thinks it is and might not be able to find where the bug is....</p>
+<p>Remember to assign the result of an operation to a variable or set the in-place parameter in the API.</p>
 </section>
 <footer class=entry-footer></footer>
-<a class=entry-link aria-label="post link to In Place APIs Misused" href=https://hynn01.github.io/dslinter/code-smells/in-place-apis-misused/></a>
+<a class=entry-link aria-label="post link to In-Place APIs Misused" href=https://hynn01.github.io/dslinter/code-smells/1-in-place-apis-misused/></a>
 </article>
 <article class="post-entry tag-entry">
 <header class=entry-header>
-<h2>Data Leakage
+<h2>No Scaling Before Scaling-sensitive Operation
 </h2>
 </header>
 <section class=entry-content>
-<p>Description “Data Leakage happens when the data you are using to train a machine learning algorithm happens to have the information you are trying to predict.” It results in overly optimistic performance during testing and poor performance in real-world usage. There are two main sources of data leakage: leaky predictors and a leaky validation strategy. Leaky predictors refer to the situation where some features updated or created after the target value is realized are included....</p>
+<p>Check whether feature scaling is added before scaling-sensitive operations.</p>
 </section>
 <footer class=entry-footer></footer>
-<a class=entry-link aria-label="post link to Data Leakage" href=https://hynn01.github.io/dslinter/code-smells/data-leakage/></a>
+<a class=entry-link aria-label="post link to No Scaling Before Scaling-sensitive Operation" href=https://hynn01.github.io/dslinter/code-smells/3-no-scaling-before-scaling-sensitive-operation/></a>
 </article>
 <article class="post-entry tag-entry">
 <header class=entry-header>
@@ -98,40 +98,10 @@
 </h2>
 </header>
 <section class=entry-content>
-<p>Description Hyperparameters are ML algorithm parameters used to control the learning process and are usually determined before the actual process starts. Hyperparameters should be set and tuned because they improve prediction quality and reproducibility. Tuning hyperparameters can lead to higher prediction quality because the default parameters of the learning algorithm may not be optimal for a given data or problem, and may lead to local optima. These parameters directly control the behavior of the training algorithm and therefore have a significant impact on the performance of the model....</p>
+<p>Hyperparameters should be set explicitly.</p>
 </section>
 <footer class=entry-footer></footer>
-<a class=entry-link aria-label="post link to Hyperparameter not Explicitly Set" href=https://hynn01.github.io/dslinter/code-smells/hyperparameter-not-explicitly-set/></a>
-</article>
-<article class="post-entry tag-entry">
-<header class=entry-header>
-<h2>Excessive Hyperparameter
-</h2>
-</header>
-<section class=entry-content>
-<p>Description Excessive hyperparameter precision is a potential risk for overtuning. Overtuning occurs if an overly high precision hyperparameter value allows the model to perform particularly well while values in close range of it do not. Further, the choice of such a hyperparameter might be uninterpretable to users, which leads to an untrustworthy result.
-Type Generic
-Existing Stage Model Training
-Effect Error-prone
-Example ### Scikit-Learn from sklearn.naive_bayes import MultinomialN # Violated Code mnb = MultinomialNB(alpha = 0....</p>
-</section>
-<footer class=entry-footer></footer>
-<a class=entry-link aria-label="post link to Excessive Hyperparameter" href=https://hynn01.github.io/dslinter/deprecated/excessive-hyperparameter/></a>
-</article>
-<article class="post-entry tag-entry">
-<header class=entry-header>
-<h2>Counterintuitive Hyperparameter
-</h2>
-</header>
-<section class=entry-content>
-<p>Description Counterintuitive hyperparameters will also cause bugs. There are four posts on StackOverflow discussing where the bug in the program is, and it turns out that a large learning rate causes bugs. This implies that the developer should check whether the hyperparameters stay in the normal range when developing ML applications.
-Type Generic
-Existing Stage Model Training
-Effect Error-prone
-Example # TensorFlow import tensorflow as tf # Violated Code optimizer = tf....</p>
-</section>
-<footer class=entry-footer></footer>
-<a class=entry-link aria-label="post link to Counterintuitive Hyperparameter" href=https://hynn01.github.io/dslinter/deprecated/counterintuitive-hyperparameter/></a>
+<a class=entry-link aria-label="post link to Hyperparameter not Explicitly Set" href=https://hynn01.github.io/dslinter/code-smells/4-hyperparameter-not-explicitly-set/></a>
 </article>
 <article class="post-entry tag-entry">
 <header class=entry-header>
@@ -139,65 +109,76 @@ Example # TensorFlow import tensorflow as tf # Violated Code optimizer = tf....<
 </h2>
 </header>
 <section class=entry-content>
-<p>Description Several posts on Stack Overflow talk about the bugs that are not easy to discover caused by the log parameter approaching zero. In this kind of program, the log function variable turns to zero and raises an error during the training process. However, the error’s stack trace did not directly point to the line of code that the bug exist. This kind of problem is not easy to debug and might take a long training time to find....</p>
+<p>Add a mask for possible invalid values. For example, developers should add a mask for the input for tf.log() API.</p>
 </section>
 <footer class=entry-footer></footer>
-<a class=entry-link aria-label="post link to Missing the Mask of Invalid Value" href=https://hynn01.github.io/dslinter/code-smells/missing-the-mask-of-invalid-value/></a>
+<a class=entry-link aria-label="post link to Missing the Mask of Invalid Value" href=https://hynn01.github.io/dslinter/code-smells/7-missing-the-mask-of-invalid-value/></a>
 </article>
 <article class="post-entry tag-entry">
 <header class=entry-header>
-<h2>Nan Equality Misused
+<h2>Data Leakage
 </h2>
 </header>
 <section class=entry-content>
-<p>Description While None == None evaluates to True, numpy.nan == numpy.nan evaluates to False. As Pandas treats None like numpy.nan for simplicity and performance reasons, a comparison of DataFrame elements with numpy.nan always return False . Therefore, developers need to be careful when using the NaN comparision in Numpy and Pandas. Otherwise, it may lead to unintentional behavior in the code.
-Type API Specific
-Existing Stage Data Preparation
-Effect Error-prone...</p>
+<p>Use Pipeline() API in Scikit-Learn or check data segregation carefully when using other libraries to prevent data leakage.</p>
 </section>
 <footer class=entry-footer></footer>
-<a class=entry-link aria-label="post link to Nan Equality Misused" href=https://hynn01.github.io/dslinter/code-smells/nan-equality-misused/></a>
+<a class=entry-link aria-label="post link to Data Leakage" href=https://hynn01.github.io/dslinter/code-smells/9-data-leakage/></a>
 </article>
 <article class="post-entry tag-entry">
 <header class=entry-header>
-<h2>Chain Indexing Misused
+<h2>NaN Equivalence Comparison Misused
+</h2>
+</header>
+<section class=entry-content>
+<p>Be careful when using the NaN equivalence comparison in NumPy and Pandas.</p>
+</section>
+<footer class=entry-footer></footer>
+<a class=entry-link aria-label="post link to NaN Equivalence Comparison Misused" href=https://hynn01.github.io/dslinter/code-smells/11-nan-equivalence-comparison-misused/></a>
+</article>
+<article class="post-entry tag-entry">
+<header class=entry-header>
+<h2>Chain Indexing
 </h2>
 </header>
 <section class=entry-content>
 <p>Avoid using chain indexing in Pandas.</p>
 </section>
 <footer class=entry-footer></footer>
-<a class=entry-link aria-label="post link to Chain Indexing Misused" href=https://hynn01.github.io/dslinter/code-smells/chain-indexing/></a>
+<a class=entry-link aria-label="post link to Chain Indexing" href=https://hynn01.github.io/dslinter/code-smells/12-chain-indexing/></a>
 </article>
 <article class="post-entry tag-entry">
 <header class=entry-header>
-<h2>Tensor Shape Unset
+<h2>Merge API Parameter Not Explicitly Set
 </h2>
 </header>
 <section class=entry-content>
-<p>Description Several bugs can be caused by tensor unaligned. Usually, the unaligned tensor problems cannot be identified at the code level, but we can explicitly control one. It is recommended to explicitly set the shape of the input for tf.Variable() to make the tensor aligned. In this way, we can alleviate the unaligned tensor problem.
-Type API Specific
-Existing Stage Data Preparation
-Effect Error-prone
-Example ### TensorFlow import Tensorflow as tf # Violated Code normal_dist = tf....</p>
+<p>Explicitly specify on, how and validate parameter for df.merge() API in Pandas for better readability.</p>
 </section>
 <footer class=entry-footer></footer>
-<a class=entry-link aria-label="post link to Tensor Shape Unset" href=https://hynn01.github.io/dslinter/deprecated/tensor-shape-unset/></a>
+<a class=entry-link aria-label="post link to Merge API Parameter Not Explicitly Set" href=https://hynn01.github.io/dslinter/code-smells/17-merge-api-parameter-not-explicitly-set/></a>
 </article>
 <article class="post-entry tag-entry">
 <header class=entry-header>
-<h2>Initialization Order Misused
+<h2>TensorArray Not Used
 </h2>
 </header>
 <section class=entry-content>
-<p>Description The AdamOptimizer class in the TensorFlow creates additional variables named “slots”. The variables must be initialized before training the model. Therefore, if the developer call initialize_all_variables() before calling AdamOptimizer and does not call the initializer afterward, the variables created by AdamOptimizer will not be initialized and might cause an error.
-Type API Specific
-Existing Stage Model Training
-Effect Error-prone
-Example ### TensorFlow import tensorflow as tf # Violated Code init = tf....</p>
+<p>Use tf.TensorArray() in TensorFlow 2 if the value of the array will change in the loop.</p>
 </section>
 <footer class=entry-footer></footer>
-<a class=entry-link aria-label="post link to Initialization Order Misused" href=https://hynn01.github.io/dslinter/deprecated/initialization-order-misused/></a>
+<a class=entry-link aria-label="post link to TensorArray Not Used" href=https://hynn01.github.io/dslinter/code-smells/19-tensorarray-not-used/></a>
+</article>
+<article class="post-entry tag-entry">
+<header class=entry-header>
+<h2>Training / Evaluation Mode Improper Toggling
+</h2>
+</header>
+<section class=entry-content>
+<p>Call the training mode in the appropriate place in PyTorch code to avoid forgetting to toggle back the training mode after the inference step.</p>
+</section>
+<footer class=entry-footer></footer>
+<a class=entry-link aria-label="post link to Training / Evaluation Mode Improper Toggling" href=https://hynn01.github.io/dslinter/code-smells/21-training-evaluation-mode-improper-toggling/></a>
 </article>
 <footer class=page-footer>
 <nav class=pagination>

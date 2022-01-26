@@ -7,16 +7,39 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language><atom:link href="https://hynn01.github.io/dslinter/tags/model-evaluation/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Threshold Dependent Validation</title>
-      <link>https://hynn01.github.io/dslinter/code-smells/threshold-dependent-validation/</link>
+      <title>Randomness Uncontrolled</title>
+      <link>https://hynn01.github.io/dslinter/code-smells/8-randomness-uncontrolled/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://hynn01.github.io/dslinter/code-smells/threshold-dependent-validation/</guid>
-      <description>Description The performance of the machine learning model can be measured by different metrics, including threshold-dependent metrics(e.g., F-measure) or threshold-independent metrics(e.g., Area Under the receiver operating characteristic curve (AUC)). Choosing a specific threshold is tricky and can lead to a less-interpretable result. Therefore, threshold-independent is more robust and should be preferred over threshold-independent metrics.
-Type Generic
-Existing Stage Model Evaluation
-Effect Robustness
-Example ### Scikit-Learn from sklearn import metrics y_true = [0, 1, 2, 0, 1, 2] y_pred = [0, 2, 1, 0, 0, 1] metrics.</description>
+      <guid>https://hynn01.github.io/dslinter/code-smells/8-randomness-uncontrolled/</guid>
+      <description>Set random seed explicitly during the development process whenever a possible random procedure is involved in the application.</description>
+    </item>
+    
+    <item>
+      <title>Data Leakage</title>
+      <link>https://hynn01.github.io/dslinter/code-smells/9-data-leakage/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://hynn01.github.io/dslinter/code-smells/9-data-leakage/</guid>
+      <description>Use &lt;code&gt;Pipeline()&lt;/code&gt; API in Scikit-Learn or check data segregation carefully when using other libraries to prevent data leakage.</description>
+    </item>
+    
+    <item>
+      <title>Threshold-Dependent Validation</title>
+      <link>https://hynn01.github.io/dslinter/code-smells/10-threshold-dependent-validation/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://hynn01.github.io/dslinter/code-smells/10-threshold-dependent-validation/</guid>
+      <description>Use threshold-independent metrics instead of threshold-dependent ones in model evaluation.</description>
+    </item>
+    
+    <item>
+      <title>DataLoader Unused</title>
+      <link>https://hynn01.github.io/dslinter/code-smells/24-dataloader-unused/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://hynn01.github.io/dslinter/code-smells/24-dataloader-unused/</guid>
+      <description>Use &lt;code&gt;DataLoader&lt;/code&gt; to load the data in PyTorch instead of splitting data manually and feed into the network.</description>
     </item>
     
   </channel>

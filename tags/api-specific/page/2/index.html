@@ -49,6 +49,11 @@
 </a>
 </li>
 <li>
+<a href=https://hynn01.github.io/dslinter/tags/ title=Tags>
+<span>Tags</span>
+</a>
+</li>
+<li>
 <a href=https://hynn01.github.io/dslinter/search/ title="Search (Alt + /)" accesskey=/>
 <span>Search</span>
 </a>
@@ -56,11 +61,6 @@
 <li>
 <a href=https://hynn01.github.io/dslinter/ title=Survey>
 <span>Survey</span>
-</a>
-</li>
-<li>
-<a href=https://hynn01.github.io/dslinter/tags/ title=Tags>
-<span>Tags</span>
 </a>
 </li>
 </ul>
@@ -72,18 +72,25 @@
 </header>
 <article class="post-entry tag-entry">
 <header class=entry-header>
-<h2>Zero_grad Not Used Before Backward
+<h2>Training / Evaluation Mode Improper Toggling
 </h2>
 </header>
 <section class=entry-content>
-<p>Description Developers should use optimizer.zero_grad(), loss_fn.backward(), optimizer.step() together and should be forget to use optimizer.zero_grad() before loss_fn.backward(). optimizer.zero_grad() clears the old gradients from last step. If this API is not used, the gradients will be accumulated from all loss.backward() calls and it will lead to the gradient explosion, which fails the training.
-Type API Specific
-Existing Stage Model Training
-Effect Error-prone
-Example # PyTorch # 1. Load and normalize CIFAR10 import torch import torchvision import torchvision....</p>
+<p>Call the training mode in the appropriate place in PyTorch code to avoid forgetting to toggle back the training mode after the inference step.</p>
 </section>
 <footer class=entry-footer></footer>
-<a class=entry-link aria-label="post link to Zero_grad Not Used Before Backward" href=https://hynn01.github.io/dslinter/code-smells/zero_grad-not-used-before-backward/></a>
+<a class=entry-link aria-label="post link to Training / Evaluation Mode Improper Toggling" href=https://hynn01.github.io/dslinter/code-smells/21-training-evaluation-mode-improper-toggling/></a>
+</article>
+<article class="post-entry tag-entry">
+<header class=entry-header>
+<h2>Gradients Not Cleared before Backward Propagation
+</h2>
+</header>
+<section class=entry-content>
+<p>Use optimizer.zero_grad(), loss_fn.backward(), optimizer.step() together in order in PyTorch. Do not forget to use optimizer.zero_grad() before loss_fn.backward() to clear gradients.</p>
+</section>
+<footer class=entry-footer></footer>
+<a class=entry-link aria-label="post link to Gradients Not Cleared before Backward Propagation" href=https://hynn01.github.io/dslinter/code-smells/22-gradients-not-cleared-before-backward-propagation/></a>
 </article>
 <article class="post-entry tag-entry">
 <header class=entry-header>
@@ -91,14 +98,21 @@ Example # PyTorch # 1. Load and normalize CIFAR10 import torch import torchvisio
 </h2>
 </header>
 <section class=entry-content>
-<p>Description Different loss APIs take different input formats, but the difference is not clarified in some documentations, so it is easy to misuse. For example, in PyTorch, the NLLLoss takes the output of LogSoftmax as the input. If the input given to NLLLoss has not been processed by LogSoftmax, it might lead to a wrong result.
-Type API Specific
-Existing Stage Model Training
-Effect Error-prone
-Example ### PyTorch import torch.nn as nn import torch + m = nn....</p>
+<p>Check the input for loss API in PyTorch carefully.</p>
 </section>
 <footer class=entry-footer></footer>
-<a class=entry-link aria-label="post link to Loss API Misused" href=https://hynn01.github.io/dslinter/code-smells/loss-api-misused/></a>
+<a class=entry-link aria-label="post link to Loss API Misused" href=https://hynn01.github.io/dslinter/code-smells/23-loss-api-misused/></a>
+</article>
+<article class="post-entry tag-entry">
+<header class=entry-header>
+<h2>DataLoader Unused
+</h2>
+</header>
+<section class=entry-content>
+<p>Use DataLoader to load the data in PyTorch instead of splitting data manually and feed into the network.</p>
+</section>
+<footer class=entry-footer></footer>
+<a class=entry-link aria-label="post link to DataLoader Unused" href=https://hynn01.github.io/dslinter/code-smells/24-dataloader-unused/></a>
 </article>
 <footer class=page-footer>
 <nav class=pagination>

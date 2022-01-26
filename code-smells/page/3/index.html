@@ -50,6 +50,11 @@
 </a>
 </li>
 <li>
+<a href=https://hynn01.github.io/dslinter/tags/ title=Tags>
+<span>Tags</span>
+</a>
+</li>
+<li>
 <a href=https://hynn01.github.io/dslinter/search/ title="Search (Alt + /)" accesskey=/>
 <span>Search</span>
 </a>
@@ -57,11 +62,6 @@
 <li>
 <a href=https://hynn01.github.io/dslinter/ title=Survey>
 <span>Survey</span>
-</a>
-</li>
-<li>
-<a href=https://hynn01.github.io/dslinter/tags/ title=Tags>
-<span>Tags</span>
 </a>
 </li>
 </ul>
@@ -73,47 +73,47 @@
 </header>
 <article class=post-entry>
 <header class=entry-header>
-<h2>Columns and DataType Not Explicitly Set
+<h2>Training / Evaluation Mode Improper Toggling
 </h2>
 </header>
 <section class=entry-content>
-<p>Description Context Problem Solution Type Existing Stage Effect Example import pandas as pd df = pd.read_csv('data.csv') + df = df[['col1', 'col2', 'col3']] Source: Paper Grey Literature GitHub Commit Stack Overflow Documentation </p>
+<p>Call the training mode in the appropriate place in PyTorch code to avoid forgetting to toggle back the training mode after the inference step.</p>
 </section>
 <footer class=entry-footer></footer>
-<a class=entry-link aria-label="post link to Columns and DataType Not Explicitly Set" href=https://hynn01.github.io/dslinter/code-smells/columns-and-datatype-not-explicitly-set/></a>
+<a class=entry-link aria-label="post link to Training / Evaluation Mode Improper Toggling" href=https://hynn01.github.io/dslinter/code-smells/21-training-evaluation-mode-improper-toggling/></a>
 </article>
 <article class=post-entry>
 <header class=entry-header>
-<h2>Empty Column Misinitialization
+<h2>Gradients Not Cleared before Backward Propagation
 </h2>
 </header>
 <section class=entry-content>
-<p>Description Context Problem Solution Type Existing Stage Effect Example import pandas as pd + import numpy as np df = pd.DataFrame([]) - df['new_col_int'] = 0 - df['new_col_str'] = '' + df['new_col_float'] = np.nan + df['new_col_int'] = pd.Series(dtype='int') + df['new_col_str'] = pd.Series(dtype='object') Source: Paper Grey Literature GitHub Commit Stack Overflow Documentation </p>
+<p>Use optimizer.zero_grad(), loss_fn.backward(), optimizer.step() together in order in PyTorch. Do not forget to use optimizer.zero_grad() before loss_fn.backward() to clear gradients.</p>
 </section>
 <footer class=entry-footer></footer>
-<a class=entry-link aria-label="post link to Empty Column Misinitialization" href=https://hynn01.github.io/dslinter/code-smells/empty-column-misinitialization/></a>
+<a class=entry-link aria-label="post link to Gradients Not Cleared before Backward Propagation" href=https://hynn01.github.io/dslinter/code-smells/22-gradients-not-cleared-before-backward-propagation/></a>
 </article>
 <article class=post-entry>
 <header class=entry-header>
-<h2>Merge API Parameter Not Explicitly Set
+<h2>Loss API Misused
 </h2>
 </header>
 <section class=entry-content>
-<p></p>
+<p>Check the input for loss API in PyTorch carefully.</p>
 </section>
 <footer class=entry-footer></footer>
-<a class=entry-link aria-label="post link to Merge API Parameter Not Explicitly Set" href=https://hynn01.github.io/dslinter/code-smells/merge-api-parameter-not-explicitly-set/></a>
+<a class=entry-link aria-label="post link to Loss API Misused" href=https://hynn01.github.io/dslinter/code-smells/23-loss-api-misused/></a>
 </article>
 <article class=post-entry>
 <header class=entry-header>
-<h2>TensorArray Not Used
+<h2>DataLoader Unused
 </h2>
 </header>
 <section class=entry-content>
-<p>Description Context Problem Solution Type Existing Stage Effect Example ### TensorFlow import tensorflow as tf @tf.function def fibonacci(n): a = tf.constant(1) b = tf.constant(1) - c = tf.constant([1, 1]) + c = tf.TensorArray(tf.int32, n) + c = c.write(0, a) + c = c.write(1, b) for i in range(2, n): a, b = b, a + b - c = tf.concat([c, [b]], 0) + c = c.write(i, b) - return c + return c....</p>
+<p>Use DataLoader to load the data in PyTorch instead of splitting data manually and feed into the network.</p>
 </section>
 <footer class=entry-footer></footer>
-<a class=entry-link aria-label="post link to TensorArray Not Used" href=https://hynn01.github.io/dslinter/code-smells/tensorarray-not-used/></a>
+<a class=entry-link aria-label="post link to DataLoader Unused" href=https://hynn01.github.io/dslinter/code-smells/24-dataloader-unused/></a>
 </article>
 <footer class=page-footer>
 <nav class=pagination>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>feature engineering on Code Smells for Machine Learning Applications</title>
+    <link>https://hynn01.github.io/dslinter/tags/feature-engineering/</link>
+    <description>Recent content in feature engineering on Code Smells for Machine Learning Applications</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="https://hynn01.github.io/dslinter/tags/feature-engineering/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>No Scaling Before Scaling-sensitive Operation</title>
+      <link>https://hynn01.github.io/dslinter/code-smells/3-no-scaling-before-scaling-sensitive-operation/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://hynn01.github.io/dslinter/code-smells/3-no-scaling-before-scaling-sensitive-operation/</guid>
+      <description>Check whether feature scaling is added before scaling-sensitive operations.</description>
+    </item>
+    
+  </channel>
+</rss>
