@@ -3,7 +3,7 @@
 <meta http-equiv=x-ua-compatible content="IE=edge">
 <meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
 <meta name=robots content="index, follow">
-<title>Chain Indexing Misused | DSLinter - Linter for Machine Learning - Specific Code Smells</title>
+<title>Chain Indexing Misused | Code Smells for Machine Learning Applications</title>
 <meta name=keywords content="api-specific,data prepaation,error-prone,efficiency">
 <meta name=description content="Avoid using chain indexing in Pandas.">
 <meta name=author content>
@@ -27,19 +27,19 @@
 <meta property="og:description" content="Avoid using chain indexing in Pandas.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://hynn01.github.io/dslinter/code-smells/chain-indexing/"><meta property="article:section" content="Code Smells">
-<meta property="og:site_name" content="DSLinter - Linter for Machine Learning Application - Specific Code Smells">
+<meta property="og:site_name" content="Code Smells for Machine Learning Applications">
 <meta name=twitter:card content="summary">
 <meta name=twitter:title content="Chain Indexing Misused">
 <meta name=twitter:description content="Avoid using chain indexing in Pandas.">
 <script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":2,"name":"Chain Indexing Misused","item":"https://hynn01.github.io/dslinter/code-smells/chain-indexing/"}]}</script>
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Chain Indexing Misused","name":"Chain Indexing Misused","description":"Avoid using chain indexing in Pandas.","keywords":["api-specific","data prepaation","error-prone","efficiency"],"articleBody":"Description Context In Pandas, df[\"one\"][\"two\"] and df.loc[:,(\"one\",\"two\")] give the same result. df[\"one\"][\"two\"] is called chain indexing.\nProblem Using chain indexing may cause performance issues as well as prone-to-bug code. For example, when using df[\"one\"][\"two\"], Pandas see this operation as two events: call df[\"one\"] first and call [\"two\"] based on the result the previous operation gets. On the contrary, df.loc[:,(\"one\",\"two\")] only perform a single call. In this way, the second approach can be significantly faster than the first one. Furthermore, assigning to the product of chain indexing has inherently unpredictable results. Since Pandas makes no guarantees on whether df[\"one\"] will return a view or a copy, the assignment may fail.\nSolution Developers using Pandas should avoid using chain indexing.\nType API Specific\nExisting Stage Data Preparation\nEffect Error-prone \u0026 Efficiency\nExample ### Pandas import pandas as pd df = pd.DataFrame([[1,2,3],[4,5,6]]) col = 1 x = 0 - df[col][x] = 42 + df.loc[x, col] = 42 Source: Paper Grey Literature GitHub Commit Stack Overflow  https://stackoverflow.com/questions/22491628/extrapolate-values-in-pandas-dataframe/35959909#35959909 https://stackoverflow.com/questions/53806570/why-does-one-use-of-iloc-give-a-settingwithcopywarning-but-the-other-doesnt/53807453#53807453  Documentation  https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#indexing-view-versus-copy  ","wordCount":"166","inLanguage":"en","datePublished":"0001-01-01T00:00:00Z","dateModified":"0001-01-01T00:00:00Z","mainEntityOfPage":{"@type":"WebPage","@id":"https://hynn01.github.io/dslinter/code-smells/chain-indexing/"},"publisher":{"@type":"Organization","name":"DSLinter - Linter for Machine Learning - Specific Code Smells","logo":{"@type":"ImageObject","url":"https://hynn01.github.io/dslinter/%3Clink%20/%20abs%20url%3E"}}}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Chain Indexing Misused","name":"Chain Indexing Misused","description":"Avoid using chain indexing in Pandas.","keywords":["api-specific","data prepaation","error-prone","efficiency"],"articleBody":"Description Context In Pandas, df[\"one\"][\"two\"] and df.loc[:,(\"one\",\"two\")] give the same result. df[\"one\"][\"two\"] is called chain indexing.\nProblem Using chain indexing may cause performance issues as well as prone-to-bug code. For example, when using df[\"one\"][\"two\"], Pandas see this operation as two events: call df[\"one\"] first and call [\"two\"] based on the result the previous operation gets. On the contrary, df.loc[:,(\"one\",\"two\")] only perform a single call. In this way, the second approach can be significantly faster than the first one. Furthermore, assigning to the product of chain indexing has inherently unpredictable results. Since Pandas makes no guarantees on whether df[\"one\"] will return a view or a copy, the assignment may fail.\nSolution Developers using Pandas should avoid using chain indexing.\nType API Specific\nExisting Stage Data Preparation\nEffect Error-prone \u0026 Efficiency\nExample ### Pandas import pandas as pd df = pd.DataFrame([[1,2,3],[4,5,6]]) col = 1 x = 0 - df[col][x] = 42 + df.loc[x, col] = 42 Source: Paper Grey Literature GitHub Commit Stack Overflow  https://stackoverflow.com/questions/22491628/extrapolate-values-in-pandas-dataframe/35959909#35959909 https://stackoverflow.com/questions/53806570/why-does-one-use-of-iloc-give-a-settingwithcopywarning-but-the-other-doesnt/53807453#53807453  Documentation  https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#indexing-view-versus-copy  ","wordCount":"166","inLanguage":"en","datePublished":"0001-01-01T00:00:00Z","dateModified":"0001-01-01T00:00:00Z","mainEntityOfPage":{"@type":"WebPage","@id":"https://hynn01.github.io/dslinter/code-smells/chain-indexing/"},"publisher":{"@type":"Organization","name":"Code Smells for Machine Learning Applications","logo":{"@type":"ImageObject","url":"https://hynn01.github.io/dslinter/%3Clink%20/%20abs%20url%3E"}}}</script>
 </head>
 <body id=top>
 <script>localStorage.getItem("pref-theme")==="dark"&&document.body.classList.add('dark')</script>
 <header class=header>
 <nav class=nav>
 <div class=logo>
-<a href=https://hynn01.github.io/dslinter/ accesskey=h title="DSLinter - Linter for Machine Learning - Specific Code Smells (Alt + H)">DSLinter - Linter for Machine Learning - Specific Code Smells</a>
+<a href=https://hynn01.github.io/dslinter/ accesskey=h title="Code Smells for Machine Learning Applications (Alt + H)">Code Smells for Machine Learning Applications</a>
 <span class=logo-switches>
 <button id=theme-toggle accesskey=t title="(Alt + T)"><svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
 </button>
@@ -125,7 +125,7 @@ x = 0
 </article>
 </main>
 <footer class=footer>
-<span>&copy; 2022 <a href=https://hynn01.github.io/dslinter/>DSLinter - Linter for Machine Learning - Specific Code Smells</a></span>
+<span>&copy; 2022 <a href=https://hynn01.github.io/dslinter/>Code Smells for Machine Learning Applications</a></span>
 <span>
 Powered by
 <a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &

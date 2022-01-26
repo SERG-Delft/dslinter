@@ -3,7 +3,7 @@
 <meta http-equiv=x-ua-compatible content="IE=edge">
 <meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
 <meta name=robots content="index, follow">
-<title>Nan Equality Misused | DSLinter - Linter for Machine Learning - Specific Code Smells</title>
+<title>Nan Equality Misused | Code Smells for Machine Learning Applications</title>
 <meta name=keywords content="api-specific,data preparation,error-prone">
 <meta name=description content="Description While None == None evaluates to True, numpy.nan == numpy.nan evaluates to False. As Pandas treats None like numpy.nan for simplicity and performance reasons, a comparison of DataFrame elements with numpy.nan always return False . Therefore, developers need to be careful when using the NaN comparision in Numpy and Pandas. Otherwise, it may lead to unintentional behavior in the code.
 Type API Specific
@@ -33,7 +33,7 @@ Existing Stage Data Preparation
 Effect Error-prone">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://hynn01.github.io/dslinter/code-smells/nan-equality-misused/"><meta property="article:section" content="Code Smells">
-<meta property="og:site_name" content="DSLinter - Linter for Machine Learning Application - Specific Code Smells">
+<meta property="og:site_name" content="Code Smells for Machine Learning Applications">
 <meta name=twitter:card content="summary">
 <meta name=twitter:title content="Nan Equality Misused">
 <meta name=twitter:description content="Description While None == None evaluates to True, numpy.nan == numpy.nan evaluates to False. As Pandas treats None like numpy.nan for simplicity and performance reasons, a comparison of DataFrame elements with numpy.nan always return False . Therefore, developers need to be careful when using the NaN comparision in Numpy and Pandas. Otherwise, it may lead to unintentional behavior in the code.
@@ -41,14 +41,14 @@ Type API Specific
 Existing Stage Data Preparation
 Effect Error-prone">
 <script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":2,"name":"Nan Equality Misused","item":"https://hynn01.github.io/dslinter/code-smells/nan-equality-misused/"}]}</script>
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Nan Equality Misused","name":"Nan Equality Misused","description":"Description While None == None evaluates to True, numpy.nan == numpy.nan evaluates to False. As Pandas treats None like numpy.nan for simplicity and performance reasons, a comparison of DataFrame elements with numpy.nan always return False . Therefore, developers need to be careful when using the NaN comparision in Numpy and Pandas. Otherwise, it may lead to unintentional behavior in the code.\nType API Specific\nExisting Stage Data Preparation\nEffect Error-prone","keywords":["api-specific","data preparation","error-prone"],"articleBody":"Description While None == None evaluates to True, numpy.nan == numpy.nan evaluates to False. As Pandas treats None like numpy.nan for simplicity and performance reasons, a comparison of DataFrame elements with numpy.nan always return False . Therefore, developers need to be careful when using the NaN comparision in Numpy and Pandas. Otherwise, it may lead to unintentional behavior in the code.\nType API Specific\nExisting Stage Data Preparation\nEffect Error-prone\nExample ### Pandas \u0026 NumPy import pandas as pd - import numpy as np  df = pd.DataFrame([1, None, 3]) - df_is_nan = df == np.nan + df_is_nan = df.isna() Source: Paper  MPA Haakman. 2020. Studying the Machine Learning Lifecycle and ImprovingCode Quality of Machine Learning Application. (2020).  Grey Literature GitHub Commit Stack Overflow Documentation ","wordCount":"124","inLanguage":"en","datePublished":"0001-01-01T00:00:00Z","dateModified":"0001-01-01T00:00:00Z","mainEntityOfPage":{"@type":"WebPage","@id":"https://hynn01.github.io/dslinter/code-smells/nan-equality-misused/"},"publisher":{"@type":"Organization","name":"DSLinter - Linter for Machine Learning - Specific Code Smells","logo":{"@type":"ImageObject","url":"https://hynn01.github.io/dslinter/%3Clink%20/%20abs%20url%3E"}}}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Nan Equality Misused","name":"Nan Equality Misused","description":"Description While None == None evaluates to True, numpy.nan == numpy.nan evaluates to False. As Pandas treats None like numpy.nan for simplicity and performance reasons, a comparison of DataFrame elements with numpy.nan always return False . Therefore, developers need to be careful when using the NaN comparision in Numpy and Pandas. Otherwise, it may lead to unintentional behavior in the code.\nType API Specific\nExisting Stage Data Preparation\nEffect Error-prone","keywords":["api-specific","data preparation","error-prone"],"articleBody":"Description While None == None evaluates to True, numpy.nan == numpy.nan evaluates to False. As Pandas treats None like numpy.nan for simplicity and performance reasons, a comparison of DataFrame elements with numpy.nan always return False . Therefore, developers need to be careful when using the NaN comparision in Numpy and Pandas. Otherwise, it may lead to unintentional behavior in the code.\nType API Specific\nExisting Stage Data Preparation\nEffect Error-prone\nExample ### Pandas \u0026 NumPy import pandas as pd - import numpy as np  df = pd.DataFrame([1, None, 3]) - df_is_nan = df == np.nan + df_is_nan = df.isna() Source: Paper  MPA Haakman. 2020. Studying the Machine Learning Lifecycle and ImprovingCode Quality of Machine Learning Application. (2020).  Grey Literature GitHub Commit Stack Overflow Documentation ","wordCount":"124","inLanguage":"en","datePublished":"0001-01-01T00:00:00Z","dateModified":"0001-01-01T00:00:00Z","mainEntityOfPage":{"@type":"WebPage","@id":"https://hynn01.github.io/dslinter/code-smells/nan-equality-misused/"},"publisher":{"@type":"Organization","name":"Code Smells for Machine Learning Applications","logo":{"@type":"ImageObject","url":"https://hynn01.github.io/dslinter/%3Clink%20/%20abs%20url%3E"}}}</script>
 </head>
 <body id=top>
 <script>localStorage.getItem("pref-theme")==="dark"&&document.body.classList.add('dark')</script>
 <header class=header>
 <nav class=nav>
 <div class=logo>
-<a href=https://hynn01.github.io/dslinter/ accesskey=h title="DSLinter - Linter for Machine Learning - Specific Code Smells (Alt + H)">DSLinter - Linter for Machine Learning - Specific Code Smells</a>
+<a href=https://hynn01.github.io/dslinter/ accesskey=h title="Code Smells for Machine Learning Applications (Alt + H)">Code Smells for Machine Learning Applications</a>
 <span class=logo-switches>
 <button id=theme-toggle accesskey=t title="(Alt + T)"><svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
 </button>
@@ -124,7 +124,7 @@ df = pd.DataFrame([1, None, 3])
 </article>
 </main>
 <footer class=footer>
-<span>&copy; 2022 <a href=https://hynn01.github.io/dslinter/>DSLinter - Linter for Machine Learning - Specific Code Smells</a></span>
+<span>&copy; 2022 <a href=https://hynn01.github.io/dslinter/>Code Smells for Machine Learning Applications</a></span>
 <span>
 Powered by
 <a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &

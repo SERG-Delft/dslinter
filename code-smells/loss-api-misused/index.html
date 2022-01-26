@@ -3,7 +3,7 @@
 <meta http-equiv=x-ua-compatible content="IE=edge">
 <meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
 <meta name=robots content="index, follow">
-<title>Loss API Misused | DSLinter - Linter for Machine Learning - Specific Code Smells</title>
+<title>Loss API Misused | Code Smells for Machine Learning Applications</title>
 <meta name=keywords content="api-specific,model training,error-prone">
 <meta name=description content="Description Different loss APIs take different input formats, but the difference is not clarified in some documentations, so it is easy to misuse. For example, in PyTorch, the NLLLoss takes the output of LogSoftmax as the input. If the input given to NLLLoss has not been processed by LogSoftmax, it might lead to a wrong result.
 Type API Specific
@@ -35,7 +35,7 @@ Effect Error-prone
 Example ### PyTorch import torch.nn as nn import torch + m = nn.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://hynn01.github.io/dslinter/code-smells/loss-api-misused/"><meta property="article:section" content="Code Smells">
-<meta property="og:site_name" content="DSLinter - Linter for Machine Learning Application - Specific Code Smells">
+<meta property="og:site_name" content="Code Smells for Machine Learning Applications">
 <meta name=twitter:card content="summary">
 <meta name=twitter:title content="Loss API Misused">
 <meta name=twitter:description content="Description Different loss APIs take different input formats, but the difference is not clarified in some documentations, so it is easy to misuse. For example, in PyTorch, the NLLLoss takes the output of LogSoftmax as the input. If the input given to NLLLoss has not been processed by LogSoftmax, it might lead to a wrong result.
@@ -44,14 +44,14 @@ Existing Stage Model Training
 Effect Error-prone
 Example ### PyTorch import torch.nn as nn import torch + m = nn.">
 <script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":2,"name":"Loss API Misused","item":"https://hynn01.github.io/dslinter/code-smells/loss-api-misused/"}]}</script>
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Loss API Misused","name":"Loss API Misused","description":"Description Different loss APIs take different input formats, but the difference is not clarified in some documentations, so it is easy to misuse. For example, in PyTorch, the NLLLoss takes the output of LogSoftmax as the input. If the input given to NLLLoss has not been processed by LogSoftmax, it might lead to a wrong result.\nType API Specific\nExisting Stage Model Training\nEffect Error-prone\nExample ### PyTorch import torch.nn as nn import torch + m = nn.","keywords":["api-specific","model training","error-prone"],"articleBody":"Description Different loss APIs take different input formats, but the difference is not clarified in some documentations, so it is easy to misuse. For example, in PyTorch, the NLLLoss takes the output of LogSoftmax as the input. If the input given to NLLLoss has not been processed by LogSoftmax, it might lead to a wrong result.\nType API Specific\nExisting Stage Model Training\nEffect Error-prone\nExample ### PyTorch import torch.nn as nn import torch + m = nn.LogSoftmax(dim=1) loss = nn.NLLLoss() input = torch.randn(3, 5, requires_grad=True) target = torch.tensor([1, 0, 4]) - output = loss(input, target) + output = loss(m(input), target) output.backward() Source: Paper Grey Literature  https://medium.com/missinglink-deep-learning-platform/most-common-neural-net-pytorch-mistakes-456560ada037  GitHub Commit Stack Overflow Documentation ","wordCount":"112","inLanguage":"en","datePublished":"0001-01-01T00:00:00Z","dateModified":"0001-01-01T00:00:00Z","mainEntityOfPage":{"@type":"WebPage","@id":"https://hynn01.github.io/dslinter/code-smells/loss-api-misused/"},"publisher":{"@type":"Organization","name":"DSLinter - Linter for Machine Learning - Specific Code Smells","logo":{"@type":"ImageObject","url":"https://hynn01.github.io/dslinter/%3Clink%20/%20abs%20url%3E"}}}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Loss API Misused","name":"Loss API Misused","description":"Description Different loss APIs take different input formats, but the difference is not clarified in some documentations, so it is easy to misuse. For example, in PyTorch, the NLLLoss takes the output of LogSoftmax as the input. If the input given to NLLLoss has not been processed by LogSoftmax, it might lead to a wrong result.\nType API Specific\nExisting Stage Model Training\nEffect Error-prone\nExample ### PyTorch import torch.nn as nn import torch + m = nn.","keywords":["api-specific","model training","error-prone"],"articleBody":"Description Different loss APIs take different input formats, but the difference is not clarified in some documentations, so it is easy to misuse. For example, in PyTorch, the NLLLoss takes the output of LogSoftmax as the input. If the input given to NLLLoss has not been processed by LogSoftmax, it might lead to a wrong result.\nType API Specific\nExisting Stage Model Training\nEffect Error-prone\nExample ### PyTorch import torch.nn as nn import torch + m = nn.LogSoftmax(dim=1) loss = nn.NLLLoss() input = torch.randn(3, 5, requires_grad=True) target = torch.tensor([1, 0, 4]) - output = loss(input, target) + output = loss(m(input), target) output.backward() Source: Paper Grey Literature  https://medium.com/missinglink-deep-learning-platform/most-common-neural-net-pytorch-mistakes-456560ada037  GitHub Commit Stack Overflow Documentation ","wordCount":"112","inLanguage":"en","datePublished":"0001-01-01T00:00:00Z","dateModified":"0001-01-01T00:00:00Z","mainEntityOfPage":{"@type":"WebPage","@id":"https://hynn01.github.io/dslinter/code-smells/loss-api-misused/"},"publisher":{"@type":"Organization","name":"Code Smells for Machine Learning Applications","logo":{"@type":"ImageObject","url":"https://hynn01.github.io/dslinter/%3Clink%20/%20abs%20url%3E"}}}</script>
 </head>
 <body id=top>
 <script>localStorage.getItem("pref-theme")==="dark"&&document.body.classList.add('dark')</script>
 <header class=header>
 <nav class=nav>
 <div class=logo>
-<a href=https://hynn01.github.io/dslinter/ accesskey=h title="DSLinter - Linter for Machine Learning - Specific Code Smells (Alt + H)">DSLinter - Linter for Machine Learning - Specific Code Smells</a>
+<a href=https://hynn01.github.io/dslinter/ accesskey=h title="Code Smells for Machine Learning Applications (Alt + H)">Code Smells for Machine Learning Applications</a>
 <span class=logo-switches>
 <button id=theme-toggle accesskey=t title="(Alt + T)"><svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
 </button>
@@ -131,7 +131,7 @@ target = torch.tensor([1, 0, 4])
 </article>
 </main>
 <footer class=footer>
-<span>&copy; 2022 <a href=https://hynn01.github.io/dslinter/>DSLinter - Linter for Machine Learning - Specific Code Smells</a></span>
+<span>&copy; 2022 <a href=https://hynn01.github.io/dslinter/>Code Smells for Machine Learning Applications</a></span>
 <span>
 Powered by
 <a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &
