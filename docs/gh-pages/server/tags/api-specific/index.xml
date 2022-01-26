@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>api-specific on DSLinter - Linter for Machine Learning - Specific Code Smells</title>
+    <link>https://hynn01.github.io/dslinter/tags/api-specific/</link>
+    <description>Recent content in api-specific on DSLinter - Linter for Machine Learning - Specific Code Smells</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="https://hynn01.github.io/dslinter/tags/api-specific/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Nan Equality Misused</title>
+      <link>https://hynn01.github.io/dslinter/code-smells/nan-equality-misused/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://hynn01.github.io/dslinter/code-smells/nan-equality-misused/</guid>
+      <description>Description While None == None evaluates to True, numpy.nan == numpy.nan evaluates to False. As Pandas treats None like numpy.nan for simplicity and performance reasons, a comparison of DataFrame elements with numpy.nan always return False . Therefore, developers need to be careful when using the NaN comparision in Numpy and Pandas. Otherwise, it may lead to unintentional behavior in the code.
+Type API Specific
+Existing Stage Data Preparation
+Effect Error-prone</description>
+    </item>
+    
+    <item>
+      <title>Chain Indexing Misused</title>
+      <link>https://hynn01.github.io/dslinter/code-smells/chain-indexing/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://hynn01.github.io/dslinter/code-smells/chain-indexing/</guid>
+      <description>Avoid using chain indexing in Pandas.</description>
+    </item>
+    
+    <item>
+      <title>Dataframe Coversion API Misused</title>
+      <link>https://hynn01.github.io/dslinter/code-smells/dataframe-coversion-api-misused/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://hynn01.github.io/dslinter/code-smells/dataframe-coversion-api-misused/</guid>
+      <description>Description When converting DataFrame to NumPy array, it is better to use df.to\_numpy() than df.values(). As noted in a post, df.values() has inconsistency problem. With .values it is unclear whether the returned value would be the actual array, some transformation of it, or one of the Pandas custom arrays. However, .values is not deprecated yet. Although the library developers note it as a warning in the documentation, it does not log a warning or error when compiling if we use .</description>
+    </item>
+    
+    <item>
+      <title>Regular Expression Solution Not Optimal</title>
+      <link>https://hynn01.github.io/dslinter/deprecated/regular-expression-solution-not-optimal/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://hynn01.github.io/dslinter/deprecated/regular-expression-solution-not-optimal/</guid>
+      <description>Description A post provides a better coding solution for the regular expression, which might be able to apply to the Nature Language Processing (NLP) preprocessing process. NLP tasks are data-intensive and often take a long time to clean the data, so it would be good to save some time when preprocessing the data. The post noted that regex.sub() and str.translate() work faster than str.replace() in practice in Pandas library. The more efficient solution is worth considering.</description>
+    </item>
+    
+    <item>
+      <title>Tensor Shape Unset</title>
+      <link>https://hynn01.github.io/dslinter/deprecated/tensor-shape-unset/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://hynn01.github.io/dslinter/deprecated/tensor-shape-unset/</guid>
+      <description>Description Several bugs can be caused by tensor unaligned. Usually, the unaligned tensor problems cannot be identified at the code level, but we can explicitly control one. It is recommended to explicitly set the shape of the input for tf.Variable() to make the tensor aligned. In this way, we can alleviate the unaligned tensor problem.
+Type API Specific
+Existing Stage Data Preparation
+Effect Error-prone
+Example ### TensorFlow import Tensorflow as tf # Violated Code normal_dist = tf.</description>
+    </item>
+    
+    <item>
+      <title>Backend Engine Mischoosed</title>
+      <link>https://hynn01.github.io/dslinter/deprecated/backend-engine-mischoosed/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://hynn01.github.io/dslinter/deprecated/backend-engine-mischoosed/</guid>
+      <description>Description When using pd.eval() in Pandas library, the numexpr is optimized for performance and python options offer no performance benefit over numexpr. Generally, it is not recommended to set the parameter to python. The developers should be careful when explicitly set this parameter.
+Type API Specific
+Existing Stage Data Preparation
+Effect Efficiency
+Example ### Pandas import pandas as pd # Violated Code pd.eval(&amp;#39;df.A.str.contains(&amp;#34;ab&amp;#34;)&amp;#39;, engine=&amp;#39;python&amp;#39;) # Recommended Fix pd.eval(&amp;#39;df.A.str.contains(&amp;#34;ab&amp;#34;)&amp;#39;) Source: Paper Grey Literature GitHub Commit Stack Overflow  https://stackoverflow.</description>
+    </item>
+    
+    <item>
+      <title>Matrix Multiplication API Misused</title>
+      <link>https://hynn01.github.io/dslinter/code-smells/matrix-multiplication-api-misused/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://hynn01.github.io/dslinter/code-smells/matrix-multiplication-api-misused/</guid>
+      <description>Description np.matmul() in Numpy library is more readable than np.dot() in the semantic way. Whilenp.dot() provides heterogeneous behaviors depending on the shape of the data, np.matmul() behaves in a consistent way. When the multiply operation is performed on two-dimension matrixes, two APIs give a same result. However, np.matmul() is preferred than np.dot() for its clear semantic.
+Type API Specific
+Existing Stage Model Training
+Effect Readability
+Example ### NumPy import numpy as np a = [[1, 0], [0, 1]] b = [[4, 1], [2, 2]] - np.</description>
+    </item>
+    
+    <item>
+      <title>Initialization Order Misused</title>
+      <link>https://hynn01.github.io/dslinter/deprecated/initialization-order-misused/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://hynn01.github.io/dslinter/deprecated/initialization-order-misused/</guid>
+      <description>Description The AdamOptimizer class in the TensorFlow creates additional variables named &amp;ldquo;slots&amp;rdquo;. The variables must be initialized before training the model. Therefore, if the developer call initialize_all_variables() before calling AdamOptimizer and does not call the initializer afterward, the variables created by AdamOptimizer will not be initialized and might cause an error.
+Type API Specific
+Existing Stage Model Training
+Effect Error-prone
+Example ### TensorFlow import tensorflow as tf # Violated Code init = tf.</description>
+    </item>
+    
+    <item>
+      <title>Pytorch Call Method Misused</title>
+      <link>https://hynn01.github.io/dslinter/code-smells/pytorch-call-method-misused/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://hynn01.github.io/dslinter/code-smells/pytorch-call-method-misused/</guid>
+      <description>Description In PyTorch, self.nn() is different than self.nn.forward(). self.nn() also deals with all the register hooks, which would not be considered when calling the plain forward. Thus, it is recommended to use self.nn() than self.nn.forward().
+Type API Specific
+Existing Stage Model Training
+Effect Robustness
+Example ### PyTorch # 1. Load and normalize CIFAR10 import torch import torchvision import torchvision.transforms as transforms transform = transforms.Compose( [transforms.ToTensor(), transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.</description>
+    </item>
+    
+    <item>
+      <title>Train Eval Mode Improper Toggling</title>
+      <link>https://hynn01.github.io/dslinter/code-smells/train-eval-mode-improper-toggling/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://hynn01.github.io/dslinter/code-smells/train-eval-mode-improper-toggling/</guid>
+      <description>Description In PyTorch, calling .eval() means we are going into the evaluation mode and the Dropout layer will be deactivated. If the training mode did not toggle back in time, the Dropout layer would not be used in some data training and thus affect the training result. Therefore, we suggest to &amp;ldquo;have the training mode set as close as possible to the inference step to avoid forgetting to set it&amp;rdquo;.</description>
+    </item>
+    
+    <item>
+      <title>Zero_grad Not Used Before Backward</title>
+      <link>https://hynn01.github.io/dslinter/code-smells/zero_grad-not-used-before-backward/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://hynn01.github.io/dslinter/code-smells/zero_grad-not-used-before-backward/</guid>
+      <description>Description Developers should use optimizer.zero_grad(), loss_fn.backward(), optimizer.step() together and should be forget to use optimizer.zero_grad() before loss_fn.backward(). optimizer.zero_grad() clears the old gradients from last step. If this API is not used, the gradients will be accumulated from all loss.backward() calls and it will lead to the gradient explosion, which fails the training.
+Type API Specific
+Existing Stage Model Training
+Effect Error-prone
+Example # PyTorch # 1. Load and normalize CIFAR10 import torch import torchvision import torchvision.</description>
+    </item>
+    
+    <item>
+      <title>Loss API Misused</title>
+      <link>https://hynn01.github.io/dslinter/code-smells/loss-api-misused/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://hynn01.github.io/dslinter/code-smells/loss-api-misused/</guid>
+      <description>Description Different loss APIs take different input formats, but the difference is not clarified in some documentations, so it is easy to misuse. For example, in PyTorch, the NLLLoss takes the output of LogSoftmax as the input. If the input given to NLLLoss has not been processed by LogSoftmax, it might lead to a wrong result.
+Type API Specific
+Existing Stage Model Training
+Effect Error-prone
+Example ### PyTorch import torch.nn as nn import torch + m = nn.</description>
+    </item>
+    
+  </channel>
+</rss>

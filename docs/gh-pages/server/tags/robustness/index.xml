@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>robustness on DSLinter - Linter for Machine Learning - Specific Code Smells</title>
+    <link>https://hynn01.github.io/dslinter/tags/robustness/</link>
+    <description>Recent content in robustness on DSLinter - Linter for Machine Learning - Specific Code Smells</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="https://hynn01.github.io/dslinter/tags/robustness/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>DataLoader Unused</title>
+      <link>https://hynn01.github.io/dslinter/code-smells/dataloader-unused/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://hynn01.github.io/dslinter/code-smells/dataloader-unused/</guid>
+      <description>Description Some new developers are not aware of using the existing function and writing the function by themselves. However, it is recommended to use the APIs because the APIs provided by the library often consider more things. For instance, in a post, the developer does not use the DataLoader and feeds the data directly to the network. The answerer noted that using DataLoader has several benefits: 1) It allows the developers to sample the data randomly.</description>
+    </item>
+    
+    <item>
+      <title>Pytorch Call Method Misused</title>
+      <link>https://hynn01.github.io/dslinter/code-smells/pytorch-call-method-misused/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://hynn01.github.io/dslinter/code-smells/pytorch-call-method-misused/</guid>
+      <description>Description In PyTorch, self.nn() is different than self.nn.forward(). self.nn() also deals with all the register hooks, which would not be considered when calling the plain forward. Thus, it is recommended to use self.nn() than self.nn.forward().
+Type API Specific
+Existing Stage Model Training
+Effect Robustness
+Example ### PyTorch # 1. Load and normalize CIFAR10 import torch import torchvision import torchvision.transforms as transforms transform = transforms.Compose( [transforms.ToTensor(), transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.</description>
+    </item>
+    
+    <item>
+      <title>Threshold Dependent Validation</title>
+      <link>https://hynn01.github.io/dslinter/code-smells/threshold-dependent-validation/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://hynn01.github.io/dslinter/code-smells/threshold-dependent-validation/</guid>
+      <description>Description The performance of the machine learning model can be measured by different metrics, including threshold-dependent metrics(e.g., F-measure) or threshold-independent metrics(e.g., Area Under the receiver operating characteristic curve (AUC)). Choosing a specific threshold is tricky and can lead to a less-interpretable result. Therefore, threshold-independent is more robust and should be preferred over threshold-independent metrics.
+Type Generic
+Existing Stage Model Evaluation
+Effect Robustness
+Example ### Scikit-Learn from sklearn import metrics y_true = [0, 1, 2, 0, 1, 2] y_pred = [0, 2, 1, 0, 0, 1] metrics.</description>
+    </item>
+    
+  </channel>
+</rss>

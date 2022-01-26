@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>readability on DSLinter - Linter for Machine Learning - Specific Code Smells</title>
+    <link>https://hynn01.github.io/dslinter/tags/readability/</link>
+    <description>Recent content in readability on DSLinter - Linter for Machine Learning - Specific Code Smells</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="https://hynn01.github.io/dslinter/tags/readability/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Matrix Multiplication API Misused</title>
+      <link>https://hynn01.github.io/dslinter/code-smells/matrix-multiplication-api-misused/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://hynn01.github.io/dslinter/code-smells/matrix-multiplication-api-misused/</guid>
+      <description>Description np.matmul() in Numpy library is more readable than np.dot() in the semantic way. Whilenp.dot() provides heterogeneous behaviors depending on the shape of the data, np.matmul() behaves in a consistent way. When the multiply operation is performed on two-dimension matrixes, two APIs give a same result. However, np.matmul() is preferred than np.dot() for its clear semantic.
+Type API Specific
+Existing Stage Model Training
+Effect Readability
+Example ### NumPy import numpy as np a = [[1, 0], [0, 1]] b = [[4, 1], [2, 2]] - np.</description>
+    </item>
+    
+  </channel>
+</rss>

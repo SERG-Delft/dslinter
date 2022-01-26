@@ -1,0 +1,225 @@
+<!doctype html><html lang=en dir=auto>
+<head><meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
+<meta name=robots content="index, follow">
+<title>Code Smells | DSLinter - Linter for Machine Learning - Specific Code Smells</title>
+<meta name=keywords content>
+<meta name=description content="Code Smells - DSLinter - Linter for Machine Learning - Specific Code Smells">
+<meta name=author content>
+<link rel=canonical href=https://hynn01.github.io/dslinter/code-smells/>
+<meta name=google-site-verification content="XYZabc">
+<meta name=yandex-verification content="XYZabc">
+<meta name=msvalidate.01 content="XYZabc">
+<link crossorigin=anonymous href=/dslinter/assets/css/stylesheet.min.548091f41dc92b4a213f8dc4a49e22545a96b7d1b4ae4ad73c2ab3a70e4e8ea1.css integrity="sha256-VICR9B3JK0ohP43EpJ4iVFqWt9G0rkrXPCqzpw5OjqE=" rel="preload stylesheet" as=style>
+<link rel=icon href=https://hynn01.github.io/dslinter/%3Clink%20/%20abs%20url%3E>
+<link rel=icon type=image/png sizes=16x16 href=https://hynn01.github.io/dslinter/%3Clink%20/%20abs%20url%3E>
+<link rel=icon type=image/png sizes=32x32 href=https://hynn01.github.io/dslinter/%3Clink%20/%20abs%20url%3E>
+<link rel=apple-touch-icon href=https://hynn01.github.io/dslinter/%3Clink%20/%20abs%20url%3E>
+<link rel=mask-icon href=https://hynn01.github.io/dslinter/%3Clink%20/%20abs%20url%3E>
+<meta name=theme-color content="#2e2e33">
+<meta name=msapplication-TileColor content="#2e2e33">
+<meta name=generator content="Hugo 0.91.0">
+<link rel=alternate type=application/rss+xml href=https://hynn01.github.io/dslinter/code-smells/index.xml>
+<noscript>
+<style>#theme-toggle,.top-link{display:none}</style>
+</noscript><meta property="og:title" content="Code Smells">
+<meta property="og:description" content>
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://hynn01.github.io/dslinter/code-smells/"><meta property="og:site_name" content="DSLinter - Linter for Machine Learning Application - Specific Code Smells">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="Code Smells">
+<meta name=twitter:description content>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Code Smells","item":"https://hynn01.github.io/dslinter/code-smells/"}]}</script>
+</head>
+<body class=list id=top>
+<script>localStorage.getItem("pref-theme")==="dark"&&document.body.classList.add('dark')</script>
+<header class=header>
+<nav class=nav>
+<div class=logo>
+<a href=https://hynn01.github.io/dslinter/ accesskey=h title="DSLinter - Linter for Machine Learning - Specific Code Smells (Alt + H)">DSLinter - Linter for Machine Learning - Specific Code Smells</a>
+<span class=logo-switches>
+<button id=theme-toggle accesskey=t title="(Alt + T)"><svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+</button>
+</span>
+</div>
+<ul id=menu>
+<li>
+<a href=https://hynn01.github.io/dslinter/code-smells/ title="Code Smells">
+<span class=active>Code Smells</span>
+</a>
+</li>
+<li>
+<a href=https://hynn01.github.io/dslinter/search/ title="Search (Alt + /)" accesskey=/>
+<span>Search</span>
+</a>
+</li>
+<li>
+<a href=https://hynn01.github.io/dslinter/ title=Survey>
+<span>Survey</span>
+</a>
+</li>
+<li>
+<a href=https://hynn01.github.io/dslinter/tags/ title=Tags>
+<span>Tags</span>
+</a>
+</li>
+</ul>
+</nav>
+</header>
+<main class=main>
+<header class=page-header><div class=breadcrumbs><a href=https://hynn01.github.io/dslinter/>Home</a></div>
+<h1>Code Smells</h1>
+</header>
+<article class=post-entry>
+<header class=entry-header>
+<h2>Chain Indexing Misused
+</h2>
+</header>
+<section class=entry-content>
+<p>Avoid using chain indexing in Pandas.</p>
+</section>
+<footer class=entry-footer></footer>
+<a class=entry-link aria-label="post link to Chain Indexing Misused" href=https://hynn01.github.io/dslinter/code-smells/chain-indexing/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>Dataframe Coversion API Misused
+</h2>
+</header>
+<section class=entry-content>
+<p>Description When converting DataFrame to NumPy array, it is better to use df.to\_numpy() than df.values(). As noted in a post, df.values() has inconsistency problem. With .values it is unclear whether the returned value would be the actual array, some transformation of it, or one of the Pandas custom arrays. However, .values is not deprecated yet. Although the library developers note it as a warning in the documentation, it does not log a warning or error when compiling if we use ....</p>
+</section>
+<footer class=entry-footer></footer>
+<a class=entry-link aria-label="post link to Dataframe Coversion API Misused" href=https://hynn01.github.io/dslinter/code-smells/dataframe-coversion-api-misused/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>DataLoader Unused
+</h2>
+</header>
+<section class=entry-content>
+<p>Description Some new developers are not aware of using the existing function and writing the function by themselves. However, it is recommended to use the APIs because the APIs provided by the library often consider more things. For instance, in a post, the developer does not use the DataLoader and feeds the data directly to the network. The answerer noted that using DataLoader has several benefits: 1) It allows the developers to sample the data randomly....</p>
+</section>
+<footer class=entry-footer></footer>
+<a class=entry-link aria-label="post link to DataLoader Unused" href=https://hynn01.github.io/dslinter/code-smells/dataloader-unused/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>Matrix Multiplication API Misused
+</h2>
+</header>
+<section class=entry-content>
+<p>Description np.matmul() in Numpy library is more readable than np.dot() in the semantic way. Whilenp.dot() provides heterogeneous behaviors depending on the shape of the data, np.matmul() behaves in a consistent way. When the multiply operation is performed on two-dimension matrixes, two APIs give a same result. However, np.matmul() is preferred than np.dot() for its clear semantic.
+Type API Specific
+Existing Stage Model Training
+Effect Readability
+Example ### NumPy import numpy as np a = [[1, 0], [0, 1]] b = [[4, 1], [2, 2]] - np....</p>
+</section>
+<footer class=entry-footer></footer>
+<a class=entry-link aria-label="post link to Matrix Multiplication API Misused" href=https://hynn01.github.io/dslinter/code-smells/matrix-multiplication-api-misused/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>Pytorch Call Method Misused
+</h2>
+</header>
+<section class=entry-content>
+<p>Description In PyTorch, self.nn() is different than self.nn.forward(). self.nn() also deals with all the register hooks, which would not be considered when calling the plain forward. Thus, it is recommended to use self.nn() than self.nn.forward().
+Type API Specific
+Existing Stage Model Training
+Effect Robustness
+Example ### PyTorch # 1. Load and normalize CIFAR10 import torch import torchvision import torchvision.transforms as transforms transform = transforms.Compose( [transforms.ToTensor(), transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0....</p>
+</section>
+<footer class=entry-footer></footer>
+<a class=entry-link aria-label="post link to Pytorch Call Method Misused" href=https://hynn01.github.io/dslinter/code-smells/pytorch-call-method-misused/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>Train Eval Mode Improper Toggling
+</h2>
+</header>
+<section class=entry-content>
+<p>Description In PyTorch, calling .eval() means we are going into the evaluation mode and the Dropout layer will be deactivated. If the training mode did not toggle back in time, the Dropout layer would not be used in some data training and thus affect the training result. Therefore, we suggest to “have the training mode set as close as possible to the inference step to avoid forgetting to set it”....</p>
+</section>
+<footer class=entry-footer></footer>
+<a class=entry-link aria-label="post link to Train Eval Mode Improper Toggling" href=https://hynn01.github.io/dslinter/code-smells/train-eval-mode-improper-toggling/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>Zero_grad Not Used Before Backward
+</h2>
+</header>
+<section class=entry-content>
+<p>Description Developers should use optimizer.zero_grad(), loss_fn.backward(), optimizer.step() together and should be forget to use optimizer.zero_grad() before loss_fn.backward(). optimizer.zero_grad() clears the old gradients from last step. If this API is not used, the gradients will be accumulated from all loss.backward() calls and it will lead to the gradient explosion, which fails the training.
+Type API Specific
+Existing Stage Model Training
+Effect Error-prone
+Example # PyTorch # 1. Load and normalize CIFAR10 import torch import torchvision import torchvision....</p>
+</section>
+<footer class=entry-footer></footer>
+<a class=entry-link aria-label="post link to Zero_grad Not Used Before Backward" href=https://hynn01.github.io/dslinter/code-smells/zero_grad-not-used-before-backward/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>Loss API Misused
+</h2>
+</header>
+<section class=entry-content>
+<p>Description Different loss APIs take different input formats, but the difference is not clarified in some documentations, so it is easy to misuse. For example, in PyTorch, the NLLLoss takes the output of LogSoftmax as the input. If the input given to NLLLoss has not been processed by LogSoftmax, it might lead to a wrong result.
+Type API Specific
+Existing Stage Model Training
+Effect Error-prone
+Example ### PyTorch import torch.nn as nn import torch + m = nn....</p>
+</section>
+<footer class=entry-footer></footer>
+<a class=entry-link aria-label="post link to Loss API Misused" href=https://hynn01.github.io/dslinter/code-smells/loss-api-misused/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>Threshold Dependent Validation
+</h2>
+</header>
+<section class=entry-content>
+<p>Description The performance of the machine learning model can be measured by different metrics, including threshold-dependent metrics(e.g., F-measure) or threshold-independent metrics(e.g., Area Under the receiver operating characteristic curve (AUC)). Choosing a specific threshold is tricky and can lead to a less-interpretable result. Therefore, threshold-independent is more robust and should be preferred over threshold-independent metrics.
+Type Generic
+Existing Stage Model Evaluation
+Effect Robustness
+Example ### Scikit-Learn from sklearn import metrics y_true = [0, 1, 2, 0, 1, 2] y_pred = [0, 2, 1, 0, 0, 1] metrics....</p>
+</section>
+<footer class=entry-footer></footer>
+<a class=entry-link aria-label="post link to Threshold Dependent Validation" href=https://hynn01.github.io/dslinter/code-smells/threshold-dependent-validation/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>Broadcasting Feature Not Used
+</h2>
+</header>
+<section class=entry-content>
+<p>Description Context Problem Solution Type Existing Stage Effect Example ### TensorFlow example 1 import tensorflow as tf a = tf.constant([[1., 2.], [3., 4.]]) b = tf.constant([[1.], [2.]]) - c = a + tf.tile(b, [1, 2]) + c = a + b ### TensorFlow example 2 import tensorflow as tf a = tf.random.uniform([5, 3, 5]) b = tf.random.uniform([5, 1, 6]) - tiled_b = tf.tile(b, [1, 3, 1]) - c = tf....</p>
+</section>
+<footer class=entry-footer></footer>
+<a class=entry-link aria-label="post link to Broadcasting Feature Not Used" href=https://hynn01.github.io/dslinter/code-smells/broadcasting-feature-not-used/></a>
+</article>
+<footer class=page-footer>
+<nav class=pagination>
+<a class=prev href=https://hynn01.github.io/dslinter/code-smells/>« Prev Page</a>
+<a class=next href=https://hynn01.github.io/dslinter/code-smells/page/3/>Next Page »</a>
+</nav>
+</footer>
+</main>
+<footer class=footer>
+<span>&copy; 2022 <a href=https://hynn01.github.io/dslinter/>DSLinter - Linter for Machine Learning - Specific Code Smells</a></span>
+<span>
+Powered by
+<a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &
+        <a href=https://git.io/hugopapermod rel=noopener target=_blank>PaperMod</a>
+</span>
+</footer>
+<a href=#top aria-label="go to top" title="Go to Top (Alt + G)" class=top-link id=top-link accesskey=g><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentcolor"><path d="M12 6H0l6-6z"/></svg>
+</a>
+<script>let menu=document.getElementById('menu');menu&&(menu.scrollLeft=localStorage.getItem("menu-scroll-position"),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)}),document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener("click",function(b){b.preventDefault();var a=this.getAttribute("href").substr(1);window.matchMedia('(prefers-reduced-motion: reduce)').matches?document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView({behavior:"smooth"}),a==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${a}`)})})</script>
+<script>var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")}</script>
+<script>document.getElementById("theme-toggle").addEventListener("click",()=>{document.body.className.includes("dark")?(document.body.classList.remove('dark'),localStorage.setItem("pref-theme",'light')):(document.body.classList.add('dark'),localStorage.setItem("pref-theme",'dark'))})</script>
+</body>
+</html>
