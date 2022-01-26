@@ -2,22 +2,30 @@
 title: "No Scaling Before Scaling-sensitive Operation"
 disableShare: true
 # ShowReadingTime: true
-tags: ["generic", "data preparation", "efficiency"]
-weight: 4
+tags: ["generic", "feature engineering", "error-prone"]
+weight: 3
+summary: "Check whether feature scaling is added before scaling-sensitive operations."
 ---
 
 ### Description
 
-Principle Component Analysis (PCA) is used for finding the components that maximize the data's variation and reduce its dimensions, which is an essential data processing method. Scaling is pretty crucial to PCA because of the way the principal components are calculated. If one variable is on a larger scale than another, it will dominate the PCA procedure. Similarly, there are some other scaling-sensitive operations. Support Vector Machine (SVM), Stochastic Gradient Descent (SGD), Multi-layer Perceptron classifier, L1 and L2 regularization are all sensitive to feature scaling. To avoid bugs, whether feature scaling is added before these operations should be checked.
+#### Context
+Feature scaling is a method of aligning features from various value ranges to the same range.
+
+#### Problem
+There are many operations sensitive to feature scaling, including Principal Component Analysis (PCA), Support Vector Machine (SVM), Stochastic Gradient Descent (SGD), Multi-layer Perceptron classifier and L1 and L2 regularization. Missing scaling can lead to a wrong conclusion. For example, if one variable is on a larger scale than another, it will dominate the PCA procedure. Therefore, PCA without feature scaling can produce a wrong principal component result. 
+
+#### Solution
+To avoid bugs, whether feature scaling is added before scaling-sensitive operations should be checked.
 
 ### Type
 Generic
 
 ### Existing Stage
-Data Preparation
+Feature Engineering
 
 ### Effect
-Efficiency
+Error-prone
 
 ### Example
 

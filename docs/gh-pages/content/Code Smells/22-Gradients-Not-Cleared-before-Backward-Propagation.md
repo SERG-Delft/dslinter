@@ -1,36 +1,46 @@
 ---
-title: "DataLoader Unused"
+title: "Gradients Not Cleared before Backward Propagation"
 disableShare: true
 # ShowReadingTime: true
-tags: ["api-specifc", "data segregation", "robustness"]
-weight: 18
+tags: ["api-specific", "model training", "error-prone"]
+weight: 22
+summary: "Use `optimizer.zero_grad()`, `loss_fn.backward()`, `optimizer.step()` together in order in PyTorch. Do not forget to use `optimizer.zero_grad()` before `loss_fn.backward()` to clear gradients."
 ---
 
 ### Description
 
-Some new developers are not aware of using the existing function and writing the function by themselves. However, it is recommended to use the APIs because the APIs provided by the library often consider more things. For instance, in a post, the developer does not use the DataLoader and feeds the data directly to the network. The answerer noted that using DataLoader has several benefits: 1) It allows the developers to sample the data randomly. 2) It does not preload data into memory, which is particularly useful for huge datasets. 3) It operates in the background of code, so it fetches data parallel to train thus saving time. 4) It is very efficient at batching the data. Therefore, it is better to use the DataLoader API than manually splitting the data and directly feeding the data into the network.
+#### Context
+
+In PyTorch, `optimizer.zero_grad()` clears the old gradients from last step, `loss_fn.backward()` does the back propagation, and `optimizer.step()` performs weight update using the gradients.
+
+#### Problem
+
+If `optimizer.zero_grad()` is not used before `loss_fn.backward()`, the gradients will be accumulated from all `loss_fn.backward()` calls and it will lead to the gradient explosion, which fails the training.
+
+#### Solution
+
+Developers should use `optimizer.zero_grad()`, `loss_fn.backward()`, `optimizer.step()` together in order and should not forget to use `optimizer.zero_grad()` before `loss_fn.backward()`.
 
 ### Type
 
-API Specific
+API-Specific
 
 ### Existing Stage
 
-Data Segregation
+Model Training
 
 ### Effect
 
-Robustness
+Error-prone
 
 ### Example
 
 ```diff
-### PyTorch
+# PyTorch
 # 1. Load and normalize CIFAR10
 import torch
 import torchvision
 import torchvision.transforms as transforms
-import torch.utils.data as data_utils
 
 transform = transforms.Compose(
     [transforms.ToTensor(),
@@ -40,13 +50,13 @@ batch_size = 4
 
 trainset = torchvision.datasets.CIFAR10(root='./data', train=True,
                                         download=True, transform=transform)
-+ trainloader = torch.utils.data.DataLoader(trainset, batch_size=batch_size,
-+                                           shuffle=True, num_workers=0)
+trainloader = torch.utils.data.DataLoader(trainset, batch_size=batch_size,
+                                          shuffle=True, num_workers=0)
 
 testset = torchvision.datasets.CIFAR10(root='./data', train=False,
                                        download=True, transform=transform)
-+ testloader = torch.utils.data.DataLoader(testset, batch_size=batch_size,
-+                                          shuffle=False, num_workers=0)
+testloader = torch.utils.data.DataLoader(testset, batch_size=batch_size,
+                                         shuffle=False, num_workers=0)
 
 classes = ('plane', 'car', 'bird', 'cat',
            'deer', 'dog', 'frog', 'horse', 'ship', 'truck')
@@ -54,6 +64,7 @@ classes = ('plane', 'car', 'bird', 'cat',
 # 2. Define a Convolutional Neural Network
 import torch.nn as nn
 import torch.nn.functional as F
+
 
 class Net(nn.Module):
     def __init__(self):
@@ -87,16 +98,12 @@ optimizer = optim.SGD(net.parameters(), lr=0.001, momentum=0.9)
 for epoch in range(2):  # loop over the dataset multiple times
 
     running_loss = 0.0
-    net.train()
--   for i in range(int(len(trainset) / batch_size)):
-+   for i, data in enumerate(trainloader, 0):
+    for i, data in enumerate(trainloader, 0):
         # get the inputs; data is a list of [inputs, labels]
--       inputs, labels = (trainset.data[i * batch_size: (i + 1) * batch_size]
--                            , trainset.targets[i * batch_size: (i + 1) * batch_size])
-+       inputs, labels = data
+        inputs, labels = data
 
-        # zero the parameter gradients
-        optimizer.zero_grad()
++       # zero the parameter gradients
++       optimizer.zero_grad()
 
         # forward + backward + optimize
         outputs = net(inputs)
@@ -109,9 +116,6 @@ for epoch in range(2):  # loop over the dataset multiple times
         if i % 2000 == 1999:    # print every 2000 mini-batches
             print(f'[{epoch + 1}, {i + 1:5d}] loss: {running_loss / 2000:.3f}')
             running_loss = 0.0
-            # validation
-            net.eval()
-            #...
 
 print('Finished Training')
 
@@ -133,6 +137,7 @@ with torch.no_grad():
         correct += (predicted == labels).sum().item()
 
 print(f'Accuracy of the network on the 10000 test images: {100 * correct // total} %')
+
 ```
 
 ### Source:
@@ -140,11 +145,11 @@ print(f'Accuracy of the network on the 10000 test images: {100 * correct // tota
 #### Paper 
 
 #### Grey Literature
+- https://medium.com/missinglink-deep-learning-platform/most-common-neural-net-pytorch-mistakes-456560ada037
 
 #### GitHub Commit
 
 #### Stack Overflow
-- https://stackoverflow.com/questions/67066452/is-this-a-right-way-to-train-and-test-the-model-using-pytorch/67067242#67067242
 
 #### Documentation
 

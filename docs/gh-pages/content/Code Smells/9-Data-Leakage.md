@@ -2,13 +2,21 @@
 title: "Data Leakage"
 disableShare: true
 # ShowReadingTime: true
-tags: ["generic", "data preparation", "error-prone"]
-weight: 5
+tags: ["generic", "model evaluation", "error-prone"]
+weight: 9
+summary: "Use `Pipeline()` API in Scikit-Learn or check data segregation carefully when using other libraries to prevent data leakage."
 ---
 
 ### Description
 
-"Data Leakage happens when the data you are using to train a machine learning algorithm happens to have the information you are trying to predict." It results in overly optimistic performance during testing and poor performance in real-world usage. There are two main sources of data leakage: leaky predictors and a leaky validation strategy. Leaky predictors refer to the situation where some features updated or created after the target value is realized are included. This kind of data leakage can only be inspected at the data level rather than the code level. Leaky validation strategy refers to the scene where information from training data is getting mixed with validation data. This kind of pitfall can be avoided by checking the code carefully. One best practice in Scikit-Learn is to use Pipeline API to prevent data leakage.
+#### Context
+The data leakage occurs when the data used for training a machine learning model contains prediction result information.
+
+#### Problem
+Data leakage frequently leads to overly optimistic experimental outcomes and poor performance in real-world usage.
+
+#### Solution
+There are two main sources of data leakage: leaky predictors and a leaky validation strategy. Leaky predictors are the cases in which some features used in training are modified or generated after the goal value has been achieved. This kind of data leakage can only be inspected at the data level rather than the code level. Leaky validation strategy refers to the scenario where training data is mixed with validation data. This fault can be checked at the code level. One best practice in Scikit-Learn is to use the `Pipeline()` API to prevent data leakage.
 
 ### Type
 
@@ -16,7 +24,7 @@ Generic
 
 ### Existing Stage
 
-Data Preparation
+Model Evaluation
 
 ### Effect
 

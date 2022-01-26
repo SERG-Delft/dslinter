@@ -1,10 +1,10 @@
 ---
 title: "{{ replace .Name "-" " " | title }}"
 disableShare: true
-summary:
 tags: 
 weight: 
 # ShowReadingTime: true	
+summary:
 ---
 
 ### Description

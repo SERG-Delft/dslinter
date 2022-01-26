@@ -3,16 +3,28 @@ title: "Loss API Misused"
 disableShare: true
 # ShowReadingTime: true
 tags: ["api-specific", "model training", "error-prone"]
-weight: 24
+weight: 23
+summary: "Check the input for loss API in PyTorch carefully."
 ---
 
 ### Description
 
-Different loss APIs take different input formats, but the difference is not clarified in some documentations, so it is easy to misuse. For example, in PyTorch, the `NLLLoss` takes the output of `LogSoftmax` as the input. If the input given to `NLLLoss` has not been processed by `LogSoftmax`, it might lead to a wrong result.
+### Context
+
+Loss functions are always used in optimization problems. 
+
+#### Problem
+
+Different loss APIs accept different input formats, but the distinction is not made in some documentation or is overlooked by some developers, making it easy to misuse. For example, in PyTorch, the `NLLLoss` takes the output of `LogSoftmax` as the input. If the input given to `NLLLoss` has not been processed by `LogSoftmax`, it may lead to a wrong result.
+
+#### Solution
+
+Developers should check whether they use the loss API in PyTorch correctly.
+
 
 ### Type
 
-API Specific
+API-Specific
 
 ### Existing Stage
 

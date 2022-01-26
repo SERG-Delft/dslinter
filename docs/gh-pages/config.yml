@@ -21,18 +21,18 @@ menu:
     - identifier: Code Smells
       name: Code Smells
       url: /Code Smells/
-      weight: 10
+      weight: 1
     - identifier: Tags
       name: Tags
       url: /tags/
-      weight: 10
+      weight: 2
+    - name: Search
+      url: search/
+      weight: 3
     - identifier: Survey
       name: Survey
       url: 
-      weight: 10
-    - name: Search
-      url: search/
-      weight: 10
+      weight: 4
 
 outputs:
   home:

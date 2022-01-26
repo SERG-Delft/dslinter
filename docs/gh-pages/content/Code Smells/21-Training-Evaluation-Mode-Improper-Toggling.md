@@ -1,18 +1,27 @@
 ---
-title: "Train Eval Mode Improper Toggling"
+title: "Training / Evaluation Mode Improper Toggling"
 disableShare: true
 # ShowReadingTime: true
 tags: ["api-specific", "model training", "error-prone"]
-weight: 22
+weight: 21
+summary: "Call the training mode in the appropriate place in PyTorch code to avoid forgetting to toggle back the training mode after the inference step."
 ---
 
 ### Description
 
-In PyTorch, calling `.eval()` means we are going into the evaluation mode and the Dropout layer will be deactivated. If the training mode did not toggle back in time, the Dropout layer would not be used in some data training and thus affect the training result. Therefore, we suggest to "have the training mode set as close as possible to the inference step to avoid forgetting to set it".
+#### Context
+In PyTorch, calling `.eval()` means we are going into the evaluation mode and the `Dropout` layer will be deactivated.
+
+#### Problem
+If the training mode did not toggle back in time, the `Dropout` layer would not be used in some data training and thus affect the training result. 
+
+#### Solution
+Developers should call the training mode in the right place to avoid forgetting to switch back to the training mode after the inference step.
+
 
 ### Type
 
-API Specific
+API-Specific
 
 ### Existing Stage
 

@@ -2,17 +2,28 @@
 title: "Pytorch Call Method Misused"
 disableShare: true
 # ShowReadingTime: true
-tags: ["api-specific", "modeling training", "robustness"]
-weight: 21
+tags: ["api-specific", "model training", "robustness"]
+weight: 20
+summary: "Use `self.net()` in PyTorch to forward the input to the network instead of `self.net.forward()`."
 ---
 
 ### Description
 
-In PyTorch, `self.nn()` is different than `self.nn.forward()`. `self.nn()` also deals with all the register hooks, which would not be considered when calling the plain `forward`. Thus, it is recommended to use `self.nn()` than `self.nn.forward()`. 
+#### Context
+
+Both `self.net()` and `self.net.forward()` can be used to forward the input into the network in PyTorch.
+
+#### Problem
+
+In PyTorch, `self.net()` and `self.net.forward()` are not identical. The `self.net()` also deals with all the register hooks, which would not be considered when calling the plain `.forward()`. 
+
+#### Solution
+
+It is recommended to use `self.net()` rather than `self.net.forward()`. 
 
 ### Type
 
-API Specific
+API-Specific
 
 ### Existing Stage
 

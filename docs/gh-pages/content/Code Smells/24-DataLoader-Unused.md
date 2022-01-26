@@ -1,35 +1,47 @@
 ---
-title: "Zero_grad Not Used Before Backward"
+title: "DataLoader Unused"
 disableShare: true
 # ShowReadingTime: true
-tags: ["api-specific", "model training", "error-prone"]
-weight: 23
+tags: ["api-specific", "model evaluation", "robustness"]
+weight: 24
+summary: "Use `DataLoader` to load the data in PyTorch instead of splitting data manually and feed into the network."
 ---
 
 ### Description
 
-Developers should use `optimizer.zero_grad()`, `loss_fn.backward()`, `optimizer.step()` together and should be forget to use `optimizer.zero_grad()` before `loss_fn.backward()`. `optimizer.zero_grad()` clears the old gradients from last step. If this API is not used, the gradients will be accumulated from all `loss.backward()` calls and it will lead to the gradient explosion, which fails the training.
+#### Context
+
+`DataLoader` API supports the data loading utility in PyTorch.
+
+#### Problem
+
+Some new developers are unaware of existing functions and end up reinventing the wheel. For instance, in a Stack Overflow post, the developer does not use the `DataLoader` and feeds the data directly to the network. However, it is recommended to use the APIs because the APIs provided by the library often consider more cases. 
+
+#### Solution
+
+Using `DataLoader` API has several advantages: 1) It enables developers to take random samples of the data. 2) It does not preload data into memory, which is especially beneficial when dealing with large datasets. 3) It runs in the background of the code, fetching data in parallel to train, hence saving time. Therefore, it is more efficient and robust to use the `DataLoader` API than manually splitting the data and directly feeding the data into the network.
 
 ### Type
 
-API Specific
+API-Specific
 
 ### Existing Stage
 
-Model Training
+Model Evaluation
 
 ### Effect
 
-Error-prone
+Robustness
 
 ### Example
 
 ```diff
-# PyTorch
+### PyTorch
 # 1. Load and normalize CIFAR10
 import torch
 import torchvision
 import torchvision.transforms as transforms
+import torch.utils.data as data_utils
 
 transform = transforms.Compose(
     [transforms.ToTensor(),
@@ -39,13 +51,13 @@ batch_size = 4
 
 trainset = torchvision.datasets.CIFAR10(root='./data', train=True,
                                         download=True, transform=transform)
-trainloader = torch.utils.data.DataLoader(trainset, batch_size=batch_size,
-                                          shuffle=True, num_workers=0)
++ trainloader = torch.utils.data.DataLoader(trainset, batch_size=batch_size,
++                                           shuffle=True, num_workers=0)
 
 testset = torchvision.datasets.CIFAR10(root='./data', train=False,
                                        download=True, transform=transform)
-testloader = torch.utils.data.DataLoader(testset, batch_size=batch_size,
-                                         shuffle=False, num_workers=0)
++ testloader = torch.utils.data.DataLoader(testset, batch_size=batch_size,
++                                          shuffle=False, num_workers=0)
 
 classes = ('plane', 'car', 'bird', 'cat',
            'deer', 'dog', 'frog', 'horse', 'ship', 'truck')
@@ -53,7 +65,6 @@ classes = ('plane', 'car', 'bird', 'cat',
 # 2. Define a Convolutional Neural Network
 import torch.nn as nn
 import torch.nn.functional as F
-
 
 class Net(nn.Module):
     def __init__(self):
@@ -87,12 +98,16 @@ optimizer = optim.SGD(net.parameters(), lr=0.001, momentum=0.9)
 for epoch in range(2):  # loop over the dataset multiple times
 
     running_loss = 0.0
-    for i, data in enumerate(trainloader, 0):
+    net.train()
+-   for i in range(int(len(trainset) / batch_size)):
++   for i, data in enumerate(trainloader, 0):
         # get the inputs; data is a list of [inputs, labels]
-        inputs, labels = data
+-       inputs, labels = (trainset.data[i * batch_size: (i + 1) * batch_size]
+-                            , trainset.targets[i * batch_size: (i + 1) * batch_size])
++       inputs, labels = data
 
-+       # zero the parameter gradients
-+       optimizer.zero_grad()
+        # zero the parameter gradients
+        optimizer.zero_grad()
 
         # forward + backward + optimize
         outputs = net(inputs)
@@ -105,6 +120,9 @@ for epoch in range(2):  # loop over the dataset multiple times
         if i % 2000 == 1999:    # print every 2000 mini-batches
             print(f'[{epoch + 1}, {i + 1:5d}] loss: {running_loss / 2000:.3f}')
             running_loss = 0.0
+            # validation
+            net.eval()
+            #...
 
 print('Finished Training')
 
@@ -126,7 +144,6 @@ with torch.no_grad():
         correct += (predicted == labels).sum().item()
 
 print(f'Accuracy of the network on the 10000 test images: {100 * correct // total} %')
-
 ```
 
 ### Source:
@@ -134,11 +151,11 @@ print(f'Accuracy of the network on the 10000 test images: {100 * correct // tota
 #### Paper 
 
 #### Grey Literature
-- https://medium.com/missinglink-deep-learning-platform/most-common-neural-net-pytorch-mistakes-456560ada037
 
 #### GitHub Commit
 
 #### Stack Overflow
+- https://stackoverflow.com/questions/67066452/is-this-a-right-way-to-train-and-test-the-model-using-pytorch/67067242#67067242
 
 #### Documentation
 

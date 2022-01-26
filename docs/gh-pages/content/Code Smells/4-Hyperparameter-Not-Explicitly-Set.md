@@ -2,17 +2,21 @@
 title: "Hyperparameter not Explicitly Set"
 disableShare: true
 # ShowReadingTime: true
-tags: ["generic", "data preparation", "error-prone","reproducibility"]
-weight: 6
+tags: ["generic", "model training", "error-prone","reproducibility"]
+weight: 4
+summary: "Hyperparameters should be set explicitly."
 ---
 
 ### Description
 
-Hyperparameters are ML algorithm parameters used to control the learning process and are usually determined before the actual process starts. Hyperparameters should be set and tuned because they improve prediction quality
-and reproducibility. Tuning hyperparameters can lead to higher prediction quality because the default
-parameters of the learning algorithm may not be optimal for a given data or problem, and may lead to local optima.  These parameters directly control the behavior of the training algorithm and therefore have a significant impact on the performance of the model.
+#### Context
+Hyperparameters are usually set before the actual learning process begins and control the learning process. These parameters directly influence the behavior of the training algorithm and therefore have a significant impact on the model's performance.
 
-The second reason for defining hyperparameters for learning algorithms is that it improves reproducibility. While the default parameters of a machine learning library may be perfect for some time, these default parameters of the library may change in new versions of the library. In addition, setting all hyperparameters explicitly allows replicating the model in a different programming language. Therefore, it is easier to reproduce the results if hyperparameters are set.
+#### Problem
+The default parameters of learning algorithm APIs may not be optimal for a given data or problem, and may lead to local optima. In addition, while the default parameters of a machine learning library may be adequate for some time, these default parameters may change in new versions of the library. Furthermore, not setting the hyperparameters explicitly is inconvenient for replicating the model in a different programming language. 
+
+#### Solution
+Hyperparameters should be set explicitly and tuned for improving the result's quality and reproducibility.
 
 ### Type
 
@@ -20,7 +24,7 @@ Generic
 
 ### Existing Stage
 
-Data Preparation
+Model Training
 
 ### Effect
 

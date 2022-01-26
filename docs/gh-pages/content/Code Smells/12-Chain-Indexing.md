@@ -1,10 +1,10 @@
 ---
-title: "Chain Indexing Misused"
+title: "Chain Indexing"
 disableShare: true
-summary: "Avoid using chain indexing in Pandas."
-tags: ["api-specific", "data prepaation", "error-prone", "efficiency"]
-weight: 13
+tags: ["api-specific", "data cleaning", "error-prone", "efficiency"]
+weight: 12
 # ShowReadingTime: true
+summary: "Avoid using chain indexing in Pandas."
 ---
 
 ### Description
@@ -21,11 +21,11 @@ Developers using Pandas should avoid using chain indexing.
 
 ### Type
 
-API Specific
+API-Specific
 
 ### Existing Stage
 
-Data Preparation
+Data Cleaning
 
 ### Effect
 
