@@ -66,10 +66,10 @@ for class_name, signature in signatures:
     hyperparameters[class_name] = {"positional": keywords_amount, "keywords": keywords}
 
 # Write the pickled hyperparameters dict to disk and verify it.
-with open("../dslinter/resources/hyperparameters_dict.pickle", "wb") as file_handler:
+with open("../resources/hyperparameters_dict.pickle", "wb") as file_handler:
     pickle.dump(hyperparameters, file_handler)
     print("The pickle with all hyperparameters is written to disk.")
-with open("../dslinter/resources/hyperparameters_dict.pickle", "rb") as file_handler:
+with open("../resources/hyperparameters_dict.pickle", "rb") as file_handler:
     hyperparameters_loaded = pickle.load(file_handler)
     assert hyperparameters == hyperparameters_loaded
 

@@ -97,3 +97,49 @@ class TestImportChecker(pylint.testutils.CheckerTestCase):
 
         with self.assertNoMessages():
             self.checker.visit_import_from(import_node)
+
+    def test_finds_incorrect_tensorflow(self):
+        """Test if message is added when tensorflow is imported incorrectly."""
+        import_node = astroid.extract_node(
+            """
+            import tensorflow as tff
+            """
+        )
+
+        with self.assertAddsMessages(pylint.testutils.Message(msg_id="import-tensorflow", node=import_node)):
+            self.checker.visit_import(import_node)
+
+    def test_ignore_correct_tensorflow(self):
+        """Test if no message is added when tensorflow is imported correctly."""
+        import_node = astroid.extract_node(
+            """
+            import tensorflow as tf
+            """
+        )
+
+        with self.assertNoMessages():
+            self.checker.visit_import(import_node)
+
+    def test_finds_inccorrect_pytorch(self):
+        """Test if message is added when pytorch is imported incorrectly."""
+        import_node = astroid.extract_node(
+            """
+            import torch as tr
+            """
+        )
+
+        with self.assertAddsMessages(pylint.testutils.Message(msg_id="import-pytorch", node=import_node)):
+            self.checker.visit_import(import_node)
+
+    def test_ignore_correct_pytorch(self):
+        """Test if no message is added when pytorch is imported correclty"""
+        import_node = astroid.extract_node(
+            """
+            import torch
+            """
+        )
+
+        with self.assertNoMessages():
+            self.checker.visit_import(import_node)
+
+

@@ -34,6 +34,16 @@ class ImportChecker(BaseChecker):
             "import-sklearn",
             "Imports from sklearn modules should not have an alias.",
         ),
+        "C5505": (
+            "Import of tensorflow not bound to 'tf'.",
+            "import-tensorflow",
+            "The tensorflow module should be imported as 'tf' ",
+        ),
+        "C5506": (
+            "Import of pytorch has an alias.",
+            "import-pytorch",
+            "The pytorch module should not have an alias",
+        )
     }
     options = ()
 
@@ -51,6 +61,10 @@ class ImportChecker(BaseChecker):
                     self.add_message("import-numpy", node=node)
                 elif name == "matplotlib.pyplot" and alias != "plt":
                     self.add_message("import-pyplot", node=node)
+                elif name == "tensorflow" and alias != "tf":
+                    self.add_message("import-tensorflow", node=node)
+                elif name == "torch" and alias is not None:
+                    self.add_message("import-pytorch", node=node)
         except:  # pylint: disable=bare-except
             ExceptionHandler.handle(self, node)
 
