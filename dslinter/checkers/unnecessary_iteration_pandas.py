@@ -87,7 +87,7 @@ class UnnecessaryIterationPandasChecker(BaseChecker):
             ):
                 return
 
-            for_targets = UnnecessaryIterationPandasChecker._get_for_targets(node)
+            for_targets = self._get_for_targets(node)
             assigned = AssignUtil.get_assigned_target_names(node)
             modified_iterated_targets = any(target in for_targets for target in assigned)
 
