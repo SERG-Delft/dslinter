@@ -1,3 +1,4 @@
+"""Class which tests the InPlaceNumpyChecker"""
 import pylint.testutils
 import dslinter
 import astroid
@@ -8,16 +9,32 @@ class TestInPlaceNumpy(pylint.testutils.CheckerTestCase):
 
     NP_INIT = "import numpy as np\n"
 
-    def test_operation_call_unassigned(self):
+    def test_operation_call_unassigned1(self):
+        """Test whether a message is added when the result is lost."""
         module_tree = astroid.parse(self.NP_INIT + "np.clip()")
         unassigned_call = module_tree.body[-1].value
         with self.assertAddsMessages(pylint.testutils.Message(msg_id = "inplace-misused-numpy", node = unassigned_call)):
             self.checker.visit_call(unassigned_call)
 
+    def test_operation_call_unassigned2(self):
+        """Test whether a message is added when the result is lost."""
+        module_tree = astroid.parse(self.NP_INIT + "np.sin(1)")
+        unassigned_call = module_tree.body[-1].value
+        with self.assertAddsMessages(pylint.testutils.Message(msg_id = "inplace-misused-numpy", node = unassigned_call)):
+            self.checker.visit_call(unassigned_call)
+
     def test_operation_call_assigned(self):
+        """Test whether no message is added when the result is assigned."""
         module_tree = astroid.parse(self.NP_INIT + "a = np.clip()")
         assigned_call = module_tree.body[-1].value
         with self.assertNoMessages():
             self.checker.visit_call(assigned_call)
+
+    def test_operation_call_inplace(self):
+        """Test whether no message is added when the inplace parameter is set."""
+        module_tree = astroid.parse(self.NP_INIT + "np.clip(out = a)")
+        unassigned_call = module_tree.body[-1].value
+        with self.assertNoMessages():
+            self.checker.visit_call(unassigned_call)
 
 
