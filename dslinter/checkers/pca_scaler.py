@@ -44,7 +44,7 @@ class PCAScalerChecker(BaseChecker):
 
     def visit_call(self, node: astroid.Call):
         try:
-            # If there is no scaler before a pca, rule is violated.
+            # If there is no scaler before a pca, the rule is violated.
             if (
                 node.func is not None
                 and hasattr(node.func, "name")

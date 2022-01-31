@@ -2,6 +2,7 @@
 from dslinter.checkers.imports import ImportChecker
 from dslinter.checkers.inplace_pandas import InPlacePandasChecker
 from dslinter.checkers.inplace_numpy import InPlaceNumpyChecker
+from dslinter.checkers.memory_release_tensorflow import MemoryReleaseTensorflowChecker
 from dslinter.checkers.unnecessary_iteration_pandas import UnnecessaryIterationPandasChecker
 from dslinter.checkers.unnecessary_iteration_tensorflow import UnnecessaryIterationTensorflowChecker
 
@@ -23,6 +24,7 @@ def register(linter):
     linter.register_checker(InPlaceNumpyChecker(linter))
     linter.register_checker(UnnecessaryIterationPandasChecker(linter))
     linter.register_checker(UnnecessaryIterationTensorflowChecker(linter))
+    linter.register_checker(MemoryReleaseTensorflowChecker(linter))
 
     linter.register_checker(HyperparameterChecker(linter))
     linter.register_checker(NanChecker(linter))

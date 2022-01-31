@@ -33,15 +33,11 @@ Memory Issue
 ### Example
 
 ```diff
-
 ### TensorFlow
 import tensorflow as tf
-
-# Violated Code
 for _ in range(100):
 +  tf.keras.backend.clear_session()
    model = tf.keras.Sequential([tf.keras.layers.Dense(10) for _ in range(10)])
-
 ```
 
 ### Source:
