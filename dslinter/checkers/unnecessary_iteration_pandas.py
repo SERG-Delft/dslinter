@@ -4,12 +4,10 @@ import astroid
 from dslinter.util.exception_handler import ExceptionHandler
 from dslinter.util.ast import AssignUtil
 from typing import List
-
 from dslinter.util.type_inference import TypeInference
 
-
 class UnnecessaryIterationPandasChecker(BaseChecker):
-    """ """
+    """Check whether there is unnecessary iteration in Pandas code."""
     __implements__ = IAstroidChecker
 
     name = "unnecessary_iteration_pandas"
