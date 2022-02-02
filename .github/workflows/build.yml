@@ -32,8 +32,9 @@ jobs:
       - name: Run dslinter tests
         run: pytest --cov
 
-      - name: Run pylint on dslinter source code
-        run: pylint dslinter
+      # - name: Run pylint on dslinter source code
+      #   run: pylint dslinter
+      
       # - name: Upload code coverage to Codecov.io
       #   uses: codecov/codecov-action@v1
       #   with:
