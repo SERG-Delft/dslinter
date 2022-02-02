@@ -16,7 +16,7 @@ setup(
     packages=find_packages(),
     package_data={"": ["*.pickle"]},
     python_requires="~=3.5",
-    install_requires=["pylint~=2.6", "astroid~=2.4", "mypy", "data-science-types", "pyspark-stubs"],
+    install_requires=["pylint=2.12.2", "astroid=2.9.3", "mypy", "data-science-types", "pyspark-stubs"],
     classifiers=[
         "Development Status :: 5 - Production/Stable",
         "Environment :: Plugins",
