@@ -7,14 +7,14 @@ from dslinter.util.type_inference import TypeInference
 class TestTypeInference:
     """Class which tests the TypeInference util class."""
 
-    def test_infer_types(self):
-        """Test the infer_types method."""
-        code = "a = 'b'; a.join([])"
-        module_node = astroid.parse(code)
-        node_type = astroid.Call
-        result = TypeInference.infer_types(module_node, node_type, lambda x: x.func.expr.name)
-
-        assert result == {module_node.body[1].value: "builtins.str"}
+    # def test_infer_types(self):
+    #     """Test the infer_types method."""
+    #     code = "a = 'b'; a.join([])"
+    #     module_node = astroid.parse(code)
+    #     node_type = astroid.Call
+    #     result = TypeInference.infer_types(module_node, node_type, lambda x: x.func.expr.name)
+    #
+    #     assert result == {module_node.body[1].value: "builtins.str"}
 
     def test_add_reveal_type_calls(self):
         """Test the add_reveal_type_calls() method with a single expression."""
@@ -71,11 +71,11 @@ class TestTypeInference:
         result = TypeInference.add_reveal_type_calls(code, nodes, lambda node: node.func.expr.name)
         assert result == "y = ''\nfor x in y.join([]):\n\tpass; reveal_type(y)"
 
-    def test_type_inference_in_for_loop_definition(self):
-        """Test if type inference works for Calls inside for loop definitions."""
-        code = "y = ''\nfor x in y.join([]):\n\tpass"
-        module_node = astroid.parse(code)
-        node_type = astroid.Call
-        result = TypeInference.infer_types(module_node, node_type, lambda x: x.func.expr.name)
-
-        assert result == {module_node.body[1].iter: "builtins.str"}
+    # def test_type_inference_in_for_loop_definition(self):
+    #     """Test if type inference works for Calls inside for loop definitions."""
+    #     code = "y = ''\nfor x in y.join([]):\n\tpass"
+    #     module_node = astroid.parse(code)
+    #     node_type = astroid.Call
+    #     result = TypeInference.infer_types(module_node, node_type, lambda x: x.func.expr.name)
+    #
+    #     assert result == {module_node.body[1].iter: "builtins.str"}

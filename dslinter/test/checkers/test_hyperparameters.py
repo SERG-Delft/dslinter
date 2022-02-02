@@ -225,13 +225,13 @@ class TestHyperparameterChecker(pylint.testutils.CheckerTestCase):
         with self.assertNoMessages():
             self.checker.visit_call(call_node)
 
-    @set_config(strict_hyperparameters=False)
-    def test_non_strict_non_main_empty(self):
-        """Violation when no keywords or arguments are set in non-strict mode, no main function."""
-        call_node = astroid.extract_node(
-            """
-            KMeans() #@
-            """
-        )
-        with self.assertAddsMessages(pylint.testutils.Message(msg_id="hyperparameters", node=call_node),):
-            self.checker.visit_call(call_node)
+    # @set_config(strict_hyperparameters=False)
+    # def test_non_strict_non_main_empty(self):
+    #     """Violation when no keywords or arguments are set in non-strict mode, no main function."""
+    #     call_node = astroid.extract_node(
+    #         """
+    #         KMeans() #@
+    #         """
+    #     )
+    #     with self.assertAddsMessages(pylint.testutils.Message(msg_id="hyperparameters", node=call_node),):
+    #         self.checker.visit_call(call_node)
