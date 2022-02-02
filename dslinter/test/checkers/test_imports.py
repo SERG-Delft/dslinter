@@ -18,7 +18,7 @@ class TestImportChecker(pylint.testutils.CheckerTestCase):
             """
         )
 
-        with self.assertAddsMessages(pylint.testutils.Message(msg_id="import-pandas", node=import_node),):
+        with self.assertAddsMessages(pylint.testutils.MessageTest(msg_id="import-pandas", node=import_node),):
             self.checker.visit_import(import_node)
 
     def test_ignore_correct_pandas(self):
@@ -40,7 +40,7 @@ class TestImportChecker(pylint.testutils.CheckerTestCase):
             """
         )
 
-        with self.assertAddsMessages(pylint.testutils.Message(msg_id="import-numpy", node=import_node),):
+        with self.assertAddsMessages(pylint.testutils.MessageTest(msg_id="import-numpy", node=import_node),):
             self.checker.visit_import(import_node)
 
     def test_ignore_correct_numpy(self):
@@ -62,7 +62,7 @@ class TestImportChecker(pylint.testutils.CheckerTestCase):
             """
         )
 
-        with self.assertAddsMessages(pylint.testutils.Message(msg_id="import-pyplot", node=import_node),):
+        with self.assertAddsMessages(pylint.testutils.MessageTest(msg_id="import-pyplot", node=import_node),):
             self.checker.visit_import(import_node)
 
     def test_ignore_correct_pyplot(self):
@@ -84,7 +84,7 @@ class TestImportChecker(pylint.testutils.CheckerTestCase):
             """
         )
 
-        with self.assertAddsMessages(pylint.testutils.Message(msg_id="import-sklearn", node=import_node),):
+        with self.assertAddsMessages(pylint.testutils.MessageTest(msg_id="import-sklearn", node=import_node),):
             self.checker.visit_import_from(import_node)
 
     def test_ignore_correct_sklearn(self):
@@ -106,7 +106,7 @@ class TestImportChecker(pylint.testutils.CheckerTestCase):
             """
         )
 
-        with self.assertAddsMessages(pylint.testutils.Message(msg_id="import-tensorflow", node=import_node)):
+        with self.assertAddsMessages(pylint.testutils.MessageTest(msg_id="import-tensorflow", node=import_node)):
             self.checker.visit_import(import_node)
 
     def test_ignore_correct_tensorflow(self):
@@ -128,7 +128,7 @@ class TestImportChecker(pylint.testutils.CheckerTestCase):
             """
         )
 
-        with self.assertAddsMessages(pylint.testutils.Message(msg_id="import-pytorch", node=import_node)):
+        with self.assertAddsMessages(pylint.testutils.MessageTest(msg_id="import-pytorch", node=import_node)):
             self.checker.visit_import(import_node)
 
     def test_ignore_correct_pytorch(self):

@@ -10,7 +10,7 @@ class TestUnnecessaryIterationTensorflowChecker(pylint.testutils.CheckerTestCase
         """Test whether there is a message added when there is a iteration with augmented assign."""
         module_tree = astroid.parse("import tensorflow as tf\nx = tf.random.uniform([500, 10])\nz = tf.zeros([10])\nfor i in range(500):\n\tz += x[i]")
         for_node = module_tree.body[-1]
-        with self.assertAddsMessages(pylint.testutils.Message(msg_id="iteration-tensorflow", node = for_node),):
+        with self.assertAddsMessages(pylint.testutils.MessageTest(msg_id="iteration-tensorflow", node = for_node),):
             self.checker.visit_for(for_node)
 
     def test_no_iteration(self):

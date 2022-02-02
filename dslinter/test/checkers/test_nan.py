@@ -18,7 +18,7 @@ class TestNanChecker(pylint.testutils.CheckerTestCase):
             """
         )
 
-        with self.assertAddsMessages(pylint.testutils.Message(msg_id="nan-equality", node=compare_node),):
+        with self.assertAddsMessages(pylint.testutils.MessageTest(msg_id="nan-equality", node=compare_node),):
             self.checker.visit_compare(compare_node)
 
     def test_nan_right(self):
@@ -29,7 +29,7 @@ class TestNanChecker(pylint.testutils.CheckerTestCase):
             """
         )
 
-        with self.assertAddsMessages(pylint.testutils.Message(msg_id="nan-equality", node=compare_node),):
+        with self.assertAddsMessages(pylint.testutils.MessageTest(msg_id="nan-equality", node=compare_node),):
             self.checker.visit_compare(compare_node)
 
     def test_nan_both(self):
@@ -40,7 +40,7 @@ class TestNanChecker(pylint.testutils.CheckerTestCase):
             """
         )
 
-        with self.assertAddsMessages(pylint.testutils.Message(msg_id="nan-equality", node=compare_node),):
+        with self.assertAddsMessages(pylint.testutils.MessageTest(msg_id="nan-equality", node=compare_node),):
             self.checker.visit_compare(compare_node)
 
     def test_nan_none(self):

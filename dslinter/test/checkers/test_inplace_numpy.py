@@ -13,14 +13,14 @@ class TestInPlaceNumpy(pylint.testutils.CheckerTestCase):
         """Test whether a message is added when the result is lost."""
         module_tree = astroid.parse(self.NP_INIT + "np.clip([1,2,3] ,1, -1)")
         unassigned_call = module_tree.body[-1].value
-        with self.assertAddsMessages(pylint.testutils.Message(msg_id = "inplace-misused-numpy", node = unassigned_call)):
+        with self.assertAddsMessages(pylint.testutils.MessageTest(msg_id = "inplace-misused-numpy", node = unassigned_call)):
             self.checker.visit_call(unassigned_call)
 
     def test_operation_call_unassigned2(self):
         """Test whether a message is added when the result is lost."""
         module_tree = astroid.parse(self.NP_INIT + "np.sin(1)")
         unassigned_call = module_tree.body[-1].value
-        with self.assertAddsMessages(pylint.testutils.Message(msg_id = "inplace-misused-numpy", node = unassigned_call)):
+        with self.assertAddsMessages(pylint.testutils.MessageTest(msg_id = "inplace-misused-numpy", node = unassigned_call)):
             self.checker.visit_call(unassigned_call)
 
     def test_operation_call_assigned(self):

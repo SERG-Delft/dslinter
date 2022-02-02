@@ -76,7 +76,7 @@ class TestHyperparameterChecker(pylint.testutils.CheckerTestCase):
             KMeans() #@
             """
         )
-        with self.assertAddsMessages(pylint.testutils.Message(msg_id="hyperparameters", node=call_node),):
+        with self.assertAddsMessages(pylint.testutils.MessageTest(msg_id="hyperparameters", node=call_node),):
             self.checker.visit_call(call_node)
 
     @set_config(strict_hyperparameters=True)
@@ -87,7 +87,7 @@ class TestHyperparameterChecker(pylint.testutils.CheckerTestCase):
             KMeans(n_clusters=8, init='k-means++') #@
             """
         )
-        with self.assertAddsMessages(pylint.testutils.Message(msg_id="hyperparameters", node=call_node),):
+        with self.assertAddsMessages(pylint.testutils.MessageTest(msg_id="hyperparameters", node=call_node),):
             self.checker.visit_call(call_node)
 
     @set_config(strict_hyperparameters=True)
@@ -98,7 +98,7 @@ class TestHyperparameterChecker(pylint.testutils.CheckerTestCase):
             KMeans(8, 'k-means++') #@
             """
         )
-        with self.assertAddsMessages(pylint.testutils.Message(msg_id="hyperparameters", node=call_node),):
+        with self.assertAddsMessages(pylint.testutils.MessageTest(msg_id="hyperparameters", node=call_node),):
             self.checker.visit_call(call_node)
 
     @set_config(strict_hyperparameters=False)
@@ -154,7 +154,7 @@ class TestHyperparameterChecker(pylint.testutils.CheckerTestCase):
             NearestNeighbors() #@
             """
         )
-        with self.assertAddsMessages(pylint.testutils.Message(msg_id="hyperparameters", node=call_node),):
+        with self.assertAddsMessages(pylint.testutils.MessageTest(msg_id="hyperparameters", node=call_node),):
             self.checker.visit_call(call_node)
 
     @set_config(strict_hyperparameters=False)
@@ -165,7 +165,7 @@ class TestHyperparameterChecker(pylint.testutils.CheckerTestCase):
             ElasticNet(alpha=1.0) #@
             """
         )
-        with self.assertAddsMessages(pylint.testutils.Message(msg_id="hyperparameters", node=call_node),):
+        with self.assertAddsMessages(pylint.testutils.MessageTest(msg_id="hyperparameters", node=call_node),):
             self.checker.visit_call(call_node)
 
     @set_config(strict_hyperparameters=False)
@@ -176,7 +176,7 @@ class TestHyperparameterChecker(pylint.testutils.CheckerTestCase):
             ElasticNet(1.0) #@
             """
         )
-        with self.assertAddsMessages(pylint.testutils.Message(msg_id="hyperparameters", node=call_node),):
+        with self.assertAddsMessages(pylint.testutils.MessageTest(msg_id="hyperparameters", node=call_node),):
             self.checker.visit_call(call_node)
 
     @set_config(strict_hyperparameters=False)
