@@ -1,9 +1,12 @@
 name: github pages
 
+# Runs on
+# - there are changes on 'docs/gh-pages/**' or '.github/workflows/gh-pages.yml' and push to the main branch
+# - release tags 
 on:
   push:
     branches:
-      - main  # Set a branch to deploy
+      - main 
     paths:
       - docs/gh-pages/**
       - .github/workflows/gh-pages.yml
