@@ -23,12 +23,14 @@ jobs:
           python-version: 3.8
 
       - name: Install dependencies
-        run: pip install pytest
+        run: |
+        pip install -e .
+        pip install pytest
 
       - name: Run dslinter tests
         run: pytest .
 
-      # - name: Upload code coverage to Codecov.io
-      #   uses: codecov/codecov-action@v1
-      #   with:
-      #     files: coverage.txt
+      - name: Upload code coverage to Codecov.io
+        uses: codecov/codecov-action@v1
+        with:
+          files: coverage.txt
