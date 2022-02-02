@@ -26,7 +26,7 @@ jobs:
         run: pip install pytest
 
       - name: Run dslinter tests
-        uses: pytest .
+        run: pytest .
 
       # - name: Upload code coverage to Codecov.io
       #   uses: codecov/codecov-action@v1
