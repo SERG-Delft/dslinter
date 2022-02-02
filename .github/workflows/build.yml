@@ -28,7 +28,7 @@ jobs:
       - name: Run dslinter tests
         uses: pytest .
 
-      - name: Upload code coverage to Codecov.io
-        uses: codecov/codecov-action@v1
-        with:
-          files: coverage.txt
+      # - name: Upload code coverage to Codecov.io
+      #   uses: codecov/codecov-action@v1
+      #   with:
+      #     files: coverage.txt
