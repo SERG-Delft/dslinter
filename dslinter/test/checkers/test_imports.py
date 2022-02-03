@@ -1,7 +1,5 @@
-"""Class which tests the ImportChecker."""
 import astroid
 import pylint.testutils
-
 import dslinter
 
 

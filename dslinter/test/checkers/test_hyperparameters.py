@@ -1,15 +1,13 @@
-"""Class which tests the HyperparameterChecker."""
 import astroid
 import pylint.testutils
 from pylint.testutils import set_config
-
 import dslinter
 
 
 class TestHyperparameterChecker(pylint.testutils.CheckerTestCase):
     """Class which tests the HyperparameterChecker."""
 
-    CHECKER_CLASS = dslinter.plugin.HyperparameterChecker
+    CHECKER_CLASS = dslinter.plugin.HyperparameterScikitLearnChecker
 
     def test_has_keyword_true(self):
         """Test whether the function returns true when the keyword is present."""

@@ -9,17 +9,17 @@ from dslinter.util.exception_handler import ExceptionHandler
 from dslinter.util.resources import Resources
 
 
-class HyperparameterChecker(BaseChecker):
+class HyperparameterScikitLearnChecker(BaseChecker):
     """Hyperparameter checker checks whether all hyperparameters for learning algorithms are set."""
 
     __implements__ = IAstroidChecker
 
-    name = "hyperparameters"
+    name = "hyperparameters_scikitlearn"
     priority = -1
     msgs = {
         "W5505": (
             "Hyperparameter not set.",
-            "hyperparameters",
+            "hyperparameters-scikitlearn",
             "For learning algorithms, hyperparameters should be tuned and set.",
         ),
     }
@@ -87,12 +87,12 @@ class HyperparameterChecker(BaseChecker):
 
             if function_name in hyperparams_all:  # pylint: disable=unsupported-membership-test
                 if self.config.strict_hyperparameters:
-                    if not HyperparameterChecker._has_required_hyperparameters(node, hyperparams_all):
+                    if not HyperparameterScikitLearnChecker._has_required_hyperparameters(node, hyperparams_all):
                         self.add_message("hyperparameters", node=node)
                 else:  # non-strict
                     if (
                         function_name in self.HYPERPARAMETERS_MAIN
-                        and not HyperparameterChecker._has_required_hyperparameters(node, self.HYPERPARAMETERS_MAIN)
+                        and not HyperparameterScikitLearnChecker._has_required_hyperparameters(node, self.HYPERPARAMETERS_MAIN)
                     ):
                         self.add_message("hyperparameters", node=node)
                     elif len(node.args) == 0 and node.keywords is None:
@@ -109,7 +109,7 @@ class HyperparameterChecker(BaseChecker):
         :param hyperparameters: Dict of functions with their required hyperparameters.
         :return: True when all required hyperparameters are defined.
         """
-        return len(node.args) >= hyperparameters[node.func.name]["positional"] or HyperparameterChecker._has_keywords(
+        return len(node.args) >= hyperparameters[node.func.name]["positional"] or HyperparameterScikitLearnChecker._has_keywords(
             node.keywords, hyperparameters[node.func.name]["keywords"]
         )
 

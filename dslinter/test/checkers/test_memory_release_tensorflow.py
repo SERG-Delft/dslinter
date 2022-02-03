@@ -2,6 +2,7 @@ import astroid
 import pylint.testutils
 import dslinter.plugin
 
+
 class TestMemoryReleaseTensorflowChecker(pylint.testutils.CheckerTestCase):
     """Test checks whether the memory is released in time in Tensorflow code."""
 
