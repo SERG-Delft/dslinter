@@ -109,7 +109,7 @@ class TypeInference:
         result = mypy.api.run(["_tmp_dslinter.py"])
         os.remove("_tmp_dslinter.py")
 
-        if result[1] != "":
+        if result[1] != '':
             raise Exception("Running mypy resulted in an error: " + result[1])
         return result[0]
 
@@ -126,11 +126,11 @@ class TypeInference:
             raise SyntaxError("Mypy cannot run on invalid syntax.", ("", lineno, 0, ""))
 
         types = []
-        revealed_type_indicator = ": note: Revealed type is '"
+        revealed_type_indicator = ': note: Revealed type is '
         for line in mypy_result.splitlines():
             if revealed_type_indicator in line:
                 line_number = int(line.split(revealed_type_indicator)[0].split(":")[-1])
-                inferred_type = line.split(revealed_type_indicator)[1][:-1]
+                inferred_type = line.split(revealed_type_indicator)[1]
                 types.append((line_number, inferred_type))
         return types
 

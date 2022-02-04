@@ -63,8 +63,8 @@ class UnnecessaryIterationPandasChecker(BaseChecker):
             and node not in node.parent.body
             and node in self._call_types
             and (
-                self._call_types[node] == "pandas.core.frame.DataFrame"
-                or self._call_types[node] == "pyspark.sql.dataframe.DataFrame"
+                self._call_types[node] == '"pandas.core.frame.DataFrame"'
+                or self._call_types[node] == '"pyspark.sql.dataframe.DataFrame"'
             )
         )
 
@@ -79,8 +79,8 @@ class UnnecessaryIterationPandasChecker(BaseChecker):
                 isinstance(node.iter, astroid.Call)
                 and node.iter in self._call_types
                 and (
-                    self._call_types[node.iter] == "pandas.core.frame.DataFrame"
-                    or self._call_types[node.iter] == "pyspark.sql.dataframe.DataFrame"
+                    self._call_types[node.iter] == '"pandas.core.frame.DataFrame"'
+                    or self._call_types[node.iter] == '"pyspark.sql.dataframe.DataFrame"'
                 )
             ):
                 return
