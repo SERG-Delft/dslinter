@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>consistency on Code Smells for Machine Learning Applications</title>
+    <title>consistency on DSLinter - Linter for Machine Learning - Specific Code Smells</title>
     <link>https://hynn01.github.io/dslinter/tags/consistency/</link>
-    <description>Recent content in consistency on Code Smells for Machine Learning Applications</description>
+    <description>Recent content in consistency on DSLinter - Linter for Machine Learning - Specific Code Smells</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language><atom:link href="https://hynn01.github.io/dslinter/tags/consistency/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Dataframe Coversion API Misused</title>
-      <link>https://hynn01.github.io/dslinter/code-smells/13-dataframe-coversion-api-misused/</link>
+      <link>https://hynn01.github.io/dslinter/posts/codesmells/13-dataframe-coversion-api-misused/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://hynn01.github.io/dslinter/code-smells/13-dataframe-coversion-api-misused/</guid>
+      <guid>https://hynn01.github.io/dslinter/posts/codesmells/13-dataframe-coversion-api-misused/</guid>
       <description>Use &lt;code&gt;df.to_numpy()&lt;/code&gt; in Pandas instead of &lt;code&gt;df.values()&lt;/code&gt; for transform a &lt;code&gt;DataFrame&lt;/code&gt; to a NumPy array.</description>
     </item>
     

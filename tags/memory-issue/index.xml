@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>memory issue on Code Smells for Machine Learning Applications</title>
+    <title>memory issue on DSLinter - Linter for Machine Learning - Specific Code Smells</title>
     <link>https://hynn01.github.io/dslinter/tags/memory-issue/</link>
-    <description>Recent content in memory issue on Code Smells for Machine Learning Applications</description>
+    <description>Recent content in memory issue on DSLinter - Linter for Machine Learning - Specific Code Smells</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language><atom:link href="https://hynn01.github.io/dslinter/tags/memory-issue/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Memory not Freed</title>
-      <link>https://hynn01.github.io/dslinter/code-smells/5-memory-not-freed/</link>
+      <link>https://hynn01.github.io/dslinter/posts/codesmells/5-memory-not-freed/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://hynn01.github.io/dslinter/code-smells/5-memory-not-freed/</guid>
+      <guid>https://hynn01.github.io/dslinter/posts/codesmells/5-memory-not-freed/</guid>
       <description>Free memory in time.</description>
     </item>
     

@@ -1,35 +1,35 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>readability on Code Smells for Machine Learning Applications</title>
+    <title>readability on DSLinter - Linter for Machine Learning - Specific Code Smells</title>
     <link>https://hynn01.github.io/dslinter/tags/readability/</link>
-    <description>Recent content in readability on Code Smells for Machine Learning Applications</description>
+    <description>Recent content in readability on DSLinter - Linter for Machine Learning - Specific Code Smells</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language><atom:link href="https://hynn01.github.io/dslinter/tags/readability/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Matrix Multiplication API Misused</title>
-      <link>https://hynn01.github.io/dslinter/code-smells/14-matrix-multiplication-api-misused/</link>
+      <link>https://hynn01.github.io/dslinter/posts/codesmells/14-matrix-multiplication-api-misused/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://hynn01.github.io/dslinter/code-smells/14-matrix-multiplication-api-misused/</guid>
+      <guid>https://hynn01.github.io/dslinter/posts/codesmells/14-matrix-multiplication-api-misused/</guid>
       <description>When the multiply operation is performed on two-dimensional matrixes, use &lt;code&gt;np.matmul()&lt;/code&gt; instead of &lt;code&gt;np.dot()&lt;/code&gt; in NumPy for better semantics.</description>
     </item>
     
     <item>
       <title>Columns and DataType Not Explicitly Set</title>
-      <link>https://hynn01.github.io/dslinter/code-smells/15-columns-and-datatype-not-explicitly-set/</link>
+      <link>https://hynn01.github.io/dslinter/posts/codesmells/15-columns-and-datatype-not-explicitly-set/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://hynn01.github.io/dslinter/code-smells/15-columns-and-datatype-not-explicitly-set/</guid>
+      <guid>https://hynn01.github.io/dslinter/posts/codesmells/15-columns-and-datatype-not-explicitly-set/</guid>
       <description>Explicitly select columns and set &lt;code&gt;DataType&lt;/code&gt; in Pandas.</description>
     </item>
     
     <item>
       <title>Merge API Parameter Not Explicitly Set</title>
-      <link>https://hynn01.github.io/dslinter/code-smells/17-merge-api-parameter-not-explicitly-set/</link>
+      <link>https://hynn01.github.io/dslinter/posts/codesmells/17-merge-api-parameter-not-explicitly-set/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://hynn01.github.io/dslinter/code-smells/17-merge-api-parameter-not-explicitly-set/</guid>
+      <guid>https://hynn01.github.io/dslinter/posts/codesmells/17-merge-api-parameter-not-explicitly-set/</guid>
       <description>Explicitly specify &lt;code&gt;on&lt;/code&gt;, &lt;code&gt;how&lt;/code&gt; and &lt;code&gt;validate&lt;/code&gt; parameter for &lt;code&gt;df.merge()&lt;/code&gt; API in Pandas for better readability.</description>
     </item>
     

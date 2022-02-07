@@ -1,116 +1,116 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>error-prone on Code Smells for Machine Learning Applications</title>
+    <title>error-prone on DSLinter - Linter for Machine Learning - Specific Code Smells</title>
     <link>https://hynn01.github.io/dslinter/tags/error-prone/</link>
-    <description>Recent content in error-prone on Code Smells for Machine Learning Applications</description>
+    <description>Recent content in error-prone on DSLinter - Linter for Machine Learning - Specific Code Smells</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language><atom:link href="https://hynn01.github.io/dslinter/tags/error-prone/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>In-Place APIs Misused</title>
-      <link>https://hynn01.github.io/dslinter/code-smells/1-in-place-apis-misused/</link>
+      <link>https://hynn01.github.io/dslinter/posts/codesmells/1-in-place-apis-misused/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://hynn01.github.io/dslinter/code-smells/1-in-place-apis-misused/</guid>
+      <guid>https://hynn01.github.io/dslinter/posts/codesmells/1-in-place-apis-misused/</guid>
       <description>Remember to assign the result of an operation to a variable or set the in-place parameter in the API.</description>
     </item>
     
     <item>
       <title>No Scaling Before Scaling-sensitive Operation</title>
-      <link>https://hynn01.github.io/dslinter/code-smells/3-no-scaling-before-scaling-sensitive-operation/</link>
+      <link>https://hynn01.github.io/dslinter/posts/codesmells/3-no-scaling-before-scaling-sensitive-operation/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://hynn01.github.io/dslinter/code-smells/3-no-scaling-before-scaling-sensitive-operation/</guid>
+      <guid>https://hynn01.github.io/dslinter/posts/codesmells/3-no-scaling-before-scaling-sensitive-operation/</guid>
       <description>Check whether feature scaling is added before scaling-sensitive operations.</description>
     </item>
     
     <item>
       <title>Hyperparameter not Explicitly Set</title>
-      <link>https://hynn01.github.io/dslinter/code-smells/4-hyperparameter-not-explicitly-set/</link>
+      <link>https://hynn01.github.io/dslinter/posts/codesmells/4-hyperparameter-not-explicitly-set/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://hynn01.github.io/dslinter/code-smells/4-hyperparameter-not-explicitly-set/</guid>
+      <guid>https://hynn01.github.io/dslinter/posts/codesmells/4-hyperparameter-not-explicitly-set/</guid>
       <description>Hyperparameters should be set explicitly.</description>
     </item>
     
     <item>
       <title>Missing the Mask of Invalid Value</title>
-      <link>https://hynn01.github.io/dslinter/code-smells/7-missing-the-mask-of-invalid-value/</link>
+      <link>https://hynn01.github.io/dslinter/posts/codesmells/7-missing-the-mask-of-invalid-value/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://hynn01.github.io/dslinter/code-smells/7-missing-the-mask-of-invalid-value/</guid>
+      <guid>https://hynn01.github.io/dslinter/posts/codesmells/7-missing-the-mask-of-invalid-value/</guid>
       <description>Add a mask for possible invalid values. For example, developers should add a mask for the input for &lt;code&gt;tf.log()&lt;/code&gt; API.</description>
     </item>
     
     <item>
       <title>Data Leakage</title>
-      <link>https://hynn01.github.io/dslinter/code-smells/9-data-leakage/</link>
+      <link>https://hynn01.github.io/dslinter/posts/codesmells/9-data-leakage/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://hynn01.github.io/dslinter/code-smells/9-data-leakage/</guid>
+      <guid>https://hynn01.github.io/dslinter/posts/codesmells/9-data-leakage/</guid>
       <description>Use &lt;code&gt;Pipeline()&lt;/code&gt; API in Scikit-Learn or check data segregation carefully when using other libraries to prevent data leakage.</description>
     </item>
     
     <item>
       <title>NaN Equivalence Comparison Misused</title>
-      <link>https://hynn01.github.io/dslinter/code-smells/11-nan-equivalence-comparison-misused/</link>
+      <link>https://hynn01.github.io/dslinter/posts/codesmells/11-nan-equivalence-comparison-misused/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://hynn01.github.io/dslinter/code-smells/11-nan-equivalence-comparison-misused/</guid>
+      <guid>https://hynn01.github.io/dslinter/posts/codesmells/11-nan-equivalence-comparison-misused/</guid>
       <description>Be careful when using the &lt;code&gt;NaN&lt;/code&gt; equivalence comparison in NumPy and Pandas.</description>
     </item>
     
     <item>
       <title>Chain Indexing</title>
-      <link>https://hynn01.github.io/dslinter/code-smells/12-chain-indexing/</link>
+      <link>https://hynn01.github.io/dslinter/posts/codesmells/12-chain-indexing/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://hynn01.github.io/dslinter/code-smells/12-chain-indexing/</guid>
+      <guid>https://hynn01.github.io/dslinter/posts/codesmells/12-chain-indexing/</guid>
       <description>Avoid using chain indexing in Pandas.</description>
     </item>
     
     <item>
       <title>Merge API Parameter Not Explicitly Set</title>
-      <link>https://hynn01.github.io/dslinter/code-smells/17-merge-api-parameter-not-explicitly-set/</link>
+      <link>https://hynn01.github.io/dslinter/posts/codesmells/17-merge-api-parameter-not-explicitly-set/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://hynn01.github.io/dslinter/code-smells/17-merge-api-parameter-not-explicitly-set/</guid>
+      <guid>https://hynn01.github.io/dslinter/posts/codesmells/17-merge-api-parameter-not-explicitly-set/</guid>
       <description>Explicitly specify &lt;code&gt;on&lt;/code&gt;, &lt;code&gt;how&lt;/code&gt; and &lt;code&gt;validate&lt;/code&gt; parameter for &lt;code&gt;df.merge()&lt;/code&gt; API in Pandas for better readability.</description>
     </item>
     
     <item>
       <title>TensorArray Not Used</title>
-      <link>https://hynn01.github.io/dslinter/code-smells/19-tensorarray-not-used/</link>
+      <link>https://hynn01.github.io/dslinter/posts/codesmells/19-tensorarray-not-used/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://hynn01.github.io/dslinter/code-smells/19-tensorarray-not-used/</guid>
+      <guid>https://hynn01.github.io/dslinter/posts/codesmells/19-tensorarray-not-used/</guid>
       <description>Use &lt;code&gt;tf.TensorArray()&lt;/code&gt; in TensorFlow 2 if the value of the array will change in the loop.</description>
     </item>
     
     <item>
       <title>Training / Evaluation Mode Improper Toggling</title>
-      <link>https://hynn01.github.io/dslinter/code-smells/21-training-evaluation-mode-improper-toggling/</link>
+      <link>https://hynn01.github.io/dslinter/posts/codesmells/21-training-evaluation-mode-improper-toggling/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://hynn01.github.io/dslinter/code-smells/21-training-evaluation-mode-improper-toggling/</guid>
+      <guid>https://hynn01.github.io/dslinter/posts/codesmells/21-training-evaluation-mode-improper-toggling/</guid>
       <description>Call the training mode in the appropriate place in PyTorch code to avoid forgetting to toggle back the training mode after the inference step.</description>
     </item>
     
     <item>
       <title>Gradients Not Cleared before Backward Propagation</title>
-      <link>https://hynn01.github.io/dslinter/code-smells/22-gradients-not-cleared-before-backward-propagation/</link>
+      <link>https://hynn01.github.io/dslinter/posts/codesmells/22-gradients-not-cleared-before-backward-propagation/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://hynn01.github.io/dslinter/code-smells/22-gradients-not-cleared-before-backward-propagation/</guid>
+      <guid>https://hynn01.github.io/dslinter/posts/codesmells/22-gradients-not-cleared-before-backward-propagation/</guid>
       <description>Use &lt;code&gt;optimizer.zero_grad()&lt;/code&gt;, &lt;code&gt;loss_fn.backward()&lt;/code&gt;, &lt;code&gt;optimizer.step()&lt;/code&gt; together in order in PyTorch. Do not forget to use &lt;code&gt;optimizer.zero_grad()&lt;/code&gt; before &lt;code&gt;loss_fn.backward()&lt;/code&gt; to clear gradients.</description>
     </item>
     
     <item>
       <title>Loss API Misused</title>
-      <link>https://hynn01.github.io/dslinter/code-smells/23-loss-api-misused/</link>
+      <link>https://hynn01.github.io/dslinter/posts/codesmells/23-loss-api-misused/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://hynn01.github.io/dslinter/code-smells/23-loss-api-misused/</guid>
+      <guid>https://hynn01.github.io/dslinter/posts/codesmells/23-loss-api-misused/</guid>
       <description>Check the input for loss API in PyTorch carefully.</description>
     </item>
     

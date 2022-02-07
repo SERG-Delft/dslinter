@@ -1,44 +1,44 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>model evaluation on Code Smells for Machine Learning Applications</title>
+    <title>model evaluation on DSLinter - Linter for Machine Learning - Specific Code Smells</title>
     <link>https://hynn01.github.io/dslinter/tags/model-evaluation/</link>
-    <description>Recent content in model evaluation on Code Smells for Machine Learning Applications</description>
+    <description>Recent content in model evaluation on DSLinter - Linter for Machine Learning - Specific Code Smells</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language><atom:link href="https://hynn01.github.io/dslinter/tags/model-evaluation/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Randomness Uncontrolled</title>
-      <link>https://hynn01.github.io/dslinter/code-smells/8-randomness-uncontrolled/</link>
+      <link>https://hynn01.github.io/dslinter/posts/codesmells/8-randomness-uncontrolled/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://hynn01.github.io/dslinter/code-smells/8-randomness-uncontrolled/</guid>
+      <guid>https://hynn01.github.io/dslinter/posts/codesmells/8-randomness-uncontrolled/</guid>
       <description>Set random seed explicitly during the development process whenever a possible random procedure is involved in the application.</description>
     </item>
     
     <item>
       <title>Data Leakage</title>
-      <link>https://hynn01.github.io/dslinter/code-smells/9-data-leakage/</link>
+      <link>https://hynn01.github.io/dslinter/posts/codesmells/9-data-leakage/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://hynn01.github.io/dslinter/code-smells/9-data-leakage/</guid>
+      <guid>https://hynn01.github.io/dslinter/posts/codesmells/9-data-leakage/</guid>
       <description>Use &lt;code&gt;Pipeline()&lt;/code&gt; API in Scikit-Learn or check data segregation carefully when using other libraries to prevent data leakage.</description>
     </item>
     
     <item>
       <title>Threshold-Dependent Validation</title>
-      <link>https://hynn01.github.io/dslinter/code-smells/10-threshold-dependent-validation/</link>
+      <link>https://hynn01.github.io/dslinter/posts/codesmells/10-threshold-dependent-validation/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://hynn01.github.io/dslinter/code-smells/10-threshold-dependent-validation/</guid>
+      <guid>https://hynn01.github.io/dslinter/posts/codesmells/10-threshold-dependent-validation/</guid>
       <description>Use threshold-independent metrics instead of threshold-dependent ones in model evaluation.</description>
     </item>
     
     <item>
       <title>DataLoader Unused</title>
-      <link>https://hynn01.github.io/dslinter/code-smells/24-dataloader-unused/</link>
+      <link>https://hynn01.github.io/dslinter/posts/codesmells/24-dataloader-unused/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://hynn01.github.io/dslinter/code-smells/24-dataloader-unused/</guid>
+      <guid>https://hynn01.github.io/dslinter/posts/codesmells/24-dataloader-unused/</guid>
       <description>Use &lt;code&gt;DataLoader&lt;/code&gt; to load the data in PyTorch instead of splitting data manually and feed into the network.</description>
     </item>
     

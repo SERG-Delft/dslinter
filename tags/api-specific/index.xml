@@ -1,134 +1,134 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>api-specific on Code Smells for Machine Learning Applications</title>
+    <title>api-specific on DSLinter - Linter for Machine Learning - Specific Code Smells</title>
     <link>https://hynn01.github.io/dslinter/tags/api-specific/</link>
-    <description>Recent content in api-specific on Code Smells for Machine Learning Applications</description>
+    <description>Recent content in api-specific on DSLinter - Linter for Machine Learning - Specific Code Smells</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language><atom:link href="https://hynn01.github.io/dslinter/tags/api-specific/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>NaN Equivalence Comparison Misused</title>
-      <link>https://hynn01.github.io/dslinter/code-smells/11-nan-equivalence-comparison-misused/</link>
+      <link>https://hynn01.github.io/dslinter/posts/codesmells/11-nan-equivalence-comparison-misused/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://hynn01.github.io/dslinter/code-smells/11-nan-equivalence-comparison-misused/</guid>
+      <guid>https://hynn01.github.io/dslinter/posts/codesmells/11-nan-equivalence-comparison-misused/</guid>
       <description>Be careful when using the &lt;code&gt;NaN&lt;/code&gt; equivalence comparison in NumPy and Pandas.</description>
     </item>
     
     <item>
       <title>Chain Indexing</title>
-      <link>https://hynn01.github.io/dslinter/code-smells/12-chain-indexing/</link>
+      <link>https://hynn01.github.io/dslinter/posts/codesmells/12-chain-indexing/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://hynn01.github.io/dslinter/code-smells/12-chain-indexing/</guid>
+      <guid>https://hynn01.github.io/dslinter/posts/codesmells/12-chain-indexing/</guid>
       <description>Avoid using chain indexing in Pandas.</description>
     </item>
     
     <item>
       <title>Dataframe Coversion API Misused</title>
-      <link>https://hynn01.github.io/dslinter/code-smells/13-dataframe-coversion-api-misused/</link>
+      <link>https://hynn01.github.io/dslinter/posts/codesmells/13-dataframe-coversion-api-misused/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://hynn01.github.io/dslinter/code-smells/13-dataframe-coversion-api-misused/</guid>
+      <guid>https://hynn01.github.io/dslinter/posts/codesmells/13-dataframe-coversion-api-misused/</guid>
       <description>Use &lt;code&gt;df.to_numpy()&lt;/code&gt; in Pandas instead of &lt;code&gt;df.values()&lt;/code&gt; for transform a &lt;code&gt;DataFrame&lt;/code&gt; to a NumPy array.</description>
     </item>
     
     <item>
       <title>Matrix Multiplication API Misused</title>
-      <link>https://hynn01.github.io/dslinter/code-smells/14-matrix-multiplication-api-misused/</link>
+      <link>https://hynn01.github.io/dslinter/posts/codesmells/14-matrix-multiplication-api-misused/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://hynn01.github.io/dslinter/code-smells/14-matrix-multiplication-api-misused/</guid>
+      <guid>https://hynn01.github.io/dslinter/posts/codesmells/14-matrix-multiplication-api-misused/</guid>
       <description>When the multiply operation is performed on two-dimensional matrixes, use &lt;code&gt;np.matmul()&lt;/code&gt; instead of &lt;code&gt;np.dot()&lt;/code&gt; in NumPy for better semantics.</description>
     </item>
     
     <item>
       <title>Columns and DataType Not Explicitly Set</title>
-      <link>https://hynn01.github.io/dslinter/code-smells/15-columns-and-datatype-not-explicitly-set/</link>
+      <link>https://hynn01.github.io/dslinter/posts/codesmells/15-columns-and-datatype-not-explicitly-set/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://hynn01.github.io/dslinter/code-smells/15-columns-and-datatype-not-explicitly-set/</guid>
+      <guid>https://hynn01.github.io/dslinter/posts/codesmells/15-columns-and-datatype-not-explicitly-set/</guid>
       <description>Explicitly select columns and set &lt;code&gt;DataType&lt;/code&gt; in Pandas.</description>
     </item>
     
     <item>
       <title>Empty Column Misinitialization</title>
-      <link>https://hynn01.github.io/dslinter/code-smells/16-empty-column-misinitialization/</link>
+      <link>https://hynn01.github.io/dslinter/posts/codesmells/16-empty-column-misinitialization/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://hynn01.github.io/dslinter/code-smells/16-empty-column-misinitialization/</guid>
+      <guid>https://hynn01.github.io/dslinter/posts/codesmells/16-empty-column-misinitialization/</guid>
       <description>When a new empty column is needed in a &lt;code&gt;DataFrame&lt;/code&gt; in Pandas, use the &lt;code&gt;NaN&lt;/code&gt; value in Numpy instead of using zeros or empty strings.</description>
     </item>
     
     <item>
       <title>Merge API Parameter Not Explicitly Set</title>
-      <link>https://hynn01.github.io/dslinter/code-smells/17-merge-api-parameter-not-explicitly-set/</link>
+      <link>https://hynn01.github.io/dslinter/posts/codesmells/17-merge-api-parameter-not-explicitly-set/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://hynn01.github.io/dslinter/code-smells/17-merge-api-parameter-not-explicitly-set/</guid>
+      <guid>https://hynn01.github.io/dslinter/posts/codesmells/17-merge-api-parameter-not-explicitly-set/</guid>
       <description>Explicitly specify &lt;code&gt;on&lt;/code&gt;, &lt;code&gt;how&lt;/code&gt; and &lt;code&gt;validate&lt;/code&gt; parameter for &lt;code&gt;df.merge()&lt;/code&gt; API in Pandas for better readability.</description>
     </item>
     
     <item>
       <title>Broadcasting Feature Not Used</title>
-      <link>https://hynn01.github.io/dslinter/code-smells/18-broadcasting-feature-not-used/</link>
+      <link>https://hynn01.github.io/dslinter/posts/codesmells/18-broadcasting-feature-not-used/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://hynn01.github.io/dslinter/code-smells/18-broadcasting-feature-not-used/</guid>
+      <guid>https://hynn01.github.io/dslinter/posts/codesmells/18-broadcasting-feature-not-used/</guid>
       <description>Use the broadcasting feature in TensorFlow 2 to be more memory efficient.</description>
     </item>
     
     <item>
       <title>TensorArray Not Used</title>
-      <link>https://hynn01.github.io/dslinter/code-smells/19-tensorarray-not-used/</link>
+      <link>https://hynn01.github.io/dslinter/posts/codesmells/19-tensorarray-not-used/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://hynn01.github.io/dslinter/code-smells/19-tensorarray-not-used/</guid>
+      <guid>https://hynn01.github.io/dslinter/posts/codesmells/19-tensorarray-not-used/</guid>
       <description>Use &lt;code&gt;tf.TensorArray()&lt;/code&gt; in TensorFlow 2 if the value of the array will change in the loop.</description>
     </item>
     
     <item>
       <title>Pytorch Call Method Misused</title>
-      <link>https://hynn01.github.io/dslinter/code-smells/20-pytorch-call-method-misused/</link>
+      <link>https://hynn01.github.io/dslinter/posts/codesmells/20-pytorch-call-method-misused/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://hynn01.github.io/dslinter/code-smells/20-pytorch-call-method-misused/</guid>
+      <guid>https://hynn01.github.io/dslinter/posts/codesmells/20-pytorch-call-method-misused/</guid>
       <description>Use &lt;code&gt;self.net()&lt;/code&gt; in PyTorch to forward the input to the network instead of &lt;code&gt;self.net.forward()&lt;/code&gt;.</description>
     </item>
     
     <item>
       <title>Training / Evaluation Mode Improper Toggling</title>
-      <link>https://hynn01.github.io/dslinter/code-smells/21-training-evaluation-mode-improper-toggling/</link>
+      <link>https://hynn01.github.io/dslinter/posts/codesmells/21-training-evaluation-mode-improper-toggling/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://hynn01.github.io/dslinter/code-smells/21-training-evaluation-mode-improper-toggling/</guid>
+      <guid>https://hynn01.github.io/dslinter/posts/codesmells/21-training-evaluation-mode-improper-toggling/</guid>
       <description>Call the training mode in the appropriate place in PyTorch code to avoid forgetting to toggle back the training mode after the inference step.</description>
     </item>
     
     <item>
       <title>Gradients Not Cleared before Backward Propagation</title>
-      <link>https://hynn01.github.io/dslinter/code-smells/22-gradients-not-cleared-before-backward-propagation/</link>
+      <link>https://hynn01.github.io/dslinter/posts/codesmells/22-gradients-not-cleared-before-backward-propagation/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://hynn01.github.io/dslinter/code-smells/22-gradients-not-cleared-before-backward-propagation/</guid>
+      <guid>https://hynn01.github.io/dslinter/posts/codesmells/22-gradients-not-cleared-before-backward-propagation/</guid>
       <description>Use &lt;code&gt;optimizer.zero_grad()&lt;/code&gt;, &lt;code&gt;loss_fn.backward()&lt;/code&gt;, &lt;code&gt;optimizer.step()&lt;/code&gt; together in order in PyTorch. Do not forget to use &lt;code&gt;optimizer.zero_grad()&lt;/code&gt; before &lt;code&gt;loss_fn.backward()&lt;/code&gt; to clear gradients.</description>
     </item>
     
     <item>
       <title>Loss API Misused</title>
-      <link>https://hynn01.github.io/dslinter/code-smells/23-loss-api-misused/</link>
+      <link>https://hynn01.github.io/dslinter/posts/codesmells/23-loss-api-misused/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://hynn01.github.io/dslinter/code-smells/23-loss-api-misused/</guid>
+      <guid>https://hynn01.github.io/dslinter/posts/codesmells/23-loss-api-misused/</guid>
       <description>Check the input for loss API in PyTorch carefully.</description>
     </item>
     
     <item>
       <title>DataLoader Unused</title>
-      <link>https://hynn01.github.io/dslinter/code-smells/24-dataloader-unused/</link>
+      <link>https://hynn01.github.io/dslinter/posts/codesmells/24-dataloader-unused/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://hynn01.github.io/dslinter/code-smells/24-dataloader-unused/</guid>
+      <guid>https://hynn01.github.io/dslinter/posts/codesmells/24-dataloader-unused/</guid>
       <description>Use &lt;code&gt;DataLoader&lt;/code&gt; to load the data in PyTorch instead of splitting data manually and feed into the network.</description>
     </item>
     

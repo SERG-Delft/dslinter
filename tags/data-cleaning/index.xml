@@ -1,89 +1,89 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>data cleaning on Code Smells for Machine Learning Applications</title>
+    <title>data cleaning on DSLinter - Linter for Machine Learning - Specific Code Smells</title>
     <link>https://hynn01.github.io/dslinter/tags/data-cleaning/</link>
-    <description>Recent content in data cleaning on Code Smells for Machine Learning Applications</description>
+    <description>Recent content in data cleaning on DSLinter - Linter for Machine Learning - Specific Code Smells</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language><atom:link href="https://hynn01.github.io/dslinter/tags/data-cleaning/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>In-Place APIs Misused</title>
-      <link>https://hynn01.github.io/dslinter/code-smells/1-in-place-apis-misused/</link>
+      <link>https://hynn01.github.io/dslinter/posts/codesmells/1-in-place-apis-misused/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://hynn01.github.io/dslinter/code-smells/1-in-place-apis-misused/</guid>
+      <guid>https://hynn01.github.io/dslinter/posts/codesmells/1-in-place-apis-misused/</guid>
       <description>Remember to assign the result of an operation to a variable or set the in-place parameter in the API.</description>
     </item>
     
     <item>
       <title>Unnecessary Iteration</title>
-      <link>https://hynn01.github.io/dslinter/code-smells/2-unnecessary-iteration/</link>
+      <link>https://hynn01.github.io/dslinter/posts/codesmells/2-unnecessary-iteration/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://hynn01.github.io/dslinter/code-smells/2-unnecessary-iteration/</guid>
+      <guid>https://hynn01.github.io/dslinter/posts/codesmells/2-unnecessary-iteration/</guid>
       <description>Avoid unnecessary iterations. Use vectorized solutions instead of loops.</description>
     </item>
     
     <item>
       <title>NaN Equivalence Comparison Misused</title>
-      <link>https://hynn01.github.io/dslinter/code-smells/11-nan-equivalence-comparison-misused/</link>
+      <link>https://hynn01.github.io/dslinter/posts/codesmells/11-nan-equivalence-comparison-misused/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://hynn01.github.io/dslinter/code-smells/11-nan-equivalence-comparison-misused/</guid>
+      <guid>https://hynn01.github.io/dslinter/posts/codesmells/11-nan-equivalence-comparison-misused/</guid>
       <description>Be careful when using the &lt;code&gt;NaN&lt;/code&gt; equivalence comparison in NumPy and Pandas.</description>
     </item>
     
     <item>
       <title>Chain Indexing</title>
-      <link>https://hynn01.github.io/dslinter/code-smells/12-chain-indexing/</link>
+      <link>https://hynn01.github.io/dslinter/posts/codesmells/12-chain-indexing/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://hynn01.github.io/dslinter/code-smells/12-chain-indexing/</guid>
+      <guid>https://hynn01.github.io/dslinter/posts/codesmells/12-chain-indexing/</guid>
       <description>Avoid using chain indexing in Pandas.</description>
     </item>
     
     <item>
       <title>Dataframe Coversion API Misused</title>
-      <link>https://hynn01.github.io/dslinter/code-smells/13-dataframe-coversion-api-misused/</link>
+      <link>https://hynn01.github.io/dslinter/posts/codesmells/13-dataframe-coversion-api-misused/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://hynn01.github.io/dslinter/code-smells/13-dataframe-coversion-api-misused/</guid>
+      <guid>https://hynn01.github.io/dslinter/posts/codesmells/13-dataframe-coversion-api-misused/</guid>
       <description>Use &lt;code&gt;df.to_numpy()&lt;/code&gt; in Pandas instead of &lt;code&gt;df.values()&lt;/code&gt; for transform a &lt;code&gt;DataFrame&lt;/code&gt; to a NumPy array.</description>
     </item>
     
     <item>
       <title>Matrix Multiplication API Misused</title>
-      <link>https://hynn01.github.io/dslinter/code-smells/14-matrix-multiplication-api-misused/</link>
+      <link>https://hynn01.github.io/dslinter/posts/codesmells/14-matrix-multiplication-api-misused/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://hynn01.github.io/dslinter/code-smells/14-matrix-multiplication-api-misused/</guid>
+      <guid>https://hynn01.github.io/dslinter/posts/codesmells/14-matrix-multiplication-api-misused/</guid>
       <description>When the multiply operation is performed on two-dimensional matrixes, use &lt;code&gt;np.matmul()&lt;/code&gt; instead of &lt;code&gt;np.dot()&lt;/code&gt; in NumPy for better semantics.</description>
     </item>
     
     <item>
       <title>Columns and DataType Not Explicitly Set</title>
-      <link>https://hynn01.github.io/dslinter/code-smells/15-columns-and-datatype-not-explicitly-set/</link>
+      <link>https://hynn01.github.io/dslinter/posts/codesmells/15-columns-and-datatype-not-explicitly-set/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://hynn01.github.io/dslinter/code-smells/15-columns-and-datatype-not-explicitly-set/</guid>
+      <guid>https://hynn01.github.io/dslinter/posts/codesmells/15-columns-and-datatype-not-explicitly-set/</guid>
       <description>Explicitly select columns and set &lt;code&gt;DataType&lt;/code&gt; in Pandas.</description>
     </item>
     
     <item>
       <title>Empty Column Misinitialization</title>
-      <link>https://hynn01.github.io/dslinter/code-smells/16-empty-column-misinitialization/</link>
+      <link>https://hynn01.github.io/dslinter/posts/codesmells/16-empty-column-misinitialization/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://hynn01.github.io/dslinter/code-smells/16-empty-column-misinitialization/</guid>
+      <guid>https://hynn01.github.io/dslinter/posts/codesmells/16-empty-column-misinitialization/</guid>
       <description>When a new empty column is needed in a &lt;code&gt;DataFrame&lt;/code&gt; in Pandas, use the &lt;code&gt;NaN&lt;/code&gt; value in Numpy instead of using zeros or empty strings.</description>
     </item>
     
     <item>
       <title>Merge API Parameter Not Explicitly Set</title>
-      <link>https://hynn01.github.io/dslinter/code-smells/17-merge-api-parameter-not-explicitly-set/</link>
+      <link>https://hynn01.github.io/dslinter/posts/codesmells/17-merge-api-parameter-not-explicitly-set/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://hynn01.github.io/dslinter/code-smells/17-merge-api-parameter-not-explicitly-set/</guid>
+      <guid>https://hynn01.github.io/dslinter/posts/codesmells/17-merge-api-parameter-not-explicitly-set/</guid>
       <description>Explicitly specify &lt;code&gt;on&lt;/code&gt;, &lt;code&gt;how&lt;/code&gt; and &lt;code&gt;validate&lt;/code&gt; parameter for &lt;code&gt;df.merge()&lt;/code&gt; API in Pandas for better readability.</description>
     </item>
     
