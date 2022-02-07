@@ -1,15 +1,15 @@
+"""Checker checks whether scaler is added before scaling-sensitive operations."""
 import traceback
 from typing import List
-
 import astroid
 from pylint.checkers import BaseChecker
 from pylint.interfaces import IAstroidChecker
-
 from dslinter.util.exception_handler import ExceptionHandler
 from dslinter.util.ast import AssignUtil
 
 
 class ScalerMissingScikitLearnChecker(BaseChecker):
+    """Checker checks whether scaler is added before scaling-sensitive operations."""
 
     __implements__ = IAstroidChecker
 
@@ -29,7 +29,7 @@ class ScalerMissingScikitLearnChecker(BaseChecker):
         "Pipeline",
     ]
 
-    PCA = ["PCA","KernelPCA","SparsePCA","IncrementalPCA","SVC"]
+    PCA = ["PCA", "KernelPCA", "SparsePCA", "IncrementalPCA", "SVC"]
 
     SCALER = ["RobustScaler", "StandardScaler", "MaxAbsScaler", "MinMaxScaler",]
 
@@ -43,6 +43,11 @@ class ScalerMissingScikitLearnChecker(BaseChecker):
 
 
     def visit_call(self, node: astroid.Call):
+        """
+        When a node is visited, add a message if the rule is violated.
+        :param node:
+        :return:
+        """
         try:
             # If there is no scaler before a pca, the rule is violated.
             if (
@@ -52,26 +57,26 @@ class ScalerMissingScikitLearnChecker(BaseChecker):
                 and node.func.name in self.PIPELINE
                 and node.args is not None
             ):
-                hasPCA = False
-                hasScaler = False
+                has_pca = False
+                has_scaler = False
                 for arg in node.args:
                     if isinstance(arg, astroid.Call):
                         if ScalerMissingScikitLearnChecker._call_initiates_scaler(arg):
-                            hasScaler = True
+                            has_scaler = True
                         if ScalerMissingScikitLearnChecker._call_initiates_pca(arg):
-                            hasPCA = True
+                            has_pca = True
                             break
                     if isinstance(arg, astroid.node_classes.List):
                         for kid in arg.get_children():
                             for item in kid.get_children():
                                 if isinstance(item, astroid.Call):
                                     if ScalerMissingScikitLearnChecker._call_initiates_scaler(item):
-                                        hasScaler=True
+                                        has_scaler=True
                                     if ScalerMissingScikitLearnChecker._call_initiates_pca(item):
-                                        hasPCA=True
-                            if hasPCA == True:
-                                    break
-                if hasPCA == True and hasScaler==False:
+                                        has_pca=True
+                            if has_pca is True:
+                                break
+                if has_pca is True and has_scaler is False:
                     self.add_message("pca scaler checker", node=node)
 
             if (
@@ -82,8 +87,8 @@ class ScalerMissingScikitLearnChecker(BaseChecker):
                     and self._expr_is_pca(node.func.expr)
                     and node.args is not None
             ):
-                hasPCA = True
-                hasScaler = False
+                has_pca = True
+                has_scaler = False
                 for arg in node.args:
                     if isinstance(arg, astroid.Name):
                         values = AssignUtil.assignment_values(arg)
@@ -94,16 +99,16 @@ class ScalerMissingScikitLearnChecker(BaseChecker):
                                     and hasattr(value.func, "attrname")
                                     and value.func.attrname in self.LEARNING_FUNCTIONS
                             ):
-                                if(self._expr_is_scaler(value.func.expr)):
-                                    hasScaler = True
+                                if self._expr_is_scaler(value.func.expr):
+                                    has_scaler = True
                                 elif(isinstance(value.func.expr, astroid.Call)
                                     and value.func.expr.func is not None
                                     and hasattr(value.func.expr.func, "attrname")
                                     and value.func.expr.func.attrname in self.LEARNING_FUNCTIONS
                                     and self._expr_is_scaler(value.func.expr.func.expr)
                                 ):
-                                    hasScaler=True
-                if hasPCA == True and hasScaler==False:
+                                    has_scaler = True
+                if has_pca is True and has_scaler is False:
                     self.add_message("pca scaler checker", node=node)
 
 

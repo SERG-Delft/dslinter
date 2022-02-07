@@ -1,4 +1,5 @@
 """Get all parameters of the learning algorithms in scikit-learn 0.22.2."""
+# pylint: disable = C0301
 import inspect
 import pickle
 

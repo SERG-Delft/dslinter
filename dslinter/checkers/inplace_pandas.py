@@ -173,4 +173,3 @@ class InPlacePandasChecker(BaseChecker):
             if keyword.arg == "inplace":
                 return keyword.value.value
         return False
-

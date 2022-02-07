@@ -1,9 +1,10 @@
+"""Check whether there is unnecessary iteration in Pandas code."""
+from typing import List
 from pylint.checkers import BaseChecker
 from pylint.interfaces import IAstroidChecker
 import astroid
 from dslinter.util.exception_handler import ExceptionHandler
 from dslinter.util.ast import AssignUtil
-from typing import List
 from dslinter.util.type_inference import TypeInference
 
 class UnnecessaryIterationPandasChecker(BaseChecker):
@@ -110,5 +111,3 @@ class UnnecessaryIterationPandasChecker(BaseChecker):
         elif isinstance(node.target, astroid.AssignName):
             target_names.append(node.target.name)
         return target_names
-
-

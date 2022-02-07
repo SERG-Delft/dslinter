@@ -139,5 +139,3 @@ class TestImportChecker(pylint.testutils.CheckerTestCase):
 
         with self.assertNoMessages():
             self.checker.visit_import(import_node)
-
-

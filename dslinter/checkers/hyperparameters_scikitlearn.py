@@ -1,10 +1,8 @@
 """Hyperparameter checker checks whether all hyperparameters for learning algorithms are set."""
 from typing import Dict, List
-
 import astroid
 from pylint.checkers import BaseChecker
 from pylint.interfaces import IAstroidChecker
-
 from dslinter.util.exception_handler import ExceptionHandler
 from dslinter.util.resources import Resources
 
