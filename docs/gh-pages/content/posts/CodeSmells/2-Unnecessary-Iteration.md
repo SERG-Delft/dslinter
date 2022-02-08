@@ -16,7 +16,7 @@ Loops are typically time-consuming and verbose, while developers can usually use
 As stated in the Pandas documentation: "Iterating through pandas objects is generally slow. In many cases, iterating manually over the rows is not needed and can be avoided". In `EffectiveTensorflow` github repository, it is also stated that the slicing operation with loops in TensorFlow is slow, and there is a substitute for better performance.
 
 #### Solution
-Machine learning applications are typically data-intensive, requiring operations on data sets rather than an individual value. Therefore, it is better to adopt a vectorized solution instead of iterating over data. In this way, the program runs faster and code complexity is reduced, resulting in more efficient and less error-prone code. Pandas' built-in methods (e.g., join, groupby) are vectorized. It is therefore recommended to use Pandas built-in methods as an alternative to loops. In TensorFlow, using the `tf.reduce\_sum()` API to perform reduction operation is much faster than combining slicing operation and loops.
+Machine learning applications are typically data-intensive, requiring operations on data sets rather than an individual value. Therefore, it is better to adopt a vectorized solution instead of iterating over data. In this way, the program runs faster and code complexity is reduced, resulting in more efficient and less error-prone code. Pandas' built-in methods (e.g., join, groupby) are vectorized. It is therefore recommended to use Pandas built-in methods as an alternative to loops. In TensorFlow, using the `tf.reduce_sum()` API to perform reduction operation is much faster than combining slicing operation and loops.
 
 ### Type
 

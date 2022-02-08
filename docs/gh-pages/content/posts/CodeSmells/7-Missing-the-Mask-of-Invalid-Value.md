@@ -16,7 +16,7 @@ In deep learning, the value of the variable changes during training. The variabl
 Several posts on Stack Overflow talk about the bugs that are not easy to discover caused by the input of the log function approaching zero. In this kind of program, the input variable turns to zero and becomes an invalid value for `tf.log()`, which raises an error during the training process. However, the error's stack trace did not directly point to the line of code that the bug exists. This problem is not easy to debug and may take a long training time to find.
 
 #### Solution
-The developer should check the input for `tf.log()` API and add a mask to avoid the invalid value. For example, developer can change `tf.log(x)` to `tf.log(tf.clip\_by\_value(x,1e-10,1.0))`. If the value of `x` becomes zero, i.e., lower than the lowest bound 1e-10, the `tf.clip\_by\_value()` API will act as a mask and outputs 1e-10. The same applies to other invalid value situations. It will save time and effort if the developer could identify this smell before the code run into errors.
+The developer should check the input for `tf.log()` API and add a mask to avoid the invalid value. For example, developer can change `tf.log(x)` to `tf.log(tf.clip_by_value(x,1e-10,1.0))`. If the value of `x` becomes zero, i.e., lower than the lowest bound 1e-10, the `tf.clip_by_value()` API will act as a mask and outputs 1e-10. The same applies to other invalid value situations. It will save time and effort if the developer could identify this smell before the code run into errors.
 
 ### Type
 

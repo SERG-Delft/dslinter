@@ -11,3 +11,20 @@
 .dark{
   --primary: #e1ebf2;
 }
+
+code {
+    background-color: #ddc9ae;
+    color: #605f53;
+}
+
+p{
+  color: #605f53;
+}
+
+li{
+  color: #605f53;  
+}
+
+.post-entry {
+  padding: 12px;
+}

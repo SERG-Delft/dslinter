@@ -16,7 +16,7 @@ Using deterministic algorithms can improve reproducibility.
 The non-deterministic algorithm cannot produce repeatable results, which is inconvenient for debugging.
 
 #### Solution
-Some libraries provide APIs for developers to use the deterministic algorithm. In PyTorch, it is suggested to set `torch.use\_deterministic\_algorithms(True)` when debugging. However, the application will perform slower if this option is set, so it is suggested not to use it in the deployment stage. 
+Some libraries provide APIs for developers to use the deterministic algorithm. In PyTorch, it is suggested to set `torch.use_deterministic_algorithms(True)` when debugging. However, the application will perform slower if this option is set, so it is suggested not to use it in the deployment stage. 
 
 ### Type
 Generic
