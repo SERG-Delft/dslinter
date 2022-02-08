@@ -143,3 +143,6 @@ dmypy.json
 
 # Hugo
 docs/gh-pages/public
+
+# poetry
+poetry.lock
