@@ -29,8 +29,15 @@ jobs:
           pip install pytest
           pip install pytest-cov
 
-      - name: Run dslinter tests
-        run: pytest --cov
+      # - name: Run tests
+      #   run: pytest --cov
+
+      - name: Run tests
+        uses: dima-engineer/pytest-reporter@v1.0.1
+        with:
+          cov-omit-list: tests/*
+          cov-threshold-single: 85
+          cov-threshold-total: 90        
 
       # - name: Run pylint on dslinter source code
       #   run: pylint dslinter
