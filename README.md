@@ -19,7 +19,8 @@ Implemented checkers:
 ## Installation
 To install from source for development purposes: clone this repo and install the plugin with:
 ```
-pip install -e .
+pip install poerty
+poetry install
 ```
 To install from the Python Package Index:
 ```
@@ -39,6 +40,6 @@ pylint --load-plugins=dslinter <other_options> <path_to_sources>
 ## Tests
 Tests can be run by using the pytest package:
 ```
-pytest .
+poetry run pytest .
 ```
 

@@ -1,3 +1,4 @@
+""" In-Place Checker for NumPy which checker In-Place APIs are correctly used. """
 import astroid
 from pylint. checkers import BaseChecker
 from pylint.interfaces import IAstroidChecker
@@ -13,7 +14,8 @@ class InPlaceNumpyChecker(BaseChecker):
         "W5601":(
             "The operation has not been assigned to another variable, which might result in losing the result",
             "inplace-misused-numpy",
-            "The result of the operation should be assigned to another variable, or the in-place parameter should be set to True(In NumPy it is the out parameter)."
+            "The result of the operation should be assigned to another variable, or the in-place "
+            "parameter should be set to True(In NumPy it is the out parameter)."
         )
     }
     options = ()
@@ -139,7 +141,7 @@ class InPlaceNumpyChecker(BaseChecker):
         :param node:
         """
         try:
-            if(self._result_is_lost(node)):
+            if self._result_is_lost(node):
                 self.add_message("inplace-misused-numpy", node = node)
         except:
             ExceptionHandler.handle(self, node)

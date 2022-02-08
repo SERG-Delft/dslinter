@@ -1,7 +1,5 @@
-"""Class which tests the DataFrameChecker."""
 import astroid
 import pylint.testutils
-
 import dslinter
 
 
@@ -28,13 +26,13 @@ class TestDataFrameChecker(pylint.testutils.CheckerTestCase):
             self.checker.visit_module(module_tree)
             self.checker.visit_call(other_call)
 
-    # def test_dataframe_call_not_assigned(self):
-    #     """Test whether a message is added when a DataFrame operation is not assigned."""
-    #     module_tree = astroid.parse(self.DF_INIT + "df.abs()")
-    #     unassigned_call = module_tree.body[-1].value
-    #     with self.assertAddsMessages(pylint.testutils.Message(msg_id="unassigned-dataframe", node=unassigned_call),):
-    #         self.checker.visit_module(module_tree)
-    #         self.checker.visit_call(unassigned_call)
+    def test_dataframe_call_not_assigned(self):
+        """Test whether a message is added when a DataFrame operation is not assigned."""
+        module_tree = astroid.parse(self.DF_INIT + "df.abs()")
+        unassigned_call = module_tree.body[-1].value
+        with self.assertAddsMessages(pylint.testutils.MessageTest(msg_id="unassigned-dataframe", node=unassigned_call),):
+            self.checker.visit_module(module_tree)
+            self.checker.visit_call(unassigned_call)
 
     def test_dataframe_call_not_assigned_inplace(self):
         """Test whether no message is added when an inplace DataFrame operation is not assigned."""
@@ -99,31 +97,31 @@ class TestDataFrameChecker(pylint.testutils.CheckerTestCase):
             self.checker.visit_call(assigned_call_1)
             self.checker.visit_call(assigned_call_2)
 
-    # def test_other_and_dataframe_not_assigned_single_line(self):  # noqa: D205, D400
-    #     """
-    #     Test whether a message is added when a DataFrame operation is not assigned on the same line
-    #     as an operation on another type of object.
-    #     """
-    #     module_tree = astroid.parse(self.DF_INIT + "''.join([]); df.abs()")
-    #     assigned_call_1 = module_tree.body[-2].value
-    #     assigned_call_2 = module_tree.body[-1].value
-    #     with self.assertAddsMessages(pylint.testutils.Message(msg_id="unassigned-dataframe", node=assigned_call_2),):
-    #         self.checker.visit_module(module_tree)
-    #         self.checker.visit_call(assigned_call_1)
-    #         self.checker.visit_call(assigned_call_2)
+    def test_other_and_dataframe_not_assigned_single_line(self):  # noqa: D205, D400
+        """
+        Test whether a message is added when a DataFrame operation is not assigned on the same line
+        as an operation on another type of object.
+        """
+        module_tree = astroid.parse(self.DF_INIT + "''.join([]); df.abs()")
+        assigned_call_1 = module_tree.body[-2].value
+        assigned_call_2 = module_tree.body[-1].value
+        with self.assertAddsMessages(pylint.testutils.MessageTest(msg_id="unassigned-dataframe", node=assigned_call_2),):
+            self.checker.visit_module(module_tree)
+            self.checker.visit_call(assigned_call_1)
+            self.checker.visit_call(assigned_call_2)
 
-    # def test_dataframe_not_assigned_and_other_single_line(self):  # noqa: D205, D400
-    #     """
-    #     Test whether a message is added when an operation on another type of object is done on the
-    #     same line as an unassigned DataFrame operation.
-    #     """
-    #     module_tree = astroid.parse(self.DF_INIT + "df.abs(); ''.join([])")
-    #     assigned_call_1 = module_tree.body[-2].value
-    #     assigned_call_2 = module_tree.body[-1].value
-    #     with self.assertAddsMessages(pylint.testutils.Message(msg_id="unassigned-dataframe", node=assigned_call_1),):
-    #         self.checker.visit_module(module_tree)
-    #         self.checker.visit_call(assigned_call_1)
-    #         self.checker.visit_call(assigned_call_2)
+    def test_dataframe_not_assigned_and_other_single_line(self):  # noqa: D205, D400
+        """
+        Test whether a message is added when an operation on another type of object is done on the
+        same line as an unassigned DataFrame operation.
+        """
+        module_tree = astroid.parse(self.DF_INIT + "df.abs(); ''.join([])")
+        assigned_call_1 = module_tree.body[-2].value
+        assigned_call_2 = module_tree.body[-1].value
+        with self.assertAddsMessages(pylint.testutils.MessageTest(msg_id="unassigned-dataframe", node=assigned_call_1),):
+            self.checker.visit_module(module_tree)
+            self.checker.visit_call(assigned_call_1)
+            self.checker.visit_call(assigned_call_2)
 
     def test_dataframe_call_not_assigned_indented_false_negative(self):
         """

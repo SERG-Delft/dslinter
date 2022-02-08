@@ -1,9 +1,10 @@
-"""Class which tests the InPlaceNumpyChecker"""
+import astroid
 import pylint.testutils
 import dslinter
-import astroid
+
 
 class TestInPlaceNumpy(pylint.testutils.CheckerTestCase):
+    """Class which tests the InPlaceNumpyChecker"""
 
     CHECKER_CLASS = dslinter.plugin.InPlaceNumpyChecker
 

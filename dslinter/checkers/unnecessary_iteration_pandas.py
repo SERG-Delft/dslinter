@@ -1,9 +1,10 @@
+"""Check whether there is unnecessary iteration in Pandas code."""
+from typing import List
 from pylint.checkers import BaseChecker
 from pylint.interfaces import IAstroidChecker
 import astroid
 from dslinter.util.exception_handler import ExceptionHandler
 from dslinter.util.ast import AssignUtil
-from typing import List
 from dslinter.util.type_inference import TypeInference
 
 class UnnecessaryIterationPandasChecker(BaseChecker):
@@ -63,8 +64,8 @@ class UnnecessaryIterationPandasChecker(BaseChecker):
             and node not in node.parent.body
             and node in self._call_types
             and (
-                self._call_types[node] == "pandas.core.frame.DataFrame"
-                or self._call_types[node] == "pyspark.sql.dataframe.DataFrame"
+                self._call_types[node] == '"pandas.core.frame.DataFrame"'
+                or self._call_types[node] == '"pyspark.sql.dataframe.DataFrame"'
             )
         )
 
@@ -79,8 +80,8 @@ class UnnecessaryIterationPandasChecker(BaseChecker):
                 isinstance(node.iter, astroid.Call)
                 and node.iter in self._call_types
                 and (
-                    self._call_types[node.iter] == "pandas.core.frame.DataFrame"
-                    or self._call_types[node.iter] == "pyspark.sql.dataframe.DataFrame"
+                    self._call_types[node.iter] == '"pandas.core.frame.DataFrame"'
+                    or self._call_types[node.iter] == '"pyspark.sql.dataframe.DataFrame"'
                 )
             ):
                 return
@@ -110,5 +111,3 @@ class UnnecessaryIterationPandasChecker(BaseChecker):
         elif isinstance(node.target, astroid.AssignName):
             target_names.append(node.target.name)
         return target_names
-
-

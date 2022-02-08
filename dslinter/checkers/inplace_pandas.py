@@ -74,7 +74,7 @@ class InPlacePandasChecker(BaseChecker):
         "to_***",
     ]
 
-    def visit_module(self, node: astroid.Module):
+    def visit_module(self, module: astroid.Module):
         """
         When an Module node is visited, scan for Call nodes and get type the function is called on.
 
@@ -82,9 +82,11 @@ class InPlacePandasChecker(BaseChecker):
         """
         try:
             # noinspection PyTypeChecker
-            self._call_types = TypeInference.infer_types(node, astroid.Call, lambda x: x.func.expr.name)
+            self._call_types = TypeInference.infer_types(module, astroid.Call, lambda x: x.func.expr.name)
+            print("self._call_types")
+            print(self._call_types)
         except:  # pylint: disable=bare-except
-            ExceptionHandler.handle(self, node)
+            ExceptionHandler.handle(self, module)
 
     def visit_call(self, node: astroid.Call):
         """
@@ -148,8 +150,8 @@ class InPlacePandasChecker(BaseChecker):
         return (
             node in self._call_types  # Check if the type is inferred of this call.
             and (
-                self._call_types[node] == "pandas.core.frame.DataFrame"
-                or self._call_types[node] == "pyspark.sql.dataframe.DataFrame"
+                self._call_types[node] == '"pandas.core.frame.DataFrame"'
+                or self._call_types[node] == '"pyspark.sql.dataframe.DataFrame"'
             )
             and not self._is_inplace_operation(node)
             # If the parent of the Call is an Expression, it means the DataFrame is lost.
@@ -171,4 +173,3 @@ class InPlacePandasChecker(BaseChecker):
             if keyword.arg == "inplace":
                 return keyword.value.value
         return False
-

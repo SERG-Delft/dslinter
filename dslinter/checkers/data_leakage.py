@@ -66,6 +66,7 @@ class DataLeakageChecker(BaseChecker):
                 node.func is not None
                 and hasattr(node.func, "attrname")
                 and node.func.attrname in self.LEARNING_FUNCTIONS
+                and hasattr(node.func, "expr")
                 and self._expr_is_estimator(node.func.expr)
             ):
                 self.add_message("sk-pipeline", node=node)

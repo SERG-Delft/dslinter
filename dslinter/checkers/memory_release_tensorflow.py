@@ -1,3 +1,4 @@
+"""Check whether the memory is freed in time."""
 import astroid
 from pylint.checkers import BaseChecker
 
@@ -22,11 +23,11 @@ class MemoryReleaseTensorflowChecker(BaseChecker):
 
     def visit_for(self, node: astroid.Call):
         """Evaluate whether memory is freed in a loop with model creation."""
-        hasClearSession = False
+        has_clear_session = False
 
         for item in node.body:
             # if there is no clear_session call before calling a model, the rule is violated.
-            if( item.value.func.attrname == "clear_session"):
-                hasClearSession = True
-            if( item.value.func.attrname in self.MODELS and hasClearSession == False):
+            if item.value.func.attrname == "clear_session":
+                has_clear_session = True
+            if (item.value.func.attrname in self.MODELS and has_clear_session is False):
                 self.add_message("memory-release-tensorflow", node = node)

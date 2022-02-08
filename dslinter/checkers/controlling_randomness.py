@@ -17,7 +17,8 @@ class ControllingRandomness(BaseChecker):
     priority = -1
     msgs = {
         "W5506": (
-            "'random_state=None' shouldn't be used in estimators or cross-validation splitters, it indicates improper randomness control",
+            "'random_state=None' shouldn't be used in estimators or "
+            "cross-validation splitters, it indicates improper randomness control",
             "controlling randomness",
             "For reproducible results across executions, remove any use of random_state=None."
         ),
@@ -47,6 +48,8 @@ class ControllingRandomness(BaseChecker):
         "TimeSeriesSplit"
     ]
 
+    estimators_all = Resources.get_hyperparameters()
+
     def visit_call(self, node: astroid.Call):
         """
         When a Call node is visited, check whether it violated the rules in this checker.
@@ -54,18 +57,24 @@ class ControllingRandomness(BaseChecker):
         :param node: The node which is visited.
         """
 
-        estimators_all = Resources.get_hyperparameters()
         try:
             if (
+                # pylint: disable = R0916
                 hasattr(node, "func")
-                and hasattr(node.func, "name")
                 and hasattr(node, "keywords")
-                and (node.func.name in self.SPLITTER_FUNCTIONS or node.func.name in self.SPLITTER_CLASSES or node.func.name in estimators_all)
+                and hasattr(node.func, "name")
+                and (node.func.name in self.SPLITTER_FUNCTIONS
+                     or node.func.name in self.SPLITTER_CLASSES
+                     or node.func.name in self.estimators_all)
                 and node.keywords is not None
             ):
                 for keyword in node.keywords:
-                    if (keyword.arg == "random_state" and keyword.value.as_string() == "None"):
+                    if (
+                        keyword.arg == "random_state"
+                        and keyword.value.as_string() == "None"
+                    ):
                         self.add_message("controlling randomness", node=node)
+        # pylint: disable=W0702
         except:
             ExceptionHandler.handle(self, node)
             traceback.print_exc()
