@@ -39,5 +39,5 @@ jobs:
           fail_ci_if_error: true
 
       - name: Run pylint on dslinter source code
-        run: pylint dslinter --fail-under=8
+        run: poetry run pylint dslinter --fail-under=8
  
