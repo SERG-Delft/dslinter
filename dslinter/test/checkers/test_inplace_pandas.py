@@ -30,7 +30,7 @@ class TestDataFrameChecker(pylint.testutils.CheckerTestCase):
         """Test whether a message is added when a DataFrame operation is not assigned."""
         module_tree = astroid.parse(self.DF_INIT + "df.abs()")
         unassigned_call = module_tree.body[-1].value
-        with self.assertAddsMessages(pylint.testutils.MessageTest(msg_id="unassigned-dataframe", node=unassigned_call),):
+        with self.assertAddsMessages(pylint.testutils.MessageTest(msg_id="inplace-pandas", node=unassigned_call),):
             self.checker.visit_module(module_tree)
             self.checker.visit_call(unassigned_call)
 
@@ -105,7 +105,7 @@ class TestDataFrameChecker(pylint.testutils.CheckerTestCase):
         module_tree = astroid.parse(self.DF_INIT + "''.join([]); df.abs()")
         assigned_call_1 = module_tree.body[-2].value
         assigned_call_2 = module_tree.body[-1].value
-        with self.assertAddsMessages(pylint.testutils.MessageTest(msg_id="unassigned-dataframe", node=assigned_call_2),):
+        with self.assertAddsMessages(pylint.testutils.MessageTest(msg_id="inplace-pandas", node=assigned_call_2),):
             self.checker.visit_module(module_tree)
             self.checker.visit_call(assigned_call_1)
             self.checker.visit_call(assigned_call_2)
@@ -118,7 +118,7 @@ class TestDataFrameChecker(pylint.testutils.CheckerTestCase):
         module_tree = astroid.parse(self.DF_INIT + "df.abs(); ''.join([])")
         assigned_call_1 = module_tree.body[-2].value
         assigned_call_2 = module_tree.body[-1].value
-        with self.assertAddsMessages(pylint.testutils.MessageTest(msg_id="unassigned-dataframe", node=assigned_call_1),):
+        with self.assertAddsMessages(pylint.testutils.MessageTest(msg_id="inplace-pandas", node=assigned_call_1),):
             self.checker.visit_module(module_tree)
             self.checker.visit_call(assigned_call_1)
             self.checker.visit_call(assigned_call_2)

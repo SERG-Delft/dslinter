@@ -6,6 +6,8 @@ import astroid
 from dslinter.util.exception_handler import ExceptionHandler
 from dslinter.util.ast import AssignUtil
 from dslinter.util.type_inference import TypeInference
+from typing import Dict
+
 
 class UnnecessaryIterationPandasChecker(BaseChecker):
     """Check whether there is unnecessary iteration in Pandas code."""
@@ -14,18 +16,20 @@ class UnnecessaryIterationPandasChecker(BaseChecker):
     name = "unnecessary_iteration_pandas"
     priority = -1
     msgs = {
-        "W5502": (
+        "W5511": (
             "Iterating through a DataFrame.",
             "dataframe-iteration",
             "Iteration through a DataFrame is generally slow and should be avoided.",
         ),
-        "W5503": (
+        "W5512": (
             "Iterated object is modified.",
             "dataframe-iteration-modification",
             "An object where is iterated over should not be modified.",
         ),
     }
     options = ()
+
+    _call_types: Dict[astroid.Call, str] = {}  # [node, inferred type of object the function is called on]
 
     def visit_module(self, node: astroid.Module):
         """

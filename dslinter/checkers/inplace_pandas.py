@@ -17,7 +17,7 @@ class InPlacePandasChecker(BaseChecker):
     msgs = {
         "W5501": (
             "Result of operation on a DataFrame is not assigned.",
-            "unassigned-dataframe",
+            "inplace-pandas",
             "Most operations on a DataFrame return a new DataFrame. These should be assigned to \
             a variable.",
         ),
@@ -83,8 +83,6 @@ class InPlacePandasChecker(BaseChecker):
         try:
             # noinspection PyTypeChecker
             self._call_types = TypeInference.infer_types(module, astroid.Call, lambda x: x.func.expr.name)
-            print("self._call_types")
-            print(self._call_types)
         except:  # pylint: disable=bare-except
             ExceptionHandler.handle(self, module)
 
@@ -100,7 +98,7 @@ class InPlacePandasChecker(BaseChecker):
                 and not self._function_whitelisted(node)
                 and self._dataframe_is_lost(node)
             ):
-                self.add_message("unassigned-dataframe", node=node)
+                self.add_message("inplace-pandas", node=node)
         except:  # pylint: disable=bare-except
             ExceptionHandler.handle(self, node)
 
@@ -153,13 +151,13 @@ class InPlacePandasChecker(BaseChecker):
                 self._call_types[node] == '"pandas.core.frame.DataFrame"'
                 or self._call_types[node] == '"pyspark.sql.dataframe.DataFrame"'
             )
-            and not self._is_inplace_operation(node)
-            # If the parent of the Call is an Expression, it means the DataFrame is lost.
+            and not self._inplace_is_true(node)
+            # If the parent of the Call is an Expression (not an Assignment), it means the DataFrame is lost.
             and isinstance(node.parent, astroid.Expr)
         )
 
     @staticmethod
-    def _is_inplace_operation(node: astroid.Call) -> bool:
+    def _inplace_is_true(node: astroid.Call) -> bool:
         """
         Evaluate whether the call has an 'inplace==True' keyword argument.
 
