@@ -154,3 +154,25 @@ class TypeInference:
                     # Remove the tuple so multiple calls on the same line get the correct type.
                     unseen_types.remove((line, type_inferred))
         return nodes_with_types
+
+    @staticmethod
+    def infer_variable_types(module: astroid.Module) -> Dict[str, str]:
+        """
+        When there is no stub available for a library (e.g., missing tensorflow-stubs),
+        use this method instead of infer_types. Infer variable type in Assign nodes.
+        :param module: code module
+        :return: Dict witn variable names and their inferred type
+        """
+        variables_with_types = {}
+        nodes = ASTUtil.search_nodes(module, astroid.Assign)
+        for node in nodes:
+            for var in node.targets:
+                variable_name = var.name
+                call = node.value.func
+                while(hasattr(call, "expr")):
+                    call = call.expr
+                if(hasattr(call, "name")):
+                    call = call.name
+                variables_with_types[variable_name] = call
+
+        return variables_with_types

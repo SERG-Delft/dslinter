@@ -49,7 +49,6 @@ class InPlaceNumpyChecker(BaseChecker):
                 and isinstance(node.parent, astroid.Expr)
         )
 
-
     @staticmethod
     def _inplace_is_true(node: astroid.Call) -> bool:
         """
