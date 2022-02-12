@@ -1,4 +1,5 @@
 [![codecov.io](https://codecov.io/github/Hynn01/dslinter/coverage.svg?branch=main)](https://codecov.io/github/Hynn01/dslinter?branch=main)
+[![build dslinter](https://github.com/Hynn01/dslinter/actions/workflows/build.yml/badge.svg)](https://github.com/Hynn01/dslinter/actions/workflows/build.yml)
 # dslinter
 Pylint plugin for linting data science and machine learning code, focussed on the libraries pandas and scikit-learn.
 
