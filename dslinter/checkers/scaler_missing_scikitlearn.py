@@ -50,7 +50,7 @@ class ScalerMissingScikitLearnChecker(BaseChecker):
         """
         try:
             # If there is no scaler before a scaling-sensitive operarion, the rule is violated.
-            # if pipeline is used
+            # If pipeline is used
             if (
                 hasattr(node, "func")
                 and hasattr(node.func, "name")
@@ -66,20 +66,10 @@ class ScalerMissingScikitLearnChecker(BaseChecker):
                         if self._call_initiates_scaling_sensitive_operations(arg):
                             has_scaling_sensitive_operation = True
                             break
-                    if isinstance(arg, astroid.node_classes.List):
-                        for ch in arg.get_children():
-                            for item in ch.get_children():
-                                if isinstance(item, astroid.Call):
-                                    if self._call_initiates_scaler(item):
-                                        has_scaler=True
-                                    if self._call_initiates_scaling_sensitive_operations(item):
-                                        has_scaling_sensitive_operation=True
-                            if has_scaling_sensitive_operation is True:
-                                break
                 if has_scaling_sensitive_operation is True and has_scaler is False:
                     self.add_message("scaler-missing-scikitlearn", node=node)
 
-            # if pipeline is not used
+            # If pipeline is not used and a scaling-sensitive operation is called
             if (
                     hasattr(node, "func")
                     and hasattr(node.func, "attrname")
@@ -95,19 +85,11 @@ class ScalerMissingScikitLearnChecker(BaseChecker):
                         values = AssignUtil.assignment_values(arg)
                         for value in values:
                             if (
-                                    isinstance(value, astroid.Call)
-                                    and value.func is not None
-                                    and hasattr(value.func, "attrname")
-                                    and value.func.attrname in self.LEARNING_FUNCTIONS
+                                isinstance(value, astroid.Call)
+                                and hasattr(value, "func")
+                                and hasattr(value.func, "expr")
                             ):
                                 if self._expr_is_scaler(value.func.expr):
-                                    has_scaler = True
-                                elif(isinstance(value.func.expr, astroid.Call)
-                                    and value.func.expr.func is not None
-                                    and hasattr(value.func.expr.func, "attrname")
-                                    and value.func.expr.func.attrname in self.LEARNING_FUNCTIONS
-                                    and self._expr_is_scaler(value.func.expr.func.expr)
-                                ):
                                     has_scaler = True
                 if has_scaling_sensitive_operation is True and has_scaler is False:
                     self.add_message("scaler-missing-scikitlearn", node=node)
