@@ -1,13 +1,13 @@
 """Class which tests RandomnessControllingPytorchChecker"""
 import astroid
 import pylint.testutils
-from dslinter.checkers.randomness_controlling_pytorch import RandomnessControllingPytorchChecker
+import dslinter
 
 
 class TestRandomnessControllingPytorchChecker(pylint.testutils.CheckerTestCase):
     """Class which tests RandomnessControllingPytorchChecker"""
 
-    CHECKER_CLASS = RandomnessControllingPytorchChecker
+    CHECKER_CLASS = dslinter.plugin.RandomnessControllingPytorchChecker
 
     def test_with_pytorch_randomness_control(self):
         """Tests whether no message is added if manual seed is set."""

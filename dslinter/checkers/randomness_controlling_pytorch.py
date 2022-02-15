@@ -5,16 +5,16 @@ import astroid
 
 
 class RandomnessControllingPytorchChecker(BaseChecker):
-    """Checker which checkes whether random seed is set in pytorch"""
+    """Checker which checks whether random seed is set in pytorch"""
     __implements__ = IAstroidChecker
 
-    name = "randomess_control_pytorch"
+    name = "randomness_control_pytorch"
     priority = -1
     msgs = {
         "" : (
-            "torch.manaul_seed() is not set in pytorch program",
-            "randomess-control-pytorch",
-            "torch.manaul_seed() should be set in pytorch program for reproducible result"
+            "torch.manual_seed() is not set in pytorch program",
+            "randomness-control-pytorch",
+            "torch.manual_seed() should be set in pytorch program for reproducible result"
         )
     }
     options = ()
@@ -27,7 +27,7 @@ class RandomnessControllingPytorchChecker(BaseChecker):
         Check whether there is a pytorch import.
         :param node: import node
         """
-        for name, alias in node.names:
+        for name, _ in node.names:
             if name == "torch":
                 self._import_pytorch = True
 
