@@ -8,18 +8,18 @@ from dslinter.util.exception_handler import ExceptionHandler
 from dslinter.util.resources import Resources
 
 
-class ControllingRandomness(BaseChecker):
+class RandomnessControllingScikitlearnChecker(BaseChecker):
     """Checker which checks rules for controlling randomness."""
 
     __implements__ = IAstroidChecker
 
-    name = "controlling-randomness"
+    name = "randomness-controlling-scikitlearn"
     priority = -1
     msgs = {
         "W5506": (
             "'random_state=None' shouldn't be used in estimators or "
             "cross-validation splitters, it indicates improper randomness control",
-            "controlling randomness",
+            "controlling_randomness_scikitlearn",
             "For reproducible results across executions, remove any use of random_state=None."
         ),
     }
@@ -66,15 +66,20 @@ class ControllingRandomness(BaseChecker):
                 and (node.func.name in self.SPLITTER_FUNCTIONS
                      or node.func.name in self.SPLITTER_CLASSES
                      or node.func.name in self.estimators_all)
-                and node.keywords is not None
             ):
-                for keyword in node.keywords:
-                    if (
-                        keyword.arg == "random_state"
-                        and keyword.value.as_string() == "None"
-                    ):
-                        self.add_message("controlling randomness", node=node)
-        # pylint: disable=W0702
+                if node.keywords is not None:
+                    has_random_state_keyword = False
+                    for keyword in node.keywords:
+                        if keyword.arg == "random_state":
+                            has_random_state_keyword = True
+                            if keyword.value.as_string() == "None":
+                                self.add_message("controlling_randomness_scikitlearn", node=node)
+                    if has_random_state_keyword is False:
+                        self.add_message("controlling_randomness_scikitlearn", node=node)
+                if node.keywords is None:
+                    self.add_message("controlling_randomness_scikitlearn", node=node)
+
+        # pylint: disable = W0702
         except:
             ExceptionHandler.handle(self, node)
             traceback.print_exc()
