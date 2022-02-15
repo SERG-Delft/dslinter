@@ -6,7 +6,7 @@ import dslinter
 
 
 class TestRandomnessControllingTensorflowChecker(pylint.testutils.CheckerTestCase):
-    """Class which tests RandomnessControllingPytorchChecker"""
+    """Class which tests RandomnessControllingTensorflowChecker"""
 
     CHECKER_CLASS = dslinter.plugin.RandomnessControllingTensorflowChecker
 
@@ -22,7 +22,7 @@ class TestRandomnessControllingTensorflowChecker(pylint.testutils.CheckerTestCas
             self.checker.visit_import(import_node)
             self.checker.visit_call(call_node)
 
-    def test_without_pytorch_randomness_control(self):
+    def test_without_tensorflow_randomness_control(self):
         """Tests whether a message is added if manual seed is not set"""
         script = """
         import tensorflow as tf #@
