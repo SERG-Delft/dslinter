@@ -5,6 +5,7 @@ from dslinter.checkers.inplace_numpy import InPlaceNumpyChecker
 from dslinter.checkers.memory_release_tensorflow import MemoryReleaseTensorflowChecker
 from dslinter.checkers.unnecessary_iteration_pandas import UnnecessaryIterationPandasChecker
 from dslinter.checkers.unnecessary_iteration_tensorflow import UnnecessaryIterationTensorflowChecker
+from dslinter.checkers.deterministic_pytorch import DeterministicAlgorithmChecker
 
 from dslinter.checkers.data_leakage import DataLeakageChecker
 from dslinter.checkers.hyperparameters_scikitlearn import HyperparameterScikitLearnChecker
@@ -27,6 +28,7 @@ def register(linter):
     linter.register_checker(ScalerMissingScikitLearnChecker(linter))
     linter.register_checker(HyperparameterScikitLearnChecker(linter))
     linter.register_checker(MemoryReleaseTensorflowChecker(linter))
+    linter.register_checker(DeterministicAlgorithmChecker(linter))
 
     linter.register_checker(NanChecker(linter))
     linter.register_checker(DataLeakageChecker(linter))
