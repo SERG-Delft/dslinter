@@ -3,6 +3,7 @@ from dslinter.checkers.imports import ImportChecker
 from dslinter.checkers.inplace_pandas import InPlacePandasChecker
 from dslinter.checkers.inplace_numpy import InPlaceNumpyChecker
 from dslinter.checkers.memory_release_tensorflow import MemoryReleaseTensorflowChecker
+from dslinter.checkers.randomness_controlling_numpy import RandomnessControllingNumpyChecker
 from dslinter.checkers.randomness_controlling_pytorch import RandomnessControllingPytorchChecker
 from dslinter.checkers.randomness_controlling_tensorflow import RandomnessControllingTensorflowChecker
 from dslinter.checkers.unnecessary_iteration_pandas import UnnecessaryIterationPandasChecker
@@ -14,6 +15,7 @@ from dslinter.checkers.nan import NanChecker
 from dslinter.checkers.randomness_controlling_scikitlearn import RandomnessControllingScikitlearnChecker
 from dslinter.checkers.scaler_missing_scikitlearn import ScalerMissingScikitLearnChecker
 # from dslinter.checkers.excessive_hyperparameter_precision import ExcessiveHyperparameterPrecision
+
 
 def register(linter):
     """
@@ -33,6 +35,7 @@ def register(linter):
     linter.register_checker(RandomnessControllingScikitlearnChecker(linter))
     linter.register_checker(RandomnessControllingPytorchChecker)
     linter.register_checker(RandomnessControllingTensorflowChecker)
+    linter.register_checker(RandomnessControllingNumpyChecker)
     linter.register_checker(DataLeakageChecker(linter))
 
     linter.register_checker(NanChecker(linter))

@@ -1,35 +1,35 @@
-"""Checker which checkes whether random seed is set in tensorflow"""
+"""Checker which checkes whether random seed is set in numpy"""
 from pylint.interfaces import IAstroidChecker
 from pylint.checkers import BaseChecker
 import astroid
 
 
-class RandomnessControllingTensorflowChecker(BaseChecker):
-    """Checker which checks whether random seed is set in tensorflow"""
+class RandomnessControllingNumpyChecker(BaseChecker):
+    """Checker which checks whether random seed is set in numpy"""
     __implements__ = IAstroidChecker
 
-    name = "randomness_control_tensorflow"
+    name = "randomness_control_numpy"
     priority = -1
     msgs = {
         "" : (
-            "tf.random.set_seed() is not set in tensorflow program",
-            "randomness-control-tensorflow",
-            "tf.random.set_seed() should be set in tensorflow program for reproducible result"
+            "tf.random.set_seed() is not set in numpy program",
+            "randomness-control-numpy",
+            "tf.random.set_seed() should be set in numpy program for reproducible result"
         )
     }
     options = ()
 
-    _import_tensorflow = False
+    _import_numpy = False
     _has_manual_seed = False
 
     def visit_import(self, node: astroid.Import):
         """
-        Check whether there is a tensorflow import.
+        Check whether there is a numpy import.
         :param node: import node
         """
         for name, _ in node.names:
-            if name == "tensorflow":
-                self._import_tensorflow = True
+            if name == "numpy":
+                self._import_numpy = True
 
     def visit_call(self, node: astroid.Call):
         """
@@ -39,18 +39,18 @@ class RandomnessControllingTensorflowChecker(BaseChecker):
         if(
             hasattr(node, "func")
             and hasattr(node.func, "attrname")
-            and node.func.attrname == "set_seed"
+            and node.func.attrname == "seed"
             and hasattr(node.func.expr, "attrname")
             and node.func.expr.attrname == "random"
             and hasattr(node.func.expr, "expr")
             and hasattr(node.func.expr.expr, "name")
-            and node.func.expr.expr.name in ["tf", "tensorflow"]
+            and node.func.expr.expr.name in ["np", "numpy"]
         ):
             self._has_manual_seed = True
 
         if(
-            self._import_tensorflow is True
+            self._import_numpy is True
             and self._has_manual_seed is False
         ):
-            self.add_message("randomness-control-tensorflow", node = node)
+            self.add_message("randomness-control-numpy", node = node)
 
