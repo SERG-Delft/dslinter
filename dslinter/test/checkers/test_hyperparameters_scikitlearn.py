@@ -4,7 +4,7 @@ from pylint.testutils import set_config
 import dslinter
 
 
-class TestHyperparameterChecker(pylint.testutils.CheckerTestCase):
+class HyperparameterScikitLearnChecker(pylint.testutils.CheckerTestCase):
     """Class which tests the HyperparameterChecker."""
 
     CHECKER_CLASS = dslinter.plugin.HyperparameterScikitLearnChecker
