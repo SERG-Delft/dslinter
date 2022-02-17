@@ -29,7 +29,24 @@ class ScalerMissingScikitLearnChecker(BaseChecker):
         "Pipeline",
     ]
 
-    SCALING_SENSITIVE_OPERATIONS = ["PCA", "KernelPCA", "SparsePCA", "IncrementalPCA", "SVC"]
+    SCALING_SENSITIVE_OPERATIONS = [
+        "PCA",
+        "KernelPCA",
+        "SparsePCA",
+        "IncrementalPCA",
+        "LinearSVC",
+        "LinearSVR",
+        "NuSVC",
+        "NuSVR",
+        "OneClassSVM",
+        "SVC",
+        "SVR",
+        "SGDClassifier",
+        "SGDOneClassSVM",
+        "SGDRegressor",
+        "MLPClassifier",
+        "MLPRegressor"
+    ]
 
     SCALER = ["RobustScaler", "StandardScaler", "MaxAbsScaler", "MinMaxScaler",]
 

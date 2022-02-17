@@ -1,10 +1,10 @@
 """Check whether there is an unnecessary iteration in Tensorflow code."""
+from typing import Dict
 from pylint.checkers import BaseChecker
 from pylint.interfaces import IAstroidChecker
 import astroid
 from dslinter.util.exception_handler import ExceptionHandler
 from dslinter.util.type_inference import TypeInference
-from typing import Dict
 
 
 class UnnecessaryIterationTensorflowChecker(BaseChecker):
@@ -14,7 +14,7 @@ class UnnecessaryIterationTensorflowChecker(BaseChecker):
     name = "unnecessary_iteration_tensorflow"
     priority = -1
     msgs = {
-        "w5513": {
+        "W5513": {
             "There is an unnecessary iteration.",
             "iteration-tensorflow",
             "There is a efficient solution(Vectorization or Reduction) to replace the iteration.",
