@@ -84,13 +84,13 @@ class HyperparameterScikitLearnChecker(BaseChecker):
             hyperparams_all = Resources.get_hyperparameters()
 
             if function_name in hyperparams_all:  # pylint: disable=unsupported-membership-test
-                if self.config.strict_hyperparameters:
-                    if not HyperparameterScikitLearnChecker._has_required_hyperparameters(node, hyperparams_all):
+                if self.config.strict_hyperparameters: # strict mode
+                    if not self._has_required_hyperparameters(node, hyperparams_all):
                         self.add_message("hyperparameters", node=node)
-                else:  # non-strict
+                else:  # non-strict mode
                     if (
                         function_name in self.HYPERPARAMETERS_MAIN
-                        and not HyperparameterScikitLearnChecker._has_required_hyperparameters(node, self.HYPERPARAMETERS_MAIN)
+                        and not self._has_required_hyperparameters(node, self.HYPERPARAMETERS_MAIN)
                     ):
                         self.add_message("hyperparameters", node=node)
                     elif len(node.args) == 0 and node.keywords is None:
@@ -98,8 +98,7 @@ class HyperparameterScikitLearnChecker(BaseChecker):
         except:  # pylint: disable=bare-except
             ExceptionHandler.handle(self, node)
 
-    @staticmethod
-    def _has_required_hyperparameters(node: astroid.Call, hyperparameters: Dict):
+    def _has_required_hyperparameters(self, node: astroid.Call, hyperparameters: Dict):
         """
         Evaluate whether a function call has all required hyperparameters defined.
 
@@ -107,7 +106,7 @@ class HyperparameterScikitLearnChecker(BaseChecker):
         :param hyperparameters: Dict of functions with their required hyperparameters.
         :return: True when all required hyperparameters are defined.
         """
-        return len(node.args) >= hyperparameters[node.func.name]["positional"] or HyperparameterScikitLearnChecker._has_keywords(
+        return len(node.args) >= hyperparameters[node.func.name]["positional"] or self._has_keywords(
             node.keywords, hyperparameters[node.func.name]["keywords"]
         )
 

@@ -1,14 +1,15 @@
 """Hyperparameter checker for pytorch checks whether important hyperparameters are set."""
+from typing import Dict
 import astroid
 from pylint.interfaces import IAstroidChecker
-from pylint.checkers import BaseChecker
+from dslinter.checkers.hyperparameter import HyperparameterChecker
 from dslinter.util.exception_handler import ExceptionHandler
 
 
-class HyperparameterPyTorchChecker(BaseChecker):
+class HyperparameterPyTorchChecker(HyperparameterChecker):
     """Hyperparameter checker for pytorch checks whether important hyperparameters are set."""
 
-    __implements__ = IAstroidChecker
+    # __implements__ = IAstroidChecker
 
     name = "hyperparameter_pytorch"
     priority = -1
@@ -20,10 +21,21 @@ class HyperparameterPyTorchChecker(BaseChecker):
         )
     }
 
-    OPTIMIZERS = [
-        "SGD",
-        "Adam"
-    ]
+    OPTIMIZERS = {
+        "Adadelta": {"keywords": ["lr", "weight_decay"]},
+        "Adagrad": {"keywords": ["lr", "weight_decay"]},
+        "Adam": {"keywords": ["lr", "weight_decay"]},
+        "AdamW": {"keywords": ["lr", "weight_decay"]},
+        "SparseAdam": {"keywords": ["lr"]},
+        "Adamax": {"keywords": ["lr", "weight_decay"]},
+        "ASGD": {"keywords": ["lr", "weight_decay"]},
+        "LBFGS": {"keywords": ["lr"]},
+        "NAdam": {"keywords": ["lr", "weight_decay", "momentum_decay"]},
+        "RAdam": {"keywords": ["lr", "weight_decay"]},
+        "RMSprop": {"keywords": ["lr", "weight_decay", "momentum"]},
+        "Rprop": {"keywords": ["lr"]},
+        "SGD": {"keywords": ["lr", "weight_decay", "momentum"]},
+    }
 
     def visit_call(self, node: astroid.Call):
         """"""
@@ -47,13 +59,15 @@ class HyperparameterPyTorchChecker(BaseChecker):
                 hasattr(node, "func")
                 and hasattr(node.func, "attrname")
                 and node.func.attrname in self.OPTIMIZERS
+                and not self.has_required_hyperparameters(node, self.OPTIMIZERS)
             ):
-                momentum_set = False
-                for k in node.keywords:
-                    if(k.arg == "momentum"):
-                        momentum_set = True
-                if(momentum_set is False):
-                    self.add_message("hyperparameter-pytorch", node=node)
+                self.add_message("hyperparameter-pytorch", node=node)
         except:
             ExceptionHandler.handle(self, node)
+
+    def has_required_hyperparameters(self, node, hyperparameters: Dict):
+        """"""
+        return self._has_keywords(
+            node.keywords, hyperparameters[node.func.attrname]["keywords"]
+        )
 

@@ -28,7 +28,7 @@ class TestHyperparameterPyTorchChecker(pylint.testutils.CheckerTestCase):
 
     def test_momentum_set(self):
         script = """
-        optimizer = optim.SGD(model.parameters(), lr=0.01, momentum=0.9) #@
+        optimizer = optim.SGD(model.parameters(), lr=0.01, momentum=0.9, weight_decay = 0) #@
         """
         call_node = astroid.extract_node(script).value
         with self.assertNoMessages():
