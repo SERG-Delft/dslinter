@@ -30,7 +30,7 @@ jobs:
 
       - name: Run tests
         run:
-           poetry run pytest --cov=./ --cov-report=xml --cov-fail-under=80         
+           poetry run pytest --cov-config=.coveragerc --cov=dslinter --cov-report=xml --cov-fail-under=80         
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v2
