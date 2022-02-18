@@ -1,2 +1,2 @@
 [run]
-omit = scripts/*
+omit = dslinter/scripts/*
