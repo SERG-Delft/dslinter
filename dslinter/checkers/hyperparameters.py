@@ -1,5 +1,4 @@
 """Hyperparameter checker checks whether all hyperparameters for learning algorithms are set."""
-import pdb
 from typing import List, Dict
 import astroid
 from pylint.checkers import BaseChecker

@@ -1,9 +1,11 @@
+"""Class which tests the HyperparameterTensorflowChecker."""
 import astroid
 import pylint.testutils
 
 import dslinter.plugin
 
 class TestHyperparameterTensorflowChecker(pylint.testutils.CheckerTestCase):
+    """Class which tests the HyperparameterTensorflowChecker."""
 
     CHECKER_CLASS = dslinter.plugin.HyperparameterTensorflowChecker
 

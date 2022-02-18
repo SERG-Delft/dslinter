@@ -1,10 +1,11 @@
+"""Class which tests the HyperparameterPyTorchChecker."""
 import astroid
 import pylint.testutils
-
 import dslinter.plugin
 
 
 class TestHyperparameterPyTorchChecker(pylint.testutils.CheckerTestCase):
+    """Class which tests the HyperparameterPyTorchChecker."""
 
     CHECKER_CLASS = dslinter.plugin.HyperparameterPyTorchChecker
 

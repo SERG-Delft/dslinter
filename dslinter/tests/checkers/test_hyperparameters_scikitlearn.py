@@ -1,3 +1,4 @@
+"""Class which tests the HyperparameterScikitLearnChecker."""
 import astroid
 import pylint.testutils
 from pylint.testutils import set_config
@@ -5,7 +6,7 @@ import dslinter
 
 
 class TestHyperparameterScikitLearnChecker(pylint.testutils.CheckerTestCase):
-    """Class which tests the HyperparameterChecker."""
+    """Class which tests the HyperparameterScikitLearnChecker."""
 
     CHECKER_CLASS = dslinter.plugin.HyperparameterScikitLearnChecker
 

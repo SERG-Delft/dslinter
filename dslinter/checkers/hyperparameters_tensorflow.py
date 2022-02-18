@@ -3,7 +3,6 @@ import astroid as astroid
 from pylint.interfaces import IAstroidChecker
 from dslinter.checkers.hyperparameters import HyperparameterChecker
 from pylint.lint import PyLinter
-
 from dslinter.utils.exception_handler import ExceptionHandler
 
 
