@@ -1,6 +1,4 @@
 """Hyperparameter checker for pytorch checks whether important hyperparameters are set."""
-import pdb
-
 import astroid as astroid
 from pylint.interfaces import IAstroidChecker
 from dslinter.checkers.hyperparameters import HyperparameterChecker

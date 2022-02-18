@@ -89,9 +89,9 @@ class TestHyperparameterTensorflowChecker(pylint.testutils.CheckerTestCase):
 
     def test_learning_rate_set(self):
         script = """
-        optimizer = SGD(learning_rate=0.001) #@
+        optimizer = SGD(learning_rate=0.001, momentum = 0) #@
         """
-        call_node = astroid.extract_node(script)
+        call_node = astroid.extract_node(script).value
         with self.assertNoMessages():
             self.checker.visit_call(call_node)
 
@@ -99,7 +99,7 @@ class TestHyperparameterTensorflowChecker(pylint.testutils.CheckerTestCase):
         script = """
         optimizer = SGD() #@
         """
-        call_node = astroid.extract_node(script)
+        call_node = astroid.extract_node(script).value
         with self.assertAddsMessages(pylint.testutils.MessageTest(msg_id = "hyperparameter-tensorflow", node = call_node)):
             self.checker.visit_call(call_node)
 
