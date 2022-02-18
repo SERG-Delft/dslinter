@@ -4,8 +4,8 @@ from typing import List
 import astroid
 from pylint.checkers import BaseChecker
 from pylint.interfaces import IAstroidChecker
-from dslinter.util.exception_handler import ExceptionHandler
-from dslinter.util.ast import AssignUtil
+from dslinter.utils.exception_handler import ExceptionHandler
+from dslinter.utils.ast import AssignUtil
 
 
 class ScalerMissingScikitLearnChecker(BaseChecker):
@@ -29,7 +29,24 @@ class ScalerMissingScikitLearnChecker(BaseChecker):
         "Pipeline",
     ]
 
-    SCALING_SENSITIVE_OPERATIONS = ["PCA", "KernelPCA", "SparsePCA", "IncrementalPCA", "SVC"]
+    SCALING_SENSITIVE_OPERATIONS = [
+        "PCA",
+        "KernelPCA",
+        "SparsePCA",
+        "IncrementalPCA",
+        "LinearSVC",
+        "LinearSVR",
+        "NuSVC",
+        "NuSVR",
+        "OneClassSVM",
+        "SVC",
+        "SVR",
+        "SGDClassifier",
+        "SGDOneClassSVM",
+        "SGDRegressor",
+        "MLPClassifier",
+        "MLPRegressor"
+    ]
 
     SCALER = ["RobustScaler", "StandardScaler", "MaxAbsScaler", "MinMaxScaler",]
 

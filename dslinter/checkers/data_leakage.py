@@ -5,9 +5,9 @@ import astroid
 from pylint.checkers import BaseChecker
 from pylint.interfaces import IAstroidChecker
 
-from dslinter.util.ast import AssignUtil
-from dslinter.util.exception_handler import ExceptionHandler
-from dslinter.util.resources import Resources
+from dslinter.utils.ast import AssignUtil
+from dslinter.utils.exception_handler import ExceptionHandler
+from dslinter.utils.resources import Resources
 
 
 class DataLeakageChecker(BaseChecker):
@@ -116,7 +116,7 @@ class DataLeakageChecker(BaseChecker):
 
         :return: List of estimator classes.
         """
-        learning_classes = list(Resources.get_hyperparameters().keys())
+        learning_classes = list(Resources.get_hyperparameters("hyperparameters_scikitlearn_dict.pickle").keys())
         estimator_classes = learning_classes + DataLeakageChecker.PREPROCESSING_CLASSES
         assert None not in estimator_classes
         return estimator_classes

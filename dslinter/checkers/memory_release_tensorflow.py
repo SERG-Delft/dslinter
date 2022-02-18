@@ -1,8 +1,9 @@
 """Check whether the memory is freed in time."""
+from typing import Dict
 import astroid
 from pylint.checkers import BaseChecker
-from dslinter.util.exception_handler import ExceptionHandler
-from dslinter.util.type_inference import TypeInference
+from dslinter.utils.exception_handler import ExceptionHandler
+from dslinter.utils.type_inference import TypeInference
 
 
 class MemoryReleaseTensorflowChecker(BaseChecker):
@@ -24,6 +25,8 @@ class MemoryReleaseTensorflowChecker(BaseChecker):
         "Sequential",
         "Model"
     ]
+
+    _variable_types: Dict[str, str] = {}  # [variable name, inferred type of object the function is called on]
 
     def visit_module(self, module: astroid.For):
         """Visit module and infer which library the variables are from. """
@@ -61,8 +64,8 @@ class MemoryReleaseTensorflowChecker(BaseChecker):
                     has_model_creation = True
 
         if(
-            has_clear_session == False
-            and has_model_creation == True
+            has_clear_session is False
+            and has_model_creation is True
         ):
             # if there is no clear_session call in the loop while there is a model creation, the rule is violated.
             self.add_message("memory-release-tensorflow", node = node)

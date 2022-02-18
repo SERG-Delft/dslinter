@@ -4,8 +4,8 @@ import traceback
 import astroid
 from pylint.checkers import BaseChecker
 from pylint.interfaces import IAstroidChecker
-from dslinter.util.exception_handler import ExceptionHandler
-from dslinter.util.resources import Resources
+from dslinter.utils.exception_handler import ExceptionHandler
+from dslinter.utils.resources import Resources
 
 
 class RandomnessControllingScikitlearnChecker(BaseChecker):
@@ -48,7 +48,8 @@ class RandomnessControllingScikitlearnChecker(BaseChecker):
         "TimeSeriesSplit"
     ]
 
-    estimators_all = Resources.get_hyperparameters()
+    __HYPERPARAMETER_RESOURCE = "hyperparameters_scikitlearn_dict.pickle"
+    estimators_all = Resources.get_hyperparameters(__HYPERPARAMETER_RESOURCE)
 
     def visit_call(self, node: astroid.Call):
         """

@@ -5,7 +5,7 @@ from typing import Callable, Dict, List, Tuple
 import astroid
 import mypy.api
 
-from dslinter.util.ast import ASTUtil
+from dslinter.utils.ast import ASTUtil
 
 
 class TypeInference:

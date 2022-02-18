@@ -1,11 +1,11 @@
-"""Class which tests the AST util class."""
+"""Class which tests the AST utils class."""
 import astroid
 
-from dslinter.util.ast import ASTUtil
+from dslinter.utils.ast import ASTUtil
 
 
 class TestAST:
-    """Class which tests the AST util class."""
+    """Class which tests the AST utils class."""
 
     def test_search_nodes(self):
         """Test the search_nodes method."""

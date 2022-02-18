@@ -1,7 +1,4 @@
 """Get all parameters of the learning algorithms in scikit-learn 0.22.2."""
-# pylint: disable = C0301
-import inspect
-import pickle
 
 from sklearn.calibration import CalibratedClassifierCV
 from sklearn.cluster import AffinityPropagation, AgglomerativeClustering, Birch, DBSCAN, FeatureAgglomeration, KMeans, MiniBatchKMeans, MeanShift, OPTICS, SpectralClustering, SpectralBiclustering, SpectralCoclustering
@@ -9,7 +6,7 @@ from sklearn.covariance import EmpiricalCovariance, EllipticEnvelope, GraphicalL
 from sklearn.cross_decomposition import CCA, PLSCanonical, PLSRegression, PLSSVD
 from sklearn.decomposition import DictionaryLearning, FactorAnalysis, FastICA, IncrementalPCA, KernelPCA, LatentDirichletAllocation, MiniBatchDictionaryLearning, MiniBatchSparsePCA, NMF, PCA, SparsePCA, SparseCoder, TruncatedSVD
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis, QuadraticDiscriminantAnalysis
-from sklearn.ensemble import AdaBoostClassifier, AdaBoostRegressor, BaggingClassifier, BaggingRegressor, ExtraTreesClassifier, ExtraTreesRegressor, GradientBoostingClassifier, GradientBoostingRegressor, IsolationForest, RandomForestClassifier, RandomForestRegressor, RandomTreesEmbedding, StackingClassifier, StackingRegressor, VotingClassifier, VotingRegressor
+from sklearn.ensemble import AdaBoostClassifier, AdaBoostRegressor, BaggingClassifier, BaggingRegressor, ExtraTreesClassifier, ExtraTreesRegressor, GradientBoostingClassifier, GradientBoostingRegressor, IsolationForest, RandomForestClassifier, RandomForestRegressor, RandomTreesEmbedding, StackingClassifier, StackingRegressor, VotingClassifier, VotingRegressor, HistGradientBoostingClassifier, HistGradientBoostingRegressor
 from sklearn.feature_selection import GenericUnivariateSelect, SelectPercentile, SelectKBest, SelectFpr, SelectFdr, SelectFromModel, SelectFwe, RFE, RFECV, VarianceThreshold
 from sklearn.gaussian_process import GaussianProcessClassifier, GaussianProcessRegressor
 from sklearn.isotonic import IsotonicRegression
@@ -27,6 +24,8 @@ from sklearn.svm import LinearSVC, LinearSVR, NuSVC, NuSVR, OneClassSVM, SVC, SV
 from sklearn.tree import DecisionTreeClassifier, DecisionTreeRegressor, ExtraTreeClassifier, ExtraTreeRegressor
 
 # Collect learning classes. A class is a learning class if it is described in section '1. Supervised learning' or '2. Unsupervised learning' of the scikit-learn user guide.
+from dslinter.scripts.hyperparameters import save_hyperparameter
+
 learning_classes = []
 learning_classes.extend([CalibratedClassifierCV])  # calibration
 learning_classes.extend([AffinityPropagation, AgglomerativeClustering, Birch, DBSCAN, FeatureAgglomeration, KMeans, MiniBatchKMeans, MeanShift, OPTICS, SpectralClustering, SpectralBiclustering, SpectralCoclustering])  # cluster
@@ -34,7 +33,7 @@ learning_classes.extend([EmpiricalCovariance, EllipticEnvelope, GraphicalLasso, 
 learning_classes.extend([CCA, PLSCanonical, PLSRegression, PLSSVD])  # cross_decomposition
 learning_classes.extend([DictionaryLearning, FactorAnalysis, FastICA, IncrementalPCA, KernelPCA, LatentDirichletAllocation, MiniBatchDictionaryLearning, MiniBatchSparsePCA, NMF, PCA, SparsePCA, SparseCoder, TruncatedSVD])  # decomposition
 learning_classes.extend([LinearDiscriminantAnalysis, QuadraticDiscriminantAnalysis])  # discriminant_analysis
-learning_classes.extend([AdaBoostClassifier, AdaBoostRegressor, BaggingClassifier, BaggingRegressor, ExtraTreesClassifier, ExtraTreesRegressor, GradientBoostingClassifier, GradientBoostingRegressor, IsolationForest, RandomForestClassifier, RandomForestRegressor, RandomTreesEmbedding, StackingClassifier, StackingRegressor, VotingClassifier, VotingRegressor])  # ensemble
+learning_classes.extend([AdaBoostClassifier, AdaBoostRegressor, BaggingClassifier, BaggingRegressor, ExtraTreesClassifier, ExtraTreesRegressor, GradientBoostingClassifier, GradientBoostingRegressor, IsolationForest, RandomForestClassifier, RandomForestRegressor, RandomTreesEmbedding, StackingClassifier, StackingRegressor, VotingClassifier, VotingRegressor, HistGradientBoostingClassifier, HistGradientBoostingRegressor])  # ensemble
 learning_classes.extend([GenericUnivariateSelect, SelectPercentile, SelectKBest, SelectFpr, SelectFdr, SelectFromModel, SelectFwe, RFE, RFECV, VarianceThreshold])  # feature_selection
 learning_classes.extend([GaussianProcessClassifier, GaussianProcessRegressor])  # gaussian_process
 learning_classes.extend([IsotonicRegression])  # isotonic
@@ -51,27 +50,5 @@ learning_classes.extend([LabelPropagation, LabelSpreading])  # semi_supervised
 learning_classes.extend([LinearSVC, LinearSVR, NuSVC, NuSVR, OneClassSVM, SVC, SVR])  # svm_classes
 learning_classes.extend([DecisionTreeClassifier, DecisionTreeRegressor, ExtraTreeClassifier, ExtraTreeRegressor])  # tree
 
-# Collect all signatures of the learning classes.
-signatures = []
-for c in learning_classes:
-    try:
-        signatures.append((c.__name__, inspect.signature(c)))
-    except ValueError as ex:
-        print(ex)
-
-# Construct the dict with hyperparameters from the signatures.
-hyperparameters = {}
-for class_name, signature in signatures:
-    keywords_amount = len(signature.parameters)
-    keywords = list(signature.parameters.keys())
-    hyperparameters[class_name] = {"positional": keywords_amount, "keywords": keywords}
-
-# Write the pickled hyperparameters dict to disk and verify it.
-with open("../resources/hyperparameters_dict.pickle", "wb") as file_handler:
-    pickle.dump(hyperparameters, file_handler)
-    print("The pickle with all hyperparameters is written to disk.")
-with open("../resources/hyperparameters_dict.pickle", "rb") as file_handler:
-    hyperparameters_loaded = pickle.load(file_handler)
-    assert hyperparameters == hyperparameters_loaded
-
-print("Done!")
+if __name__ == "__main__":
+    save_hyperparameter(learning_classes, "../resources/hyperparameters_scikitlearn_dict.pickle")

@@ -16,7 +16,6 @@ class TestUnnecessaryIterationTensorflowChecker(pylint.testutils.CheckerTestCase
             z = tf.zeros([10])
             for i in range(500): #@
                 z += x[i]
-                z += x[i]
         """
         module_node = astroid.parse(script)
         for_node = astroid.extract_node(script)
