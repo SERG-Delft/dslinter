@@ -2,7 +2,7 @@
 import astroid
 from pylint.checkers import BaseChecker
 
-from dslinter.util.ast import ASTUtil
+from dslinter.utils.ast import ASTUtil
 
 
 class ExceptionHandler:

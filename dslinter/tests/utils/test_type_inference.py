@@ -1,11 +1,11 @@
-"""Class which tests the TypeInference util class."""
+"""Class which tests the TypeInference utils class."""
 import astroid
 
-from dslinter.util.type_inference import TypeInference
+from dslinter.utils.type_inference import TypeInference
 
 
 class TestTypeInference:
-    """Class which tests the TypeInference util class."""
+    """Class which tests the TypeInference utils class."""
 
     # def test_infer_types(self):
     #     """Test the infer_types method."""

@@ -4,8 +4,8 @@ from typing import List, Dict
 import astroid
 from pylint.checkers import BaseChecker
 from pylint.interfaces import IAstroidChecker
-from dslinter.util.exception_handler import ExceptionHandler
-from dslinter.util.resources import Resources
+from dslinter.utils.exception_handler import ExceptionHandler
+from dslinter.utils.resources import Resources
 from pylint.lint import PyLinter
 
 

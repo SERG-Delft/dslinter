@@ -4,9 +4,9 @@ from typing import Dict
 from pylint.checkers import BaseChecker
 from pylint.interfaces import IAstroidChecker
 import astroid
-from dslinter.util.exception_handler import ExceptionHandler
-from dslinter.util.ast import AssignUtil
-from dslinter.util.type_inference import TypeInference
+from dslinter.utils.exception_handler import ExceptionHandler
+from dslinter.utils.ast import AssignUtil
+from dslinter.utils.type_inference import TypeInference
 
 
 class UnnecessaryIterationPandasChecker(BaseChecker):

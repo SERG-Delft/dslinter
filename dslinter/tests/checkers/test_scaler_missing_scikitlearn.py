@@ -66,7 +66,7 @@ class TestScalerMissingScikitLearn(pylint.testutils.CheckerTestCase):
             from sklearn.metrics import accuracy_score
             from sklearn.svm import SVC
             
-            # Make a train/test split using 30% test size
+            # Make a train/tests split using 30% tests size
             RANDOM_STATE = 42
             features, target = load_wine(return_X_y=True)
             X_train, X_test, y_train, y_test = train_test_split(
@@ -92,7 +92,7 @@ class TestScalerMissingScikitLearn(pylint.testutils.CheckerTestCase):
             from sklearn.pipeline import make_pipeline
             from sklearn.preprocessing import StandardScaler
             
-            # Make a train/test split using 30% test size
+            # Make a train/tests split using 30% tests size
             RANDOM_STATE = 42
             features, target = load_wine(return_X_y=True)
             X_train, X_test, y_train, y_test = train_test_split(
@@ -117,7 +117,7 @@ class TestScalerMissingScikitLearn(pylint.testutils.CheckerTestCase):
             from sklearn.svm import SVC
             from sklearn.preprocessing import StandardScaler
             
-            # Make a train/test split using 30% test size
+            # Make a train/tests split using 30% tests size
             RANDOM_STATE = 42
             features, target = load_wine(return_X_y=True)
             X_train, X_test, y_train, y_test = train_test_split(
