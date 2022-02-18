@@ -29,7 +29,7 @@ class TestHyperparameterScikitLearnChecker(pylint.testutils.CheckerTestCase):
         )
         keywords = call_node.keywords
 
-        assert not self.checker._has_keywords(keywords, ["keyword1"])
+        assert not self.checker.has_keywords(keywords, ["keyword1"])
 
     def test_has_keyword_empty(self):
         """Test whether the function returns false when there is no keyword present."""
@@ -40,7 +40,7 @@ class TestHyperparameterScikitLearnChecker(pylint.testutils.CheckerTestCase):
         )
         keywords = call_node.keywords
 
-        assert not self.checker._has_keywords(keywords, ["keyword1"])
+        assert not self.checker.has_keywords(keywords, ["keyword1"])
 
     @set_config(strict_hyperparameters=True)
     def test_strict_keywords_correct(self):
@@ -128,17 +128,6 @@ class TestHyperparameterScikitLearnChecker(pylint.testutils.CheckerTestCase):
         call_node = astroid.extract_node(
             """
             NearestNeighbors(5, 1.0, 'auto', 30, 'minkowski', 2, None, None) #@
-            """
-        )
-        with self.assertNoMessages():
-            self.checker.visit_call(call_node)
-
-    @set_config(strict_hyperparameters=False)
-    def test_non_strict_arguments_required(self):
-        """No violation when only required arguments are set in non-strict mode, main function."""
-        call_node = astroid.extract_node(
-            """
-            NearestNeighbors(5) #@
             """
         )
         with self.assertNoMessages():

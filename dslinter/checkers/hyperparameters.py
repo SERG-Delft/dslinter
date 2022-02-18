@@ -43,7 +43,6 @@ class HyperparameterChecker(BaseChecker):
         :param node: Node which is visited.
         """
         try:
-            pdb.set_trace()
             if(
                 hasattr(node, "func")
                 and hasattr(node.func, "name")
