@@ -116,7 +116,7 @@ class DataLeakageChecker(BaseChecker):
 
         :return: List of estimator classes.
         """
-        learning_classes = list(Resources.get_hyperparameters().keys())
+        learning_classes = list(Resources.get_hyperparameters("hyperparameters_scikitlearn_dict.pickle").keys())
         estimator_classes = learning_classes + DataLeakageChecker.PREPROCESSING_CLASSES
         assert None not in estimator_classes
         return estimator_classes
