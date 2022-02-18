@@ -4,7 +4,7 @@ from pylint.testutils import set_config
 import dslinter
 
 
-class HyperparameterScikitLearnChecker(pylint.testutils.CheckerTestCase):
+class TestHyperparameterScikitLearnChecker(pylint.testutils.CheckerTestCase):
     """Class which tests the HyperparameterChecker."""
 
     CHECKER_CLASS = dslinter.plugin.HyperparameterScikitLearnChecker
@@ -18,7 +18,7 @@ class HyperparameterScikitLearnChecker(pylint.testutils.CheckerTestCase):
         )
         keywords = call_node.keywords
 
-        assert self.checker._has_keywords(keywords, ["keyword1", "keyword2"])
+        assert self.checker.has_keywords(keywords, ["keyword1", "keyword2"])
 
     def test_has_keyword_false(self):
         """Test whether the function returns false when the keyword is not present."""

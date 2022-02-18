@@ -48,7 +48,8 @@ class RandomnessControllingScikitlearnChecker(BaseChecker):
         "TimeSeriesSplit"
     ]
 
-    estimators_all = Resources.get_hyperparameters()
+    __HYPERPARAMETER_RESOURCE = "hyperparameters_scikitlearn_dict.pickle"
+    estimators_all = Resources.get_hyperparameters(__HYPERPARAMETER_RESOURCE)
 
     def visit_call(self, node: astroid.Call):
         """

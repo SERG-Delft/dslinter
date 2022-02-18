@@ -10,12 +10,9 @@ class Resources:
     """Utility class for reading resources."""
 
     __RESOURCES_PACKAGE = "dslinter.resources"
-    __HYPERPARAMETER_RESOURCE = "hyperparameters_dict.pickle"
-
-    __HYPERPARAMETERS = None
 
     @staticmethod
-    def get_hyperparameters() -> Dict[str, Dict[str, Union[int, List[str]]]]:
+    def get_hyperparameters(hyperparameter_resource) -> Dict[str, Dict[str, Union[int, List[str]]]]:
         """
         Get the hyperparameters resource.
 
@@ -23,9 +20,7 @@ class Resources:
         containing the keys 'positional' and 'keywords' containing its amount of keywords and a list
         with the names of its keywords respectively.
         """
-        if Resources.__HYPERPARAMETERS is None:
-            Resources.__HYPERPARAMETERS = Resources.read_pickle(Resources.__HYPERPARAMETER_RESOURCE)
-        return Resources.__HYPERPARAMETERS
+        return Resources.read_pickle(hyperparameter_resource)
 
     @staticmethod
     def read_pickle(file):
