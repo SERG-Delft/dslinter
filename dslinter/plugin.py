@@ -5,6 +5,7 @@ from dslinter.checkers.dependent_threshold_tensorflow import DependentThresholdT
 from dslinter.checkers.imports import ImportChecker
 from dslinter.checkers.inplace_pandas import InPlacePandasChecker
 from dslinter.checkers.inplace_numpy import InPlaceNumpyChecker
+from dslinter.checkers.mask_missing_tensorflow_checker import MaskMissingTensorflowChecker
 from dslinter.checkers.memory_release_tensorflow import MemoryReleaseTensorflowChecker
 from dslinter.checkers.randomness_controlling_numpy import RandomnessControllingNumpyChecker
 from dslinter.checkers.randomness_controlling_pytorch import RandomnessControllingPytorchChecker
@@ -48,5 +49,6 @@ def register(linter):
     linter.register_checker(DependentThresholdPytorchChecker)
     linter.register_checker(DependentThresholdTensorflowChecker)
     linter.register_checker(DependentThresholdScikitLearnChecker)
+    linter.register_checker(MaskMissingTensorflowChecker)
 
     linter.register_checker(NanChecker(linter))
