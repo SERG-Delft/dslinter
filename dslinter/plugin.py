@@ -1,4 +1,7 @@
 """Main module for the plugin."""
+from dslinter.checkers.dependent_threshold_pytorch import DependentThresholdPytorchChecker
+from dslinter.checkers.dependent_threshold_scikitlearn import DependentThresholdScikitLearnChecker
+from dslinter.checkers.dependent_threshold_tensorflow import DependentThresholdTensorflowChecker
 from dslinter.checkers.imports import ImportChecker
 from dslinter.checkers.inplace_pandas import InPlacePandasChecker
 from dslinter.checkers.inplace_numpy import InPlaceNumpyChecker
@@ -42,5 +45,8 @@ def register(linter):
     linter.register_checker(RandomnessControllingTensorflowChecker)
     linter.register_checker(RandomnessControllingNumpyChecker)
     linter.register_checker(DataLeakageChecker(linter))
+    linter.register_checker(DependentThresholdPytorchChecker)
+    linter.register_checker(DependentThresholdTensorflowChecker)
+    linter.register_checker(DependentThresholdScikitLearnChecker)
 
     linter.register_checker(NanChecker(linter))
