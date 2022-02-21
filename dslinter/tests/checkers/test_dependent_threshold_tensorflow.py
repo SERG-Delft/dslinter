@@ -1,11 +1,11 @@
-""""""
+"""Class which tests DependentThresholdTensorflowChecker."""
 import astroid
 import pylint.testutils
 import dslinter.plugin
 
 
 class TestDependentThresholdTensorflowChecker(pylint.testutils.CheckerTestCase):
-    """"""
+    """Class which tests DependentThresholdTensorflowChecker."""
     CHECKER_CLASS = dslinter.plugin.DependentThresholdTensorflowChecker
 
     def test_with_auc_used(self):
@@ -29,7 +29,6 @@ class TestDependentThresholdTensorflowChecker(pylint.testutils.CheckerTestCase):
         module = astroid.parse(script)
         with self.assertNoMessages():
             self.checker.visit_module(module)
-
 
     def test_with_only_f1_score_used(self):
         script = """

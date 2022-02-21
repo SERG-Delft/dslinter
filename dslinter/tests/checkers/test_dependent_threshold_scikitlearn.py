@@ -1,10 +1,11 @@
+"""Class which tests DependentThresholdScikitLearnChecker."""
 import astroid
 import pylint.testutils
 import dslinter.plugin
 
 
 class TestDependentThresholdScikitLearnChecker(pylint.testutils.CheckerTestCase):
-    """"""
+    """Class which tests DependentThresholdScikitLearnChecker."""
 
     CHECKER_CLASS = dslinter.plugin.DependentThresholdScikitLearnChecker
 
@@ -25,7 +26,6 @@ class TestDependentThresholdScikitLearnChecker(pylint.testutils.CheckerTestCase)
         module = astroid.parse(script)
         with self.assertNoMessages():
             self.checker.visit_module(module)
-
 
     def test_with_only_f1_score_used(self):
         script = """

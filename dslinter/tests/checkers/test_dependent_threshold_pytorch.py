@@ -1,10 +1,11 @@
+"""Class which tests DependentThresholdPytorchChecker."""
 import astroid
 import pylint.testutils
 import dslinter.plugin
 
 
 class TestDependentThresholdPytorchChecker(pylint.testutils.CheckerTestCase):
-    """"""
+    """Class which tests DependentThresholdPytorchChecker."""
 
     CHECKER_CLASS = dslinter.plugin.DependentThresholdPytorchChecker
 
@@ -25,7 +26,6 @@ class TestDependentThresholdPytorchChecker(pylint.testutils.CheckerTestCase):
         module = astroid.parse(script)
         with self.assertNoMessages():
             self.checker.visit_module(module)
-
 
     def test_with_only_f1_score_used(self):
         script = """
