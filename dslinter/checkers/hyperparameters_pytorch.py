@@ -1,7 +1,7 @@
 """Hyperparameter checker for pytorch checks whether important hyperparameters are set."""
 from pylint.interfaces import IAstroidChecker
-from dslinter.checkers.hyperparameters import HyperparameterChecker
 from pylint.lint import PyLinter
+from dslinter.checkers.hyperparameters import HyperparameterChecker
 
 
 class HyperparameterPyTorchChecker(HyperparameterChecker):
@@ -13,14 +13,15 @@ class HyperparameterPyTorchChecker(HyperparameterChecker):
     priority = -1
     msgs = {
         "W5532": (
-            "Some of the important hyperparameters(learning rate, batch size, momentum, and weight decay) is not set in the program.",
+            "Some of the important hyperparameters(learning rate, batch size, \
+            momentum, and weight decay) is not set in the program.",
             "hyperparameter-pytorch",
             "Important hyperparameters should be set in the program."
         )
     }
 
     def __init__(self, linter: PyLinter = HyperparameterChecker):
-        super(HyperparameterPyTorchChecker, self).__init__(linter)
+        super().__init__(linter)
         self.HYPERPARAMETER_RESOURCE = "hyperparameters_pytorch_dict.pickle"
         self.MESSAGE = "hyperparameter-pytorch"
         self.HYPERPARAMETERS_MAIN = {
@@ -41,5 +42,3 @@ class HyperparameterPyTorchChecker(HyperparameterChecker):
             "Rprop": {"positional": 4, "keywords": ["lr"]},
             "SGD": {"positional": 6, "keywords": ["lr", "weight_decay", "momentum"]},
         }
-
-

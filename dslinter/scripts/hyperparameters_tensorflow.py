@@ -1,5 +1,6 @@
 """Get all parameters of the learning algorithms in pytorch."""
 # pylint: disable = line-too-long
+# pylint: disable = import-error
 from tensorflow.keras.optimizers import Adadelta, Adagrad, Adam, Adamax, Ftrl, Nadam, RMSprop, SGD
 from dslinter.scripts.hyperparameters import save_hyperparameter
 

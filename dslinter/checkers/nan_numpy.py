@@ -29,7 +29,9 @@ class NanNumpyChecker(BaseChecker):
         """
         try:
             for side in (node.left, node.ops[0][1]):
-                if isinstance(side, astroid.Attribute) and side.attrname == "nan" and side.expr.name == "np":
+                if isinstance(side, astroid.Attribute) \
+                        and side.attrname == "nan" \
+                        and side.expr.name == "np":
                     self.add_message("nan-equality", node=node)
                     return
         except:  # pylint: disable=bare-except

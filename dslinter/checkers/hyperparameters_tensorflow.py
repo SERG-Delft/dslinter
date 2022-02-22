@@ -38,6 +38,7 @@ class HyperparameterTensorflowChecker(HyperparameterChecker):
             "RMSprop": {'positional': 7, "keywords": ["earning_rate", "momentum"]},
             "SGD": {'positional': 5, "keywords": ["learning_rate", "momentum"]},
         }
+        # pylint: disable = invalid-name
         self.HYPERPARAMETERS_MAIN_2 = {
             "fit": {"positional": 19,"keywords": ["batch_size"]},
         }

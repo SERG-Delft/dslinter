@@ -53,4 +53,3 @@ class RandomnessControllingNumpyChecker(BaseChecker):
             and self._has_manual_seed is False
         ):
             self.add_message("randomness-control-numpy", node = node)
-

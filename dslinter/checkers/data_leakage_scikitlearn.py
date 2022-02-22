@@ -81,7 +81,8 @@ class DataLeakageScikitLearnChecker(BaseChecker):
         :param expr: Expression to evaluate.
         :return: True when the expression is an estimator.
         """
-        if isinstance(expr, astroid.Call) and DataLeakageScikitLearnChecker._call_initiates_estimator(expr):
+        if isinstance(expr, astroid.Call) \
+                and DataLeakageScikitLearnChecker._call_initiates_estimator(expr):
             return True
 
         # If expr is a Name, check whether that name is assigned to an estimator.
@@ -116,6 +117,7 @@ class DataLeakageScikitLearnChecker(BaseChecker):
 
         :return: List of estimator classes.
         """
+        # pylint: disable = line-too-long
         learning_classes = list(Resources.get_hyperparameters("hyperparameters_scikitlearn_dict.pickle").keys())
         estimator_classes = learning_classes + DataLeakageScikitLearnChecker.PREPROCESSING_CLASSES
         assert None not in estimator_classes

@@ -1,7 +1,8 @@
 """Hyperparameter checker checks whether all hyperparameters for learning algorithms are set."""
-from dslinter.checkers.hyperparameters import HyperparameterChecker
+# pylint: disable = line-too-long
 from pylint.interfaces import IAstroidChecker
 from pylint.lint import PyLinter
+from dslinter.checkers.hyperparameters import HyperparameterChecker
 
 
 class HyperparameterScikitLearnChecker(HyperparameterChecker):
@@ -20,7 +21,7 @@ class HyperparameterScikitLearnChecker(HyperparameterChecker):
     }
 
     def __init__(self, linter: PyLinter = HyperparameterChecker):
-        super(HyperparameterScikitLearnChecker, self).__init__(linter)
+        super().__init__(linter)
         self.HYPERPARAMETER_RESOURCE = "hyperparameters_scikitlearn_dict.pickle"
         self.MESSAGE = "hyperparameters"
 

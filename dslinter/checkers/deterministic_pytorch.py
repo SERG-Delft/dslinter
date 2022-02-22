@@ -15,7 +15,8 @@ class DeterministicAlgorithmChecker(BaseChecker):
         "W5551":(
             "torch.use_deterministic_algorithm()  is not set to True",
             "deterministic-pytorch",
-            "torch.use_deterministic_algorithm()  should be set to True during development process for reproducible result."
+            "torch.use_deterministic_algorithm()  should be set to True \
+            during development process for reproducible result."
         )
     }
     options = ()
@@ -28,7 +29,7 @@ class DeterministicAlgorithmChecker(BaseChecker):
         Check whether there is a pytorch import
         :param node: import node
         """
-        for name, alias in node.names:
+        for name, _ in node.names:
             if name == "torch":
                 self._import_pytorch = True
 
@@ -37,7 +38,8 @@ class DeterministicAlgorithmChecker(BaseChecker):
         Check whether use_deterministic_algorithms option is used.
         :param node: call node
         """
-        # if torch.use_deterministic_algorithm() is call and the argument is True, set _has_deterministic_algorithm_option to True
+        # if torch.use_deterministic_algorithm() is call and the argument is True,
+        # set _has_deterministic_algorithm_option to True
         if(
             hasattr(node, "func")
             and hasattr(node.func, "attrname")
@@ -45,7 +47,7 @@ class DeterministicAlgorithmChecker(BaseChecker):
             and hasattr(node, "args")
             and len(node.args) > 0
             and hasattr(node.args[0], "value")
-            and node.args[0].value == True
+            and node.args[0].value is True
         ):
             self._has_deterministic_algorithm_option = True
 

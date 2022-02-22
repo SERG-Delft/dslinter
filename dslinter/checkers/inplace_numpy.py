@@ -13,9 +13,11 @@ class InPlaceNumpyChecker(BaseChecker):
     priority = -1
     msgs = {
         "W5502":(
-            "The operation result has not been assigned to another variable, which might cause losing the result.",
+            "The operation result has not been assigned to another variable,\
+             which might cause losing the result.",
             "inplace-numpy",
-            "The result of the operation should be assigned to another variable, or the `out` parameter should be defined."
+            "The result of the operation should be assigned to another variable, \
+            or the `out` parameter should be defined."
         )
     }
     options = ()
@@ -46,7 +48,8 @@ class InPlaceNumpyChecker(BaseChecker):
                 and hasattr(node.func.expr, "name")
                 and node.func.expr.name == "np"
                 and not self._inplace_is_true(node)
-                # If the parent of the Call is an Expression (not an Assignment), it means the result is lost.
+                # If the parent of the Call is an Expression (not an Assignment),
+                # it means the result is lost.
                 and isinstance(node.parent, astroid.Expr)
         )
 
