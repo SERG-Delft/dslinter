@@ -14,7 +14,7 @@ class HyperparameterTensorflowChecker(HyperparameterChecker):
     name = "hyperparameter_tensorflow"
     priority = -1
     msgs = {
-        "": (
+        "W5533": (
             "Some of the important hyperparameters(learning rate, batch size, momentum, and weight decay) is not set in the program.",
             "hyperparameter-tensorflow",
             "Important hyperparameters should be set in the program."

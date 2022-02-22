@@ -8,7 +8,7 @@ from dslinter.utils.exception_handler import ExceptionHandler
 from dslinter.utils.resources import Resources
 
 
-class RandomnessControllingScikitlearnChecker(BaseChecker):
+class RandomnessControllingScikitLLearnChecker(BaseChecker):
     """Checker which checks rules for controlling randomness."""
 
     __implements__ = IAstroidChecker
@@ -16,7 +16,7 @@ class RandomnessControllingScikitlearnChecker(BaseChecker):
     name = "randomness-controlling-scikitlearn"
     priority = -1
     msgs = {
-        "W5506": (
+        "W5571": (
             "'random_state=None' shouldn't be used in estimators or "
             "cross-validation splitters, it indicates improper randomness control",
             "controlling_randomness_scikitlearn",

@@ -14,12 +14,12 @@ from dslinter.checkers.randomness_controlling_tensorflow import RandomnessContro
 from dslinter.checkers.unnecessary_iteration_pandas import UnnecessaryIterationPandasChecker
 from dslinter.checkers.unnecessary_iteration_tensorflow import UnnecessaryIterationTensorflowChecker
 from dslinter.checkers.deterministic_pytorch import DeterministicAlgorithmChecker
-from dslinter.checkers.data_leakage import DataLeakageChecker
+from dslinter.checkers.data_leakage_scikitlearn import DataLeakageScikitLearnChecker
 from dslinter.checkers.hyperparameters_pytorch import HyperparameterPyTorchChecker
 from dslinter.checkers.hyperparameters_tensorflow import HyperparameterTensorflowChecker
 from dslinter.checkers.hyperparameters_scikitlearn import HyperparameterScikitLearnChecker
-from dslinter.checkers.nan import NanChecker
-from dslinter.checkers.randomness_controlling_scikitlearn import RandomnessControllingScikitlearnChecker
+from dslinter.checkers.nan_numpy import NanNumpyChecker
+from dslinter.checkers.randomness_controlling_scikitlearn import RandomnessControllingScikitLLearnChecker
 from dslinter.checkers.scaler_missing_scikitlearn import ScalerMissingScikitLearnChecker
 
 
@@ -40,15 +40,15 @@ def register(linter):
     linter.register_checker(HyperparameterScikitLearnChecker(linter))
     linter.register_checker(MemoryReleaseTensorflowChecker(linter))
     linter.register_checker(DeterministicAlgorithmChecker(linter))
-    linter.register_checker(RandomnessControllingScikitlearnChecker(linter))
+    linter.register_checker(RandomnessControllingScikitLLearnChecker(linter))
     linter.register_checker(RandomnessControllingPytorchChecker)
     linter.register_checker(RandomnessControllingDataloaderPytorchChecker)
     linter.register_checker(RandomnessControllingTensorflowChecker)
     linter.register_checker(RandomnessControllingNumpyChecker)
-    linter.register_checker(DataLeakageChecker(linter))
+    linter.register_checker(DataLeakageScikitLearnChecker(linter))
     linter.register_checker(DependentThresholdPytorchChecker)
     linter.register_checker(DependentThresholdTensorflowChecker)
     linter.register_checker(DependentThresholdScikitLearnChecker)
     linter.register_checker(MaskMissingTensorflowChecker)
 
-    linter.register_checker(NanChecker(linter))
+    linter.register_checker(NanNumpyChecker(linter))

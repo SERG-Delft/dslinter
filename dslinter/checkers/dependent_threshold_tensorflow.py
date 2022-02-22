@@ -14,7 +14,7 @@ when a threshold-dependent method is used in Tensorflow programs, because thresh
     name = "dependent_threshold_tensorflow"
     priority = -1
     msgs = {
-        "": (
+        "W5591": (
             "dependent-threshold-tensorflow",
             "dependent-threshold-tensorflow",
             "dependent-threshold-tensorflow"

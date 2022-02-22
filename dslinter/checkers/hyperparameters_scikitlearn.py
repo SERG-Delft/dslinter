@@ -12,7 +12,7 @@ class HyperparameterScikitLearnChecker(HyperparameterChecker):
     name = "hyperparameters_scikitlearn"
     priority = -1
     msgs = {
-        "W5505": (
+        "W5531": (
             "Hyperparameter not set.",
             "hyperparameters-scikitlearn",
             "For learning algorithms, hyperparameters should be tuned and set.",

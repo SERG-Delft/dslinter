@@ -10,7 +10,7 @@ from dslinter.utils.exception_handler import ExceptionHandler
 from dslinter.utils.resources import Resources
 
 
-class DataLeakageChecker(BaseChecker):
+class DataLeakageScikitLearnChecker(BaseChecker):
     """Checker which checks rules for preventing data leakage between training and test data."""
 
     __implements__ = IAstroidChecker
@@ -18,7 +18,7 @@ class DataLeakageChecker(BaseChecker):
     name = "data-leakage"
     priority = -1
     msgs = {
-        "W5504": (
+        "W5581": (
             "scikit-learn estimator not used in a pipeline.",
             "sk-pipeline",
             "All scikit-learn estimators should be used inside pipelines, to prevent data leakage \
@@ -81,14 +81,14 @@ class DataLeakageChecker(BaseChecker):
         :param expr: Expression to evaluate.
         :return: True when the expression is an estimator.
         """
-        if isinstance(expr, astroid.Call) and DataLeakageChecker._call_initiates_estimator(expr):
+        if isinstance(expr, astroid.Call) and DataLeakageScikitLearnChecker._call_initiates_estimator(expr):
             return True
 
         # If expr is a Name, check whether that name is assigned to an estimator.
         if isinstance(expr, astroid.Name):
             values = AssignUtil.assignment_values(expr)
             for value in values:
-                if DataLeakageChecker._expr_is_estimator(value):
+                if DataLeakageScikitLearnChecker._expr_is_estimator(value):
                     return True
         return False
 
@@ -101,9 +101,9 @@ class DataLeakageChecker(BaseChecker):
         :return: True when an estimator is initiated.
         """
         return (
-            call.func is not None
-            and hasattr(call.func, "name")
-            and call.func.name in DataLeakageChecker._get_estimator_classes()
+                call.func is not None
+                and hasattr(call.func, "name")
+                and call.func.name in DataLeakageScikitLearnChecker._get_estimator_classes()
         )
 
     @staticmethod
@@ -117,6 +117,6 @@ class DataLeakageChecker(BaseChecker):
         :return: List of estimator classes.
         """
         learning_classes = list(Resources.get_hyperparameters("hyperparameters_scikitlearn_dict.pickle").keys())
-        estimator_classes = learning_classes + DataLeakageChecker.PREPROCESSING_CLASSES
+        estimator_classes = learning_classes + DataLeakageScikitLearnChecker.PREPROCESSING_CLASSES
         assert None not in estimator_classes
         return estimator_classes

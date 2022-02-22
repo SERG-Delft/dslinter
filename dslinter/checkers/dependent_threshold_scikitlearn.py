@@ -13,7 +13,7 @@ when a threshold-dependent method is used in Scikit-Learn, because threshold-ind
     name = "dependent_threshold_scikitlearn"
     priority = -1
     msgs = {
-        "": (
+        "W5593": (
             "dependent-threshold-scikitlearn",
             "dependent-threshold-scikitlearn",
             "dependent-threshold-scikitlearn"

@@ -12,7 +12,7 @@ class DeterministicAlgorithmChecker(BaseChecker):
     name = "deterministic-pytorch"
     priority = -1
     msgs = {
-        "":(
+        "W5551":(
             "torch.use_deterministic_algorithm()  is not set to True",
             "deterministic-pytorch",
             "torch.use_deterministic_algorithm()  should be set to True during development process for reproducible result."

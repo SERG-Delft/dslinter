@@ -5,7 +5,7 @@ from pylint.interfaces import IAstroidChecker
 from dslinter.utils.exception_handler import ExceptionHandler
 
 
-class NanChecker(BaseChecker):
+class NanNumpyChecker(BaseChecker):
     """Checker which checks whether values are compared with np.nan."""
 
     __implements__ = IAstroidChecker

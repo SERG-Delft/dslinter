@@ -12,7 +12,7 @@ class HyperparameterPyTorchChecker(HyperparameterChecker):
     name = "hyperparameter_pytorch"
     priority = -1
     msgs = {
-        "": (
+        "W5532": (
             "Some of the important hyperparameters(learning rate, batch size, momentum, and weight decay) is not set in the program.",
             "hyperparameter-pytorch",
             "Important hyperparameters should be set in the program."

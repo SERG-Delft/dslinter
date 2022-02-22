@@ -11,7 +11,7 @@ class RandomnessControllingNumpyChecker(BaseChecker):
     name = "randomness_control_numpy"
     priority = -1
     msgs = {
-        "" : (
+        "W5574" : (
             "tf.random.set_seed() is not set in numpy program",
             "randomness-control-numpy",
             "tf.random.set_seed() should be set in numpy program for reproducible result"

@@ -14,7 +14,7 @@ when a threshold-dependent method is used in pytorch programs, because threshold
     name = "dependent_threshold_pytorch"
     priority = -1
     msgs = {
-        "": (
+        "W5592": (
             "dependent-threshold-pytorch",
             "dependent-threshold-pytorch",
             "dependent-threshold-pytorch"

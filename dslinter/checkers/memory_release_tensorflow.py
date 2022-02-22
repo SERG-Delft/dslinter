@@ -13,7 +13,7 @@ class MemoryReleaseTensorflowChecker(BaseChecker):
     priority = -1
     msgs = {
         #TODO: add the message code
-        "":{
+        "W5541":{
             "The memory has not freed in time.",
             "memory-release-tensorflow",
             "`clean_session()` can be used to free memory in the loop."
