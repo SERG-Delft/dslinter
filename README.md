@@ -1,24 +1,26 @@
+# dslinter
 [![build dslinter](https://github.com/Hynn01/dslinter/actions/workflows/build.yml/badge.svg)](https://github.com/Hynn01/dslinter/actions/workflows/build.yml)
 [![codecov.io](https://codecov.io/github/Hynn01/dslinter/coverage.svg?branch=main)](https://codecov.io/github/Hynn01/dslinter?branch=main)
-# dslinter
-Pylint plugin for linting data science and machine learning code, focussed on the libraries pandas and scikit-learn.
+
+`dslinter` is a pylint plugin for linting data science and machine learning code. We plan to support the following Python libraries: TensorFlow, PyTorch, Scikit-Learn, Pandas, NumPy and SciPy.
 
 Implemented checkers:
 
+- **Import Checker**: Check whether data science modules are imported using the correct naming conventions.
 - **Unassigned DataFrame Checker**: Operations on DataFrames return new DataFrames. These DataFrames should be
     assigned to a variable.
 - **DataFrame Iteration Checker**: Vectorized solutions are preferred over iterators for DataFrames.
-- **Nan Equality Checker**: Values cannot be compared with np.nan, as `np.nan != np.nan`.
 - **Hyperparameter Checker**: For (scikit-learn) learning algorithms, all hyperparameters should be set.
-- **Import Checker**: Check whether data science modules are imported using the correct naming conventions.
 - **Data Leakage Checker**: All scikit-learn estimators should be used inside Pipelines, to prevent data leakage between
     training and test data.
 - **Controlling Randomness Checker**: For reproducible results across executions, remove any use of random_state=None in scikit-learn estimators.
-- **Excessive Hyperparameter Precision Checker**: Check hyperparameter in scikit-learn estimators. excessive hyperparameter precision might suggest over-tuning.
 - **Scaler before PCA Checker**: Check scaler is used before Principle Component Analysis (PCA) in a scikit-learn pipeline. Feature scaling is important for PCA.
+
+- **Nan Equality Checker**: Values cannot be compared with np.nan, as `np.nan != np.nan`.
 
 
 ## Installation
+`dslinter` uses `poetry` to manage dependencies.
 To install from source for development purposes: clone this repo and install the plugin with:
 ```
 pip install poerty
