@@ -10,7 +10,7 @@ class DependentThresholdScikitLearnChecker(BaseChecker):
 when a threshold-dependent method is used in Scikit-Learn, because threshold-independent method is always preferred over threshold-dependent method in evaluation."""
     __implements__ = IAstroidChecker
 
-    name = "dependent_threshold_scikitlearn"
+    name = "dependent-threshold-scikitlearn"
     priority = -1
     msgs = {
         "W5593": (

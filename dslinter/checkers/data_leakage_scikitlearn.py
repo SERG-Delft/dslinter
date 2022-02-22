@@ -15,7 +15,7 @@ class DataLeakageScikitLearnChecker(BaseChecker):
 
     __implements__ = IAstroidChecker
 
-    name = "data-leakage"
+    name = "data-leakage-scikitlearn"
     priority = -1
     msgs = {
         "W5581": (

@@ -8,7 +8,7 @@ class MaskMissingTensorflowChecker(BaseChecker):
 
     __implements__ = IAstroidChecker
 
-    name = "missing_mask_tensorflow"
+    name = "missing-mask-tensorflow"
     priority = -1
     msgs = {
         "W5561": (

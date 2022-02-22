@@ -11,7 +11,7 @@ class UnnecessaryIterationTensorflowChecker(BaseChecker):
     """Check whether there is an unnecessary iteration in Tensorflow code."""
     __implements__ = IAstroidChecker
 
-    name = "unnecessary_iteration_tensorflow"
+    name = "unnecessary-iteration-tensorflow"
     priority = -1
     msgs = {
         "W5513": {

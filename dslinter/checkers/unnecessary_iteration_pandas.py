@@ -13,7 +13,7 @@ class UnnecessaryIterationPandasChecker(BaseChecker):
     """Check whether there is unnecessary iteration in Pandas code."""
     __implements__ = IAstroidChecker
 
-    name = "unnecessary_iteration_pandas"
+    name = "unnecessary-iteration-pandas"
     priority = -1
     msgs = {
         "W5511": (

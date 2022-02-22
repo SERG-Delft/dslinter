@@ -8,7 +8,7 @@ class RandomnessControllingDataloaderPytorchChecker(BaseChecker):
     """Checker which checks whether random seed is set in pytorch dataloader"""
     __implements__ = IAstroidChecker
 
-    name = "randomness_control_dataloader_pytorch"
+    name = "randomness-control-dataloader-pytorch"
     priority = -1
     msgs = {
         "W5575" : (

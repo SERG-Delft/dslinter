@@ -8,7 +8,7 @@ class RandomnessControllingPytorchChecker(BaseChecker):
     """Checker which checks whether random seed is set in pytorch"""
     __implements__ = IAstroidChecker
 
-    name = "randomness_control_pytorch"
+    name = "randomness-control-pytorch"
     priority = -1
     msgs = {
         "W5573" : (

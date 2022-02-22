@@ -9,7 +9,7 @@ class HyperparameterScikitLearnChecker(HyperparameterChecker):
 
     __implements__ = IAstroidChecker
 
-    name = "hyperparameters_scikitlearn"
+    name = "hyperparameters-scikitlearn"
     priority = -1
     msgs = {
         "W5531": (

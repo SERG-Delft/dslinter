@@ -11,7 +11,7 @@ when a threshold-dependent method is used in pytorch programs, because threshold
 
     __implements__ = IAstroidChecker
 
-    name = "dependent_threshold_pytorch"
+    name = "dependent-threshold-pytorch"
     priority = -1
     msgs = {
         "W5592": (

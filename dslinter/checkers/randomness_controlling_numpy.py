@@ -8,7 +8,7 @@ class RandomnessControllingNumpyChecker(BaseChecker):
     """Checker which checks whether random seed is set in numpy"""
     __implements__ = IAstroidChecker
 
-    name = "randomness_control_numpy"
+    name = "randomness-control-numpy"
     priority = -1
     msgs = {
         "W5574" : (

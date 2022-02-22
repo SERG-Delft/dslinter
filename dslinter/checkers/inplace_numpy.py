@@ -9,7 +9,7 @@ class InPlaceNumpyChecker(BaseChecker):
     """ In-Place Checker for NumPy which checker In-Place APIs are correctly used. """
     __implement__ = IAstroidChecker
 
-    name = "inplace_numpy"
+    name = "inplace-numpy"
     priority = -1
     msgs = {
         "W5502":(

@@ -10,7 +10,7 @@ class NanNumpyChecker(BaseChecker):
 
     __implements__ = IAstroidChecker
 
-    name = "nan"
+    name = "nan-numpy"
     priority = -1
     msgs = {
         "E5501": (

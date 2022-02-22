@@ -9,7 +9,7 @@ class HyperparameterPyTorchChecker(HyperparameterChecker):
 
     __implements__ = IAstroidChecker
 
-    name = "hyperparameter_pytorch"
+    name = "hyperparameter-pytorch"
     priority = -1
     msgs = {
         "W5532": (

@@ -11,7 +11,7 @@ class HyperparameterTensorflowChecker(HyperparameterChecker):
 
     __implements__ = IAstroidChecker
 
-    name = "hyperparameter_tensorflow"
+    name = "hyperparameter-tensorflow"
     priority = -1
     msgs = {
         "W5533": (

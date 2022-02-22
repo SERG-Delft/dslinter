@@ -11,7 +11,7 @@ when a threshold-dependent method is used in Tensorflow programs, because thresh
 
     __implements__ = IAstroidChecker
 
-    name = "dependent_threshold_tensorflow"
+    name = "dependent-threshold-tensorflow"
     priority = -1
     msgs = {
         "W5591": (

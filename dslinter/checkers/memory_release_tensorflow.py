@@ -9,7 +9,7 @@ from dslinter.utils.type_inference import TypeInference
 class MemoryReleaseTensorflowChecker(BaseChecker):
     """Check whether the memory is freed in time."""
 
-    name = "memory_release_tensorflow"
+    name = "memory-release-tensorflow"
     priority = -1
     msgs = {
         #TODO: add the message code

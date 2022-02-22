@@ -12,7 +12,7 @@ class InPlacePandasChecker(BaseChecker):
 
     __implements__ = IAstroidChecker
 
-    name = "inplace_pandas"
+    name = "inplace-pandas"
     priority = -1
     msgs = {
         "W5501": (
