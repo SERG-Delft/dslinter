@@ -148,6 +148,7 @@ class ScalerMissingScikitLearnChecker(BaseChecker):
         :param expr: Expression to evaluate.
         :return: True when the expression is an estimator.
         """
+        # pylint: disable = line-too-long
         if isinstance(expr, astroid.Call) and self._call_initiates_scaling_sensitive_operations(expr):
             return True
 

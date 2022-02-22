@@ -1,5 +1,5 @@
 """Get all parameters of the learning algorithms in scikit-learn 0.22.2."""
-
+# pylint: disable = line-too-long
 from sklearn.calibration import CalibratedClassifierCV
 from sklearn.cluster import AffinityPropagation, AgglomerativeClustering, Birch, DBSCAN, FeatureAgglomeration, KMeans, MiniBatchKMeans, MeanShift, OPTICS, SpectralClustering, SpectralBiclustering, SpectralCoclustering
 from sklearn.covariance import EmpiricalCovariance, EllipticEnvelope, GraphicalLasso, GraphicalLassoCV, LedoitWolf, MinCovDet, OAS, ShrunkCovariance

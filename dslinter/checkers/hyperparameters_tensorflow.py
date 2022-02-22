@@ -1,8 +1,8 @@
 """Hyperparameter checker for pytorch checks whether important hyperparameters are set."""
-import astroid as astroid
+import astroid
 from pylint.interfaces import IAstroidChecker
-from dslinter.checkers.hyperparameters import HyperparameterChecker
 from pylint.lint import PyLinter
+from dslinter.checkers.hyperparameters import HyperparameterChecker
 from dslinter.utils.exception_handler import ExceptionHandler
 
 
@@ -15,14 +15,15 @@ class HyperparameterTensorflowChecker(HyperparameterChecker):
     priority = -1
     msgs = {
         "W5533": (
-            "Some of the important hyperparameters(learning rate, batch size, momentum, and weight decay) is not set in the program.",
+            "Some of the important hyperparameters(learning rate, batch size, momentum, \
+            and weight decay) is not set in the program.",
             "hyperparameter-tensorflow",
             "Important hyperparameters should be set in the program."
         )
     }
 
     def __init__(self, linter: PyLinter = HyperparameterChecker):
-        super(HyperparameterTensorflowChecker, self).__init__(linter)
+        super().__init__(linter)
         self.HYPERPARAMETER_RESOURCE = "hyperparameters_tensorflow_dict.pickle"
         self.MESSAGE = "hyperparameter-tensorflow"
         self.HYPERPARAMETERS_MAIN = {
@@ -37,7 +38,7 @@ class HyperparameterTensorflowChecker(HyperparameterChecker):
             "RMSprop": {'positional': 7, "keywords": ["earning_rate", "momentum"]},
             "SGD": {'positional': 5, "keywords": ["learning_rate", "momentum"]},
         }
-        self.HYPERPARAMETERS_MAIN2 = {
+        self.HYPERPARAMETERS_MAIN_2 = {
             "fit": {"positional": 19,"keywords": ["batch_size"]},
         }
 
@@ -69,26 +70,31 @@ class HyperparameterTensorflowChecker(HyperparameterChecker):
             ExceptionHandler.handle(self, node)
 
     def hyperparameters_in_function(self, node: astroid.Call):
-        self.has_required_hyperparameters(node, self.HYPERPARAMETERS_MAIN2, node.func.attrname)
+        """Check whether we have required hyperparamter in a specific function."""
+        self.has_required_hyperparameters(node, self.HYPERPARAMETERS_MAIN_2, node.func.attrname)
 
         hyperparams_all = {
-            "fit": {"positional": 19,"keywords": ["x", "y", "batch_size", "epochs", "verbose",
-                                                  "callbacks", "validation_split", "validation_data", "shuffle",
-                                                  "class_weight", "sample_weight", "initial_epoch", "steps_per_epoch",
-                                                  "validation_steps", "validation_batch_size", "validation_freq",
-                                                  "max_queue_size", "workers", "use_multiprocessing"]},
+            "fit": {
+                "positional": 19,
+                "keywords": ["x", "y", "batch_size", "epochs", "verbose",
+                                "callbacks", "validation_split", "validation_data", "shuffle",
+                                "class_weight", "sample_weight", "initial_epoch", "steps_per_epoch",
+                                "validation_steps", "validation_batch_size", "validation_freq",
+                                "max_queue_size", "workers", "use_multiprocessing"]
+            },
         }
 
         function_name = node.func.attrname
 
         if function_name in hyperparams_all:  # pylint: disable=unsupported-membership-test
             if self.config.strict_hyperparameters: # strict mode
+                # pylint: disable = line-too-long
                 if not self.has_required_hyperparameters(node, hyperparams_all, function_name):
                     self.add_message(self.MESSAGE, node=node)
             else:  # non-strict mode
                 if (
-                    function_name in self.HYPERPARAMETERS_MAIN2
-                    and not self.has_required_hyperparameters(node, self.HYPERPARAMETERS_MAIN2, function_name)
+                    function_name in self.HYPERPARAMETERS_MAIN_2
+                    and not self.has_required_hyperparameters(node, self.HYPERPARAMETERS_MAIN_2, function_name)
                 ):
                     self.add_message(self.MESSAGE, node=node)
                 elif len(node.args) == 0 and node.keywords is None:

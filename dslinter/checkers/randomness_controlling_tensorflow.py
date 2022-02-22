@@ -53,4 +53,3 @@ class RandomnessControllingTensorflowChecker(BaseChecker):
             and self._has_manual_seed is False
         ):
             self.add_message("randomness-control-tensorflow", node = node)
-

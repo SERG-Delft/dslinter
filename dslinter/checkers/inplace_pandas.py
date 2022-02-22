@@ -24,7 +24,8 @@ class InPlacePandasChecker(BaseChecker):
     }
     options = ()
 
-    _call_types: Dict[astroid.Call, str] = {}  # [node, inferred type of object the function is called on]
+    # [node, inferred type of object the function is called on]
+    _call_types: Dict[astroid.Call, str] = {}
 
     # Whitelisted functions for which a DataFrame does not have to be assigned.
     WHITELISTED = [
@@ -82,6 +83,7 @@ class InPlacePandasChecker(BaseChecker):
         """
         try:
             # noinspection PyTypeChecker
+            # pylint: disable = line-too-long
             self._call_types = TypeInference.infer_types(module, astroid.Call, lambda x: x.func.expr.name)
         except:  # pylint: disable=bare-except
             ExceptionHandler.handle(self, module)
@@ -132,7 +134,8 @@ class InPlacePandasChecker(BaseChecker):
         :return: True when the function of the call is whitelisted.
         """
         return hasattr(node.func, "attrname") and (
-                node.func.attrname in InPlacePandasChecker.WHITELISTED or node.func.attrname[:3] == "to_"
+                node.func.attrname in InPlacePandasChecker.WHITELISTED
+                or node.func.attrname[:3] == "to_"
         )
 
     def _dataframe_is_lost(self, node: astroid.Call) -> bool:
@@ -152,7 +155,8 @@ class InPlacePandasChecker(BaseChecker):
                 or self._call_types[node] == '"pyspark.sql.dataframe.DataFrame"'
             )
             and not self._inplace_is_true(node)
-            # If the parent of the Call is an Expression (not an Assignment), it means the DataFrame is lost.
+            # If the parent of the Call is an Expression (not an Assignment),
+            # it means the DataFrame is lost.
             and isinstance(node.parent, astroid.Expr)
         )
 

@@ -34,4 +34,3 @@ class RandomnessControllingDataloaderPytorchChecker(BaseChecker):
             or "generator" not in keywords
         ):
             self.add_message("randomness-control-dataloader-pytorch", node = node)
-

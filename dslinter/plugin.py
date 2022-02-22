@@ -9,7 +9,9 @@ from dslinter.checkers.mask_missing_tensorflow_checker import MaskMissingTensorf
 from dslinter.checkers.memory_release_tensorflow import MemoryReleaseTensorflowChecker
 from dslinter.checkers.randomness_controlling_numpy import RandomnessControllingNumpyChecker
 from dslinter.checkers.randomness_controlling_pytorch import RandomnessControllingPytorchChecker
+# pylint: disable = line-too-long
 from dslinter.checkers.randomness_controlling_dataloader_pytorch import RandomnessControllingDataloaderPytorchChecker
+# pylint: disable = line-too-long
 from dslinter.checkers.randomness_controlling_tensorflow import RandomnessControllingTensorflowChecker
 from dslinter.checkers.unnecessary_iteration_pandas import UnnecessaryIterationPandasChecker
 from dslinter.checkers.unnecessary_iteration_tensorflow import UnnecessaryIterationTensorflowChecker
@@ -17,6 +19,7 @@ from dslinter.checkers.deterministic_pytorch import DeterministicAlgorithmChecke
 from dslinter.checkers.data_leakage_scikitlearn import DataLeakageScikitLearnChecker
 from dslinter.checkers.hyperparameters_pytorch import HyperparameterPyTorchChecker
 from dslinter.checkers.hyperparameters_tensorflow import HyperparameterTensorflowChecker
+# pylint: disable = line-too-long
 from dslinter.checkers.hyperparameters_scikitlearn import HyperparameterScikitLearnChecker
 from dslinter.checkers.nan_numpy import NanNumpyChecker
 from dslinter.checkers.randomness_controlling_scikitlearn import RandomnessControllingScikitLLearnChecker
