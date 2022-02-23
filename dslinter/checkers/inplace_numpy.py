@@ -12,7 +12,7 @@ class InPlaceNumpyChecker(BaseChecker):
     name = "inplace-numpy"
     priority = -1
     msgs = {
-        "W5502":(
+        "W5502": (
             "The operation result has not been assigned to another variable,\
              which might cause losing the result.",
             "inplace-numpy",
@@ -48,7 +48,7 @@ class InPlaceNumpyChecker(BaseChecker):
                 and hasattr(node.func.expr, "name")
                 and node.func.expr.name == "np"
                 and not self._inplace_is_true(node)
-                # If the parent of the Call is an Expression (not an Assignment),
+                # If the parent of the Call is an Expression (not an Assignment or a Call),
                 # it means the result is lost.
                 and isinstance(node.parent, astroid.Expr)
         )
