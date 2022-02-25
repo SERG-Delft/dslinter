@@ -79,7 +79,7 @@ class InPlacePandasChecker(BaseChecker):
         """
         When an Module node is visited, scan for Call nodes and get type the function is called on.
 
-        :param node: Node which is visited.
+        :param module: Node which is visited.
         """
         try:
             # noinspection PyTypeChecker

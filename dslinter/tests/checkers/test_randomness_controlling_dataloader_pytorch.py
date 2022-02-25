@@ -15,26 +15,26 @@ class TestRandomnessControllingDataloaderPytorchChecker(pylint.testutils.Checker
             import torch
             import numpy
             import random
-            
+
             def seed_worker(worker_id):
                 worker_seed = torch.initial_seed() % 2**32
                 numpy.random.seed(worker_seed)
                 random.seed(worker_seed)
-            
+
             g = torch.Generator()
             g.manual_seed(0)
-            
+
             batch_size = 4
             num_workers = 4
-            train_dataset = [1, 1, 1, 1] 
-            
+            train_dataset = [1, 1, 1, 1]
+
             train_dataloader = DataLoader( #@
                 train_dataset,
                 batch_size=batch_size,
                 num_workers=num_workers,
                 worker_init_fn=seed_worker,
                 generator=g,
-            ) 
+            )
         """
         call_node = astroid.extract_node(script).value
         with self.assertNoMessages():
@@ -48,7 +48,7 @@ class TestRandomnessControllingDataloaderPytorchChecker(pylint.testutils.Checker
                 train_dataset,
                 batch_size=batch_size,
                 num_workers=num_workers
-            ) 
+            )
         """
         call_node = astroid.extract_node(script).value
         with self.assertAddsMessages(pylint.testutils.MessageTest(msg_id="randomness-control-dataloader-pytorch", node = call_node)):

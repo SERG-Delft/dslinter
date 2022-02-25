@@ -56,7 +56,27 @@ class TestInPlaceNumpy(pylint.testutils.CheckerTestCase):
         import numpy as np
         print(np.sum(y)) #@
         """
-        node = astroid.extract_node(script).args[0]
+        call_node = astroid.extract_node(script).args[0]
         with self.assertNoMessages():
-            self.checker.visit_call(node)
+            self.checker.visit_call(call_node)
 
+    def test_np_call_in_return_node(self):
+        """Test whether no message is added when the call is in a return node."""
+        script = """
+        import numpy as np
+        def test_function():
+            return np.sum() #@
+        """
+        call_node = astroid.extract_node(script).value
+        with self.assertNoMessages():
+            self.checker.visit_call(call_node)
+
+    def test_call_name_in_whitelist(self):
+        """Tesr whether no message is added if the call name is in whitelist"""
+        script = """
+        import numpy as np
+        np.save() #@
+        """
+        call_node = astroid.extract_node(script)
+        with self.assertNoMessages():
+            self.checker.visit_call(call_node)

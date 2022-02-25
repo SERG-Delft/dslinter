@@ -20,6 +20,18 @@ class HyperparameterPyTorchChecker(HyperparameterChecker):
         )
     }
 
+    options = (
+        (
+            "strict_hyperparameters",
+            {
+                "default": False,
+                "type": "yn",
+                "metavar": "<y_or_n>",
+                "help": "Force that all parameters of learning algorithms are set.",
+            },
+        ),
+    )
+
     def __init__(self, linter: PyLinter = HyperparameterChecker):
         super().__init__(linter)
         self.HYPERPARAMETER_RESOURCE = "hyperparameters_pytorch_dict.pickle"

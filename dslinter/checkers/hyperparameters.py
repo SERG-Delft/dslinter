@@ -13,18 +13,6 @@ class HyperparameterChecker(BaseChecker):
 
     __implements__ = IAstroidChecker
 
-    options = (
-        (
-            "strict_hyperparameters",
-            {
-                "default": False,
-                "type": "yn",
-                "metavar": "<y_or_n>",
-                "help": "Force that all parameters of learning algorithms are set.",
-            },
-        ),
-    )
-
     def __init__(self, linter: PyLinter = None) -> None:
         super().__init__(linter)
         self.HYPERPARAMETERS_MAIN = {}

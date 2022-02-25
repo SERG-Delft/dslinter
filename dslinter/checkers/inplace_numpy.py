@@ -7,7 +7,8 @@ from dslinter.utils.exception_handler import ExceptionHandler
 
 class InPlaceNumpyChecker(BaseChecker):
     """ In-Place Checker for NumPy which checker In-Place APIs are correctly used. """
-    __implement__ = IAstroidChecker
+
+    __implements__ = IAstroidChecker
 
     name = "inplace-numpy"
     priority = -1
@@ -47,11 +48,23 @@ class InPlaceNumpyChecker(BaseChecker):
                 and hasattr(node.func, "expr")
                 and hasattr(node.func.expr, "name")
                 and node.func.expr.name == "np"
+                and not self._function_whitelisted(node)
                 and not self._inplace_is_true(node)
-                # If the parent of the Call is an Expression (not an Assignment or a Call),
+                # If the parent of the Call is an Expression (not an Assignment or a Call or Return),
                 # it means the result is lost.
                 and isinstance(node.parent, astroid.Expr)
         )
+
+    def _function_whitelisted(self, node) -> bool:
+        """
+
+        :return:
+        """
+        # Whitelisted functions for which a DataFrame does not have to be assigned.
+        WHITELIST = [
+            # "save"
+        ]
+        return hasattr(node.func, "attrname") and (node.func.attrname in  WHITELIST)
 
     @staticmethod
     def _inplace_is_true(node: astroid.Call) -> bool:

@@ -25,6 +25,8 @@ To install from source for development purposes: clone this repo and install the
 ```
 pip install poerty
 poetry install
+poetry build
+pip install ./dist/dslinter-version.tar.gz
 ```
 To install from the Python Package Index:
 ```
