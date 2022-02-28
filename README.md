@@ -35,11 +35,7 @@ pylint --load-plugins=dslinter <other_options> <path_to_sources>
 ```
 
 ## How to contribute
-1. clone the repository:
-```
-git clone https://github.com/Hynn01/dslinter.git
-cd dslinter
-```
+1. fork the repository
 2. dslinter uses poetry to manage dependencies. To install from source for development purposes, clone this repo and install the plugin with:
 ```
 pip install poerty
