@@ -20,14 +20,6 @@ Implemented checkers:
 
 
 ## Installation
-`dslinter` uses `poetry` to manage dependencies.
-To install from source for development purposes: clone this repo and install the plugin with:
-```
-pip install poerty
-poetry install
-poetry build
-pip install ./dist/dslinter-version.tar.gz
-```
 To install from the Python Package Index:
 ```
 pip install dslinter
@@ -43,9 +35,20 @@ To expand a current pylint configuration with the checkers from this plugin, run
 pylint --load-plugins=dslinter <other_options> <path_to_sources>
 ```
 
-## Tests
-Tests can be run by using the pytest package:
+## How to contribute
+1. fork the repository
+2. dslinter uses poetry to manage dependencies. To install from source for development purposes, clone this repo and install the plugin with:
+```
+pip install poerty
+poetry install
+poetry build
+pip install ./dist/dslinter-version.tar.gz
+```
+3. Assign yourself to the issue you want to solve. If you identify a new issue that needs to be solved, feel free to open a new issue.
+4. Make changes to the repository and run the tests.
+To run the tests using pytest:
 ```
 poetry run pytest .
 ```
+5. Make a pull request. The pull request is expected to pass the tests.
 
