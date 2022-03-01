@@ -20,7 +20,7 @@ class ExceptionHandler:
         """
         module = ASTUtil.search_module(node)
         print(
-            "ERROR: Could not finish processing the checker {} on module {}. Continuing.".format(
-                checker.name, module.name
+            "ERROR: Could not finish processing the checker {} on module {} at line {}. Continuing.".format(
+                checker.name, module.name, node.lineno
             )
         )

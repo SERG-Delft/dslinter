@@ -55,6 +55,9 @@ class UnnecessaryIterationTensorflowChecker(BaseChecker):
         for node in body:
             # there is augmented assign in the body
             if isinstance(node, astroid.AugAssign):
+                # # the augmented assign is apply on a const
+                # if hasattr(node, "value") and isinstance(node.value, astroid.nodes.Const):
+                #     return True
                 while hasattr(node, "value"):
                     node = node.value
                 # the augmented assign is apply on a tf variable node
@@ -68,4 +71,4 @@ class UnnecessaryIterationTensorflowChecker(BaseChecker):
         :param name: name of the variable
         :return: True when meeting the requirements
         """
-        return self._variable_types[name] in ["tf", "tensorflow"]
+        return name in self._variable_types and self._variable_types[name] in ["tf", "tensorflow"]
