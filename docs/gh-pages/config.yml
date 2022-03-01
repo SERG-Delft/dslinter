@@ -11,7 +11,7 @@ buildDrafts: false
 buildFuture: false
 buildExpired: false
 enableEmoji: true
-# googleAnalytics: UA-123-45
+googleAnalytics: UA-123-45
 
 minify:
   disableXML: true
@@ -47,8 +47,7 @@ taxonomies:
     # series: series
 
 params:
-  # env: production # to enable google analytics, opengraph, twitter-cards and schema.
-  # title: Code Smells for Machine Learning Applications
+  env: production # to enable google analytics, opengraph, twitter-cards and schema.
   title: DSLinter - Linter for Machine Learning Application - Specific Code Smells
   description: ""
   # keywords: [Blog, Portfolio, PaperMod]

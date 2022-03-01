@@ -3,10 +3,10 @@ import pylint.testutils
 import dslinter
 
 
-class TestDataLeakageChecker(pylint.testutils.CheckerTestCase):
+class TestDataLeakageScikitLearnChecker(pylint.testutils.CheckerTestCase):
     """Class which tests the DataLeakageChecker."""
 
-    CHECKER_CLASS = dslinter.plugin.DataLeakageChecker
+    CHECKER_CLASS = dslinter.plugin.DataLeakageScikitLearnChecker
 
     def test_pipeline_violation_on_call(self):
         """Message should be added when learning function is called directly on a learning class."""

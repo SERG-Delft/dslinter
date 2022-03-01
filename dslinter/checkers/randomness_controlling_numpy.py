@@ -8,10 +8,10 @@ class RandomnessControllingNumpyChecker(BaseChecker):
     """Checker which checks whether random seed is set in numpy"""
     __implements__ = IAstroidChecker
 
-    name = "randomness_control_numpy"
+    name = "randomness-control-numpy"
     priority = -1
     msgs = {
-        "" : (
+        "W5574" : (
             "tf.random.set_seed() is not set in numpy program",
             "randomness-control-numpy",
             "tf.random.set_seed() should be set in numpy program for reproducible result"
@@ -53,4 +53,3 @@ class RandomnessControllingNumpyChecker(BaseChecker):
             and self._has_manual_seed is False
         ):
             self.add_message("randomness-control-numpy", node = node)
-

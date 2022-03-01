@@ -16,7 +16,7 @@ class TestDependentThresholdPytorchChecker(pylint.testutils.CheckerTestCase):
         preds = torch.tensor([0, 2, 1, 0, 0, 1])
         f1 = F1Score(num_classes=3)
         f1(preds, target)
-        
+
         from torchmetrics import AUROC
         preds = torch.tensor([0.13, 0.26, 0.08, 0.19, 0.34])
         target = torch.tensor([0, 0, 1, 1, 1])

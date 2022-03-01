@@ -4,10 +4,10 @@ import pylint.testutils
 import dslinter.plugin
 
 
-class TestRandomnessControllingScikitlearnChecker(pylint.testutils.CheckerTestCase):
+class TestRandomnessControllingScikitLearnChecker(pylint.testutils.CheckerTestCase):
     """Class which tests RandomnessControllingScikitlearn."""
 
-    CHECKER_CLASS = dslinter.plugin.RandomnessControllingScikitlearnChecker
+    CHECKER_CLASS = dslinter.plugin.RandomnessControllingScikitLLearnChecker
 
     def test_with_randomness_controlling(self):
         """If there is randomness controlling in the fucntion, no message is added."""

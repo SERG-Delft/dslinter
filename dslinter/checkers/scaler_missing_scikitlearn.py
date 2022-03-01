@@ -13,10 +13,10 @@ class ScalerMissingScikitLearnChecker(BaseChecker):
 
     __implements__ = IAstroidChecker
 
-    name = "scalar_missing_scikitlearn"
+    name = "scalar-missing-scikitlearn"
     priority = -1
     msgs = {
-        "W5508": (
+        "W5521": (
             "Scaler is not used before scaling-sensitive operation",
             "scaler-missing-scikitlearn",
             "To ensure a good result, use feature scaling before scaling-sensitive operation."
@@ -148,6 +148,7 @@ class ScalerMissingScikitLearnChecker(BaseChecker):
         :param expr: Expression to evaluate.
         :return: True when the expression is an estimator.
         """
+        # pylint: disable = line-too-long
         if isinstance(expr, astroid.Call) and self._call_initiates_scaling_sensitive_operations(expr):
             return True
 

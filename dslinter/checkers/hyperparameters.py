@@ -1,11 +1,11 @@
 """Hyperparameter checker checks whether all hyperparameters for learning algorithms are set."""
 from typing import List, Dict
 import astroid
+from pylint.lint import PyLinter
 from pylint.checkers import BaseChecker
 from pylint.interfaces import IAstroidChecker
 from dslinter.utils.exception_handler import ExceptionHandler
 from dslinter.utils.resources import Resources
-from pylint.lint import PyLinter
 
 
 class HyperparameterChecker(BaseChecker):
@@ -13,20 +13,8 @@ class HyperparameterChecker(BaseChecker):
 
     __implements__ = IAstroidChecker
 
-    options = (
-        (
-            "strict_hyperparameters",
-            {
-                "default": False,
-                "type": "yn",
-                "metavar": "<y_or_n>",
-                "help": "Force that all parameters of learning algorithms are set.",
-            },
-        ),
-    )
-
     def __init__(self, linter: PyLinter = None) -> None:
-        super(HyperparameterChecker, self).__init__(linter)
+        super().__init__(linter)
         self.HYPERPARAMETERS_MAIN = {}
         self.HYPERPARAMETER_RESOURCE = ""
         self.MESSAGE = ""
@@ -51,20 +39,22 @@ class HyperparameterChecker(BaseChecker):
             ExceptionHandler.handle(self, node)
 
     def hyperparameter_in_class(self, node: astroid.Call, function_name: str):
-            hyperparams_all = Resources.get_hyperparameters(self.HYPERPARAMETER_RESOURCE)
+        """Cheches whether the required hyperparameters are used in the class."""
+        hyperparams_all = Resources.get_hyperparameters(self.HYPERPARAMETER_RESOURCE)
 
-            if function_name in hyperparams_all:  # pylint: disable=unsupported-membership-test
-                if self.config.strict_hyperparameters: # strict mode
-                    if not self.has_required_hyperparameters(node, hyperparams_all, function_name):
-                        self.add_message(self.MESSAGE, node=node)
-                else:  # non-strict mode
-                    if (
-                        function_name in self.HYPERPARAMETERS_MAIN
-                        and not self.has_required_hyperparameters(node, self.HYPERPARAMETERS_MAIN, function_name)
-                    ):
-                        self.add_message(self.MESSAGE, node=node)
-                    elif len(node.args) == 0 and node.keywords is None:
-                        self.add_message(self.MESSAGE, node=node)
+        if function_name in hyperparams_all:  # pylint: disable=unsupported-membership-test
+            if self.config.strict_hyperparameters: # strict mode
+                if not self.has_required_hyperparameters(node, hyperparams_all, function_name):
+                    self.add_message(self.MESSAGE, node=node)
+            else:  # non-strict mode
+                if (
+                    function_name in self.HYPERPARAMETERS_MAIN
+                    # pylint: disable = line-too-long
+                    and not self.has_required_hyperparameters(node, self.HYPERPARAMETERS_MAIN, function_name)
+                ):
+                    self.add_message(self.MESSAGE, node=node)
+                elif len(node.args) == 0 and node.keywords is None:
+                    self.add_message(self.MESSAGE, node=node)
 
     def has_required_hyperparameters(self, node: astroid.Call, hyperparameters: Dict, name: str):
         """

@@ -8,10 +8,10 @@ class RandomnessControllingPytorchChecker(BaseChecker):
     """Checker which checks whether random seed is set in pytorch"""
     __implements__ = IAstroidChecker
 
-    name = "randomness_control_pytorch"
+    name = "randomness-control-pytorch"
     priority = -1
     msgs = {
-        "" : (
+        "W5573" : (
             "torch.manual_seed() is not set in pytorch program",
             "randomness-control-pytorch",
             "torch.manual_seed() should be set in pytorch program for reproducible result"
@@ -48,4 +48,3 @@ class RandomnessControllingPytorchChecker(BaseChecker):
             and self._has_manual_seed is False
         ):
             self.add_message("randomness-control-pytorch", node = node)
-

@@ -1,20 +1,24 @@
-"""DependentThresholdPytorchChecker checks whether threshold-independent evaluation methods(e.g. auc) is used
-when a threshold-dependent method is used in Tensorflow programs, because threshold-independent method is always preferred over threshold-dependent method in evaluation."""
+"""DependentThresholdPytorchChecker checks whether threshold-independent
+evaluation methods(e.g. auc) is used when a threshold-dependent method is used
+ in Tensorflow programs, because threshold-independent method is always
+ preferred over threshold-dependent method in evaluation."""
 from pylint.checkers import BaseChecker
 from pylint.interfaces import IAstroidChecker
 import astroid
 
 
 class DependentThresholdTensorflowChecker(BaseChecker):
-    """DependentThresholdPytorchChecker checks whether threshold-independent evaluation methods(e.g. auc) is used
-when a threshold-dependent method is used in Tensorflow programs, because threshold-independent method is always preferred over threshold-dependent method in evaluation."""
+    """DependentThresholdPytorchChecker checks whether threshold-independent
+    evaluation methods(e.g. auc) is used when a threshold-dependent method is used
+     in Tensorflow programs, because threshold-independent method is always
+     preferred over threshold-dependent method in evaluation."""
 
     __implements__ = IAstroidChecker
 
-    name = "dependent_threshold_tensorflow"
+    name = "dependent-threshold-tensorflow"
     priority = -1
     msgs = {
-        "": (
+        "W5591": (
             "dependent-threshold-tensorflow",
             "dependent-threshold-tensorflow",
             "dependent-threshold-tensorflow"
@@ -34,12 +38,12 @@ when a threshold-dependent method is used in Tensorflow programs, because thresh
         __has_auc = False
         __has_f1_score = False
 
-        for n in module.body:
+        for nod in module.body:
             if(
-                hasattr(n, "value")
-                and isinstance(n.value, astroid.Call)
+                hasattr(nod, "value")
+                and isinstance(nod.value, astroid.Call)
             ):
-                call_node = n.value
+                call_node = nod.value
                 if(
                     hasattr(call_node, "func")
                     and hasattr(call_node.func, "name")
@@ -54,7 +58,5 @@ when a threshold-dependent method is used in Tensorflow programs, because thresh
                     __has_f1_score = True
 
         # if f1 score is used but auc is not used
-        if(__has_f1_score == True and __has_auc == False):
+        if(__has_f1_score is True and __has_auc is False):
             self.add_message("dependent-threshold-tensorflow", node = module)
-
-

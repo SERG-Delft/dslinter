@@ -1,12 +1,12 @@
 """Utility module for working with the Abstract Syntax Tree (AST)."""
 from typing import List, Optional, Tuple, Union
-
 import astroid
 
 
 class ASTUtil:
     """Utility class for working with the Abstract Syntax Tree (AST)."""
 
+    # pylint: disable = line-too-long
     @staticmethod
     def search_nodes(node: astroid.node_classes.NodeNG, type_searched: type) -> List[astroid.node_classes.NodeNG]:
         """
@@ -143,7 +143,8 @@ class AssignUtil:
         values = []
         body_block = ASTUtil.search_body(node)
         for child in body_block:
-            if isinstance(child, (astroid.AnnAssign, astroid.Assign)) and AssignUtil.is_target(name, child):
+            if isinstance(child, (astroid.AnnAssign, astroid.Assign)) \
+                    and AssignUtil.is_target(name, child):
                 values.append(child.value)
         if hasattr(node, "parent") and node.parent is not None:
             return AssignUtil._assign_values_in_body_of_parents(name, node.parent)

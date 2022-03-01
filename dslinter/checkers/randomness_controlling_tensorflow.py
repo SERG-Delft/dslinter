@@ -8,10 +8,10 @@ class RandomnessControllingTensorflowChecker(BaseChecker):
     """Checker which checks whether random seed is set in tensorflow"""
     __implements__ = IAstroidChecker
 
-    name = "randomness_control_tensorflow"
+    name = "randomness-control-tensorflow"
     priority = -1
     msgs = {
-        "" : (
+        "W5572" : (
             "tf.random.set_seed() is not set in tensorflow program",
             "randomness-control-tensorflow",
             "tf.random.set_seed() should be set in tensorflow program for reproducible result"
@@ -53,4 +53,3 @@ class RandomnessControllingTensorflowChecker(BaseChecker):
             and self._has_manual_seed is False
         ):
             self.add_message("randomness-control-tensorflow", node = node)
-

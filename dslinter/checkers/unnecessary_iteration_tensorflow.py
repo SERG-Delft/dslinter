@@ -11,7 +11,7 @@ class UnnecessaryIterationTensorflowChecker(BaseChecker):
     """Check whether there is an unnecessary iteration in Tensorflow code."""
     __implements__ = IAstroidChecker
 
-    name = "unnecessary_iteration_tensorflow"
+    name = "unnecessary-iteration-tensorflow"
     priority = -1
     msgs = {
         "W5513": {
@@ -22,7 +22,8 @@ class UnnecessaryIterationTensorflowChecker(BaseChecker):
     }
     options = ()
 
-    _variable_types: Dict[str, str] = {}  # [variable name, inferred type of object the function is called on]
+    # [variable name, inferred type of object the function is called on]
+    _variable_types: Dict[str, str] = {}
 
     def visit_module(self, module: astroid.Module):
         """Visit module and infer which library the variables are from. """
@@ -37,7 +38,8 @@ class UnnecessaryIterationTensorflowChecker(BaseChecker):
         try:
             if (
                 hasattr(node, "body")
-                and self._augmented_assign_with_tf_variable(node.body) # there is augmented assign with tf variable in the body
+                # there is augmented assign with tf variable in the body
+                and self._augmented_assign_with_tf_variable(node.body)
             ):
                 self.add_message("iteration-tensorflow", node=node)
         except:  # pylint: disable=W0702
@@ -45,15 +47,18 @@ class UnnecessaryIterationTensorflowChecker(BaseChecker):
 
     def _augmented_assign_with_tf_variable(self, body: list) -> bool:
         """
-        Check whether there are augmented assigns in the body, and whether the augmented assign is applied on a tensorflow variable.
+        Check whether there are augmented assigns in the body,
+        and whether the augmented assign is applied on a tensorflow variable.
         :param body: body in the for node
         :return: True when meeting the requirements
         """
         for node in body:
-            if isinstance(node, astroid.AugAssign): # there is augmented assign in the body
+            # there is augmented assign in the body
+            if isinstance(node, astroid.AugAssign):
                 while hasattr(node, "value"):
                     node = node.value
-                if hasattr(node, "name") and self._is_tf_variable(node.name): # the augmented assign is apply on a tf variable node
+                # the augmented assign is apply on a tf variable node
+                if hasattr(node, "name") and self._is_tf_variable(node.name):
                     return True
         return False
 

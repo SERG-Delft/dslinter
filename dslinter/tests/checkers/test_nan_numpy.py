@@ -3,10 +3,10 @@ import pylint.testutils
 import dslinter
 
 
-class TestNanChecker(pylint.testutils.CheckerTestCase):
+class TestNanNumpyChecker(pylint.testutils.CheckerTestCase):
     """Class which tests the NanChecker."""
 
-    CHECKER_CLASS = dslinter.plugin.NanChecker
+    CHECKER_CLASS = dslinter.plugin.NanNumpyChecker
 
     def test_nan_left(self):
         """Test whether a message is added when np.nan is compared with something."""

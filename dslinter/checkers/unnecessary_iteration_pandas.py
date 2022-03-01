@@ -13,7 +13,7 @@ class UnnecessaryIterationPandasChecker(BaseChecker):
     """Check whether there is unnecessary iteration in Pandas code."""
     __implements__ = IAstroidChecker
 
-    name = "unnecessary_iteration_pandas"
+    name = "unnecessary-iteration-pandas"
     priority = -1
     msgs = {
         "W5511": (
@@ -29,7 +29,8 @@ class UnnecessaryIterationPandasChecker(BaseChecker):
     }
     options = ()
 
-    _call_types: Dict[astroid.Call, str] = {}  # [node, inferred type of object the function is called on]
+    # [node, inferred type of object the function is called on]
+    _call_types: Dict[astroid.Call, str] = {}
 
     def visit_module(self, node: astroid.Module):
         """
@@ -39,7 +40,9 @@ class UnnecessaryIterationPandasChecker(BaseChecker):
         """
         try:
             # noinspection PyTypeChecker
-            self._call_types = TypeInference.infer_types(node, astroid.Call, lambda x: x.func.expr.name)
+            self._call_types = TypeInference.infer_types(node,
+                                                         astroid.Call,
+                                                         lambda x: x.func.expr.name)
         except:  # pylint: disable=bare-except
             ExceptionHandler.handle(self, node)
 

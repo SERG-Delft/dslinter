@@ -11,6 +11,7 @@ from dslinter.utils.ast import ASTUtil
 class TypeInference:
     """Utility class for type inference."""
 
+    #pylint: disable = line-too-long
     @staticmethod
     def infer_types(module: astroid.Module, node_type: type, expr: Callable) -> Dict[astroid.node_classes.NodeNG, str]:
         """
@@ -169,9 +170,9 @@ class TypeInference:
             for var in node.targets:
                 variable_name = var.name
                 call = node.value.func
-                while(hasattr(call, "expr")):
+                while hasattr(call, "expr"):
                     call = call.expr
-                if(hasattr(call, "name")):
+                if hasattr(call, "name"):
                     call = call.name
                 variables_with_types[variable_name] = call
 

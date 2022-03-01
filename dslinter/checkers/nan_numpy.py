@@ -5,12 +5,12 @@ from pylint.interfaces import IAstroidChecker
 from dslinter.utils.exception_handler import ExceptionHandler
 
 
-class NanChecker(BaseChecker):
+class NanNumpyChecker(BaseChecker):
     """Checker which checks whether values are compared with np.nan."""
 
     __implements__ = IAstroidChecker
 
-    name = "nan"
+    name = "nan-numpy"
     priority = -1
     msgs = {
         "E5501": (
@@ -29,7 +29,9 @@ class NanChecker(BaseChecker):
         """
         try:
             for side in (node.left, node.ops[0][1]):
-                if isinstance(side, astroid.Attribute) and side.attrname == "nan" and side.expr.name == "np":
+                if isinstance(side, astroid.Attribute) \
+                        and side.attrname == "nan" \
+                        and side.expr.name == "np":
                     self.add_message("nan-equality", node=node)
                     return
         except:  # pylint: disable=bare-except

@@ -1,8 +1,12 @@
+"""Functions for getting the signatures of Classes."""
+# pylint: disable = line-too-long
 import inspect
 import pickle
 from typing import List
 
+
 def save_hyperparameter(classes: List, path: str):
+    """Functions for getting the signatures of Classes."""
     # Collect all signatures of the learning classes.
     signatures = []
     for c in classes:
