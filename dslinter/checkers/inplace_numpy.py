@@ -62,9 +62,9 @@ class InPlaceNumpyChecker(BaseChecker):
         """
         # Whitelisted functions for which a DataFrame does not have to be assigned.
         WHITELIST = [
-            # "save"
+            "save"
         ]
-        return hasattr(node.func, "attrname") and (node.func.attrname in  WHITELIST)
+        return hasattr(node.func, "attrname") and (node.func.attrname in WHITELIST)
 
     @staticmethod
     def _inplace_is_true(node: astroid.Call) -> bool:

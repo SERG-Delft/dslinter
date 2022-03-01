@@ -4,7 +4,7 @@ import pylint.testutils
 import dslinter
 
 
-class TestInPlaceNumpy(pylint.testutils.CheckerTestCase):
+class TestInPlaceNumpyChecker(pylint.testutils.CheckerTestCase):
     """Class which tests the InPlaceNumpyChecker"""
 
     CHECKER_CLASS = dslinter.plugin.InPlaceNumpyChecker
