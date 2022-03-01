@@ -118,7 +118,7 @@ class TestImportChecker(pylint.testutils.CheckerTestCase):
         with self.assertNoMessages():
             self.checker.visit_import(import_node)
 
-    def test_finds_inccorrect_pytorch(self):
+    def test_finds_incorrect_pytorch(self):
         """Test if message is added when pytorch is imported incorrectly."""
         import_node = astroid.extract_node(
             """
