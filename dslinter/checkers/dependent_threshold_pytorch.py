@@ -27,7 +27,7 @@ class DependentThresholdPytorchChecker(BaseChecker):
 
     options = ()
 
-    def visit_module(self, module):
+    def visit_module(self, module: astroid.Module):
         """
         When a module node is visited, check whether there is f1 score function called.
         If true, check whether there is auc function.
