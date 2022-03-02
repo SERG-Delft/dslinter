@@ -169,7 +169,6 @@ class TypeInference:
         for node in nodes:
             if hasattr(node, "targets"):
                 for var in node.targets:
-                    print(var)
                     if hasattr(var, "name"):
                         variable_name = var.name
                         if isinstance(node.value, astroid.nodes.Const):
