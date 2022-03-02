@@ -37,13 +37,13 @@ pylint --load-plugins=dslinter <other_options> <path_to_sources>
 
 ## How to contribute
 Contributions are welcome! If you want to contribute, please see the following steps:
-1. fork the repository and clone the repository you forked
+1. fork the repository and clone the repository you forked.
 2. `dslinter` uses `poetry` to manage dependencies, so you will need to install `poetry` first and then install the dependencies. 
 ```
 pip install poerty
 poetry install
 ```
-To install `dslinter` from source for development purposes, install it with:
+- To install `dslinter` from source for development purposes, install it with:
 ```
 poetry build
 pip install ./dist/dslinter-version.tar.gz
