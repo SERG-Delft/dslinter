@@ -35,3 +35,36 @@ class TestUnnecessaryIterationTensorflowChecker(pylint.testutils.CheckerTestCase
         with self.assertNoMessages():
             self.checker.visit_module(module_node)
             self.checker.visit_for(for_node)
+
+    def test_iteration_for_not_tf_variable(self):
+        script = """
+        m = 1
+        for i in range(7):
+            for j in range(4): #@
+                # k=k+1
+                k += m
+                sns.distplot(X_train_pt_df['V'+str(k)], ax=ax[i][j])
+                ax[i][j].set_title('V'+str(k))
+        """
+        module_node = astroid.parse(script)
+        for_node = astroid.extract_node(script)
+        with self.assertNoMessages():
+            self.checker.visit_module(module_node)
+            self.checker.visit_for(for_node)
+
+    def test_iteration_for_not_tf_variable_2(self):
+        script = """
+        k = 1
+        for i in range(7):
+            for j in range(4): #@
+                # k=k+1
+                k += 1
+                sns.distplot(X_train_pt_df['V'+str(k)], ax=ax[i][j])
+                ax[i][j].set_title('V'+str(k))
+        """
+        module_node = astroid.parse(script)
+        for_node = astroid.extract_node(script)
+        with self.assertNoMessages():
+        # with self.assertAddsMessages(pylint.testutils.MessageTest(msg_id="iteration-tensorflow", node = for_node),):
+            self.checker.visit_module(module_node)
+            self.checker.visit_for(for_node)
