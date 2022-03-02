@@ -28,7 +28,7 @@ pip install dslinter
 ## Usage
 To only use the checkers implemented in this plugin, run:
 ```
-pylint --load-plugins=dslinter --disable=all --enable=dataframe,nan,hyperparameters,import,data-leakage,controlling-randomness,excessive-hyperparameter-precision,pca-scaler <other_options> <path_to_sources>
+pylint --load-plugins=dslinter --disable=all --enable=import,data-leakage <other_options> <path_to_sources>
 ```
 To expand a current pylint configuration with the checkers from this plugin, run:
 ```
@@ -36,11 +36,15 @@ pylint --load-plugins=dslinter <other_options> <path_to_sources>
 ```
 
 ## How to contribute
-1. fork the repository
-2. dslinter uses poetry to manage dependencies. To install from source for development purposes, clone this repo and install the plugin with:
+Contributions are welcome! If you want to contribute, please see the following steps:
+1. fork the repository and clone the repository you forked
+2. `dslinter` uses `poetry` to manage dependencies, so you will need to install `poetry` first and then install the dependencies. 
 ```
 pip install poerty
 poetry install
+```
+To install `dslinter` from source for development purposes, install it with:
+```
 poetry build
 pip install ./dist/dslinter-version.tar.gz
 ```
@@ -50,5 +54,5 @@ To run the tests using pytest:
 ```
 poetry run pytest .
 ```
-5. Make a pull request. The pull request is expected to pass the tests.
+5. Make a pull request. The pull request is expected to pass the tests. :)
 
