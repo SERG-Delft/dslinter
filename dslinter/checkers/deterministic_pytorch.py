@@ -33,26 +33,29 @@ class DeterministicAlgorithmChecker(BaseChecker):
             if name == "torch":
                 self._import_pytorch = True
 
-    def visit_call(self, node: astroid.Call):
+    def visit_module(self, module: astroid.Module):
         """
         Check whether use_deterministic_algorithms option is used.
         :param node: call node
         """
         # if torch.use_deterministic_algorithm() is call and the argument is True,
         # set _has_deterministic_algorithm_option to True
-        if(
-            hasattr(node, "func")
-            and hasattr(node.func, "attrname")
-            and node.func.attrname == "use_deterministic_algorithms"
-            and hasattr(node, "args")
-            and len(node.args) > 0
-            and hasattr(node.args[0], "value")
-            and node.args[0].value is True
-        ):
-            self._has_deterministic_algorithm_option = True
+        for node in module.body:
+            if isinstance(node, astroid.nodes.Expr) and hasattr(node, "value"):
+                call_node = node.value
+                if(
+                    hasattr(call_node, "func")
+                    and hasattr(call_node.func, "attrname")
+                    and call_node.func.attrname == "use_deterministic_algorithms"
+                    and hasattr(call_node, "args")
+                    and len(call_node.args) > 0
+                    and hasattr(call_node.args[0], "value")
+                    and call_node.args[0].value is True
+                ):
+                    self._has_deterministic_algorithm_option = True
 
         if(
             self._import_pytorch is True
             and self._has_deterministic_algorithm_option is False
         ):
-            self.add_message("deterministic-pytorch", node = node)
+            self.add_message("deterministic-pytorch", node = module)
