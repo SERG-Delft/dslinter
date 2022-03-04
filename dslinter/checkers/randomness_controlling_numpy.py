@@ -11,7 +11,7 @@ class RandomnessControllingNumpyChecker(BaseChecker):
     name = "randomness-control-numpy"
     priority = -1
     msgs = {
-        "W5574" : (
+        "W5574": (
             "tf.random.set_seed() is not set in numpy program",
             "randomness-control-numpy",
             "tf.random.set_seed() should be set in numpy program for reproducible result"
@@ -21,6 +21,7 @@ class RandomnessControllingNumpyChecker(BaseChecker):
 
     _import_numpy = False
     _has_manual_seed = False
+    _is_main_module = False
 
     def visit_import(self, node: astroid.Import):
         """
@@ -31,25 +32,28 @@ class RandomnessControllingNumpyChecker(BaseChecker):
             if name == "numpy":
                 self._import_numpy = True
 
-    def visit_call(self, node: astroid.Call):
+    def visit_module(self, module: astroid.Module):
         """
         Check whether there is a rule violation.
-        :param node:
+        :param module:
         """
-        if(
-            hasattr(node, "func")
-            and hasattr(node.func, "attrname")
-            and node.func.attrname == "seed"
-            and hasattr(node.func.expr, "attrname")
-            and node.func.expr.attrname == "random"
-            and hasattr(node.func.expr, "expr")
-            and hasattr(node.func.expr.expr, "name")
-            and node.func.expr.expr.name in ["np", "numpy"]
-        ):
-            self._has_manual_seed = True
+        for node in module.body:
+            if isinstance(node, astroid.nodes.Expr) and hasattr(node, "value"):
+                call_node = node.value
+                if(
+                    hasattr(call_node, "func")
+                    and hasattr(call_node.func, "attrname")
+                    and call_node.func.attrname == "seed"
+                    and hasattr(call_node.func.expr, "attrname")
+                    and call_node.func.expr.attrname == "random"
+                    and hasattr(call_node.func.expr, "expr")
+                    and hasattr(call_node.func.expr.expr, "name")
+                    and call_node.func.expr.expr.name in ["np", "numpy"]
+                ):
+                    self._has_manual_seed = True
 
         if(
             self._import_numpy is True
             and self._has_manual_seed is False
         ):
-            self.add_message("randomness-control-numpy", node = node)
+            self.add_message("randomness-control-numpy", node = module)
