@@ -75,7 +75,8 @@ class TestInPlaceNumpyChecker(pylint.testutils.CheckerTestCase):
         """Tesr whether no message is added if the call name is in whitelist"""
         script = """
         import numpy as np
-        np.save() #@
+        a = [1, 2, 3]
+        np.save(a) #@
         """
         call_node = astroid.extract_node(script)
         with self.assertNoMessages():
