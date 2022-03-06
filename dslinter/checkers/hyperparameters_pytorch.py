@@ -22,7 +22,7 @@ class HyperparameterPyTorchChecker(HyperparameterChecker):
 
     options = (
         (
-            "strict_hyperparameters",
+            "strict_hyperparameters_pytorch",
             {
                 "default": False,
                 "type": "yn",
@@ -54,3 +54,4 @@ class HyperparameterPyTorchChecker(HyperparameterChecker):
             "Rprop": {"positional": 4, "keywords": ["lr"]},
             "SGD": {"positional": 6, "keywords": ["lr", "weight_decay", "momentum"]},
         }
+        self.LIBRARY = "pytorch"
