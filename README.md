@@ -6,10 +6,18 @@
 
 Implemented checkers:
 
-- **Import Checker**: Check whether data science modules are imported using the correct naming conventions.
-- **Unassigned DataFrame Checker**: Operations on DataFrames return new DataFrames. These DataFrames should be
-    assigned to a variable.
-- **DataFrame Iteration Checker**: Vectorized solutions are preferred over iterators for DataFrames.
+- **[C5501 - C5506] Import Checker**: Check whether data science modules are imported using the correct naming conventions.
+
+- **W5501 InPlace Checker(Pandas)**: Operations on DataFrames return new DataFrames, and they should be assigned to a variable. If the result of a operation on a DataFrame is not assigned to a variable, the result will be lost, so the rule is violated. Operations from the whitelist and with `in_place` parameter set are excluded.
+
+- **W5502 InPlace Checker(NumPy)**: The result of the NumPy operations should be assign to a variable. If the operation is not assigned to a variable, the result will be lost, so the rule is violated. Operations from whitelist and with `out` parameter (can act as in-place) set are excluded. 
+
+- **W5511 Unnecessary Iteration Checker(Pandas)**: Vectorized solutions are preferred over iterators for DataFrames. If iterations are used while there are better solutions, the rule is violated.
+
+- **W5512 Unnecessary Iteration Checker(Pandas)**: A dataframe where is iterated over should not be modified. If the dataframe is modified during iteration, the rule is violated.
+
+- **W5513 Unnecessary Iteration Checker(TensoFlow)**: If there is any augment assignment operation in the loop, the rule is violated. Augment assignment in the loop can be replace with vectorized solution in TensorFlow API.
+
 - **Hyperparameter Checker**: For (scikit-learn) learning algorithms, all hyperparameters should be set.
 - **Data Leakage Checker**: All scikit-learn estimators should be used inside Pipelines, to prevent data leakage between
     training and test data.
