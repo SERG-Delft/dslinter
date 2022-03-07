@@ -4,7 +4,7 @@
 
 `dslinter` is a pylint plugin for linting data science and machine learning code. We plan to support the following Python libraries: TensorFlow, PyTorch, Scikit-Learn, Pandas, NumPy and SciPy.
 
-Implemented checkers:
+## Implemented Checkers:
 
 - **[C5501 - C5506] Import Checker**: Check whether data science modules are imported using the correct naming conventions.
 
@@ -40,11 +40,20 @@ Implemented checkers:
 
 - **W5565 Randomness Control Checker(PyTorch-Dataloader)**: The worker_init_fn() and generator should be set in dataloader to preserve reproducibility. If they're not set, the rule is violated.
 
-- **Data Leakage Checker**: All scikit-learn estimators should be used inside Pipelines, to prevent data leakage between
-    training and test data.
+- **W5571 Mask Missing Checker(TensorFlow)**: If log function is used in the code, check whether the argument value is valid. 
+
+- **W5572 Mask Missing Checker(PyTorch)**: If log function is used in the code, check whether the argument value is valid. 
+
+- **W5581 Data Leakage Checker(ScikitLearn)**: All scikit-learn estimators should be used inside Pipelines, to prevent data leakage between training and test data.
+
+- **W5591 Dependent Threshold Checker(TensorFlow)**: If threshold-dependent evaluation(e.g., f-score) is used in the code, check whether threshold-indenpendent evaluation(e.g., auc) metrics is also used in the code.
+
+- **W5592 Dependent Threshold Checker(PyTorch)**: If threshold-dependent evaluation(e.g., f-score) is used in the code, check whether threshold-indenpendent evaluation(e.g., auc) metrics is also used in the code.
+
+- **W5593 Dependent Threshold Checker(ScikitLearn)**: If threshold-dependent evaluation(e.g., f-score) is used in the code, check whether threshold-indenpendent evaluation(e.g., auc) metrics is also used in the code.
 
 
-- **Nan Equality Checker (NumPy)**: Values cannot be compared with np.nan, as `np.nan != np.nan`.
+- **W5601 Nan Equality Checker (NumPy)**: Values cannot be compared with np.nan, as `np.nan != np.nan`.
 
 
 ## Installation
