@@ -1,4 +1,4 @@
-"""Checker which checkes whether random seed is set in tensorflow"""
+"""Checker which checks whether random seed is set in tensorflow"""
 from pylint.interfaces import IAstroidChecker
 from pylint.checkers import BaseChecker
 import astroid
