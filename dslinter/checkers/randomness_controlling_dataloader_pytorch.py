@@ -28,13 +28,13 @@ class RandomnessControllingDataloaderPytorchChecker(BaseChecker):
         if(
             hasattr(node.func, "name")
             and node.func.name == "DataLoader"
-            and hasattr(node, "keywords")
         ):
-            for k in node.keywords:
-                if hasattr(k, "arg"):
-                    keywords.append(k.arg)
-        if(
-            "worker_init_fn" not in keywords
-            or "generator" not in keywords
-        ):
-            self.add_message("randomness-control-dataloader-pytorch", node = node)
+            if hasattr(node, "keywords"):
+                for k in node.keywords:
+                    if hasattr(k, "arg"):
+                        keywords.append(k.arg)
+            if(
+                "worker_init_fn" not in keywords
+                or "generator" not in keywords
+            ):
+                self.add_message("randomness-control-dataloader-pytorch", node=node)
