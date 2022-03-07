@@ -1,8 +1,9 @@
 """ In-Place Checker for NumPy which checker In-Place APIs are correctly used. """
 import astroid
-from pylint. checkers import BaseChecker
+from pylint.checkers import BaseChecker
 from pylint.interfaces import IAstroidChecker
 from dslinter.utils.exception_handler import ExceptionHandler
+from dslinter.utils.inplace_helper import _inplace_is_true
 
 
 class InPlaceNumpyChecker(BaseChecker):
@@ -31,8 +32,8 @@ class InPlaceNumpyChecker(BaseChecker):
         """
         try:
             if self._result_is_lost(node):
-                self.add_message("inplace-numpy", node = node)
-        except: # pylint: disable=bare-except
+                self.add_message("inplace-numpy", node=node)
+        except:  # pylint: disable=bare-except
             ExceptionHandler.handle(self, node)
 
     def _result_is_lost(self, node: astroid.Call) -> bool:
@@ -47,9 +48,9 @@ class InPlaceNumpyChecker(BaseChecker):
                 hasattr(node, "func")
                 and hasattr(node.func, "expr")
                 and hasattr(node.func.expr, "name")
-                and node.func.expr.name == "np"
+                and node.func.expr.name in ["np", "numpy"]  # This might need to be changed to a more robust check
                 and not self._function_whitelisted(node)
-                and not self._inplace_is_true(node)
+                and not _inplace_is_true(node, "out")
                 # If the parent of the Call is an Expression (not an Assignment or a Call or Return),
                 # it means the result is lost.
                 and isinstance(node.parent, astroid.Expr)
@@ -57,27 +58,10 @@ class InPlaceNumpyChecker(BaseChecker):
 
     def _function_whitelisted(self, node) -> bool:
         """
-
+        If the function is in the whitelist, it can be excluded from the check.
         :return:
         """
-        # Whitelisted functions for which a DataFrame does not have to be assigned.
         WHITELIST = [
             "save"
         ]
         return hasattr(node.func, "attrname") and (node.func.attrname in WHITELIST)
-
-    @staticmethod
-    def _inplace_is_true(node: astroid.Call) -> bool:
-        """
-        Evaluate whether the call has an 'out==True' keyword argument.
-
-        :param node: Node to check the arguments from.
-        :return: True when the call has an 'inplace==True' keyword argument.
-        """
-        if node.keywords is None:
-            return False
-
-        for keyword in node.keywords:
-            if keyword.arg == "out":
-                return keyword.value.value
-        return False

@@ -154,24 +154,8 @@ class InPlacePandasChecker(BaseChecker):
                 self._call_types[node] == '"pandas.core.frame.DataFrame"'
                 or self._call_types[node] == '"pyspark.sql.dataframe.DataFrame"'
             )
-            and not self._inplace_is_true(node)
+            and not self._inplace_is_true(node, "inplace")
             # If the parent of the Call is an Expression (not an Assignment),
             # it means the DataFrame is lost.
             and isinstance(node.parent, astroid.Expr)
         )
-
-    @staticmethod
-    def _inplace_is_true(node: astroid.Call) -> bool:
-        """
-        Evaluate whether the call has an 'inplace==True' keyword argument.
-
-        :param node: Node to check the arguments from.
-        :return: True when the call has an 'inplace==True' keyword argument.
-        """
-        if node.keywords is None:
-            return False
-
-        for keyword in node.keywords:
-            if keyword.arg == "inplace":
-                return keyword.value.value
-        return False

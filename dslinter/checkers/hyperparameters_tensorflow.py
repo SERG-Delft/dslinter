@@ -47,7 +47,7 @@ class HyperparameterTensorflowChecker(HyperparameterChecker):
             "Adamax": {'positional': 6, "keywords": ["learning_rate"]},
             "Ftrl": {'positional': 9, "keywords": ["learning_rate"]},
             "Nadam": {'positional': 6, "keywords": ["learning_rate"]},
-            "RMSprop": {'positional': 7, "keywords": ["earning_rate", "momentum"]},
+            "RMSprop": {'positional': 7, "keywords": ["learning_rate", "momentum"]},
             "SGD": {'positional': 5, "keywords": ["learning_rate", "momentum"]},
         }
         # pylint: disable = invalid-name
