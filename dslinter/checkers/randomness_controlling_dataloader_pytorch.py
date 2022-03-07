@@ -25,7 +25,11 @@ class RandomnessControllingDataloaderPytorchChecker(BaseChecker):
         :param node:
         """
         keywords = []
-        if hasattr(node, "keywords"):
+        if(
+            hasattr(node.func, "name")
+            and node.func.name == "DataLoader"
+            and hasattr(node, "keywords")
+        ):
             for k in node.keywords:
                 if hasattr(k, "arg"):
                     keywords.append(k.arg)
