@@ -28,10 +28,9 @@ class MaskMissingPytorchChecker(BaseChecker):
         :return:
         """
         # if log is call but no mask outside of it, it violate the rule
-        # pdb.set_trace()
         __has_log = False
         __has_mask = False
-        if node.func.attrname == "log":
+        if hasattr(node.func, "attrname") and node.func.attrname == "log":
             __has_log = True
         if(
             hasattr(node, "args")
@@ -43,4 +42,4 @@ class MaskMissingPytorchChecker(BaseChecker):
             __has_mask = True
 
         if __has_log is True and __has_mask is False:
-            self.add_message(msgid= "missing-mask-pytorch", node = node)
+            self.add_message(msgid="missing-mask-pytorch", node=node)

@@ -58,5 +58,5 @@ class DependentThresholdTensorflowChecker(BaseChecker):
                     __has_f1_score = True
 
         # if f1 score is used but auc is not used
-        if(__has_f1_score is True and __has_auc is False):
+        if __has_f1_score is True and __has_auc is False:
             self.add_message("dependent-threshold-tensorflow", node = module)

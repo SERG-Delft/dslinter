@@ -58,7 +58,6 @@ class ScalerMissingScikitLearnChecker(BaseChecker):
 
     Variables = []
 
-
     def visit_call(self, node: astroid.Call):
         """
         When a node is visited, add a message if the rule is violated.

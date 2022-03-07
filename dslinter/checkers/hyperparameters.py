@@ -18,6 +18,7 @@ class HyperparameterChecker(BaseChecker):
         self.HYPERPARAMETERS_MAIN = {}
         self.HYPERPARAMETER_RESOURCE = ""
         self.MESSAGE = ""
+        self.LIBRARY = ""
 
     def visit_call(self, node: astroid.Call):
         """
@@ -43,7 +44,14 @@ class HyperparameterChecker(BaseChecker):
         hyperparams_all = Resources.get_hyperparameters(self.HYPERPARAMETER_RESOURCE)
 
         if function_name in hyperparams_all:  # pylint: disable=unsupported-membership-test
-            if self.config.strict_hyperparameters: # strict mode
+            strict_hyperparameters = ""
+            if self.LIBRARY == "scikitlearn": # strict mode
+                strict_hyperparameters = self.config.strict_hyperparameters_scikitlearn
+            elif self.LIBRARY == "tensorflow":
+                strict_hyperparameters = self.config.strict_hyperparameters_tensorflow
+            elif self.LIBRARY == "pytorch":
+                strict_hyperparameters = self.config.strict_hyperparameters_pytorch
+            if strict_hyperparameters:
                 if not self.has_required_hyperparameters(node, hyperparams_all, function_name):
                     self.add_message(self.MESSAGE, node=node)
             else:  # non-strict mode

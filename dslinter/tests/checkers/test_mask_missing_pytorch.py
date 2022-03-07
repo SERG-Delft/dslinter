@@ -1,5 +1,3 @@
-import pdb
-
 import astroid
 import pylint.testutils
 
@@ -25,6 +23,5 @@ class TestMaskMissingPytorchChecker(pylint.testutils.CheckerTestCase):
         """
         node = astroid.extract_node(script)
         call_node = node.value.args[0]
-        # pdb.set_trace()
         with self.assertNoMessages():
             self.checker.visit_call(call_node)
