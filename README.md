@@ -4,19 +4,56 @@
 
 `dslinter` is a pylint plugin for linting data science and machine learning code. We plan to support the following Python libraries: TensorFlow, PyTorch, Scikit-Learn, Pandas, NumPy and SciPy.
 
-Implemented checkers:
+## Implemented Checkers:
 
-- **Import Checker**: Check whether data science modules are imported using the correct naming conventions.
-- **Unassigned DataFrame Checker**: Operations on DataFrames return new DataFrames. These DataFrames should be
-    assigned to a variable.
-- **DataFrame Iteration Checker**: Vectorized solutions are preferred over iterators for DataFrames.
-- **Hyperparameter Checker**: For (scikit-learn) learning algorithms, all hyperparameters should be set.
-- **Data Leakage Checker**: All scikit-learn estimators should be used inside Pipelines, to prevent data leakage between
-    training and test data.
-- **Controlling Randomness Checker**: For reproducible results across executions, remove any use of random_state=None in scikit-learn estimators.
-- **Scaler before PCA Checker**: Check scaler is used before Principle Component Analysis (PCA) in a scikit-learn pipeline. Feature scaling is important for PCA.
+- **[C5501 - C5506] Import Checker**: Check whether data science modules are imported using the correct naming conventions.
 
-- **Nan Equality Checker**: Values cannot be compared with np.nan, as `np.nan != np.nan`.
+- **W5501 InPlace Checker(Pandas)**: Operations on DataFrames return new DataFrames, and they should be assigned to a variable. If the result of a operation on a DataFrame is not assigned to a variable, the result will be lost, so the rule is violated. Operations from the whitelist and with `in_place` parameter set are excluded.
+
+- **W5502 InPlace Checker(NumPy)**: The result of the NumPy operations should be assign to a variable. If the operation is not assigned to a variable, the result will be lost, so the rule is violated. Operations from whitelist and with `out` parameter (can act as in-place) set are excluded. 
+
+- **W5511 Unnecessary Iteration Checker(Pandas)**: Vectorized solutions are preferred over iterators for DataFrames. If iterations are used while there are better solutions, the rule is violated.
+
+- **W5512 Unnecessary Iteration Checker(Pandas)**: A dataframe where is iterated over should not be modified. If the dataframe is modified during iteration, the rule is violated.
+
+- **W5513 Unnecessary Iteration Checker(TensorFlow)**: If there is any augment assignment operation in the loop, the rule is violated. Augment assignment in the loop can be replace with vectorized solution in TensorFlow API.
+
+- **W5521 Scaler Missing Checker(ScikitLearn)**: Check scaler is used before scaling-sensitive operations in a scikit-learn pipeline. Scaling-sensitive operations includes Principal Component Analysis (PCA), Support Vector Machine (SVM), Stochastic Gradient Descent (SGD), Multi-layer Perceptron classifier and L1 and L2 regularization
+
+- **W5531 Hyperparameter Checker(ScikitLearn)**: For scikit-learn learning algorithms, some important hyperparameters should be set.
+
+- **W5532 Hyperparameter Checker(PyTorch)**: For neural network learning algorithm, some imporatnt hyperparameters should be set, such as learning rate, batch size, momentum and weight decay.
+
+- **W5533 Hyperparameter Checker(TensorFlow)**: For neural network learning algorithm, some imporatnt hyperparameters should be set, such as learning rate, batch size, momentum and weight decay.
+
+- **W5541 Memory Release Checker(TensorFlow)**: If a neural network is created in the loop, and no memory clear operation is used, the rule is violated.
+
+- **W5551 Deterministic Algorithm Usage Checker(PyTorch)**: If use_deterministic algorithm is not used in a pytorch program, the rule is violated.
+
+- **W5561 Randomness Control Checker(ScikitLearn)**: For reproducible results across executions, remove any use of random_state=None in scikit-learn estimators.
+
+- **W5562 Randomness Control Checker(TensorFlow)**: The tf.random.set_seed() should be used to preserve reproducibility in a Tensorflow program.
+
+- **W5563 Randomness Control Checker(PyTorch)**: The torch.manual_seed() should be used to preserve reproducibility in a Tensorflow program.
+
+- **W5564 Randomness Control Checker(NumPy)**: The np.seed() should be used to preserve reproducibility in a machine learning program.
+
+- **W5565 Randomness Control Checker(PyTorch-Dataloader)**: The worker_init_fn() and generator should be set in dataloader to preserve reproducibility. If they're not set, the rule is violated.
+
+- **W5571 Mask Missing Checker(TensorFlow)**: If log function is used in the code, check whether the argument value is valid. 
+
+- **W5572 Mask Missing Checker(PyTorch)**: If log function is used in the code, check whether the argument value is valid. 
+
+- **W5581 Data Leakage Checker(ScikitLearn)**: All scikit-learn estimators should be used inside Pipelines, to prevent data leakage between training and test data.
+
+- **W5591 Dependent Threshold Checker(TensorFlow)**: If threshold-dependent evaluation(e.g., f-score) is used in the code, check whether threshold-indenpendent evaluation(e.g., auc) metrics is also used in the code.
+
+- **W5592 Dependent Threshold Checker(PyTorch)**: If threshold-dependent evaluation(e.g., f-score) is used in the code, check whether threshold-indenpendent evaluation(e.g., auc) metrics is also used in the code.
+
+- **W5593 Dependent Threshold Checker(ScikitLearn)**: If threshold-dependent evaluation(e.g., f-score) is used in the code, check whether threshold-indenpendent evaluation(e.g., auc) metrics is also used in the code.
+
+
+- **W5601 Nan Equality Checker (NumPy)**: Values cannot be compared with np.nan, as `np.nan != np.nan`.
 
 
 ## Installation
