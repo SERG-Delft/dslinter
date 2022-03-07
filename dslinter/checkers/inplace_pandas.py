@@ -4,6 +4,7 @@ import astroid
 from pylint.checkers import BaseChecker
 from pylint.interfaces import IAstroidChecker
 from dslinter.utils.exception_handler import ExceptionHandler
+from dslinter.utils.inplace_helper import _inplace_is_true
 from dslinter.utils.type_inference import TypeInference
 
 
@@ -154,7 +155,7 @@ class InPlacePandasChecker(BaseChecker):
                 self._call_types[node] == '"pandas.core.frame.DataFrame"'
                 or self._call_types[node] == '"pyspark.sql.dataframe.DataFrame"'
             )
-            and not self._inplace_is_true(node, "inplace")
+            and not _inplace_is_true(node, "inplace")
             # If the parent of the Call is an Expression (not an Assignment),
             # it means the DataFrame is lost.
             and isinstance(node.parent, astroid.Expr)
