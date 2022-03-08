@@ -4,10 +4,10 @@ import pylint.testutils
 import dslinter
 
 
-class TestRandomnessControllingTensorflowChecker(pylint.testutils.CheckerTestCase):
+class TestRandomnessControlTensorflowChecker(pylint.testutils.CheckerTestCase):
     """Class which tests RandomnessControllingTensorflowChecker"""
 
-    CHECKER_CLASS = dslinter.plugin.RandomnessControllingTensorflowChecker
+    CHECKER_CLASS = dslinter.plugin.RandomnessControlTensorflowChecker
 
     def test_with_tensorflow_randomness_control(self):
         """Tests whether no message is added if manual seed is set."""

@@ -4,7 +4,7 @@ from pylint.checkers import BaseChecker
 import astroid
 
 
-class RandomnessControllingNumpyChecker(BaseChecker):
+class RandomnessControlNumpyChecker(BaseChecker):
     """Checker which checks whether random seed is set in numpy"""
     __implements__ = IAstroidChecker
 

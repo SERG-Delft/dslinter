@@ -8,13 +8,13 @@ from dslinter.checkers.inplace_numpy import InPlaceNumpyChecker
 from dslinter.checkers.mask_missing_pytorch import MaskMissingPytorchChecker
 from dslinter.checkers.mask_missing_tensorflow import MaskMissingTensorflowChecker
 from dslinter.checkers.memory_release_tensorflow import MemoryReleaseTensorflowChecker
-from dslinter.checkers.randomness_controlling_numpy import RandomnessControllingNumpyChecker
-from dslinter.checkers.randomness_controlling_pytorch import RandomnessControllingPytorchChecker
+from dslinter.checkers.randomness_control_numpy import RandomnessControlNumpyChecker
+from dslinter.checkers.randomness_control_pytorch import RandomnessControlPytorchChecker
 # pylint: disable = line-too-long
-from dslinter.checkers.randomness_controlling_dataloader_pytorch import RandomnessControllingDataloaderPytorchChecker
+from dslinter.checkers.randomness_control_dataloader_pytorch import RandomnessControlDataloaderPytorchChecker
 # pylint: disable = line-too-long
-from dslinter.checkers.randomness_controlling_tensorflow import RandomnessControllingTensorflowChecker
-from dslinter.checkers.randomness_controlling_scikitlearn import RandomnessControllingScikitLLearnChecker
+from dslinter.checkers.randomness_control_tensorflow import RandomnessControlTensorflowChecker
+from dslinter.checkers.randomness_control_scikitlearn import RandomnessControlScikitLLearnChecker
 from dslinter.checkers.unnecessary_iteration_pandas import UnnecessaryIterationPandasChecker
 from dslinter.checkers.unnecessary_iteration_tensorflow import UnnecessaryIterationTensorflowChecker
 from dslinter.checkers.deterministic_pytorch import DeterministicAlgorithmChecker
@@ -44,11 +44,11 @@ def register(linter):
     linter.register_checker(HyperparameterScikitLearnChecker(linter))
     linter.register_checker(MemoryReleaseTensorflowChecker(linter))
     linter.register_checker(DeterministicAlgorithmChecker(linter))
-    linter.register_checker(RandomnessControllingScikitLLearnChecker(linter))
-    linter.register_checker(RandomnessControllingPytorchChecker(linter))
-    linter.register_checker(RandomnessControllingDataloaderPytorchChecker(linter))
-    linter.register_checker(RandomnessControllingTensorflowChecker(linter))
-    linter.register_checker(RandomnessControllingNumpyChecker(linter))
+    linter.register_checker(RandomnessControlScikitLLearnChecker(linter))
+    linter.register_checker(RandomnessControlPytorchChecker(linter))
+    linter.register_checker(RandomnessControlDataloaderPytorchChecker(linter))
+    linter.register_checker(RandomnessControlTensorflowChecker(linter))
+    linter.register_checker(RandomnessControlNumpyChecker(linter))
     linter.register_checker(DataLeakageScikitLearnChecker(linter))
     linter.register_checker(DependentThresholdPytorchChecker(linter))
     linter.register_checker(DependentThresholdTensorflowChecker(linter))

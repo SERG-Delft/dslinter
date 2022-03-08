@@ -4,7 +4,7 @@ from pylint.checkers import BaseChecker
 import astroid
 
 
-class RandomnessControllingPytorchChecker(BaseChecker):
+class RandomnessControlPytorchChecker(BaseChecker):
     """Checker which checks whether random seed is set in pytorch"""
     __implements__ = IAstroidChecker
 

@@ -8,18 +8,18 @@ from dslinter.utils.exception_handler import ExceptionHandler
 from dslinter.utils.resources import Resources
 
 
-class RandomnessControllingScikitLLearnChecker(BaseChecker):
+class RandomnessControlScikitLLearnChecker(BaseChecker):
     """Checker which checks rules for controlling randomness."""
 
     __implements__ = IAstroidChecker
 
-    name = "randomness-controlling-scikitlearn"
+    name = "randomness-control-scikitlearn"
     priority = -1
     msgs = {
         "W5571": (
             "'random_state=None' shouldn't be used in estimators or "
             "cross-validation splitters, it indicates improper randomness control",
-            "controlling_randomness_scikitlearn",
+            "randomness-control-scikitlearn",
             "For reproducible results across executions, remove any use of random_state=None."
         ),
     }
@@ -74,11 +74,11 @@ class RandomnessControllingScikitLLearnChecker(BaseChecker):
                         if keyword.arg == "random_state":
                             has_random_state_keyword = True
                             if keyword.value.as_string() == "None":
-                                self.add_message("controlling_randomness_scikitlearn", node=node)
+                                self.add_message("randomness-control-scikitlearn", node=node)
                     if has_random_state_keyword is False:
-                        self.add_message("controlling_randomness_scikitlearn", node=node)
+                        self.add_message("randomness-control-scikitlearn", node=node)
                 if node.keywords is None:
-                    self.add_message("controlling_randomness_scikitlearn", node=node)
+                    self.add_message("randomness-control-scikitlearn", node=node)
 
         # pylint: disable = W0702
         except:

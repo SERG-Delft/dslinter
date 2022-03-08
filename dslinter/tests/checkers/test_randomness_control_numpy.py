@@ -4,10 +4,10 @@ import pylint.testutils
 import dslinter
 
 
-class TestRandomnessControllingNumpyChecker(pylint.testutils.CheckerTestCase):
+class TestRandomnessControlNumpyChecker(pylint.testutils.CheckerTestCase):
     """Class which tests RandomnessControllingNumpyChecker"""
 
-    CHECKER_CLASS = dslinter.plugin.RandomnessControllingNumpyChecker
+    CHECKER_CLASS = dslinter.plugin.RandomnessControlNumpyChecker
 
     def test_with_numpy_randomness_control(self):
         """Tests whether no message is added if manual seed is set."""

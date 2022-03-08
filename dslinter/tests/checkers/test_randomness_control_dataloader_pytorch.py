@@ -4,10 +4,10 @@ import pylint.testutils
 import dslinter
 
 
-class TestRandomnessControllingDataloaderPytorchChecker(pylint.testutils.CheckerTestCase):
+class TestRandomnessControlDataloaderPytorchChecker(pylint.testutils.CheckerTestCase):
     """Class which tests RandomnessControllingDataloaderPytorchChecker"""
 
-    CHECKER_CLASS = dslinter.plugin.RandomnessControllingDataloaderPytorchChecker
+    CHECKER_CLASS = dslinter.plugin.RandomnessControlDataloaderPytorchChecker
 
     def test_with_dataloader_randomness_control(self):
         """Tests whether no message is added if manual seed is set."""
