@@ -15,6 +15,9 @@ class TestRandomnessControlPytorchChecker(pylint.testutils.CheckerTestCase):
         import torch #@
         torch.manual_seed(0) 
         torch.randn(10).index_copy(0, torch.tensor([0]), torch.randn(1))
+                
+        if __name__ == '__main__':
+            pass
         """
         import_node = astroid.extract_node(script)
         module = astroid.parse(script)
@@ -27,6 +30,9 @@ class TestRandomnessControlPytorchChecker(pylint.testutils.CheckerTestCase):
         script = """
         import torch #@
         torch.randn(10).index_copy(0, torch.tensor([0]), torch.randn(1)) 
+                
+        if __name__ == '__main__':
+            pass
         """
         import_node = astroid.extract_node(script)
         module = astroid.parse(script)

@@ -3,6 +3,8 @@ from pylint.interfaces import IAstroidChecker
 from pylint.checkers import BaseChecker
 import astroid
 
+from dslinter.utils.randomness_control_helper import _check_main_module
+
 
 class RandomnessControlPytorchChecker(BaseChecker):
     """Checker which checks whether random seed is set in pytorch"""
@@ -11,17 +13,27 @@ class RandomnessControlPytorchChecker(BaseChecker):
     name = "randomness-control-pytorch"
     priority = -1
     msgs = {
-        "W5573": (
+        "W5563": (
             "torch.manual_seed() is not set in pytorch program",
             "randomness-control-pytorch",
             "torch.manual_seed() should be set in pytorch program for reproducible result"
         )
     }
-    options = ()
+
+    options = (
+        (
+            "no_main_module_check_randomness_control_pytorch",
+            {
+                "default": False,
+                "type": "yn",
+                "metavar": "<y_or_n>",
+                "help": "Check every module whether torch.manual_seed() is used.",
+            },
+        ),
+    )
 
     _import_pytorch = False
     _has_manual_seed = False
-    _is_main_module = False
 
     def visit_import(self, node: astroid.Import):
         """
@@ -38,7 +50,9 @@ class RandomnessControlPytorchChecker(BaseChecker):
         :param module:
         """
 
-        self._is_main_module = self._check_main_module(module)
+        _is_main_module = _check_main_module(module)
+        if self.config.no_main_module_check_randomness_control_pytorch is False and _is_main_module is False:
+            return
 
         for node in module.body:
             if isinstance(node, astroid.nodes.Expr) and hasattr(node, "value"):
@@ -51,20 +65,9 @@ class RandomnessControlPytorchChecker(BaseChecker):
                     self._has_manual_seed = True
 
         if(
-            self._is_main_module is True
-            and self._import_pytorch is True
+            self._import_pytorch is True
             and self._has_manual_seed is False
         ):
             self.add_message("randomness-control-pytorch", node = module)
 
-    def _check_main_module(self, module: astroid.Module) -> bool:
-        return True
-        # for node in module.body:
-        #     if isinstance(node, astroid.nodes.If) and hasattr(node, "test"):
-        #         if_compare_node = node.test
-        #         if(
-        #             if_compare_node.left.name == "__name__"
-        #             and if_compare_node.ops[0][1] == '__main__'
-        #         ):
-        #             return True
 

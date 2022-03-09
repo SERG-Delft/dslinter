@@ -3,6 +3,8 @@ from pylint.interfaces import IAstroidChecker
 from pylint.checkers import BaseChecker
 import astroid
 
+from dslinter.utils.randomness_control_helper import _check_main_module
+
 
 class RandomnessControlNumpyChecker(BaseChecker):
     """Checker which checks whether random seed is set in numpy"""
@@ -11,17 +13,28 @@ class RandomnessControlNumpyChecker(BaseChecker):
     name = "randomness-control-numpy"
     priority = -1
     msgs = {
-        "W5574": (
-            "tf.random.set_seed() is not set in numpy program",
+        "W5564": (
+            "np.seed() is not set in numpy program",
             "randomness-control-numpy",
-            "tf.random.set_seed() should be set in numpy program for reproducible result"
+            "np.seed() should be set in numpy program for reproducible result"
         )
     }
     options = ()
 
     _import_numpy = False
     _has_manual_seed = False
-    _is_main_module = False
+
+    options = (
+        (
+            "no_main_module_check_randomness_control_numpy",
+            {
+                "default": False,
+                "type": "yn",
+                "metavar": "<y_or_n>",
+                "help": "Check every module whether tf.random.set_seed() is used.",
+            },
+        ),
+    )
 
     def visit_import(self, node: astroid.Import):
         """
@@ -37,6 +50,10 @@ class RandomnessControlNumpyChecker(BaseChecker):
         Check whether there is a rule violation.
         :param module:
         """
+        _is_main_module = _check_main_module(module)
+        if self.config.no_main_module_check_randomness_control_numpy is False and _is_main_module is False:
+            return
+
         for node in module.body:
             if isinstance(node, astroid.nodes.Expr) and hasattr(node, "value"):
                 call_node = node.value

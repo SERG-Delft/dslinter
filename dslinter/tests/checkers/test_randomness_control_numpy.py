@@ -15,6 +15,9 @@ class TestRandomnessControlNumpyChecker(pylint.testutils.CheckerTestCase):
         import numpy as np #@
         np.random.seed(0)
         np.random.rand(4)
+                
+        if __name__ == '__main__':
+            pass
         """
         import_node = astroid.extract_node(script)
         module = astroid.parse(script)
@@ -27,6 +30,9 @@ class TestRandomnessControlNumpyChecker(pylint.testutils.CheckerTestCase):
         script = """
         import numpy as np #@
         np.random.rand(4) 
+                
+        if __name__ == '__main__':
+            pass
         """
         import_node = astroid.extract_node(script)
         module = astroid.parse(script)

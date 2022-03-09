@@ -3,6 +3,8 @@ import astroid
 from pylint.interfaces import IAstroidChecker
 from pylint.checkers import BaseChecker
 
+from dslinter.utils.randomness_control_helper import _check_main_module
+
 
 class DeterministicAlgorithmChecker(BaseChecker):
     """Checker which checks whether deterministic algorithm is used."""
@@ -13,13 +15,24 @@ class DeterministicAlgorithmChecker(BaseChecker):
     priority = -1
     msgs = {
         "W5551":(
-            "torch.use_deterministic_algorithm()  is not set to True",
+            "torch.use_deterministic_algorithm()  is not used or not set to True",
             "deterministic-pytorch",
-            "torch.use_deterministic_algorithm()  should be set to True \
+            "torch.use_deterministic_algorithm()  should be used and set to True \
             during development process for reproducible result."
         )
     }
-    options = ()
+
+    options = (
+        (
+            "no_main_module_check_deterministic_pytorch",
+            {
+                "default": False,
+                "type": "yn",
+                "metavar": "<y_or_n>",
+                "help": "Check every module whether torch.use_deterministic_algorithm() is used or set.",
+            },
+        ),
+    )
 
     _import_pytorch = False
     _has_deterministic_algorithm_option = False
@@ -38,6 +51,10 @@ class DeterministicAlgorithmChecker(BaseChecker):
         Check whether use_deterministic_algorithms option is used.
         :param node: call node
         """
+        _is_main_module = _check_main_module(module)
+        if self.config.no_main_module_check_deterministic_pytorch is False and _is_main_module is False:
+            return
+
         # if torch.use_deterministic_algorithm() is call and the argument is True,
         # set _has_deterministic_algorithm_option to True
         for node in module.body:

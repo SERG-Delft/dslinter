@@ -15,6 +15,9 @@ class TestRandomnessControlTensorflowChecker(pylint.testutils.CheckerTestCase):
         import tensorflow as tf #@
         tf.random.set_seed(0)
         tf.random.uniform([1])
+                
+        if __name__ == '__main__':
+            pass
         """
         import_node = astroid.extract_node(script)
         module = astroid.parse(script)
@@ -27,6 +30,9 @@ class TestRandomnessControlTensorflowChecker(pylint.testutils.CheckerTestCase):
         script = """
         import tensorflow as tf #@
         tf.random.uniform([1])
+                
+        if __name__ == '__main__':
+            pass
         """
         import_node = astroid.extract_node(script)
         module = astroid.parse(script)

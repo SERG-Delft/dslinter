@@ -3,6 +3,8 @@ from pylint.interfaces import IAstroidChecker
 from pylint.checkers import BaseChecker
 import astroid
 
+from dslinter.utils.randomness_control_helper import _check_main_module
+
 
 class RandomnessControlTensorflowChecker(BaseChecker):
     """Checker which checks whether random seed is set in tensorflow"""
@@ -11,13 +13,23 @@ class RandomnessControlTensorflowChecker(BaseChecker):
     name = "randomness-control-tensorflow"
     priority = -1
     msgs = {
-        "W5572": (
+        "W5562": (
             "tf.random.set_seed() is not set in tensorflow program",
             "randomness-control-tensorflow",
             "tf.random.set_seed() should be set in tensorflow program for reproducible result"
         )
     }
-    options = ()
+    options = (
+        (
+            "no_main_module_check_randomness_control_tensorflow",
+            {
+                "default": False,
+                "type": "yn",
+                "metavar": "<y_or_n>",
+                "help": "Check every module whether tf.random.set_seed() is used.",
+            },
+        ),
+    )
 
     _import_tensorflow = False
     _has_manual_seed = False
@@ -36,6 +48,11 @@ class RandomnessControlTensorflowChecker(BaseChecker):
         Check whether there is a rule violation.
         :param node:
         """
+
+        _is_main_module = _check_main_module(module)
+        if self.config.no_main_module_check_randomness_control_tensorflow is False and _is_main_module is False:
+            return
+
         for node in module.body:
             if isinstance(node, astroid.nodes.Expr) and hasattr(node, "value"):
                 call_node = node.value

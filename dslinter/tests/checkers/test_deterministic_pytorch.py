@@ -14,6 +14,9 @@ class TestDeterministicAlgorithmChecker(pylint.testutils.CheckerTestCase):
         script = """
         import torch #@
         torch.use_deterministic_algorithms(True)
+        
+        if __name__ == '__main__':
+            pass
         """
         import_node = astroid.extract_node(script)
         module = astroid.parse(script)
@@ -26,9 +29,12 @@ class TestDeterministicAlgorithmChecker(pylint.testutils.CheckerTestCase):
         script = """
         import torch #@
         torch.randn(10).index_copy(0, torch.tensor([0]), torch.randn(1))
+        
+        if __name__ == '__main__':
+            pass
         """
         import_node = astroid.extract_node(script)
         module = astroid.parse(script)
-        with self.assertAddsMessages(pylint.testutils.MessageTest(msg_id="deterministic-pytorch", node = module)):
+        with self.assertAddsMessages(pylint.testutils.MessageTest(msg_id="deterministic-pytorch", node=module)):
             self.checker.visit_import(import_node)
             self.checker.visit_module(module)
