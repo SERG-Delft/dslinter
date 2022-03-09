@@ -14,9 +14,9 @@ class RandomnessControlNumpyChecker(BaseChecker):
     priority = -1
     msgs = {
         "W5564": (
-            "np.seed() is not set in numpy program",
+            "np.random.seed() is not set in numpy program.",
             "randomness-control-numpy",
-            "np.seed() should be set in numpy program for reproducible result"
+            "np.random.seed() should be set in numpy program for reproducible result."
         )
     }
     options = ()
@@ -31,7 +31,7 @@ class RandomnessControlNumpyChecker(BaseChecker):
                 "default": False,
                 "type": "yn",
                 "metavar": "<y_or_n>",
-                "help": "Check every module whether tf.random.set_seed() is used.",
+                "help": "Check every module whether np.random.seed() is used.",
             },
         ),
     )
@@ -71,4 +71,4 @@ class RandomnessControlNumpyChecker(BaseChecker):
             self._import_numpy is True
             and self._has_manual_seed is False
         ):
-            self.add_message("randomness-control-numpy", node = module)
+            self.add_message("randomness-control-numpy", node=module)

@@ -73,4 +73,4 @@ class DeterministicAlgorithmChecker(BaseChecker):
             self._import_pytorch is True
             and self._has_deterministic_algorithm_option is False
         ):
-            self.add_message("deterministic-pytorch", node = module)
+            self.add_message("deterministic-pytorch", node=module)

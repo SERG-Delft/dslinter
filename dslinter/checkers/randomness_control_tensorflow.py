@@ -14,9 +14,9 @@ class RandomnessControlTensorflowChecker(BaseChecker):
     priority = -1
     msgs = {
         "W5562": (
-            "tf.random.set_seed() is not set in tensorflow program",
+            "tf.random.set_seed() is not set in TensorFlow program",
             "randomness-control-tensorflow",
-            "tf.random.set_seed() should be set in tensorflow program for reproducible result"
+            "tf.random.set_seed() should be set in TensorFlow program for reproducible result"
         )
     }
     options = (
@@ -44,7 +44,7 @@ class RandomnessControlTensorflowChecker(BaseChecker):
     def visit_module(self, module: astroid.Module):
         """
         Check whether there is a rule violation.
-        :param node:
+        :param module:
         """
 
         _is_main_module = check_main_module(module)
@@ -70,4 +70,4 @@ class RandomnessControlTensorflowChecker(BaseChecker):
             self._import_tensorflow is True
             and self._has_manual_seed is False
         ):
-            self.add_message("randomness-control-tensorflow", node = module)
+            self.add_message("randomness-control-tensorflow", node=module)
