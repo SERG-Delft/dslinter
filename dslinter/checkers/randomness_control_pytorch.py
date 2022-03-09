@@ -3,7 +3,7 @@ from pylint.interfaces import IAstroidChecker
 from pylint.checkers import BaseChecker
 import astroid
 
-from dslinter.utils.randomness_control_helper import _check_main_module
+from dslinter.utils.randomness_control_helper import check_main_module, has_import
 
 
 class RandomnessControlPytorchChecker(BaseChecker):
@@ -40,9 +40,7 @@ class RandomnessControlPytorchChecker(BaseChecker):
         Check whether there is a pytorch import.
         :param node: import node
         """
-        for name, _ in node.names:
-            if name == "torch":
-                self._import_pytorch = True
+        self._import_pytorch = has_import(node, "torch")
 
     def visit_module(self, module: astroid.Module):
         """
@@ -50,7 +48,7 @@ class RandomnessControlPytorchChecker(BaseChecker):
         :param module:
         """
 
-        _is_main_module = _check_main_module(module)
+        _is_main_module = check_main_module(module)
         if self.config.no_main_module_check_randomness_control_pytorch is False and _is_main_module is False:
             return
 

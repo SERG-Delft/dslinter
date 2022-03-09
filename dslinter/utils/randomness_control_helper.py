@@ -1,6 +1,7 @@
 import astroid
 
-def _check_main_module(module: astroid.Module) -> bool:
+
+def check_main_module(module: astroid.Module) -> bool:
     for node in module.body:
         if isinstance(node, astroid.nodes.If) and hasattr(node, "test"):
             if_compare_node = node.test
@@ -15,3 +16,9 @@ def _check_main_module(module: astroid.Module) -> bool:
             ):
                 return True
     return False
+
+
+def has_import(node: astroid.Import, library_name: str):
+    for name, _ in node.names:
+        if name == library_name:
+            return True

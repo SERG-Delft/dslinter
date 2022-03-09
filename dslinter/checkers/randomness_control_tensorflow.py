@@ -3,7 +3,7 @@ from pylint.interfaces import IAstroidChecker
 from pylint.checkers import BaseChecker
 import astroid
 
-from dslinter.utils.randomness_control_helper import _check_main_module
+from dslinter.utils.randomness_control_helper import check_main_module, has_import
 
 
 class RandomnessControlTensorflowChecker(BaseChecker):
@@ -39,9 +39,7 @@ class RandomnessControlTensorflowChecker(BaseChecker):
         Check whether there is a tensorflow import.
         :param node: import node
         """
-        for name, _ in node.names:
-            if name == "tensorflow":
-                self._import_tensorflow = True
+        self._import_tensorflow = has_import(node, "tensorflow")
 
     def visit_module(self, module: astroid.Module):
         """
@@ -49,7 +47,7 @@ class RandomnessControlTensorflowChecker(BaseChecker):
         :param node:
         """
 
-        _is_main_module = _check_main_module(module)
+        _is_main_module = check_main_module(module)
         if self.config.no_main_module_check_randomness_control_tensorflow is False and _is_main_module is False:
             return
 
