@@ -27,29 +27,29 @@ class RandomnessControlScikitLLearnChecker(BaseChecker):
 
     SPLITTER_FUNCTIONS: List[str] = [
         "make_classification",
-        "check_cv",
+        # "check_cv", # no random_state
         "train_test_split",
     ]
 
     SPLITTER_CLASSES = [
-        "GroupKFold",
+        # "GroupKFold",
         "GroupShuffleSplit",
         "KFold",
-        "LeaveOneGroupOut",
-        "LeavePGroupsOut",
-        "LeaveOneOut",
-        "LeavePOut",
-        "PredefinedSplit",
+        # "LeaveOneGroupOut",
+        # "LeavePGroupsOut",
+        # "LeaveOneOut",
+        # "LeavePOut",
+        # "PredefinedSplit",
         "RepeatedKFold",
         "RepeatedStratifiedKFold",
         "ShuffleSplit",
         "StratifiedKFold",
         "StratifiedShuffleSplit",
-        "TimeSeriesSplit"
+        # "TimeSeriesSplit"
     ]
 
-    __HYPERPARAMETER_RESOURCE = "hyperparameters_scikitlearn_dict.pickle"
-    estimators_all = Resources.get_hyperparameters(__HYPERPARAMETER_RESOURCE)
+    _HYPERPARAMETER_RESOURCE = "hyperparameters_scikitlearn_dict.pickle"
+    _estimators_all = Resources.get_hyperparameters(_HYPERPARAMETER_RESOURCE)
 
     def visit_call(self, node: astroid.Call):
         """
@@ -65,20 +65,18 @@ class RandomnessControlScikitLLearnChecker(BaseChecker):
                 and hasattr(node, "keywords")
                 and hasattr(node.func, "name")
                 and (node.func.name in self.SPLITTER_FUNCTIONS
-                     or node.func.name in self.SPLITTER_CLASSES
-                     or node.func.name in self.estimators_all)
+                     or node.func.name in self.SPLITTER_CLASSES)
+                     #or node.func.name in self.estimators_all)
             ):
                 if node.keywords is not None:
-                    has_random_state_keyword = False
+                    _has_random_state_keyword = False
                     for keyword in node.keywords:
                         if keyword.arg == "random_state":
-                            has_random_state_keyword = True
+                            _has_random_state_keyword = True
                             if keyword.value.as_string() == "None":
                                 self.add_message("randomness-control-scikitlearn", node=node)
-                    if has_random_state_keyword is False:
+                    if _has_random_state_keyword is False:
                         self.add_message("randomness-control-scikitlearn", node=node)
-                if node.keywords is None:
-                    self.add_message("randomness-control-scikitlearn", node=node)
 
         # pylint: disable = W0702
         except:
