@@ -9,6 +9,7 @@ from dslinter.checkers.inplace_numpy import InPlaceNumpyChecker
 from dslinter.checkers.mask_missing_pytorch import MaskMissingPytorchChecker
 from dslinter.checkers.mask_missing_tensorflow import MaskMissingTensorflowChecker
 from dslinter.checkers.memory_release_tensorflow import MemoryReleaseTensorflowChecker
+from dslinter.checkers.merge_parameter_pandas_checker import MergeParameterPandasChecker
 from dslinter.checkers.randomness_control_numpy import RandomnessControlNumpyChecker
 from dslinter.checkers.randomness_control_pytorch import RandomnessControlPytorchChecker
 # pylint: disable = line-too-long
@@ -59,3 +60,4 @@ def register(linter):
 
     linter.register_checker(NanNumpyChecker(linter))
     linter.register_checker(ChainIndexingPandasChecker(linter))
+    linter.register_checker(MergeParameterPandasChecker(linter))
