@@ -77,4 +77,4 @@ class MemoryReleaseTensorflowChecker(BaseChecker):
         :param name: name of the variable
         :return: True when meeting the requirements
         """
-        return self._variable_types[name] in ["tf", "tensorflow"]
+        return name in self._variable_types and self._variable_types[name] in ["tf", "tensorflow"]

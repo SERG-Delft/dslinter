@@ -23,12 +23,12 @@ class ChainIndexingPandasChecker(BaseChecker):
     options = ()
 
     # [variable name, inferred type of object the function is called on]
-    _variable_types: Dict[str, str] = {}
+    _subscript_types: Dict[str, str] = {}
 
     def visit_module(self, module: astroid.Module):
         """Visit module and infer which library the variables are from. """
         try:
-            self._variable_types = TypeInference.infer_variable_types(module)
+            self._subscript_types = TypeInference.infer_dataframes(module)
         except: # pylint: disable = bare-except
             ExceptionHandler.handle(self, module)
 
@@ -38,12 +38,8 @@ class ChainIndexingPandasChecker(BaseChecker):
             hasattr(subscript_node, "value")
             and hasattr(subscript_node.value, "value")
             and hasattr(subscript_node.value.value, "name")
-            and subscript_node.value.value.name in self._variable_types
-            and self._variable_types[subscript_node.value.value.name] == "pd"
+            and subscript_node.value.value.name in self._subscript_types
+            and self._subscript_types[subscript_node.value.value.name] == "pd.DataFrame"
         ):
             self.add_message("chain-indexing-pandas", node=subscript_node)
-
-
-
-
 
