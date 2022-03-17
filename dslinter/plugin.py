@@ -1,5 +1,7 @@
 """Main module for the plugin."""
 from dslinter.checkers.chain_indexing_pandas import ChainIndexingPandasChecker
+from dslinter.checkers.column_selection_pandas_checker import ColumnSelectionPandasChecker
+from dslinter.checkers.datatype_pandas_checker import DatatypePandasChecker
 from dslinter.checkers.dependent_threshold_pytorch import DependentThresholdPytorchChecker
 from dslinter.checkers.dependent_threshold_scikitlearn import DependentThresholdScikitLearnChecker
 from dslinter.checkers.dependent_threshold_tensorflow import DependentThresholdTensorflowChecker
@@ -61,3 +63,5 @@ def register(linter):
     linter.register_checker(NanNumpyChecker(linter))
     linter.register_checker(ChainIndexingPandasChecker(linter))
     linter.register_checker(MergeParameterPandasChecker(linter))
+    linter.register_checker(DatatypePandasChecker(linter))
+    linter.register_checker(ColumnSelectionPandasChecker(linter))

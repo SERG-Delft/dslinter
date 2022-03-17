@@ -1,5 +1,3 @@
-import pdb
-
 import astroid as astroid
 from pylint.interfaces import IAstroidChecker
 from pylint.checkers import BaseChecker
