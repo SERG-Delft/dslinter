@@ -1,3 +1,4 @@
+"""Checker which checks whether chain indexing is used in pandas code."""
 import astroid
 from pylint.checkers import BaseChecker
 from pylint.interfaces import IAstroidChecker
@@ -8,6 +9,7 @@ from dslinter.utils.type_inference import TypeInference
 
 
 class ChainIndexingPandasChecker(BaseChecker):
+    """Checker which checks whether chain indexing is used in pandas code."""
 
     __implements__ = IAstroidChecker
 
@@ -15,9 +17,9 @@ class ChainIndexingPandasChecker(BaseChecker):
     priority = -1
     msgs = {
         "": (
+            "chain indexing is used in pandas code",
             "chain-indexing-pandas",
-            "chain-indexing-pandas",
-            "chain-indexing-pandas"
+            "chain indexing is considered bad practice in pandas and should be avoided in pandas code."
         )
     }
     options = ()
@@ -26,14 +28,14 @@ class ChainIndexingPandasChecker(BaseChecker):
     _subscript_types: Dict[str, str] = {}
 
     def visit_module(self, module: astroid.Module):
-        """Visit module and infer which library the variables are from. """
+        """Visit module and infer which libraries the variables are from. """
         try:
             self._subscript_types = TypeInference.infer_dataframes(module)
         except: # pylint: disable = bare-except
             ExceptionHandler.handle(self, module)
 
     def visit_subscript(self, subscript_node: astroid.Subscript):
-        # is chainindexing && is dataframe
+        """Visit subscript node and check whether there is chain indexing."""
         if(
             hasattr(subscript_node, "value")
             and hasattr(subscript_node.value, "value")

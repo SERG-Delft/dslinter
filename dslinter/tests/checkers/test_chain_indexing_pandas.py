@@ -1,13 +1,17 @@
+"""Class which test ChainIndexingPandasChecker."""
 import astroid
 import pylint.testutils
 
 import dslinter
 
+
 class TestChainIndexingPandasChecker(pylint.testutils.CheckerTestCase):
+    """Class which test ChainIndexingPandasChecker."""
 
     CHECKER_CLASS = dslinter.plugin.ChainIndexingPandasChecker
 
     def test_chain_indexing_on_dataframe(self):
+        """Message should be added if there is a chain indexing on pandas dataframe."""
         script = """
         import pandas as pd
         df = pd.DataFrame([[1,2,3],[4,5,6]])
@@ -23,6 +27,7 @@ class TestChainIndexingPandasChecker(pylint.testutils.CheckerTestCase):
             self.checker.visit_subscript(subscript_node)
 
     def test_chain_indexing_on_normal_array(self):
+        """No message should be added if there is a chain indexing on normal array."""
         script = """
         a = [[0, 0][0, 0]]
         a[0][1] = 2 #@
@@ -35,6 +40,7 @@ class TestChainIndexingPandasChecker(pylint.testutils.CheckerTestCase):
             self.checker.visit_subscript(subscript_node)
 
     def test_indexing_on_dataframe(self):
+        """No message should be added if there is a normal indexing on pandas dataframe."""
         script = """
         import pandas as pd
         df = pd.DataFrame([[1,2,3],[4,5,6]])
@@ -50,6 +56,7 @@ class TestChainIndexingPandasChecker(pylint.testutils.CheckerTestCase):
             self.checker.visit_subscript(subscript_node)
 
     def test_no_chain_indexing_on_dataframe(self):
+        """No message should be added when there is no chain indexing on dataframe."""
         script = """
         import pandas as pd
         df = pd.DataFrame([[1,2,3],[4,5,6]])
