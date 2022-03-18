@@ -17,9 +17,9 @@ class ChainIndexingPandasChecker(BaseChecker):
     priority = -1
     msgs = {
         "": (
-            "chain indexing is used in pandas code",
+            "Chain indexing is used in pandas code",
             "chain-indexing-pandas",
-            "chain indexing is considered bad practice in pandas and should be avoided in pandas code."
+            "Chain indexing is considered bad practice in pandas and should be avoided in pandas code."
         )
     }
     options = ()

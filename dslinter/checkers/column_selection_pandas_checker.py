@@ -1,8 +1,11 @@
+"""Checker which checks column is selected after the dataframe is imported."""
 import astroid as astroid
 from pylint.checkers import BaseChecker
 from pylint.interfaces import IAstroidChecker
 
+
 class ColumnSelectionPandasChecker(BaseChecker):
+    """Checker which checks column is selected after the dataframe is imported."""
 
     __implements__ = IAstroidChecker
 
@@ -10,9 +13,9 @@ class ColumnSelectionPandasChecker(BaseChecker):
     priority = -1
     msgs = {
         "": (
+            "There is no column selection after the dataframe is imported.",
             "column-selection-pandas",
-            "column-selection-pandas",
-            "column-selection-pandas"
+            "Column should be selected after the dataframe is imported for better readability."
         )
     }
     options = ()
@@ -22,6 +25,11 @@ class ColumnSelectionPandasChecker(BaseChecker):
     _dataframe_name = ""
 
     def visit_module(self, module: astroid.Module):
+        """
+        Visit module and see whether the rule is violated.
+        :param module:
+        :return:
+        """
         for idx, node in enumerate(module.body):
             if isinstance(node, astroid.Assign):
                 sub_node = node.value
@@ -38,6 +46,8 @@ class ColumnSelectionPandasChecker(BaseChecker):
                     self._import_data_pandas = True
                     self._import_data_idx = idx
                     self._dataframe_name = node.targets[0].name
+                if len(module.body) <= self._import_data_idx + 1:
+                    self.add_message("column-selection-pandas", node=module)
                 if self._import_data_idx != -1 and idx == self._import_data_idx + 1:
                     if(
                         len(node.targets) > 0
