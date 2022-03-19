@@ -17,7 +17,7 @@ class TestMemoryReleaseTensorflowChecker(pylint.testutils.CheckerTestCase):
         """
         module_tree = astroid.parse(script)
         for_node = astroid.extract_node(script)
-        with self.assertAddsMessages(pylint.testutils.MessageTest(msg_id = "memory-release-tensorflow", node = for_node),):
+        with self.assertAddsMessages(pylint.testutils.MessageTest(msg_id="memory-release-tensorflow", node=for_node),):
             self.checker.visit_module(module_tree)
             self.checker.visit_for(for_node)
 

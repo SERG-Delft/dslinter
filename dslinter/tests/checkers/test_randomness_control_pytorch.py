@@ -4,10 +4,10 @@ import pylint.testutils
 import dslinter
 
 
-class TestRandomnessControllingPytorchChecker(pylint.testutils.CheckerTestCase):
+class TestRandomnessControlPytorchChecker(pylint.testutils.CheckerTestCase):
     """Class which tests RandomnessControllingPytorchChecker"""
 
-    CHECKER_CLASS = dslinter.plugin.RandomnessControllingPytorchChecker
+    CHECKER_CLASS = dslinter.plugin.RandomnessControlPytorchChecker
 
     def test_with_pytorch_randomness_control(self):
         """Tests whether no message is added if manual seed is set."""
@@ -15,6 +15,9 @@ class TestRandomnessControllingPytorchChecker(pylint.testutils.CheckerTestCase):
         import torch #@
         torch.manual_seed(0) 
         torch.randn(10).index_copy(0, torch.tensor([0]), torch.randn(1))
+                
+        if __name__ == '__main__':
+            pass
         """
         import_node = astroid.extract_node(script)
         module = astroid.parse(script)
@@ -27,6 +30,9 @@ class TestRandomnessControllingPytorchChecker(pylint.testutils.CheckerTestCase):
         script = """
         import torch #@
         torch.randn(10).index_copy(0, torch.tensor([0]), torch.randn(1)) 
+                
+        if __name__ == '__main__':
+            pass
         """
         import_node = astroid.extract_node(script)
         module = astroid.parse(script)

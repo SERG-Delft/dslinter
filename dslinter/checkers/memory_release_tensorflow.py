@@ -28,7 +28,7 @@ class MemoryReleaseTensorflowChecker(BaseChecker):
     # [variable name, inferred type of object the function is called on]
     _variable_types: Dict[str, str] = {}
 
-    def visit_module(self, module: astroid.For):
+    def visit_module(self, module: astroid.Module):
         """Visit module and infer which library the variables are from. """
         try:
             self._variable_types = TypeInference.infer_variable_types(module)
@@ -69,7 +69,7 @@ class MemoryReleaseTensorflowChecker(BaseChecker):
         ):
             # if there is no clear_session call in the loop
             # while there is a model creation, the rule is violated.
-            self.add_message("memory-release-tensorflow", node = node)
+            self.add_message("memory-release-tensorflow", node=node)
 
     def _is_tf_variable(self, name) -> bool:
         """
@@ -77,4 +77,4 @@ class MemoryReleaseTensorflowChecker(BaseChecker):
         :param name: name of the variable
         :return: True when meeting the requirements
         """
-        return self._variable_types[name] in ["tf", "tensorflow"]
+        return name in self._variable_types and self._variable_types[name] in ["tf", "tensorflow"]

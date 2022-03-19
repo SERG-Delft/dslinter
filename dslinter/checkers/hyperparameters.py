@@ -19,6 +19,11 @@ class HyperparameterChecker(BaseChecker):
         self.HYPERPARAMETER_RESOURCE = ""
         self.MESSAGE = ""
         self.LIBRARY = ""
+        self.call_types = {}
+
+    def visit_importfrom(self, node: astroid.ImportFrom):
+        for name, _ in node.names:
+            self.call_types[name] = node.modname.split('.')[0]
 
     def visit_call(self, node: astroid.Call):
         """
@@ -41,16 +46,22 @@ class HyperparameterChecker(BaseChecker):
 
     def hyperparameter_in_class(self, node: astroid.Call, function_name: str):
         """Cheches whether the required hyperparameters are used in the class."""
+
         hyperparams_all = Resources.get_hyperparameters(self.HYPERPARAMETER_RESOURCE)
 
+        strict_hyperparameters = ""
+        if self.LIBRARY == "scikitlearn": # strict mode
+            strict_hyperparameters = self.config.strict_hyperparameters_scikitlearn
+        elif self.LIBRARY == "tensorflow":
+            strict_hyperparameters = self.config.strict_hyperparameters_tensorflow
+            if self.call_types[function_name] not in ["tf", "tensorflow"]:
+                return
+        elif self.LIBRARY == "pytorch":
+            strict_hyperparameters = self.config.strict_hyperparameters_pytorch
+            if self.call_types[function_name] != "torch":
+                return
+
         if function_name in hyperparams_all:  # pylint: disable=unsupported-membership-test
-            strict_hyperparameters = ""
-            if self.LIBRARY == "scikitlearn": # strict mode
-                strict_hyperparameters = self.config.strict_hyperparameters_scikitlearn
-            elif self.LIBRARY == "tensorflow":
-                strict_hyperparameters = self.config.strict_hyperparameters_tensorflow
-            elif self.LIBRARY == "pytorch":
-                strict_hyperparameters = self.config.strict_hyperparameters_pytorch
             if strict_hyperparameters:
                 if not self.has_required_hyperparameters(node, hyperparams_all, function_name):
                     self.add_message(self.MESSAGE, node=node)

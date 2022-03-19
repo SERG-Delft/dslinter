@@ -12,7 +12,7 @@ class MaskMissingTensorflowChecker(BaseChecker):
     name = "missing-mask-tensorflow"
     priority = -1
     msgs = {
-        "W5561": (
+        "W5571": (
             "missing-mask-tensorflow",
             "missing-mask-tensorflow",
             "missing-mask-tensorflow"

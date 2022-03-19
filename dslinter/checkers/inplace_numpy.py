@@ -62,6 +62,14 @@ class InPlaceNumpyChecker(BaseChecker):
         :return:
         """
         WHITELIST = [
-            "save"
+            "resize",
+            "sort",
+            "save",
+            "savez",
+            "savez_compressed",
+            "savetxt",
+            "tofile",
+            "fill_diagonal",
+            "testing"
         ]
         return hasattr(node.func, "attrname") and (node.func.attrname in WHITELIST)

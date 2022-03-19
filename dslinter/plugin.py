@@ -1,4 +1,7 @@
 """Main module for the plugin."""
+from dslinter.checkers.chain_indexing_pandas import ChainIndexingPandasChecker
+from dslinter.checkers.column_selection_pandas_checker import ColumnSelectionPandasChecker
+from dslinter.checkers.datatype_pandas_checker import DatatypePandasChecker
 from dslinter.checkers.dependent_threshold_pytorch import DependentThresholdPytorchChecker
 from dslinter.checkers.dependent_threshold_scikitlearn import DependentThresholdScikitLearnChecker
 from dslinter.checkers.dependent_threshold_tensorflow import DependentThresholdTensorflowChecker
@@ -8,13 +11,14 @@ from dslinter.checkers.inplace_numpy import InPlaceNumpyChecker
 from dslinter.checkers.mask_missing_pytorch import MaskMissingPytorchChecker
 from dslinter.checkers.mask_missing_tensorflow import MaskMissingTensorflowChecker
 from dslinter.checkers.memory_release_tensorflow import MemoryReleaseTensorflowChecker
-from dslinter.checkers.randomness_controlling_numpy import RandomnessControllingNumpyChecker
-from dslinter.checkers.randomness_controlling_pytorch import RandomnessControllingPytorchChecker
+from dslinter.checkers.merge_parameter_pandas_checker import MergeParameterPandasChecker
+from dslinter.checkers.randomness_control_numpy import RandomnessControlNumpyChecker
+from dslinter.checkers.randomness_control_pytorch import RandomnessControlPytorchChecker
 # pylint: disable = line-too-long
-from dslinter.checkers.randomness_controlling_dataloader_pytorch import RandomnessControllingDataloaderPytorchChecker
+from dslinter.checkers.randomness_control_dataloader_pytorch import RandomnessControlDataloaderPytorchChecker
 # pylint: disable = line-too-long
-from dslinter.checkers.randomness_controlling_tensorflow import RandomnessControllingTensorflowChecker
-from dslinter.checkers.randomness_controlling_scikitlearn import RandomnessControllingScikitLLearnChecker
+from dslinter.checkers.randomness_control_tensorflow import RandomnessControlTensorflowChecker
+from dslinter.checkers.randomness_control_scikitlearn import RandomnessControlScikitLLearnChecker
 from dslinter.checkers.unnecessary_iteration_pandas import UnnecessaryIterationPandasChecker
 from dslinter.checkers.unnecessary_iteration_tensorflow import UnnecessaryIterationTensorflowChecker
 from dslinter.checkers.deterministic_pytorch import DeterministicAlgorithmChecker
@@ -44,15 +48,20 @@ def register(linter):
     linter.register_checker(HyperparameterScikitLearnChecker(linter))
     linter.register_checker(MemoryReleaseTensorflowChecker(linter))
     linter.register_checker(DeterministicAlgorithmChecker(linter))
-    linter.register_checker(RandomnessControllingScikitLLearnChecker(linter))
-    linter.register_checker(RandomnessControllingPytorchChecker(linter))
-    linter.register_checker(RandomnessControllingDataloaderPytorchChecker(linter))
-    linter.register_checker(RandomnessControllingTensorflowChecker(linter))
-    linter.register_checker(RandomnessControllingNumpyChecker(linter))
+    linter.register_checker(RandomnessControlScikitLLearnChecker(linter))
+    linter.register_checker(RandomnessControlPytorchChecker(linter))
+    linter.register_checker(RandomnessControlDataloaderPytorchChecker(linter))
+    linter.register_checker(RandomnessControlTensorflowChecker(linter))
+    linter.register_checker(RandomnessControlNumpyChecker(linter))
     linter.register_checker(DataLeakageScikitLearnChecker(linter))
     linter.register_checker(DependentThresholdPytorchChecker(linter))
     linter.register_checker(DependentThresholdTensorflowChecker(linter))
     linter.register_checker(DependentThresholdScikitLearnChecker(linter))
     linter.register_checker(MaskMissingTensorflowChecker(linter))
     linter.register_checker(MaskMissingPytorchChecker(linter))
+
     linter.register_checker(NanNumpyChecker(linter))
+    linter.register_checker(ChainIndexingPandasChecker(linter))
+    linter.register_checker(MergeParameterPandasChecker(linter))
+    linter.register_checker(DatatypePandasChecker(linter))
+    linter.register_checker(ColumnSelectionPandasChecker(linter))

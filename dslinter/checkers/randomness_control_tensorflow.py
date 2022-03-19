@@ -3,21 +3,33 @@ from pylint.interfaces import IAstroidChecker
 from pylint.checkers import BaseChecker
 import astroid
 
+from dslinter.utils.randomness_control_helper import check_main_module, has_import
 
-class RandomnessControllingTensorflowChecker(BaseChecker):
+
+class RandomnessControlTensorflowChecker(BaseChecker):
     """Checker which checks whether random seed is set in tensorflow"""
     __implements__ = IAstroidChecker
 
     name = "randomness-control-tensorflow"
     priority = -1
     msgs = {
-        "W5572": (
-            "tf.random.set_seed() is not set in tensorflow program",
+        "W5562": (
+            "tf.random.set_seed() is not set in TensorFlow program",
             "randomness-control-tensorflow",
-            "tf.random.set_seed() should be set in tensorflow program for reproducible result"
+            "tf.random.set_seed() should be set in TensorFlow program for reproducible result"
         )
     }
-    options = ()
+    options = (
+        (
+            "no_main_module_check_randomness_control_tensorflow",
+            {
+                "default": False,
+                "type": "yn",
+                "metavar": "<y_or_n>",
+                "help": "Check every module whether tf.random.set_seed() is used.",
+            },
+        ),
+    )
 
     _import_tensorflow = False
     _has_manual_seed = False
@@ -27,15 +39,18 @@ class RandomnessControllingTensorflowChecker(BaseChecker):
         Check whether there is a tensorflow import.
         :param node: import node
         """
-        for name, _ in node.names:
-            if name == "tensorflow":
-                self._import_tensorflow = True
+        self._import_tensorflow = has_import(node, "tensorflow")
 
     def visit_module(self, module: astroid.Module):
         """
         Check whether there is a rule violation.
-        :param node:
+        :param module:
         """
+
+        _is_main_module = check_main_module(module)
+        if self.config.no_main_module_check_randomness_control_tensorflow is False and _is_main_module is False:
+            return
+
         for node in module.body:
             if isinstance(node, astroid.nodes.Expr) and hasattr(node, "value"):
                 call_node = node.value
@@ -55,4 +70,4 @@ class RandomnessControllingTensorflowChecker(BaseChecker):
             self._import_tensorflow is True
             and self._has_manual_seed is False
         ):
-            self.add_message("randomness-control-tensorflow", node = module)
+            self.add_message("randomness-control-tensorflow", node=module)

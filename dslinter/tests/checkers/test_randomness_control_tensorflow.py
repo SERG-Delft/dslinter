@@ -4,10 +4,10 @@ import pylint.testutils
 import dslinter
 
 
-class TestRandomnessControllingTensorflowChecker(pylint.testutils.CheckerTestCase):
+class TestRandomnessControlTensorflowChecker(pylint.testutils.CheckerTestCase):
     """Class which tests RandomnessControllingTensorflowChecker"""
 
-    CHECKER_CLASS = dslinter.plugin.RandomnessControllingTensorflowChecker
+    CHECKER_CLASS = dslinter.plugin.RandomnessControlTensorflowChecker
 
     def test_with_tensorflow_randomness_control(self):
         """Tests whether no message is added if manual seed is set."""
@@ -15,6 +15,9 @@ class TestRandomnessControllingTensorflowChecker(pylint.testutils.CheckerTestCas
         import tensorflow as tf #@
         tf.random.set_seed(0)
         tf.random.uniform([1])
+                
+        if __name__ == '__main__':
+            pass
         """
         import_node = astroid.extract_node(script)
         module = astroid.parse(script)
@@ -27,6 +30,9 @@ class TestRandomnessControllingTensorflowChecker(pylint.testutils.CheckerTestCas
         script = """
         import tensorflow as tf #@
         tf.random.uniform([1])
+                
+        if __name__ == '__main__':
+            pass
         """
         import_node = astroid.extract_node(script)
         module = astroid.parse(script)

@@ -4,10 +4,10 @@ import pylint.testutils
 import dslinter
 
 
-class TestRandomnessControllingNumpyChecker(pylint.testutils.CheckerTestCase):
+class TestRandomnessControlNumpyChecker(pylint.testutils.CheckerTestCase):
     """Class which tests RandomnessControllingNumpyChecker"""
 
-    CHECKER_CLASS = dslinter.plugin.RandomnessControllingNumpyChecker
+    CHECKER_CLASS = dslinter.plugin.RandomnessControlNumpyChecker
 
     def test_with_numpy_randomness_control(self):
         """Tests whether no message is added if manual seed is set."""
@@ -15,6 +15,9 @@ class TestRandomnessControllingNumpyChecker(pylint.testutils.CheckerTestCase):
         import numpy as np #@
         np.random.seed(0)
         np.random.rand(4)
+                
+        if __name__ == '__main__':
+            pass
         """
         import_node = astroid.extract_node(script)
         module = astroid.parse(script)
@@ -27,6 +30,9 @@ class TestRandomnessControllingNumpyChecker(pylint.testutils.CheckerTestCase):
         script = """
         import numpy as np #@
         np.random.rand(4) 
+                
+        if __name__ == '__main__':
+            pass
         """
         import_node = astroid.extract_node(script)
         module = astroid.parse(script)

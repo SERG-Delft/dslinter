@@ -4,10 +4,10 @@ import pylint.testutils
 import dslinter.plugin
 
 
-class TestRandomnessControllingScikitLearnChecker(pylint.testutils.CheckerTestCase):
+class TestRandomnessControlScikitLearnChecker(pylint.testutils.CheckerTestCase):
     """Class which tests RandomnessControllingScikitlearn."""
 
-    CHECKER_CLASS = dslinter.plugin.RandomnessControllingScikitLLearnChecker
+    CHECKER_CLASS = dslinter.plugin.RandomnessControlScikitLLearnChecker
 
     def test_with_randomness_controlling(self):
         """If there is randomness controlling in the fucntion, no message is added."""
@@ -29,16 +29,16 @@ class TestRandomnessControllingScikitLearnChecker(pylint.testutils.CheckerTestCa
         """
         assign_node = astroid.extract_node(script)
         call_node = assign_node.value
-        with self.assertAddsMessages(pylint.testutils.MessageTest(msg_id="controlling_randomness_scikitlearn", node=call_node)):
+        with self.assertAddsMessages(pylint.testutils.MessageTest(msg_id="randomness-control-scikitlearn", node=call_node)):
             self.checker.visit_call(call_node)
 
     def test_without_randomness_controlling2(self):
-        """If there is no randomness controllling in the function, a ciolation message is added."""
+        """If there is no randomness controlling in the function, a ciolation message is added."""
         script = """
             from sklearn.model_selection import KFold
             kf = KFold() #@
         """
         assign_node = astroid.extract_node(script)
         call_node = assign_node.value
-        with self.assertAddsMessages(pylint.testutils.MessageTest(msg_id="controlling_randomness_scikitlearn", node=call_node)):
+        with self.assertAddsMessages(pylint.testutils.MessageTest(msg_id="randomness-control-scikitlearn", node=call_node)):
             self.checker.visit_call(call_node)
