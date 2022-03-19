@@ -1,8 +1,11 @@
+"""Checker that checks whether datatype is set when dataframe is imported from data."""
 import astroid as astroid
 from pylint.checkers import BaseChecker
 from pylint.interfaces import IAstroidChecker
 
+
 class DatatypePandasChecker(BaseChecker):
+    """Checker that checks whether datatype is set when a dataframe is imported from data."""
 
     __implements__ = IAstroidChecker
 
@@ -10,15 +13,19 @@ class DatatypePandasChecker(BaseChecker):
     priority = -1
     msgs = {
         "":(
+            "Datatypoe is not set when a dataframe is imported from data.",
             "datatype-pandas",
-            "datatype-pandas",
-            "datatype-pandas",
+            "Datatype should be set when a dataframe is imported from data.",
         )
     }
     options = ()
 
     def visit_call(self, call_node: astroid.Call):
-        # pd and read_source and datatype
+        """
+        Vist call node and see whether datatype is set when a dataframe is imported from data.
+        :param call_node:
+        :return:
+        """
         if(
             hasattr(call_node.func, "attrname")
             and call_node.func.attrname == "read_csv"
