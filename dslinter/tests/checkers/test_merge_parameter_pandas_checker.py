@@ -1,3 +1,4 @@
+"""Class which tests TestMergeParameterPandasChecker."""
 import astroid
 import pylint.testutils
 
@@ -5,10 +6,12 @@ import dslinter.plugin
 
 
 class TestMergeParameterPandasChecker(pylint.testutils.CheckerTestCase):
+    """Class which tests TestMergeParameterPandasChecker."""
 
     CHECKER_CLASS = dslinter.plugin.MergeParameterPandasChecker
 
     def test_merge_parameter_pandas_checker_not_set(self):
+        """Message should be added if the parameters for merge operations are not set."""
         script = """
             import pandas as pd
             df1 = pd.DataFrame({'key': ['foo', 'bar', 'baz', 'foo'],
@@ -25,6 +28,7 @@ class TestMergeParameterPandasChecker(pylint.testutils.CheckerTestCase):
             self.checker.visit_call(call_node)
 
     def test_merge_parameter_pandas_checker_set(self):
+        """No message should be added if the parameters for merge operations are set."""
         script = """
             import pandas as pd
             df1 = pd.DataFrame({'key': ['foo', 'bar', 'baz', 'foo'],

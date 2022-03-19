@@ -1,3 +1,4 @@
+"""Checker which checks whether the parameters for merge operations are set."""
 import astroid as astroid
 from pylint.interfaces import IAstroidChecker
 from pylint.checkers import BaseChecker
@@ -8,6 +9,7 @@ from dslinter.utils.type_inference import TypeInference
 
 
 class MergeParameterPandasChecker(BaseChecker):
+    """Checker which checks whether the parameters for merge operations are set."""
 
     __implements__ = IAstroidChecker
 
@@ -15,9 +17,9 @@ class MergeParameterPandasChecker(BaseChecker):
     priority = -1
     msgs = {
         "": (
+            "Parameters for merge operations are not set.",
             "merge-parameter-pandas",
-            "merge-parameter-pandas",
-            "merge-parameter-pandas"
+            "Parameters for merge operations should be set to ensure the correct usage of merging,"
         )
     }
     options = ()
@@ -33,6 +35,7 @@ class MergeParameterPandasChecker(BaseChecker):
             ExceptionHandler.handle(self, module)
 
     def visit_call(self, call_node: astroid.Call):
+        """Visit call node and check whether the parameters are set."""
         # call on pandas dataframe object && name "merge" && check parameter
         if(
             hasattr(call_node.func, "attrname")
@@ -50,4 +53,3 @@ class MergeParameterPandasChecker(BaseChecker):
                 pass
             else:
                 self.add_message("merge-parameter-pandas", node=call_node)
-
