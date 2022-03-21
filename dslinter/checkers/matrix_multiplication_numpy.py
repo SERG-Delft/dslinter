@@ -2,6 +2,7 @@ import astroid
 from pylint.interfaces import IAstroidChecker
 from pylint.checkers import BaseChecker
 
+
 class MatrixMultiplicationNumpyChecker(BaseChecker):
 
     __implements__ = IAstroidChecker
@@ -18,5 +19,12 @@ class MatrixMultiplicationNumpyChecker(BaseChecker):
     options = ()
 
     def visit_call(self, call_node: astroid.Call):
-        pass
+        if(
+            hasattr(call_node.func, "attrname")
+            and call_node.func.attrname == "dot"
+            and hasattr(call_node.func, "expr")
+            and hasattr(call_node.func.expr, "name")
+            and call_node.func.expr.name in ["numpy", "np"]
+        ):
+            self.add_message("matrix-multiplication-numpy", node=call_node)
 
