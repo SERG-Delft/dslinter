@@ -68,4 +68,4 @@ def register(linter):
     linter.register_checker(DatatypePandasChecker(linter))
     linter.register_checker(ColumnSelectionPandasChecker(linter))
     linter.register_checker(DataframeConversionPandasChecker(linter))
-    linter.register_checker(MatrixMultiplicationNumpyChecker(linter))
+    # linter.register_checker(MatrixMultiplicationNumpyChecker(linter))
