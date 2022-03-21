@@ -1,6 +1,7 @@
 """Main module for the plugin."""
 from dslinter.checkers.chain_indexing_pandas import ChainIndexingPandasChecker
 from dslinter.checkers.column_selection_pandas_checker import ColumnSelectionPandasChecker
+from dslinter.checkers.dataframe_conversion_pandas import DataframeConversionPandasChecker
 from dslinter.checkers.datatype_pandas_checker import DatatypePandasChecker
 from dslinter.checkers.dependent_threshold_pytorch import DependentThresholdPytorchChecker
 from dslinter.checkers.dependent_threshold_scikitlearn import DependentThresholdScikitLearnChecker
@@ -10,6 +11,7 @@ from dslinter.checkers.inplace_pandas import InPlacePandasChecker
 from dslinter.checkers.inplace_numpy import InPlaceNumpyChecker
 from dslinter.checkers.mask_missing_pytorch import MaskMissingPytorchChecker
 from dslinter.checkers.mask_missing_tensorflow import MaskMissingTensorflowChecker
+from dslinter.checkers.matrix_multiplication_numpy import MatrixMultiplicationNumpyChecker
 from dslinter.checkers.memory_release_tensorflow import MemoryReleaseTensorflowChecker
 from dslinter.checkers.merge_parameter_pandas_checker import MergeParameterPandasChecker
 from dslinter.checkers.randomness_control_numpy import RandomnessControlNumpyChecker
@@ -65,3 +67,5 @@ def register(linter):
     linter.register_checker(MergeParameterPandasChecker(linter))
     linter.register_checker(DatatypePandasChecker(linter))
     linter.register_checker(ColumnSelectionPandasChecker(linter))
+    linter.register_checker(DataframeConversionPandasChecker(linter))
+    linter.register_checker(MatrixMultiplicationNumpyChecker(linter))
