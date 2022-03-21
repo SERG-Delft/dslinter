@@ -11,7 +11,7 @@ from dslinter.checkers.inplace_pandas import InPlacePandasChecker
 from dslinter.checkers.inplace_numpy import InPlaceNumpyChecker
 from dslinter.checkers.mask_missing_pytorch import MaskMissingPytorchChecker
 from dslinter.checkers.mask_missing_tensorflow import MaskMissingTensorflowChecker
-from dslinter.checkers.matrix_multiplication_numpy import MatrixMultiplicationNumpyChecker
+# from dslinter.checkers.matrix_multiplication_numpy import MatrixMultiplicationNumpyChecker
 from dslinter.checkers.memory_release_tensorflow import MemoryReleaseTensorflowChecker
 from dslinter.checkers.merge_parameter_pandas import MergeParameterPandasChecker
 from dslinter.checkers.randomness_control_numpy import RandomnessControlNumpyChecker

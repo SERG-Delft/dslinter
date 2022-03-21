@@ -1,3 +1,4 @@
+"""Class which tests DataframeConversionPandasChecker."""
 import astroid
 import pylint.testutils
 
@@ -5,10 +6,12 @@ import dslinter
 
 
 class TestDataframeConversionPandasChecker(pylint.testutils.CheckerTestCase):
+    """Class which tests DataframeConversionPandasChecker."""
 
     CHECKER_CLASS = dslinter.plugin.DataframeConversionPandasChecker
 
     def test_dataframe_conversion_incorrectly_used(self):
+        """Message should be added if .values is used for dataframe conversion."""
         script = """
         import numpy as np
         import pandas as pd
@@ -28,6 +31,7 @@ class TestDataframeConversionPandasChecker(pylint.testutils.CheckerTestCase):
             self.checker.visit_call(call_node)
 
     def test_dataframe_conversion_correctly_used(self):
+        """No message should be added if .to_numpy() is used for dataframe conversion."""
         script = """
         import numpy as np
         import pandas as pd
