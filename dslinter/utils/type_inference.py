@@ -189,7 +189,7 @@ class TypeInference:
         return variables_with_full_types
 
     @staticmethod
-    def infer_variable_types(module: astroid.Module) -> Dict[str, str]:
+    def infer_native_variable_types(module: astroid.Module) -> Dict[str, str]:
         """
         When there is no stub available for a library (e.g., missing tensorflow-stubs),
         use this method instead of infer_types. Infer variable type in Assign nodes.
@@ -203,7 +203,7 @@ class TypeInference:
         return variables_with_types
 
     @staticmethod
-    def infer_dataframes(module: astroid.Module) -> Dict[str, str]:
+    def infer_library_variable_types(module: astroid.Module) -> Dict[str, str]:
         """
         When there is no stub available for a library (e.g., missing tensorflow-stubs),
         use this method instead of infer_types. Infer variable type in Assign nodes.

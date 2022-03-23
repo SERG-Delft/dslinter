@@ -21,6 +21,7 @@ from dslinter.checkers.randomness_control_dataloader_pytorch import RandomnessCo
 # pylint: disable = line-too-long
 from dslinter.checkers.randomness_control_tensorflow import RandomnessControlTensorflowChecker
 from dslinter.checkers.randomness_control_scikitlearn import RandomnessControlScikitLLearnChecker
+from dslinter.checkers.tensor_array_tensorflow import TensorArrayTensorflowChecker
 from dslinter.checkers.unnecessary_iteration_pandas import UnnecessaryIterationPandasChecker
 from dslinter.checkers.unnecessary_iteration_tensorflow import UnnecessaryIterationTensorflowChecker
 from dslinter.checkers.deterministic_pytorch import DeterministicAlgorithmChecker
@@ -69,3 +70,4 @@ def register(linter):
     linter.register_checker(ColumnSelectionPandasChecker(linter))
     linter.register_checker(DataframeConversionPandasChecker(linter))
     # linter.register_checker(MatrixMultiplicationNumpyChecker(linter))
+    linter.register_checker(TensorArrayTensorflowChecker(linter))

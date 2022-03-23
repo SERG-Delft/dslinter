@@ -30,7 +30,7 @@ class MergeParameterPandasChecker(BaseChecker):
     def visit_module(self, module: astroid.Module):
         """Visit module and infer which library the variables are from. """
         try:
-            self._subscript_types = TypeInference.infer_dataframes(module)
+            self._subscript_types = TypeInference.infer_library_variable_types(module)
         except: # pylint: disable = bare-except
             ExceptionHandler.handle(self, module)
 
