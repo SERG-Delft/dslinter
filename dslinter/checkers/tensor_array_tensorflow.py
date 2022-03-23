@@ -1,4 +1,5 @@
 """"""
+
 import astroid
 from pylint.checkers import BaseChecker
 from pylint.interfaces import IAstroidChecker
@@ -30,7 +31,7 @@ class TensorArrayTensorflowChecker(BaseChecker):
     def visit_module(self, module: astroid.Module):
         """Visit module and infer which libraries the variables are from. """
         try:
-            self._variable_types = TypeInference.infer_library_variable_types(module)
+            self._variable_types = TypeInference.infer_library_variable_first_types(module)
         except: # pylint: disable = bare-except
             ExceptionHandler.handle(self, module)
 
@@ -38,8 +39,10 @@ class TensorArrayTensorflowChecker(BaseChecker):
         for node in for_node.body:
             if(
                 isinstance(node, astroid.Assign)
-                and node.targets[0] in self._variable_types
-                and self._variable_types[node.targets[0]] in ["tf.TensorArray", "tensorflow.TensorArray"]
+                and len(node.targets) > 0
+                and hasattr(node.targets[0], "name")
+                and node.targets[0].name in self._variable_types
+                and self._variable_types[node.targets[0].name] in ["tf.constant", "tensorflow.constant"]
                 and self.infer_call_expression(node.value) in ["tf.concat"]
             ):
                 self.add_message("tensor-array-tensorflow", node=for_node)
