@@ -157,7 +157,7 @@ class TypeInference:
         return nodes_with_types
 
     @staticmethod
-    def infer_variable_full_types(module: astroid.Module) -> Dict[str, str]:
+    def infer_variable_most_recent_full_types(module: astroid.Module) -> Dict[str, str]:
         """
         When there is no stub available for a library (e.g., missing tensorflow-stubs),
         use this method instead of infer_types. Infer variable type in Assign nodes.
@@ -189,7 +189,42 @@ class TypeInference:
         return variables_with_full_types
 
     @staticmethod
-    def infer_variable_types(module: astroid.Module) -> Dict[str, str]:
+    def infer_variable_full_types(module: astroid.Module) -> Dict[str, str]:
+        """
+        When there is no stub available for a library (e.g., missing tensorflow-stubs),
+        use this method instead of infer_types. Infer variable type in Assign nodes.
+        :param module: code module
+        :return: Dict witn variable names and their inferred type
+        """
+        variables_with_full_types = {}
+        nodes = ASTUtil.search_nodes(module, astroid.Assign)
+        for node in nodes:
+            if hasattr(node, "targets"):
+                for var in node.targets:
+                    if hasattr(var, "name"):
+                        variable_name = var.name
+                        if isinstance(node.value, astroid.nodes.Const):
+                            variables_with_full_types[variable_name] = 'const'
+                        elif hasattr(node.value, "func"):
+                            call = node.value.func
+                            full_type = ""
+                            if hasattr(call, "attrname"):
+                                full_type = "." + call.attrname + full_type
+                            while hasattr(call, "expr"):
+                                call = call.expr
+                                if hasattr(call, "attrname"):
+                                    full_type = "." + call.attrname + full_type
+                            if hasattr(call, "name"):
+                                full_type = call.name + full_type
+                            if variable_name not in variables_with_full_types:
+                                variables_with_full_types[variable_name] = [full_type]
+                            else:
+                                variables_with_full_types[variable_name].append(full_type)
+
+        return variables_with_full_types
+
+    @staticmethod
+    def infer_native_variable_most_recent_types(module: astroid.Module) -> Dict[str, str]:
         """
         When there is no stub available for a library (e.g., missing tensorflow-stubs),
         use this method instead of infer_types. Infer variable type in Assign nodes.
@@ -197,13 +232,29 @@ class TypeInference:
         :return: Dict witn variable names and their inferred type
         """
         variables_with_types = {}
-        variables_with_full_types = TypeInference.infer_variable_full_types(module)
+        variables_with_full_types = TypeInference.infer_variable_most_recent_full_types(module)
         for k, v in variables_with_full_types.items():
             variables_with_types[k] = v.split(".")[0]
         return variables_with_types
 
     @staticmethod
-    def infer_dataframes(module: astroid.Module) -> Dict[str, str]:
+    def infer_library_variable_most_recent_types(module: astroid.Module) -> Dict[str, str]:
+        """
+        When there is no stub available for a library (e.g., missing tensorflow-stubs),
+        use this method instead of infer_types. Infer variable type in Assign nodes.
+        :param module: code module
+        :return: Dict witn variable names and their inferred type
+        """
+        variables_with_types = {}
+        variables_with_full_types = TypeInference.infer_variable_most_recent_full_types(module)
+        for k, v in variables_with_full_types.items():
+            strings = v.split(".")
+            if len(strings) >= 2:
+                variables_with_types[k] = strings[0] + "." + strings[1]
+        return variables_with_types
+
+    @staticmethod
+    def infer_library_variable_first_types(module: astroid.Module) -> Dict[str, str]:
         """
         When there is no stub available for a library (e.g., missing tensorflow-stubs),
         use this method instead of infer_types. Infer variable type in Assign nodes.
@@ -213,7 +264,7 @@ class TypeInference:
         variables_with_types = {}
         variables_with_full_types = TypeInference.infer_variable_full_types(module)
         for k, v in variables_with_full_types.items():
-            strings = v.split(".")
+            strings = v[0].split(".")
             if len(strings) >= 2:
                 variables_with_types[k] = strings[0] + "." + strings[1]
         return variables_with_types

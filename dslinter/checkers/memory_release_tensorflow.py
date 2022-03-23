@@ -31,7 +31,7 @@ class MemoryReleaseTensorflowChecker(BaseChecker):
     def visit_module(self, module: astroid.Module):
         """Visit module and infer which library the variables are from. """
         try:
-            self._variable_types = TypeInference.infer_variable_types(module)
+            self._variable_types = TypeInference.infer_native_variable_most_recent_types(module)
         except: # pylint: disable = bare-except
             ExceptionHandler.handle(self, module)
 

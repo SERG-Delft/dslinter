@@ -30,7 +30,7 @@ class DataframeConversionPandasChecker(BaseChecker):
     def visit_module(self, module: astroid.Module):
         """Visit module and infer which libraries the variables are from. """
         try:
-            self._call_types = TypeInference.infer_dataframes(module)
+            self._call_types = TypeInference.infer_library_variable_most_recent_types(module)
         except: # pylint: disable = bare-except
             ExceptionHandler.handle(self, module)
 
