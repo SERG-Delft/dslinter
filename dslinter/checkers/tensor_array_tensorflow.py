@@ -1,5 +1,4 @@
-""""""
-
+"""Checker which checks whether tf.TensorArray() is used for growing array in the loop in tensorflow code. """
 import astroid
 from pylint.checkers import BaseChecker
 from pylint.interfaces import IAstroidChecker
@@ -10,7 +9,7 @@ from typing import Dict
 
 
 class TensorArrayTensorflowChecker(BaseChecker):
-    """"""
+    """Checker which checks whether tf.TensorArray() is used for growing array in the loop in tensorflow code. """
 
     __implements__ = IAstroidChecker
 
@@ -18,9 +17,9 @@ class TensorArrayTensorflowChecker(BaseChecker):
     priority = -1
     msgs = {
         "": (
+            "tf.constant() variable is assigned or growing in the loop.",
             "tensor-array-tensorflow",
-            "tensor-array-tensorflow",
-            "tensor-array-tensorflow",
+            "Using tf.TensorArray() for growing array in the loop.",
         )
     }
     options = ()
@@ -29,13 +28,14 @@ class TensorArrayTensorflowChecker(BaseChecker):
     _variable_types: Dict[str, str] = {}
 
     def visit_module(self, module: astroid.Module):
-        """Visit module and infer which libraries the variables are from. """
+        """Visit module and infer which libraries the variables are from."""
         try:
             self._variable_types = TypeInference.infer_library_variable_first_types(module)
         except: # pylint: disable = bare-except
             ExceptionHandler.handle(self, module)
 
     def visit_for(self, for_node: astroid.For):
+        """Visit for node and see whether the rule is violated."""
         for node in for_node.body:
             if(
                 isinstance(node, astroid.Assign)
@@ -47,7 +47,9 @@ class TensorArrayTensorflowChecker(BaseChecker):
             ):
                 self.add_message("tensor-array-tensorflow", node=for_node)
 
-    def infer_call_expression(self, call_node: astroid.Call):
+    @staticmethod
+    def infer_call_expression(call_node: astroid.Call):
+        """Infer the whole call exprassion of the call node."""
         call_expression = ""
         call = call_node.func
         if hasattr(call, "attrname"):

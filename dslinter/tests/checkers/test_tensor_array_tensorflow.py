@@ -1,3 +1,4 @@
+"""Class which tests TensorArrayTensorflowChecker."""
 import astroid as astroid
 import pylint.testutils
 
@@ -5,10 +6,12 @@ import dslinter
 
 
 class TestTensorArrayTensorflowChecker(pylint.testutils.CheckerTestCase):
+    """Class which tests TensorArrayTensorflowChecker."""
 
     CHECKER_CLASS = dslinter.plugin.TensorArrayTensorflowChecker
 
     def test_not_use_tensor_array(self):
+        """Message should be added if tf.constant() type variable is changed in the loop."""
         script = """
         import tensorflow as tf
         @tf.function
@@ -33,6 +36,7 @@ class TestTensorArrayTensorflowChecker(pylint.testutils.CheckerTestCase):
             self.checker.visit_for(for_node)
 
     def test_use_tensor_array(self):
+        """No message should be added if tf.TensorArray() type variable is changed in the loop."""
         script = """
         import tensorflow as tf
         @tf.function
