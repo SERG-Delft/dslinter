@@ -6,12 +6,12 @@ from dslinter.checkers.datatype_pandas import DatatypePandasChecker
 from dslinter.checkers.dependent_threshold_pytorch import DependentThresholdPytorchChecker
 from dslinter.checkers.dependent_threshold_scikitlearn import DependentThresholdScikitLearnChecker
 from dslinter.checkers.dependent_threshold_tensorflow import DependentThresholdTensorflowChecker
+from dslinter.checkers.forward_pytorch import ForwardPytorchChecker
 from dslinter.checkers.imports import ImportChecker
 from dslinter.checkers.inplace_pandas import InPlacePandasChecker
 from dslinter.checkers.inplace_numpy import InPlaceNumpyChecker
 from dslinter.checkers.mask_missing_pytorch import MaskMissingPytorchChecker
 from dslinter.checkers.mask_missing_tensorflow import MaskMissingTensorflowChecker
-# from dslinter.checkers.matrix_multiplication_numpy import MatrixMultiplicationNumpyChecker
 from dslinter.checkers.memory_release_tensorflow import MemoryReleaseTensorflowChecker
 from dslinter.checkers.merge_parameter_pandas import MergeParameterPandasChecker
 from dslinter.checkers.randomness_control_numpy import RandomnessControlNumpyChecker
@@ -69,5 +69,5 @@ def register(linter):
     linter.register_checker(DatatypePandasChecker(linter))
     linter.register_checker(ColumnSelectionPandasChecker(linter))
     linter.register_checker(DataframeConversionPandasChecker(linter))
-    # linter.register_checker(MatrixMultiplicationNumpyChecker(linter))
     linter.register_checker(TensorArrayTensorflowChecker(linter))
+    linter.register_checker(ForwardPytorchChecker(linter))
