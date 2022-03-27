@@ -14,6 +14,7 @@ from dslinter.checkers.mask_missing_pytorch import MaskMissingPytorchChecker
 from dslinter.checkers.mask_missing_tensorflow import MaskMissingTensorflowChecker
 from dslinter.checkers.memory_release_tensorflow import MemoryReleaseTensorflowChecker
 from dslinter.checkers.merge_parameter_pandas import MergeParameterPandasChecker
+from dslinter.checkers.mode_toggling_pytorch import ModeTogglingPytorchChecker
 from dslinter.checkers.randomness_control_numpy import RandomnessControlNumpyChecker
 from dslinter.checkers.randomness_control_pytorch import RandomnessControlPytorchChecker
 # pylint: disable = line-too-long
@@ -71,3 +72,4 @@ def register(linter):
     linter.register_checker(DataframeConversionPandasChecker(linter))
     linter.register_checker(TensorArrayTensorflowChecker(linter))
     linter.register_checker(ForwardPytorchChecker(linter))
+    linter.register_checker(ModeTogglingPytorchChecker(linter))
