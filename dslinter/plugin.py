@@ -7,6 +7,7 @@ from dslinter.checkers.dependent_threshold_pytorch import DependentThresholdPyto
 from dslinter.checkers.dependent_threshold_scikitlearn import DependentThresholdScikitLearnChecker
 from dslinter.checkers.dependent_threshold_tensorflow import DependentThresholdTensorflowChecker
 from dslinter.checkers.forward_pytorch import ForwardPytorchChecker
+from dslinter.checkers.gradient_clear_pytorch import GradientClearPytorchChecker
 from dslinter.checkers.imports import ImportChecker
 from dslinter.checkers.inplace_pandas import InPlacePandasChecker
 from dslinter.checkers.inplace_numpy import InPlaceNumpyChecker
@@ -73,3 +74,4 @@ def register(linter):
     linter.register_checker(TensorArrayTensorflowChecker(linter))
     linter.register_checker(ForwardPytorchChecker(linter))
     linter.register_checker(ModeTogglingPytorchChecker(linter))
+    linter.register_checker(GradientClearPytorchChecker(linter))
