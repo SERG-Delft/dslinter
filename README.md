@@ -75,6 +75,10 @@ pylint --load-plugins=dslinter <other_options> <path_to_sources>
 ## How to contribute
 Contributions are welcome! If you want to contribute, please see the following steps:
 1. fork the repository and clone the repository you forked.
+```
+git clone https://github.com/your-github-account/dslinter.git
+git submodule update --init --recursive
+```
 2. `dslinter` uses `poetry` to manage dependencies, so you will need to install `poetry` first and then install the dependencies. 
 ```
 pip install poerty
