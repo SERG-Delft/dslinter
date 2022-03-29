@@ -8,6 +8,8 @@
 
 - **[C5501 - C5506] Import Checker**: Check whether data science modules are imported using the correct naming conventions.
 
+- **W5601 Nan Equality Checker (NumPy)**: Values cannot be compared with np.nan, as `np.nan != np.nan`.
+
 - **W5501 InPlace Checker(Pandas)**: Operations on DataFrames return new DataFrames, and they should be assigned to a variable. If the result of a operation on a DataFrame is not assigned to a variable, the result will be lost, so the rule is violated. Operations from the whitelist and with `in_place` parameter set are excluded.
 
 - **W5502 InPlace Checker(NumPy)**: The result of the NumPy operations should be assign to a variable. If the operation is not assigned to a variable, the result will be lost, so the rule is violated. Operations from whitelist and with `out` parameter (can act as in-place) set are excluded. 
@@ -53,8 +55,6 @@
 - **W5593 Dependent Threshold Checker(ScikitLearn)**: If threshold-dependent evaluation(e.g., f-score) is used in the code, check whether threshold-indenpendent evaluation(e.g., auc) metrics is also used in the code.
 
 
-- **W5601 Nan Equality Checker (NumPy)**: Values cannot be compared with np.nan, as `np.nan != np.nan`.
-
 
 ## Installation
 To install from the Python Package Index:
@@ -75,6 +75,10 @@ pylint --load-plugins=dslinter <other_options> <path_to_sources>
 ## How to contribute
 Contributions are welcome! If you want to contribute, please see the following steps:
 1. fork the repository and clone the repository you forked.
+```
+git clone https://github.com/your-github-account/dslinter.git
+git submodule update --init --recursive
+```
 2. `dslinter` uses `poetry` to manage dependencies, so you will need to install `poetry` first and then install the dependencies. 
 ```
 pip install poerty
