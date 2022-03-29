@@ -1,3 +1,4 @@
+"""Class which tests ModeTogglingPytorchChecker."""
 import astroid
 import pylint.testutils
 
@@ -5,10 +6,12 @@ import dslinter.plugin
 
 
 class TestModeTogglingPytorchChecker(pylint.testutils.CheckerTestCase):
+    """Class which tests ModeTogglingPytorchChecker."""
 
     CHECKER_CLASS = dslinter.plugin.ModeTogglingPytorchChecker
 
     def test_mode_improper_toggling(self):
+        """Message will be added when the training mode is not toggling back in time."""
         script = """
         for epoch in range(2):  # loop over the dataset multiple times 
             running_loss = 0.0
@@ -39,6 +42,7 @@ class TestModeTogglingPytorchChecker(pylint.testutils.CheckerTestCase):
             self.checker.visit_for(for_node)
 
     def test_mode_proper_toggling(self):
+        """No message will be added if the training mode is toggling back in time."""
         script = """
         for epoch in range(2):  # loop over the dataset multiple times 
             running_loss = 0.0

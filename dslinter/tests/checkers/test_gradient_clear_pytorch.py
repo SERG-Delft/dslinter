@@ -1,3 +1,4 @@
+"""Class which tests the GradientClearPytorchChecker."""
 import astroid
 import pylint.testutils
 
@@ -5,10 +6,12 @@ import dslinter
 
 
 class TestGradientClearPytorchChecker(pylint.testutils.CheckerTestCase):
+    """Class which tests the GradientClearPytorchChecker."""
 
     CHECKER_CLASS = dslinter.plugin.GradientClearPytorchChecker
 
     def test_gradient_not_clear(self):
+        """Message should be added if the optimizer.zero_grad() is not used in pytorch code when loss_fn.backward() and optimizer.step() are used."""
         script = """
             for epoch in range(2):  # loop over the dataset multiple times
             
@@ -34,6 +37,7 @@ class TestGradientClearPytorchChecker(pylint.testutils.CheckerTestCase):
             self.checker.visit_for(for_node)
 
     def test_gradient_clear(self):
+        """No message should be added if the loss_fn.backward() and optimizer.step() should be used together with optimizer.zero_grad()."""
         script = """
             for epoch in range(2):  # loop over the dataset multiple times
             

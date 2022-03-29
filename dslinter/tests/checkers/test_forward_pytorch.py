@@ -1,3 +1,4 @@
+"""Class which tests the ForwardPytorchChecker."""
 import astroid
 import pylint.testutils
 
@@ -5,10 +6,12 @@ import dslinter
 
 
 class TestForwardPytorchChecker(pylint.testutils.CheckerTestCase):
+    """Class which tests the ForwardPytorchChecker."""
 
     CHECKER_CLASS = dslinter.plugin.ForwardPytorchChecker
 
     def test_use_forward(self):
+        """Message will be added if the self.net.forward() is used in the code rather than self.net()."""
         script = """
         import torch.nn as nn
         class Net(nn.Module):
@@ -35,6 +38,7 @@ class TestForwardPytorchChecker(pylint.testutils.CheckerTestCase):
             self.checker.visit_call(call_node)
 
     def test_not_use_forward(self):
+        """No message will be added if self.net() is used in the code."""
         script = """
         import torch.nn as nn
         class Net(nn.Module):
