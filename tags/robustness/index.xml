@@ -33,14 +33,5 @@
       <description>Use &lt;code&gt;self.net()&lt;/code&gt; in PyTorch to forward the input to the network instead of &lt;code&gt;self.net.forward()&lt;/code&gt;.</description>
     </item>
     
-    <item>
-      <title>DataLoader Unused</title>
-      <link>https://hynn01.github.io/dslinter/posts/codesmells/24-dataloader-unused/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://hynn01.github.io/dslinter/posts/codesmells/24-dataloader-unused/</guid>
-      <description>Use &lt;code&gt;DataLoader&lt;/code&gt; to load the data in PyTorch instead of splitting data manually and feed into the network.</description>
-    </item>
-    
   </channel>
 </rss>

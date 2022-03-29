@@ -204,24 +204,6 @@
       <description>Use &lt;code&gt;optimizer.zero_grad()&lt;/code&gt;, &lt;code&gt;loss_fn.backward()&lt;/code&gt;, &lt;code&gt;optimizer.step()&lt;/code&gt; together in order in PyTorch. Do not forget to use &lt;code&gt;optimizer.zero_grad()&lt;/code&gt; before &lt;code&gt;loss_fn.backward()&lt;/code&gt; to clear gradients.</description>
     </item>
     
-    <item>
-      <title>Loss API Misused</title>
-      <link>https://hynn01.github.io/dslinter/posts/codesmells/23-loss-api-misused/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://hynn01.github.io/dslinter/posts/codesmells/23-loss-api-misused/</guid>
-      <description>Check the input for loss API in PyTorch carefully.</description>
-    </item>
-    
-    <item>
-      <title>DataLoader Unused</title>
-      <link>https://hynn01.github.io/dslinter/posts/codesmells/24-dataloader-unused/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://hynn01.github.io/dslinter/posts/codesmells/24-dataloader-unused/</guid>
-      <description>Use &lt;code&gt;DataLoader&lt;/code&gt; to load the data in PyTorch instead of splitting data manually and feed into the network.</description>
-    </item>
-    
     
   </channel>
 </rss>

@@ -46,10 +46,6 @@
   </url><url>
     <loc>https://hynn01.github.io/dslinter/posts/codesmells/22-gradients-not-cleared-before-backward-propagation/</loc>
   </url><url>
-    <loc>https://hynn01.github.io/dslinter/posts/codesmells/23-loss-api-misused/</loc>
-  </url><url>
-    <loc>https://hynn01.github.io/dslinter/posts/codesmells/24-dataloader-unused/</loc>
-  </url><url>
     <loc>https://hynn01.github.io/dslinter/tags/api-specific/</loc>
   </url><url>
     <loc>https://hynn01.github.io/dslinter/posts/codesmells/</loc>
