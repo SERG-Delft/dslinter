@@ -1,4 +1,6 @@
 """Checker which checks whether there are possible invalid value unmasked."""
+import pdb
+
 import astroid
 from pylint.checkers import BaseChecker
 from pylint.interfaces import IAstroidChecker
@@ -30,7 +32,13 @@ class MaskMissingPytorchChecker(BaseChecker):
         # if log is call but no mask outside of it, it violate the rule
         __has_log = False
         __has_mask = False
-        if hasattr(node.func, "attrname") and node.func.attrname == "log":
+        if (
+            hasattr(node.func, "attrname")
+            and node.func.attrname == "log"
+            and hasattr(node.func, "expr")
+            and hasattr(node.func.expr, "name")
+            and node.func.expr.name == "torch"
+        ):
             __has_log = True
         if(
             hasattr(node, "args")
