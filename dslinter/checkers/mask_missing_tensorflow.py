@@ -30,7 +30,13 @@ class MaskMissingTensorflowChecker(BaseChecker):
         # if log is call but no mask outside of it, it violate the rule
         __has_log = False
         __has_mask = False
-        if hasattr(node.func, "attrname") and node.func.attrname == "log":
+        if(
+            hasattr(node.func, "attrname")
+            and node.func.attrname == "log"
+            and hasattr(node.func, "expr")
+            and hasattr(node.func.expr, "name")
+            and node.func.expr.name in ["tf", "tensorflow"]
+        ):
             __has_log = True
         if(
             hasattr(node, "args")

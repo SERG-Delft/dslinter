@@ -17,7 +17,6 @@ class TestMaskMissingTensorflowChecker(pylint.testutils.CheckerTestCase):
         with self.assertAddsMessages(pylint.testutils.MessageTest(msg_id="missing-mask-tensorflow", node = call_node)):
             self.checker.visit_call(call_node)
 
-
     def test_with_mask(self):
         script = """
         cross_entropy = tf.reduce_mean(-tf.reduce_sum(y_*tf.log(tf.clip_by_value(y_conv,1e-10,1.0)),reduction_indices=[1])) #@
