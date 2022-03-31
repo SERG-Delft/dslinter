@@ -18,7 +18,7 @@ class DependentThresholdPytorchChecker(BaseChecker):
     name = "dependent-threshold-pytorch"
     priority = -1
     msgs = {
-        "W5592": (
+        "W5519": (
             "dependent-threshold-pytorch",
             "dependent-threshold-pytorch",
             "dependent-threshold-pytorch"

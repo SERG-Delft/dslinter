@@ -17,7 +17,7 @@ class DependentThresholdScikitLearnChecker(BaseChecker):
     name = "dependent-threshold-scikitlearn"
     priority = -1
     msgs = {
-        "W5593": (
+        "W5517": (
             "dependent-threshold-scikitlearn",
             "dependent-threshold-scikitlearn",
             "dependent-threshold-scikitlearn"

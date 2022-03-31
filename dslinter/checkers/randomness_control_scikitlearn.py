@@ -16,7 +16,7 @@ class RandomnessControlScikitLLearnChecker(BaseChecker):
     name = "randomness-control-scikitlearn"
     priority = -1
     msgs = {
-        "W5561": (
+        "W5507": (
             "'random_state=None' shouldn't be used in estimators or "
             "cross-validation splitters, it indicates improper randomness control",
             "randomness-control-scikitlearn",

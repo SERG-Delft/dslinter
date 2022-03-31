@@ -14,7 +14,7 @@ class MaskMissingPytorchChecker(BaseChecker):
     name = "missing-mask-pytorch"
     priority = -1
     msgs = {
-        "W5572": (
+        "W5511": (
             "missing-mask-pytorch",
             "missing-mask-pytorch",
             "missing-mask-pytorch"

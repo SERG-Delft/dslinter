@@ -12,7 +12,7 @@ class GradientClearPytorchChecker(BaseChecker):
     name = "gradient-clear-pytorch"
     priority = -1
     msgs = {
-        "": (
+        "E5505": (
             "The optimizer.zero_grad() is not used in pytorch code when loss_fn.backward() and optimizer.step() are used.",
             "gradient-clear-pytorch",
             "The loss_fn.backward() and optimizer.step() should be used together with optimizer.zero_grad()."

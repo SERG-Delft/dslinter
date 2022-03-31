@@ -13,7 +13,7 @@ class RandomnessControlNumpyChecker(BaseChecker):
     name = "randomness-control-numpy"
     priority = -1
     msgs = {
-        "W5564": (
+        "W5506": (
             "np.random.seed() is not set in numpy program.",
             "randomness-control-numpy",
             "np.random.seed() should be set in numpy program for reproducible result."

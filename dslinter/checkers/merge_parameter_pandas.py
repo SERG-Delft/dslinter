@@ -16,7 +16,7 @@ class MergeParameterPandasChecker(BaseChecker):
     name = "merge-parameter-pandas"
     priority = -1
     msgs = {
-        "": (
+        "R5505": (
             "Parameters for merge operations are not set.",
             "merge-parameter-pandas",
             "Parameters for merge operations should be set to ensure the correct usage of merging,"

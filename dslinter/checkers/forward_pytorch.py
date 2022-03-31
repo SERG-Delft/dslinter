@@ -12,7 +12,7 @@ class ForwardPytorchChecker(BaseChecker):
     name = "forward-pytorch"
     priority = -1
     msgs = {
-        "": (
+        "W5515": (
             "The self.net.forward() is used in the code rather than self.net().",
             "forward-pytorch",
             "It is recommended to use self.net() rather than self.net.forward() in PyTorch code."
