@@ -58,7 +58,6 @@ class UnnecessaryIterationPandasChecker(BaseChecker):
         except:  # pylint: disable=bare-except
             ExceptionHandler.handle(self, node)
 
-
     def _iterating_through_dataframe(self, node: astroid.Call) -> bool:
         """
         Evaluate whether there is iterated through a DataFrame.
