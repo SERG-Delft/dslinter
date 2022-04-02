@@ -13,7 +13,7 @@ class ScalerMissingScikitLearnChecker(BaseChecker):
 
     __implements__ = IAstroidChecker
 
-    name = "scalar-missing-scikitlearn"
+    name = "scaler-missing-scikitlearn"
     priority = -1
     msgs = {
         "E5504": (

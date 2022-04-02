@@ -15,7 +15,7 @@ class NanNumpyChecker(BaseChecker):
     msgs = {
         "E5501": (
             "Value compared with np.nan.",
-            "nan-equality",
+            "nan-numpy",
             "Values cannot be compared with np.nan, as np.nan != np.nan.",
         ),
     }
@@ -32,7 +32,7 @@ class NanNumpyChecker(BaseChecker):
                 if isinstance(side, astroid.Attribute) \
                         and side.attrname == "nan" \
                         and side.expr.name == "np":
-                    self.add_message("nan-equality", node=node)
+                    self.add_message("nan-numpy", node=node)
                     return
         except:  # pylint: disable=bare-except
             ExceptionHandler.handle(self, node)
