@@ -69,7 +69,7 @@ class DataLeakageScikitLearnChecker(BaseChecker):
                 and hasattr(node.func, "expr")
                 and self._expr_is_estimator(node.func.expr)
             ):
-                self.add_message("sk-pipeline", node=node)
+                self.add_message("data-leakage-scikitlearn", node=node)
         except:  # pylint: disable=bare-except
             ExceptionHandler.handle(self, node)
 

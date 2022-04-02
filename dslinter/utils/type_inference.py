@@ -207,7 +207,7 @@ class TypeInference:
                     if hasattr(var, "name"):
                         variable_name = var.name
                         if isinstance(node.value, astroid.nodes.Const):
-                            variables_with_full_types[variable_name] = 'const'
+                            variables_with_full_types[variable_name] = ['const']
                         elif hasattr(node.value, "func"):
                             call = node.value.func
                             full_type = ""
