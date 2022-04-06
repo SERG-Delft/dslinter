@@ -16,7 +16,7 @@ class DataframeConversionPandasChecker(BaseChecker):
     name = "dataframe-conversion-pandas"
     priority = -1
     msgs = {
-        "": (
+        "W5503": (
             ".values is used in pandas code for dataframe conversion.",
             "dataframe-conversion-pandas",
             "For dataframe conversion in pandas code, use .to_numpy() instead of .values."

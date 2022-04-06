@@ -16,14 +16,14 @@ class UnnecessaryIterationPandasChecker(BaseChecker):
     name = "unnecessary-iteration-pandas"
     priority = -1
     msgs = {
-        "W5511": (
+        "R5501": (
             "Iterating through a DataFrame.",
-            "dataframe-iteration",
+            "unnecessary-iteration-pandas",
             "Iteration through a DataFrame is generally slow and should be avoided.",
         ),
-        "W5512": (
+        "W5501": (
             "Iterated object is modified.",
-            "dataframe-iteration-modification",
+            "dataframe-iteration-modification-pandas",
             "An object where is iterated over should not be modified.",
         ),
     }
@@ -57,7 +57,6 @@ class UnnecessaryIterationPandasChecker(BaseChecker):
                 self.add_message("dataframe-iteration", node=node)
         except:  # pylint: disable=bare-except
             ExceptionHandler.handle(self, node)
-
 
     def _iterating_through_dataframe(self, node: astroid.Call) -> bool:
         """

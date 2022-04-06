@@ -18,7 +18,7 @@ class DependentThresholdTensorflowChecker(BaseChecker):
     name = "dependent-threshold-tensorflow"
     priority = -1
     msgs = {
-        "W5591": (
+        "W5518": (
             "dependent-threshold-tensorflow",
             "dependent-threshold-tensorflow",
             "dependent-threshold-tensorflow"

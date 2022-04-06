@@ -18,9 +18,9 @@ class DataLeakageScikitLearnChecker(BaseChecker):
     name = "data-leakage-scikitlearn"
     priority = -1
     msgs = {
-        "W5581": (
+        "W5516": (
             "scikit-learn estimator not used in a pipeline.",
-            "sk-pipeline",
+            "data-leakage-scikitlearn",
             "All scikit-learn estimators should be used inside pipelines, to prevent data leakage \
              between training and test data.",
         ),
@@ -69,7 +69,7 @@ class DataLeakageScikitLearnChecker(BaseChecker):
                 and hasattr(node.func, "expr")
                 and self._expr_is_estimator(node.func.expr)
             ):
-                self.add_message("sk-pipeline", node=node)
+                self.add_message("data-leakage-scikitlearn", node=node)
         except:  # pylint: disable=bare-except
             ExceptionHandler.handle(self, node)
 

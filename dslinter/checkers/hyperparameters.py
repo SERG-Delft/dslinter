@@ -54,11 +54,11 @@ class HyperparameterChecker(BaseChecker):
             strict_hyperparameters = self.config.strict_hyperparameters_scikitlearn
         elif self.LIBRARY == "tensorflow":
             strict_hyperparameters = self.config.strict_hyperparameters_tensorflow
-            if self.call_types[function_name] not in ["tf", "tensorflow"]:
+            if function_name in self.call_types and  self.call_types[function_name] not in ["tf", "tensorflow"]:
                 return
         elif self.LIBRARY == "pytorch":
             strict_hyperparameters = self.config.strict_hyperparameters_pytorch
-            if self.call_types[function_name] != "torch":
+            if function_name in self.call_types and self.call_types[function_name] != "torch":
                 return
 
         if function_name in hyperparams_all:  # pylint: disable=unsupported-membership-test

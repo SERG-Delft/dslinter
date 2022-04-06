@@ -16,7 +16,7 @@ class InPlacePandasChecker(BaseChecker):
     name = "inplace-pandas"
     priority = -1
     msgs = {
-        "W5501": (
+        "E5502": (
             "Result of operation on a DataFrame is not assigned.",
             "inplace-pandas",
             "Most operations on a DataFrame return a new DataFrame. These should be assigned to \

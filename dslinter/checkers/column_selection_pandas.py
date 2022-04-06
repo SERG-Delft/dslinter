@@ -1,5 +1,5 @@
 """Checker which checks column is selected after the dataframe is imported."""
-import astroid as astroid
+import astroid
 from pylint.checkers import BaseChecker
 from pylint.interfaces import IAstroidChecker
 
@@ -12,7 +12,7 @@ class ColumnSelectionPandasChecker(BaseChecker):
     name = "column-selection-pandas"
     priority = -1
     msgs = {
-        "": (
+        "R5504": (
             "There is no column selection after the dataframe is imported.",
             "column-selection-pandas",
             "Column should be selected after the dataframe is imported for better readability."

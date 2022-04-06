@@ -6,6 +6,7 @@ import astroid
 import mypy.api
 
 from dslinter.utils.ast import ASTUtil
+import uuid
 
 
 class TypeInference:
@@ -104,11 +105,13 @@ class TypeInference:
         :param code: Code to run mypy on.
         :return: Normal report written to sys.stdout by mypy.
         """
-        file = open("_tmp_dslinter.py", "w", encoding="utf-8")
+        id1 = str(uuid.uuid1())
+        _tmp_dslinter_file = "_tmp_dslinter"+id1+".py"
+        file = open(_tmp_dslinter_file, "w", encoding="utf-8")
         file.write(code)
         file.close()
-        result = mypy.api.run(["_tmp_dslinter.py"])
-        os.remove("_tmp_dslinter.py")
+        result = mypy.api.run([_tmp_dslinter_file])
+        os.remove(_tmp_dslinter_file)
 
         if result[1] != '':
             raise Exception("Running mypy resulted in an error: " + result[1])
@@ -204,7 +207,7 @@ class TypeInference:
                     if hasattr(var, "name"):
                         variable_name = var.name
                         if isinstance(node.value, astroid.nodes.Const):
-                            variables_with_full_types[variable_name] = 'const'
+                            variables_with_full_types[variable_name] = ['const']
                         elif hasattr(node.value, "func"):
                             call = node.value.func
                             full_type = ""

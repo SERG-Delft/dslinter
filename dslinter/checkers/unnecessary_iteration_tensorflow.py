@@ -14,9 +14,9 @@ class UnnecessaryIterationTensorflowChecker(BaseChecker):
     name = "unnecessary-iteration-tensorflow"
     priority = -1
     msgs = {
-        "W5513": {
+        "R5502": {
             "There is an unnecessary iteration.",
-            "iteration-tensorflow",
+            "unnecessary-iteration-tensorflow",
             "There is a efficient solution(Vectorization or Reduction) to replace the iteration.",
         }
     }

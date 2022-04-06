@@ -13,10 +13,10 @@ class ScalerMissingScikitLearnChecker(BaseChecker):
 
     __implements__ = IAstroidChecker
 
-    name = "scalar-missing-scikitlearn"
+    name = "scaler-missing-scikitlearn"
     priority = -1
     msgs = {
-        "W5521": (
+        "E5504": (
             "Scaler is not used before scaling-sensitive operation",
             "scaler-missing-scikitlearn",
             "To ensure a good result, use feature scaling before scaling-sensitive operation."

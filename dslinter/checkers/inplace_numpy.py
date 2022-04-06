@@ -14,7 +14,7 @@ class InPlaceNumpyChecker(BaseChecker):
     name = "inplace-numpy"
     priority = -1
     msgs = {
-        "W5502": (
+        "E5503": (
             "The operation result has not been assigned to another variable,\
              which might cause losing the result.",
             "inplace-numpy",

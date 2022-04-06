@@ -16,7 +16,7 @@ class MergeParameterPandasChecker(BaseChecker):
     name = "merge-parameter-pandas"
     priority = -1
     msgs = {
-        "": (
+        "R5505": (
             "Parameters for merge operations are not set.",
             "merge-parameter-pandas",
             "Parameters for merge operations should be set to ensure the correct usage of merging,"
@@ -37,19 +37,23 @@ class MergeParameterPandasChecker(BaseChecker):
     def visit_call(self, call_node: astroid.Call):
         """Visit call node and check whether the parameters are set."""
         # call on pandas dataframe object && name "merge" && check parameter
-        if(
-            hasattr(call_node.func, "attrname")
-            and call_node.func.attrname == "merge"
-            and hasattr(call_node.func, "expr")
-            and hasattr(call_node.func.expr, "name")
-            and self._subscript_types[call_node.func.expr.name] in ["pd.DataFrame", "pandas.DataFrame"]
-        ):
-            kws = [kw.arg for kw in call_node.keywords if hasattr(kw, "arg")]
+        try:
             if(
-                "how" in kws
-                and "on" in kws
-                and "validate" in kws
+                hasattr(call_node.func, "attrname")
+                and call_node.func.attrname == "merge"
+                and hasattr(call_node.func, "expr")
+                and hasattr(call_node.func.expr, "name")
+                and call_node.func.expr.name in self._subscript_types
+                and self._subscript_types[call_node.func.expr.name] in ["pd.DataFrame", "pandas.DataFrame"]
             ):
-                pass
-            else:
-                self.add_message("merge-parameter-pandas", node=call_node)
+                kws = [kw.arg for kw in call_node.keywords if hasattr(kw, "arg")]
+                if(
+                    "how" in kws
+                    and "on" in kws
+                    and "validate" in kws
+                ):
+                    pass
+                else:
+                    self.add_message("merge-parameter-pandas", node=call_node)
+        except: # pylint: disable = bare-except
+            ExceptionHandler.handle(self, call_node)
