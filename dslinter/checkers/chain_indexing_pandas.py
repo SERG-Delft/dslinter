@@ -24,7 +24,7 @@ class ChainIndexingPandasChecker(BaseChecker):
     }
     options = ()
 
-    # [variable name, inferred type of object the function is called on]
+    # [subscript node name, inferred type of object the function is called on]
     _subscript_types: Dict[str, str] = {}
 
     def visit_module(self, module: astroid.Module):
