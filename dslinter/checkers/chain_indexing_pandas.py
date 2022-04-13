@@ -36,12 +36,17 @@ class ChainIndexingPandasChecker(BaseChecker):
 
     def visit_subscript(self, subscript_node: astroid.Subscript):
         """Visit subscript node and check whether there is chain indexing."""
+        indexing_num = 0
+        node = subscript_node
+        # count indexing number
+        while hasattr(node, "value"):
+            indexing_num += 1
+            node = node.value
+        # if chain indexing is used in the code, and the indexing number is no less than two, the rule is violated.
         if(
-            hasattr(subscript_node, "value")
-            and hasattr(subscript_node.value, "value")
-            and hasattr(subscript_node.value.value, "name")
-            and subscript_node.value.value.name in self._subscript_types
-            and self._subscript_types[subscript_node.value.value.name] == "pd.DataFrame"
+            hasattr(node, "name")
+            and node.name in self._subscript_types
+            and self._subscript_types[node.name] == "pd.DataFrame"
+            and indexing_num >= 2
         ):
             self.add_message("chain-indexing-pandas", node=subscript_node)
-
