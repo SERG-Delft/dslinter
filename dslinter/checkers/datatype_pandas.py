@@ -20,6 +20,8 @@ class DatatypePandasChecker(BaseChecker):
     }
     options = ()
 
+    _data_import_functions = ["read_csv", "read_table", "read_excel"]
+
     def visit_call(self, call_node: astroid.Call):
         """
         Vist call node and see whether datatype is set when a dataframe is imported from data.
@@ -28,7 +30,7 @@ class DatatypePandasChecker(BaseChecker):
         """
         if(
             hasattr(call_node.func, "attrname")
-            and call_node.func.attrname == "read_csv"
+            and call_node.func.attrname in self._data_import_functions
             and hasattr(call_node.func, "expr")
             and hasattr(call_node.func.expr, "name")
             and call_node.func.expr.name in ["pandas", "pd"]

@@ -29,5 +29,3 @@ class TestDatatypePandasChecker(pylint.testutils.CheckerTestCase):
         call_node = assign_node.value
         with self.assertNoMessages():
             self.checker.visit_call(call_node)
-
-
