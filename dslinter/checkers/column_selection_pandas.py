@@ -1,4 +1,6 @@
 """Checker which checks column is selected after the dataframe is imported."""
+from collections import defaultdict
+
 import astroid
 from pylint.checkers import BaseChecker
 from pylint.interfaces import IAstroidChecker
@@ -20,9 +22,10 @@ class ColumnSelectionPandasChecker(BaseChecker):
     }
     options = ()
 
-    _import_data_pandas = False
-    _import_data_idx = -1
-    _dataframe_name = ""
+    _has_column_selection = False
+    _dataframe_selected_dict = defaultdict(bool)
+    _name_node_dict = defaultdict()
+    _data_import_functions = ["read_csv"]
 
     def visit_module(self, module: astroid.Module):
         """
@@ -32,32 +35,34 @@ class ColumnSelectionPandasChecker(BaseChecker):
         """
         for idx, node in enumerate(module.body):
             if isinstance(node, astroid.Assign):
-                sub_node = node.value
+                # check if there is a imported dataframe
                 if(
-                    hasattr(sub_node, "func")
-                    and hasattr(sub_node.func, "attrname")
-                    and sub_node.func.attrname == "read_csv"
-                    and hasattr(sub_node.func, "expr")
-                    and hasattr(sub_node.func.expr, "name")
-                    and sub_node.func.expr.name in ["pandas", "pd"]
+                    hasattr(node.value, "func")
+                    and hasattr(node.value.func, "attrname")
+                    and node.value.func.attrname in self._data_import_functions
+                    and hasattr(node.value.func, "expr")
+                    and hasattr(node.value.func.expr, "name")
+                    and node.value.func.expr.name in ["pandas", "pd"]
                     and len(node.targets) > 0
                     and hasattr(node.targets[0], "name")
                 ):
-                    self._import_data_pandas = True
-                    self._import_data_idx = idx
-                    self._dataframe_name = node.targets[0].name
-                if len(module.body) <= self._import_data_idx + 1:
-                    self.add_message("column-selection-pandas", node=module)
-                if self._import_data_idx != -1 and idx == self._import_data_idx + 1:
-                    if(
-                        len(node.targets) > 0
-                        and hasattr(node.targets[0], "name")
-                        and node.targets[0].name == self._dataframe_name
-                        and hasattr(node, "value")
-                        and hasattr(node.value, "slice")
-                        and isinstance(node.value.slice, astroid.nodes.List)
-                    ):
-                        pass
-                    else:
-                        self.add_message("column-selection-pandas", node=module)
+                    _imported_dataframe_name = node.targets[0].name
+                    self._dataframe_selected_dict[_imported_dataframe_name] = False
+                    self._name_node_dict[_imported_dataframe_name] = node
+                # check if dataframe columns are selected
+                if(
+                    hasattr(node, "value")
+                    and isinstance(node.value, astroid.Subscript)
+                    and hasattr(node.value, "value")
+                    and hasattr(node.value.value, "name")
+                    and node.value.value.name in self._dataframe_selected_dict
+                    and hasattr(node.value, "slice")
+                    and isinstance(node.value.slice, astroid.nodes.List)
+                ):
+                    _selected_dataframe_name = node.value.value.name
+                    self._dataframe_selected_dict[_selected_dataframe_name] = True
 
+        # check which dataframe is imported but not selected by columns
+        for k, v in self._dataframe_selected_dict.items():
+            if v is False:
+                self.add_message("column-selection-pandas", node=self._name_node_dict[k])
