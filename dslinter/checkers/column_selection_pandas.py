@@ -25,7 +25,7 @@ class ColumnSelectionPandasChecker(BaseChecker):
     _has_column_selection = False
     _dataframe_selected_dict = defaultdict(bool)
     _name_node_dict = defaultdict()
-    _data_import_functions = ["read_csv"]
+    _data_import_functions = ["read_csv", "read_table", "read_fwf", "read_excel", "read_xml"]
 
     def visit_module(self, module: astroid.Module):
         """

@@ -20,11 +20,23 @@ class TestColumnSelectionPandasChecker(pylint.testutils.CheckerTestCase):
         with self.assertAddsMessages(pylint.testutils.MessageTest(msg_id="column-selection-pandas", node=assign_node)):
             self.checker.visit_module(module)
 
-    def test_column_selected(self):
+    def test_column_selected1(self):
         """No message should be added if there is column selection after the dataframe is imported."""
         script = """
         import pandas as pd
         df = pd.read_csv('data.csv')
+        df = df[['col1', 'col2', 'col3']]
+        """
+        module = astroid.parse(script)
+        with self.assertNoMessages():
+            self.checker.visit_module(module)
+
+    def test_column_selected2(self):
+        """No message should be added if there is column selection after the dataframe is imported."""
+        script = """
+        import pandas as pd
+        df = pd.read_csv('data.csv')
+        print(df)
         df = df[['col1', 'col2', 'col3']]
         """
         module = astroid.parse(script)
