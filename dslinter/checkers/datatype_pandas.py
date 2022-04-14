@@ -13,7 +13,7 @@ class DatatypePandasChecker(BaseChecker):
     priority = -1
     msgs = {
         "R5503":(
-            "Datatypoe is not set when a dataframe is imported from data.",
+            "Datatype is not set when a dataframe is imported from data.",
             "datatype-pandas",
             "Datatype should be set when a dataframe is imported from data.",
         )
