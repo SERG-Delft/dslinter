@@ -35,5 +35,6 @@ class TestDependentThresholdScikitLearnChecker(pylint.testutils.CheckerTestCase)
         f1_score(y_true, y_pred, average='macro')
         """
         module = astroid.parse(script)
-        with self.assertAddsMessages(pylint.testutils.MessageTest(msg_id="dependent-threshold-scikitlearn", node = module)):
+        f1_score_node = module.body[-1].value
+        with self.assertAddsMessages(pylint.testutils.MessageTest(msg_id="dependent-threshold-scikitlearn", node=f1_score_node)):
             self.checker.visit_module(module)

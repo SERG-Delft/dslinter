@@ -18,9 +18,9 @@ class DependentThresholdScikitLearnChecker(BaseChecker):
     priority = -1
     msgs = {
         "W5517": (
+            "The F1 Score is used but AUC is not used in the Scikit-learn code.",
             "dependent-threshold-scikitlearn",
-            "dependent-threshold-scikitlearn",
-            "dependent-threshold-scikitlearn"
+            "The threshold independent evaluation method(e.g., AUC) is preferred over threshold dependent method(e.g., F1 Score)."
         )
     }
 
@@ -34,28 +34,27 @@ class DependentThresholdScikitLearnChecker(BaseChecker):
         :param module:
         :return:
         """
-        __has_auc = False
-        __has_f1_score = False
+        _has_auc = False
+        _has_f1_score = False
+        _f1_score_node = None
 
         for nod in module.body:
-            if(
-                hasattr(nod, "value")
-                and isinstance(nod.value, astroid.Call)
-            ):
+            if hasattr(nod, "value") and isinstance(nod.value, astroid.Call):
                 call_node = nod.value
                 if(
                     hasattr(call_node, "func")
                     and hasattr(call_node.func, "name")
-                    and call_node.func.name == "auc"
+                    and call_node.func.name in ["auc", "roc_auc_score"]
                 ):
-                    __has_auc = True
+                    _has_auc = True
                 if(
                     hasattr(call_node, "func")
                     and hasattr(call_node.func, "name")
                     and call_node.func.name == "f1_score"
                 ):
-                    __has_f1_score = True
+                    _has_f1_score = True
+                    _f1_score_node = call_node
 
         # if f1 score is used but auc is not used
-        if __has_f1_score is True and __has_auc is False :
-            self.add_message("dependent-threshold-scikitlearn", node = module)
+        if _has_f1_score is True and _has_auc is False :
+            self.add_message("dependent-threshold-scikitlearn", node=_f1_score_node)
