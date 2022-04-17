@@ -25,8 +25,15 @@ class ForwardPytorchChecker(BaseChecker):
         When a Call node is visited, check whether it violated the rule in this checker.
         :param call_node: The node which is visited.
         """
+        _has_forward = False
+        _call_from_self = False
+        if hasattr(call_node.func, "attrname") and call_node.func.attrname == "forward":
+            _has_forward = True
         if(
-            hasattr(call_node.func, "attrname")
-            and call_node.func.attrname == "forward"
+            hasattr(call_node.func, "expr")
+            and hasattr(call_node.func.expr, "name")
+            and call_node.func.expr.name == "self"
         ):
+            _call_from_self = True
+        if _has_forward is True and _call_from_self is False:
             self.add_message("forward-pytorch", node=call_node)
