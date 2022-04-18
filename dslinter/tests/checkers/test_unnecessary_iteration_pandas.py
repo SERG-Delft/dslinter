@@ -9,11 +9,15 @@ class TestUnnecessaryIterationPandasChecker(pylint.testutils.CheckerTestCase):
 
     CHECKER_CLASS = dslinter.plugin.UnnecessaryIterationPandasChecker
 
-    DF_INIT = "import pandas as pd\ndf = pd.DataFrame()\n"
-
     def test_iterating_through_dataframe(self):
         """Test whether a message is added when there is iterated through a DataFrame."""
-        module_tree = astroid.parse(self.DF_INIT + "for _, row in df.iterrows(): pass")
+        script = """
+        import pandas as pd
+        df = pd.DataFrame()
+        for _, row in df.iterrows(): 
+            pass
+        """
+        module_tree = astroid.parse(script)
         call = module_tree.body[-1].iter
         with self.assertAddsMessages(pylint.testutils.MessageTest(msg_id="dataframe-iteration", node=call),):
             self.checker.visit_module(module_tree)
@@ -21,7 +25,13 @@ class TestUnnecessaryIterationPandasChecker(pylint.testutils.CheckerTestCase):
 
     def test_iterating_and_modifying(self):
         """Test whether a dataframe-iteration-modification violation is correctly found."""
-        module_tree = astroid.parse(self.DF_INIT + "for _, row in df.iterrows(): row['a'] = 10")
+        script = """
+        import pandas as pd
+        df = pd.DataFrame()
+        for _, row in df.iterrows():
+            row['a'] = 10
+        """
+        module_tree = astroid.parse(script)
         for_node = module_tree.body[-1]
         with self.assertAddsMessages(
             pylint.testutils.MessageTest(msg_id="dataframe-iteration-modification", node=for_node),
@@ -31,7 +41,13 @@ class TestUnnecessaryIterationPandasChecker(pylint.testutils.CheckerTestCase):
 
     def test_iterating_and_modifying_nested(self):
         """Test whether a nested dataframe-iteration-modification violation is correctly found."""
-        module_tree = astroid.parse(self.DF_INIT + "for _, row in df.iterrows():\n\tif True: row['a'] = 10")
+        script = """
+        import pandas as pd
+        df = pd.DataFrame()
+        for _, row in df.iterrows():
+            if True: row['a'] = 10
+        """
+        module_tree = astroid.parse(script)
         for_node = module_tree.body[-1]
         with self.assertAddsMessages(
             pylint.testutils.MessageTest(msg_id="dataframe-iteration-modification", node=for_node),
