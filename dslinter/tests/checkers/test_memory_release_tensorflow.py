@@ -1,3 +1,4 @@
+"""Test checks whether the memory is released in time in Tensorflow code."""
 import astroid
 import pylint.testutils
 import dslinter.plugin

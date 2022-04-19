@@ -1,3 +1,4 @@
+"""Class which tests the DataLeakageChecker."""
 import astroid
 import pylint.testutils
 import dslinter

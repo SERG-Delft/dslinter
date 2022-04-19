@@ -1,3 +1,4 @@
+"""Class which tests MaskMissingTensorflowChecker."""
 import astroid
 import pylint.testutils
 
@@ -5,6 +6,7 @@ import dslinter.plugin
 
 
 class TestMaskMissingTensorflowChecker(pylint.testutils.CheckerTestCase):
+    """Class which tests MaskMissingTensorflowChecker."""
 
     CHECKER_CLASS = dslinter.plugin.MaskMissingTensorflowChecker
 
