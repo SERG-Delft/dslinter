@@ -58,11 +58,12 @@ class MaskMissingPytorchChecker(BaseChecker):
             and len(call_node.args) > 0
             and hasattr(call_node.args[0], "name")
             and call_node.args[0].name in self._variables_with_processing_operation
+            and (
+                "torch.clip" in self._variables_with_processing_operation[call_node.args[0].name]
+                or "torch.clamp" in self._variables_with_processing_operation[call_node.args[0].name]
+                )
         ):
-            _variable_name = call_node.args[0].name
-            _variable_index = self._variables_with_processing_operation[_variable_name].index("torch.log")
-            if _variable_index >= 1 and self._variables_with_processing_operation[_variable_name][_variable_index - 1] in ["torch.clip", "torch.clamp"]:
-                _has_mask = True
+            _has_mask = True
 
         if _has_log is True and _has_mask is False:
             self.add_message(msgid="missing-mask-pytorch", node=call_node)
