@@ -70,7 +70,7 @@ class TestImportChecker(pylint.testutils.CheckerTestCase):
             """
         import_node = astroid.extract_node(script)
         with self.assertAddsMessages(pylint.testutils.MessageTest(msg_id="import-sklearn", node=import_node),):
-            self.checker.visit_import_from(import_node)
+            self.checker.visit_importfrom(import_node)
 
     def test_ignore_correct_sklearn(self):
         """Test if no message is added when an sklearn module import is not assigned an alias."""
@@ -79,7 +79,7 @@ class TestImportChecker(pylint.testutils.CheckerTestCase):
             """
         import_node = astroid.extract_node(script)
         with self.assertNoMessages():
-            self.checker.visit_import_from(import_node)
+            self.checker.visit_importfrom(import_node)
 
     def test_finds_incorrect_tensorflow(self):
         """Test if message is added when tensorflow is imported incorrectly."""

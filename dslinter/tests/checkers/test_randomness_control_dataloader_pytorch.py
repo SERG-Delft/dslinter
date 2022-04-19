@@ -40,7 +40,7 @@ class TestRandomnessControlDataloaderPytorchChecker(pylint.testutils.CheckerTest
         import_from_node, assign_node = astroid.extract_node(script)
         call_node = assign_node.value
         with self.assertNoMessages():
-            self.checker.visit_import_from(import_from_node)
+            self.checker.visit_importfrom(import_from_node)
             self.checker.visit_call(call_node)
 
     def test_without_dataloader_randomness_control1(self):
@@ -56,7 +56,7 @@ class TestRandomnessControlDataloaderPytorchChecker(pylint.testutils.CheckerTest
         import_from_node, assign_node = astroid.extract_node(script)
         call_node = assign_node.value
         with self.assertAddsMessages(pylint.testutils.MessageTest(msg_id="randomness-control-dataloader-pytorch", node=call_node)):
-            self.checker.visit_import_from(import_from_node)
+            self.checker.visit_importfrom(import_from_node)
             self.checker.visit_call(call_node)
 
     def test_with_dataloader_randomness_control2(self):
