@@ -2,7 +2,7 @@
 import astroid
 
 
-def _inplace_is_true(node: astroid.Call, argument: str) -> bool:
+def inplace_is_true(node: astroid.Call, argument: str) -> bool:
     """
     Evaluate whether the call has an 'out==True' keyword argument.
 

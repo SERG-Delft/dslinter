@@ -22,8 +22,11 @@ class HyperparameterChecker(BaseChecker):
         self.call_types = {}
 
     def visit_importfrom(self, node: astroid.ImportFrom):
-        for name, _ in node.names:
-            self.call_types[name] = node.modname.split('.')[0]
+        try:
+            for name, _ in node.names:
+                self.call_types[name] = node.modname.split('.')[0]
+        except:
+            ExceptionHandler.handle(self, node)
 
     def visit_call(self, node: astroid.Call):
         """
@@ -54,7 +57,7 @@ class HyperparameterChecker(BaseChecker):
             strict_hyperparameters = self.config.strict_hyperparameters_scikitlearn
         elif self.LIBRARY == "tensorflow":
             strict_hyperparameters = self.config.strict_hyperparameters_tensorflow
-            if function_name in self.call_types and  self.call_types[function_name] not in ["tf", "tensorflow"]:
+            if function_name in self.call_types and self.call_types[function_name] not in ["tf", "tensorflow"]:
                 return
         elif self.LIBRARY == "pytorch":
             strict_hyperparameters = self.config.strict_hyperparameters_pytorch

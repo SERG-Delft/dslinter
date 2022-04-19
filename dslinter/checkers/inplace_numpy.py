@@ -3,7 +3,7 @@ import astroid
 from pylint.checkers import BaseChecker
 from pylint.interfaces import IAstroidChecker
 from dslinter.utils.exception_handler import ExceptionHandler
-from dslinter.utils.inplace_helper import _inplace_is_true
+from dslinter.utils.inplace_helper import inplace_is_true
 
 
 class InPlaceNumpyChecker(BaseChecker):
@@ -50,7 +50,7 @@ class InPlaceNumpyChecker(BaseChecker):
                 and hasattr(node.func.expr, "name")
                 and node.func.expr.name in ["np", "numpy"]  # This might need to be changed to a more robust check
                 and not self._function_whitelisted(node)
-                and not _inplace_is_true(node, "out")
+                and not inplace_is_true(node, "out")
                 # If the parent of the Call is an Expression (not an Assignment or a Call or Return),
                 # it means the result is lost.
                 and isinstance(node.parent, astroid.Expr)
@@ -70,6 +70,8 @@ class InPlaceNumpyChecker(BaseChecker):
             "savetxt",
             "tofile",
             "fill_diagonal",
-            "testing"
+            "testing",
+            "allclose",
+            "copyto"
         ]
         return hasattr(node.func, "attrname") and (node.func.attrname in WHITELIST)

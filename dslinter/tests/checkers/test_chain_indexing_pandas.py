@@ -10,7 +10,7 @@ class TestChainIndexingPandasChecker(pylint.testutils.CheckerTestCase):
 
     CHECKER_CLASS = dslinter.plugin.ChainIndexingPandasChecker
 
-    def test_chain_indexing_on_dataframe(self):
+    def test_chain_indexing_on_dataframe1(self):
         """Message should be added if there is a chain indexing on pandas dataframe."""
         script = """
         import pandas as pd
@@ -18,6 +18,23 @@ class TestChainIndexingPandasChecker(pylint.testutils.CheckerTestCase):
         col = 1
         x = 0
         df[col][x] = 42 #@
+        """
+        module = astroid.parse(script)
+        assign_node = astroid.extract_node(script)
+        subscript_node = assign_node.targets[0]
+        with self.assertAddsMessages(pylint.testutils.MessageTest(msg_id="chain-indexing-pandas", node=subscript_node)):
+            self.checker.visit_module(module)
+            self.checker.visit_subscript(subscript_node)
+
+    def test_chain_indexing_on_dataframe2(self):
+        """Message should be added if there is a chain indexing on pandas dataframe."""
+        script = """
+        import pandas as pd
+        df = pd.DataFrame([[[1, 1],[2, 2],[3, 3]],[[4, 4],[5, 5],[6, 6]]])
+        col = 1
+        x = 0
+        y = 0
+        df[col][x][y] = 42 #@
         """
         module = astroid.parse(script)
         assign_node = astroid.extract_node(script)

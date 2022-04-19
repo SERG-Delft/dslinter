@@ -36,16 +36,19 @@ class TensorArrayTensorflowChecker(BaseChecker):
 
     def visit_for(self, for_node: astroid.For):
         """Visit for node and see whether the rule is violated."""
-        for node in for_node.body:
-            if(
-                isinstance(node, astroid.Assign)
-                and len(node.targets) > 0
-                and hasattr(node.targets[0], "name")
-                and node.targets[0].name in self._variable_types
-                and self._variable_types[node.targets[0].name] in ["tf.constant", "tensorflow.constant"]
-                and self.infer_call_expression(node.value) in ["tf.concat"]
-            ):
-                self.add_message("tensor-array-tensorflow", node=for_node)
+        try:
+            for node in for_node.body:
+                if(
+                    isinstance(node, astroid.Assign)
+                    and len(node.targets) > 0
+                    and hasattr(node.targets[0], "name")
+                    and node.targets[0].name in self._variable_types
+                    and self._variable_types[node.targets[0].name] in ["tf.constant", "tensorflow.constant"]
+                    and self.infer_call_expression(node.value) in ["tf.concat"]
+                ):
+                    self.add_message("tensor-array-tensorflow", node=for_node)
+        except: # pylint: disable = bare-except
+            ExceptionHandler.handle(self, for_node)
 
     @staticmethod
     def infer_call_expression(call_node: astroid.Call):

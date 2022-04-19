@@ -36,5 +36,6 @@ class TestDependentThresholdPytorchChecker(pylint.testutils.CheckerTestCase):
         f1(preds, target)
         """
         module = astroid.parse(script)
-        with self.assertAddsMessages(pylint.testutils.MessageTest(msg_id="dependent-threshold-pytorch", node = module)):
+        f1_score_node = module.body[-2].value
+        with self.assertAddsMessages(pylint.testutils.MessageTest(msg_id="dependent-threshold-pytorch", node=f1_score_node)):
             self.checker.visit_module(module)

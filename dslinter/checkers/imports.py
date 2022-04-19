@@ -68,7 +68,7 @@ class ImportChecker(BaseChecker):
         except:  # pylint: disable=bare-except
             ExceptionHandler.handle(self, node)
 
-    def visit_import_from(self, node: astroid.ImportFrom):
+    def visit_importfrom(self, node: astroid.ImportFrom):
         """
         When an ImportFrom node is visited, check if it follows the conventions.
 

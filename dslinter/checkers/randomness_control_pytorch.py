@@ -3,6 +3,7 @@ from pylint.interfaces import IAstroidChecker
 from pylint.checkers import BaseChecker
 import astroid
 
+from dslinter.utils.exception_handler import ExceptionHandler
 from dslinter.utils.randomness_control_helper import check_main_module, has_import
 
 
@@ -40,32 +41,36 @@ class RandomnessControlPytorchChecker(BaseChecker):
         Check whether there is a pytorch import.
         :param node: import node
         """
-        self._import_pytorch = has_import(node, "torch")
+        try:
+            self._import_pytorch = has_import(node, "torch")
+        except: # pylint: disable = bare-except
+            ExceptionHandler.handle(self, node)
 
     def visit_module(self, module: astroid.Module):
         """
         Check whether there is a rule violation.
         :param module:
         """
+        try:
+            _is_main_module = check_main_module(module)
+            if self.config.no_main_module_check_randomness_control_pytorch is False and _is_main_module is False:
+                return
 
-        _is_main_module = check_main_module(module)
-        if self.config.no_main_module_check_randomness_control_pytorch is False and _is_main_module is False:
-            return
+            for node in module.body:
+                if isinstance(node, astroid.nodes.Expr) and hasattr(node, "value"):
+                    call_node = node.value
+                    if(
+                        hasattr(call_node, "func")
+                        and hasattr(call_node.func, "attrname")
+                        and call_node.func.attrname == "manual_seed"
+                    ):
+                        self._has_manual_seed = True
 
-        for node in module.body:
-            if isinstance(node, astroid.nodes.Expr) and hasattr(node, "value"):
-                call_node = node.value
-                if(
-                    hasattr(call_node, "func")
-                    and hasattr(call_node.func, "attrname")
-                    and call_node.func.attrname == "manual_seed"
-                ):
-                    self._has_manual_seed = True
-
-        if(
-            self._import_pytorch is True
-            and self._has_manual_seed is False
-        ):
-            self.add_message("randomness-control-pytorch", node=module)
-
+            if(
+                self._import_pytorch is True
+                and self._has_manual_seed is False
+            ):
+                self.add_message("randomness-control-pytorch", node=module)
+        except: # pylint: disable = bare-except
+            ExceptionHandler.handle(self, module)
 

@@ -63,3 +63,15 @@ class TestForwardPytorchChecker(pylint.testutils.CheckerTestCase):
         call_node = astroid.extract_node(script).value
         with self.assertNoMessages():
             self.checker.visit_call(call_node)
+
+    def test_use_self_forward(self):
+        """Message will be added if the self.net.forward() is used in the code rather than self.net()."""
+        script = """
+        def training_step(self, batch, batch_nb):
+            idx = batch['idx']
+            loss = self.forward(batch)[0] #@
+            return {'loss': loss, 'idx': idx}
+        """
+        call_node = astroid.extract_node(script).value.value
+        with self.assertNoMessages():
+            self.checker.visit_call(call_node)

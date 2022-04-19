@@ -54,24 +54,24 @@ class DataLeakageScikitLearnChecker(BaseChecker):
         "StandardScaler",
     ]
 
-    def visit_call(self, node: astroid.Call):
+    def visit_call(self, call_node: astroid.Call):
         """
         When a Call node is visited, check whether it violated the rules in this checker.
 
-        :param node: The node which is visited.
+        :param call_node: The node which is visited.
         """
         try:
             # If the learning function is called on an estimator, rule is violated.
             if (
-                node.func is not None
-                and hasattr(node.func, "attrname")
-                and node.func.attrname in self.LEARNING_FUNCTIONS
-                and hasattr(node.func, "expr")
-                and self._expr_is_estimator(node.func.expr)
+                call_node.func is not None
+                and hasattr(call_node.func, "attrname")
+                and call_node.func.attrname in self.LEARNING_FUNCTIONS
+                and hasattr(call_node.func, "expr")
+                and self._expr_is_estimator(call_node.func.expr)
             ):
-                self.add_message("data-leakage-scikitlearn", node=node)
+                self.add_message("data-leakage-scikitlearn", node=call_node)
         except:  # pylint: disable=bare-except
-            ExceptionHandler.handle(self, node)
+            ExceptionHandler.handle(self, call_node)
 
     @staticmethod
     def _expr_is_estimator(expr: astroid.node_classes.NodeNG) -> bool:

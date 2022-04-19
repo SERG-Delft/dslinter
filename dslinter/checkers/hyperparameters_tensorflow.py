@@ -55,6 +55,16 @@ class HyperparameterTensorflowChecker(HyperparameterChecker):
             "fit": {"positional": 19,"keywords": ["batch_size"]},
         }
         self.LIBRARY = "tensorflow"
+        self.hyperparams_all_in_function = {
+            "fit": {
+                "positional": 19,
+                "keywords": ["x", "y", "batch_size", "epochs", "verbose",
+                                "callbacks", "validation_split", "validation_data", "shuffle",
+                                "class_weight", "sample_weight", "initial_epoch", "steps_per_epoch",
+                                "validation_steps", "validation_batch_size", "validation_freq",
+                                "max_queue_size", "workers", "use_multiprocessing"]
+            },
+        }
 
     def visit_call(self, node: astroid.Call):
         """
@@ -85,25 +95,12 @@ class HyperparameterTensorflowChecker(HyperparameterChecker):
 
     def hyperparameters_in_function(self, node: astroid.Call):
         """Check whether we have required hyperparamter in a specific function."""
-        self.has_required_hyperparameters(node, self.HYPERPARAMETERS_MAIN_2, node.func.attrname)
-
-        hyperparams_all = {
-            "fit": {
-                "positional": 19,
-                "keywords": ["x", "y", "batch_size", "epochs", "verbose",
-                                "callbacks", "validation_split", "validation_data", "shuffle",
-                                "class_weight", "sample_weight", "initial_epoch", "steps_per_epoch",
-                                "validation_steps", "validation_batch_size", "validation_freq",
-                                "max_queue_size", "workers", "use_multiprocessing"]
-            },
-        }
-
         function_name = node.func.attrname
 
-        if function_name in hyperparams_all:  # pylint: disable=unsupported-membership-test
+        if function_name in self.hyperparams_all_in_function:  # pylint: disable=unsupported-membership-test
             if self.config.strict_hyperparameters: # strict mode
                 # pylint: disable = line-too-long
-                if not self.has_required_hyperparameters(node, hyperparams_all, function_name):
+                if not self.has_required_hyperparameters(node, self.hyperparams_all_in_function, function_name):
                     self.add_message(self.MESSAGE, node=node)
             else:  # non-strict mode
                 if (

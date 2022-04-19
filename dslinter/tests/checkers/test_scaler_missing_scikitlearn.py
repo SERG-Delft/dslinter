@@ -3,7 +3,8 @@ import dslinter.plugin
 import pylint.testutils
 
 
-class TestScalerMissingScikitLearn(pylint.testutils.CheckerTestCase):
+class TestScalerMissingScikitLearnChecker(pylint.testutils.CheckerTestCase):
+    """Class which tests ScalerMissingScikitLearnChecker"""
 
     CHECKER_CLASS = dslinter.plugin.ScalerMissingScikitLearnChecker
 
