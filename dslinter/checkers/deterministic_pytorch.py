@@ -3,6 +3,7 @@ import astroid
 from pylint.interfaces import IAstroidChecker
 from pylint.checkers import BaseChecker
 
+from dslinter.utils.exception_handler import ExceptionHandler
 from dslinter.utils.randomness_control_helper import check_main_module, has_import
 
 
@@ -49,28 +50,31 @@ class DeterministicAlgorithmChecker(BaseChecker):
         Check whether use_deterministic_algorithms option is used.
         :param node: call node
         """
-        _is_main_module = check_main_module(module)
-        if self.config.no_main_module_check_deterministic_pytorch is False and _is_main_module is False:
-            return
+        try:
+            _is_main_module = check_main_module(module)
+            if self.config.no_main_module_check_deterministic_pytorch is False and _is_main_module is False:
+                return
 
-        # if torch.use_deterministic_algorithm() is call and the argument is True,
-        # set _has_deterministic_algorithm_option to True
-        for node in module.body:
-            if isinstance(node, astroid.nodes.Expr) and hasattr(node, "value"):
-                call_node = node.value
-                if(
-                    hasattr(call_node, "func")
-                    and hasattr(call_node.func, "attrname")
-                    and call_node.func.attrname == "use_deterministic_algorithms"
-                    and hasattr(call_node, "args")
-                    and len(call_node.args) > 0
-                    and hasattr(call_node.args[0], "value")
-                    and call_node.args[0].value is True
-                ):
-                    self._has_deterministic_algorithm_option = True
+            # if torch.use_deterministic_algorithm() is call and the argument is True,
+            # set _has_deterministic_algorithm_option to True
+            for node in module.body:
+                if isinstance(node, astroid.nodes.Expr) and hasattr(node, "value"):
+                    call_node = node.value
+                    if(
+                        hasattr(call_node, "func")
+                        and hasattr(call_node.func, "attrname")
+                        and call_node.func.attrname == "use_deterministic_algorithms"
+                        and hasattr(call_node, "args")
+                        and len(call_node.args) > 0
+                        and hasattr(call_node.args[0], "value")
+                        and call_node.args[0].value is True
+                    ):
+                        self._has_deterministic_algorithm_option = True
 
-        if(
-            self._import_pytorch is True
-            and self._has_deterministic_algorithm_option is False
-        ):
-            self.add_message("deterministic-pytorch", node=module)
+            if(
+                self._import_pytorch is True
+                and self._has_deterministic_algorithm_option is False
+            ):
+                self.add_message("deterministic-pytorch", node=module)
+        except: # pylint: disable = bare-except
+            ExceptionHandler.handle(self, module)

@@ -37,39 +37,42 @@ class MemoryReleaseTensorflowChecker(BaseChecker):
 
     def visit_for(self, node: astroid.For):
         """Evaluate whether memory is freed in a loop with model creation."""
-        has_clear_session = False
-        has_model_creation = False
+        try:
+            has_clear_session = False
+            has_model_creation = False
 
-        for nod in node.body:
-            if (
-                hasattr(nod, "value")
-                and hasattr(nod.value, "func")
-                and hasattr(nod.value.func, "attrname")
-                and nod.value.func.attrname == "clear_session"
-            ):
-                has_clear_session = True
-
-            if (
-                hasattr(nod, "value")
-                and hasattr(nod.value, "func")
-                and hasattr(nod.value.func, "attrname")
-                and nod.value.func.attrname in self.MODELS
-            ):
-                if(
-                    hasattr(nod, "targets")
-                    and len(nod.targets) > 0
-                    and hasattr(nod.targets[0], "name")
-                    and self._is_tf_variable(nod.targets[0].name)
+            for nod in node.body:
+                if (
+                    hasattr(nod, "value")
+                    and hasattr(nod.value, "func")
+                    and hasattr(nod.value.func, "attrname")
+                    and nod.value.func.attrname == "clear_session"
                 ):
-                    has_model_creation = True
+                    has_clear_session = True
 
-        if(
-            has_clear_session is False
-            and has_model_creation is True
-        ):
-            # if there is no clear_session call in the loop
-            # while there is a model creation, the rule is violated.
-            self.add_message("memory-release-tensorflow", node=node)
+                if (
+                    hasattr(nod, "value")
+                    and hasattr(nod.value, "func")
+                    and hasattr(nod.value.func, "attrname")
+                    and nod.value.func.attrname in self.MODELS
+                ):
+                    if(
+                        hasattr(nod, "targets")
+                        and len(nod.targets) > 0
+                        and hasattr(nod.targets[0], "name")
+                        and self._is_tf_variable(nod.targets[0].name)
+                    ):
+                        has_model_creation = True
+
+            if(
+                has_clear_session is False
+                and has_model_creation is True
+            ):
+                # if there is no clear_session call in the loop
+                # while there is a model creation, the rule is violated.
+                self.add_message("memory-release-tensorflow", node=node)
+        except: # pylint: disable = bare-except
+            ExceptionHandler.handle(self, node)
 
     def _is_tf_variable(self, name) -> bool:
         """

@@ -22,8 +22,11 @@ class HyperparameterChecker(BaseChecker):
         self.call_types = {}
 
     def visit_importfrom(self, node: astroid.ImportFrom):
-        for name, _ in node.names:
-            self.call_types[name] = node.modname.split('.')[0]
+        try:
+            for name, _ in node.names:
+                self.call_types[name] = node.modname.split('.')[0]
+        except:
+            ExceptionHandler.handle(self, node)
 
     def visit_call(self, node: astroid.Call):
         """

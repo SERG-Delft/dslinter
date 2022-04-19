@@ -6,6 +6,8 @@ from pylint.checkers import BaseChecker
 from pylint.interfaces import IAstroidChecker
 import astroid
 
+from dslinter.utils.exception_handler import ExceptionHandler
+
 
 class DependentThresholdTensorflowChecker(BaseChecker):
     """DependentThresholdPytorchChecker checks whether threshold-independent
@@ -35,27 +37,30 @@ class DependentThresholdTensorflowChecker(BaseChecker):
         :param module:
         :return:
         """
-        _has_auc = False
-        _has_f1_score = False
-        _f1_score_node = None
+        try:
+            _has_auc = False
+            _has_f1_score = False
+            _f1_score_node = None
 
-        for nod in module.body:
-            if hasattr(nod, "value") and isinstance(nod.value, astroid.Call):
-                call_node = nod.value
-                if(
-                    hasattr(call_node, "func")
-                    and hasattr(call_node.func, "name")
-                    and call_node.func.name == "AUC"
-                ):
-                    _has_auc = True
-                if(
-                    hasattr(call_node, "func")
-                    and hasattr(call_node.func, "name")
-                    and call_node.func.name == "F1Score"
-                ):
-                    _has_f1_score = True
-                    _f1_score_node = call_node
+            for nod in module.body:
+                if hasattr(nod, "value") and isinstance(nod.value, astroid.Call):
+                    call_node = nod.value
+                    if(
+                        hasattr(call_node, "func")
+                        and hasattr(call_node.func, "name")
+                        and call_node.func.name == "AUC"
+                    ):
+                        _has_auc = True
+                    if(
+                        hasattr(call_node, "func")
+                        and hasattr(call_node.func, "name")
+                        and call_node.func.name == "F1Score"
+                    ):
+                        _has_f1_score = True
+                        _f1_score_node = call_node
 
-        # if f1 score is used but auc is not used
-        if _has_f1_score is True and _has_auc is False:
-            self.add_message("dependent-threshold-tensorflow", node=_f1_score_node)
+            # if f1 score is used but auc is not used
+            if _has_f1_score is True and _has_auc is False:
+                self.add_message("dependent-threshold-tensorflow", node=_f1_score_node)
+        except: # pylint: disable = bare-except
+            ExceptionHandler.handle(self, module)

@@ -5,6 +5,8 @@ from pylint.checkers import BaseChecker
 
 from typing import Dict
 
+from dslinter.utils.exception_handler import ExceptionHandler
+
 
 class DataframeConversionPandasChecker(BaseChecker):
     """Checker which check whether df.values is used for dataframe conversion."""
@@ -28,21 +30,27 @@ class DataframeConversionPandasChecker(BaseChecker):
 
     def visit_import(self, import_node: astroid.Import):
         """Visit import node to see whether pandas is imported."""
-        for name, _ in import_node.names:
-            if name == "pandas":
-                self._imported_pandas = True
+        try:
+            for name, _ in import_node.names:
+                if name == "pandas":
+                    self._imported_pandas = True
+        except: # pylint: disable = bare-except
+            ExceptionHandler.handle(self, import_node)
 
     def visit_call(self, call_node: astroid.Call):
         """Visit call node to see whether there is rule violation."""
-        node = call_node
-        while hasattr(node, "attrname") or (hasattr(node, "func") and hasattr(node.func, "expr")):
-            if hasattr(node, "attrname"):
-                if node.attrname == "values":
-                    self.add_message("dataframe-conversion-pandas", node=call_node)
-                    return
+        try:
+            node = call_node
+            while hasattr(node, "attrname") or (hasattr(node, "func") and hasattr(node.func, "expr")):
+                if hasattr(node, "attrname"):
+                    if node.attrname == "values":
+                        self.add_message("dataframe-conversion-pandas", node=call_node)
+                        return
+                    elif hasattr(node, "func") and hasattr(node.func, "expr"):
+                        node = node.func.expr
+                    else:
+                        return
                 elif hasattr(node, "func") and hasattr(node.func, "expr"):
                     node = node.func.expr
-                else:
-                    return
-            elif hasattr(node, "func") and hasattr(node.func, "expr"):
-                node = node.func.expr
+        except: # pylint: disable = bare-except
+            ExceptionHandler.handle(self, call_node)
