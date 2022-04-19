@@ -1,6 +1,4 @@
 """Checker which checks whether there are possible invalid value unmasked."""
-import pdb
-
 import astroid
 from pylint.checkers import BaseChecker
 from pylint.interfaces import IAstroidChecker
@@ -15,9 +13,9 @@ class MaskMissingPytorchChecker(BaseChecker):
     priority = -1
     msgs = {
         "W5511": (
+            "The variable in torch.log() isn't wrapped with torch.clip() or torch.clamp().",
             "missing-mask-pytorch",
-            "missing-mask-pytorch",
-            "missing-mask-pytorch"
+            "Add a mask for possible invalid values. For example, developers should wrap the argument for torch.log() with torch.clip() to avoid the argument turning to zero."
         )
     }
 
@@ -30,8 +28,8 @@ class MaskMissingPytorchChecker(BaseChecker):
         :return:
         """
         # if log is call but no mask outside of it, it violate the rule
-        __has_log = False
-        __has_mask = False
+        _has_log = False
+        _has_mask = False
         if (
             hasattr(node.func, "attrname")
             and node.func.attrname == "log"
@@ -39,7 +37,7 @@ class MaskMissingPytorchChecker(BaseChecker):
             and hasattr(node.func.expr, "name")
             and node.func.expr.name == "torch"
         ):
-            __has_log = True
+            _has_log = True
         if(
             hasattr(node, "args")
             and len(node.args) > 0
@@ -47,7 +45,7 @@ class MaskMissingPytorchChecker(BaseChecker):
             and hasattr(node.args[0].func, "attrname")
             and node.args[0].func.attrname in ["clip", "clamp"]
         ):
-            __has_mask = True
+            _has_mask = True
 
-        if __has_log is True and __has_mask is False:
+        if _has_log is True and _has_mask is False:
             self.add_message(msgid="missing-mask-pytorch", node=node)

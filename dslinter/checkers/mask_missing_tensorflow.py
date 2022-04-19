@@ -13,9 +13,9 @@ class MaskMissingTensorflowChecker(BaseChecker):
     priority = -1
     msgs = {
         "W5512": (
+            "The variable in tf.log() isn't wrapped with tf.clip().",
             "missing-mask-tensorflow",
-            "missing-mask-tensorflow",
-            "missing-mask-tensorflow"
+            "Add a mask for possible invalid values. For example, developers should wrap the argument for tf.log() with tf.clip() to avoid the argument turning to zero."
         )
     }
 
@@ -28,8 +28,8 @@ class MaskMissingTensorflowChecker(BaseChecker):
         :return:
         """
         # if log is call but no mask outside of it, it violate the rule
-        __has_log = False
-        __has_mask = False
+        _has_log = False
+        _has_mask = False
         if(
             hasattr(node.func, "attrname")
             and node.func.attrname == "log"
@@ -37,7 +37,7 @@ class MaskMissingTensorflowChecker(BaseChecker):
             and hasattr(node.func.expr, "name")
             and node.func.expr.name in ["tf", "tensorflow"]
         ):
-            __has_log = True
+            _has_log = True
         if(
             hasattr(node, "args")
             and len(node.args) > 0
@@ -45,7 +45,7 @@ class MaskMissingTensorflowChecker(BaseChecker):
             and hasattr(node.args[0].func, "attrname")
             and node.args[0].func.attrname == "clip_by_value"
         ):
-            __has_mask = True
+            _has_mask = True
 
-        if __has_log is True and __has_mask is False:
+        if _has_log is True and _has_mask is False:
             self.add_message(msgid="missing-mask-tensorflow", node=node)
