@@ -15,11 +15,9 @@ class InPlaceNumpyChecker(BaseChecker):
     priority = -1
     msgs = {
         "E5503": (
-            "The operation result has not been assigned to another variable,\
-             which might cause losing the result.",
+            "The operation result has not been assigned to another variable, which might cause losing the result.",
             "inplace-numpy",
-            "The result of the operation should be assigned to another variable, \
-            or the `out` parameter should be defined."
+            "The result of the operation should be assigned to another variable, or the `out` parameter should be defined."
         )
     }
     options = ()
@@ -72,6 +70,10 @@ class InPlaceNumpyChecker(BaseChecker):
             "fill_diagonal",
             "testing",
             "allclose",
-            "copyto"
+            "copyto",
+            "set_printoptions",
+            "isclose",
+            "seterr",
+            "scatter_add"
         ]
         return hasattr(node.func, "attrname") and (node.func.attrname in WHITELIST)

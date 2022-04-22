@@ -21,8 +21,7 @@ class DataLeakageScikitLearnChecker(BaseChecker):
         "W5516": (
             "scikit-learn estimator not used in a pipeline.",
             "data-leakage-scikitlearn",
-            "All scikit-learn estimators should be used inside pipelines, to prevent data leakage \
-             between training and test data.",
+            "All scikit-learn estimators should be used inside pipelines, to prevent data leakage between training and test data.",
         ),
     }
     options = ()

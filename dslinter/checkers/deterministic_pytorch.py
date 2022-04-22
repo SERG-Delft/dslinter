@@ -18,8 +18,7 @@ class DeterministicAlgorithmChecker(BaseChecker):
         "W5505": (
             "torch.use_deterministic_algorithm()  is not used or not set to True",
             "deterministic-pytorch",
-            "torch.use_deterministic_algorithm()  should be used and set to True \
-            during development process for reproducible result."
+            "torch.use_deterministic_algorithm()  should be used and set to True during development process for reproducible result."
         )
     }
 

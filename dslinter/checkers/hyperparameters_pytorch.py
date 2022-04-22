@@ -13,8 +13,7 @@ class HyperparameterPyTorchChecker(HyperparameterChecker):
     priority = -1
     msgs = {
         "R5508": (
-            "Some of the important hyperparameters(learning rate, batch size, \
-            momentum, and weight decay) is not set in the program.",
+            "Some of the important hyperparameters(learning rate, batch size, momentum, and weight decay) is not set in the program.",
             "hyperparameter-pytorch",
             "Important hyperparameters should be set in the program."
         )
