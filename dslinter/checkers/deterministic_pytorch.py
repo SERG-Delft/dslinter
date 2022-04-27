@@ -42,12 +42,13 @@ class DeterministicAlgorithmChecker(BaseChecker):
         Check whether there is a pytorch import
         :param node: import node
         """
-        self._import_pytorch = has_import(node, "torch")
+        if self._import_pytorch is False:
+            self._import_pytorch = has_import(node, "torch")
 
     def visit_module(self, module: astroid.Module):
         """
         Check whether use_deterministic_algorithms option is used.
-        :param node: call node
+        :param module: call node
         """
         try:
             _is_main_module = check_main_module(module)

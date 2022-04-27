@@ -4,7 +4,7 @@ from pylint.checkers import BaseChecker
 import astroid
 
 from dslinter.utils.exception_handler import ExceptionHandler
-from dslinter.utils.randomness_control_helper import check_main_module, has_import
+from dslinter.utils.randomness_control_helper import check_main_module, has_import, has_importfrom_sklearn
 
 
 class RandomnessControlNumpyChecker(BaseChecker):
@@ -24,6 +24,7 @@ class RandomnessControlNumpyChecker(BaseChecker):
 
     _import_numpy = False
     _has_manual_seed = False
+    _import_ml_libraries = False
 
     options = (
         (
@@ -43,7 +44,13 @@ class RandomnessControlNumpyChecker(BaseChecker):
         :param node: import node
         """
         try:
-            self._import_numpy = has_import(node, "numpy")
+            if self._import_numpy is False:
+                self._import_numpy = has_import(node, "numpy")
+            if self._import_ml_libraries is False:
+                self._import_ml_libraries = has_import(node, "sklearn") \
+                                            or has_import(node, "torch") \
+                                            or has_import(node, "tensorflow") \
+                                            or has_importfrom_sklearn(node)
         except: # pylint: disable = bare-except
             ExceptionHandler.handle(self, node)
 
@@ -74,6 +81,7 @@ class RandomnessControlNumpyChecker(BaseChecker):
 
             if(
                 self._import_numpy is True
+                and self._import_ml_libraries is True
                 and self._has_manual_seed is False
             ):
                 self.add_message("randomness-control-numpy", node=module)
