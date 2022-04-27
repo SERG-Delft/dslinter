@@ -40,7 +40,7 @@ class RandomnessControlNumpyChecker(BaseChecker):
 
     def visit_import(self, node: astroid.Import):
         """
-        Check whether there is a numpy import.
+        Check whether there is a numpy import and ml library import.
         :param node: import node
         """
         try:
@@ -49,10 +49,21 @@ class RandomnessControlNumpyChecker(BaseChecker):
             if self._import_ml_libraries is False:
                 self._import_ml_libraries = has_import(node, "sklearn") \
                                             or has_import(node, "torch") \
-                                            or has_import(node, "tensorflow") \
-                                            or has_importfrom_sklearn(node)
+                                            or has_import(node, "tensorflow")
         except: # pylint: disable = bare-except
             ExceptionHandler.handle(self, node)
+
+    def visit_importfrom(self, node: astroid.ImportFrom):
+        """
+        Check whether there is a scikit-learn import.
+        :param node: import from node
+        """
+        try:
+            if self._import_ml_libraries is False:
+                self._import_ml_libraries = has_importfrom_sklearn(node)
+        except: # pylint: disable = bare-except
+            ExceptionHandler.handle(self, node)
+
 
     def visit_module(self, module: astroid.Module):
         """

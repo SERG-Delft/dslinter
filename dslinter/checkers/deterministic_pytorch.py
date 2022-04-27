@@ -42,8 +42,11 @@ class DeterministicAlgorithmChecker(BaseChecker):
         Check whether there is a pytorch import
         :param node: import node
         """
-        if self._import_pytorch is False:
-            self._import_pytorch = has_import(node, "torch")
+        try:
+            if self._import_pytorch is False:
+                self._import_pytorch = has_import(node, "torch")
+        except: # pylint: disable = bare-except
+            ExceptionHandler.handle(self, node)
 
     def visit_module(self, module: astroid.Module):
         """

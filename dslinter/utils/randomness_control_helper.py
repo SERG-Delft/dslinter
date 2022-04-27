@@ -22,7 +22,11 @@ def has_import(node: astroid.Import, library_name: str):
     for name, _ in node.names:
         if name == library_name:
             return True
+    return False
+
 
 def has_importfrom_sklearn(node: astroid.ImportFrom):
     if node.modname[:7] == "sklearn":
         return True
+    return False
+
