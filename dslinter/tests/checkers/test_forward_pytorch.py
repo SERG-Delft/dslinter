@@ -65,7 +65,7 @@ class TestForwardPytorchChecker(pylint.testutils.CheckerTestCase):
             self.checker.visit_call(call_node)
 
     def test_use_self_forward(self):
-        """Message will be added if the self.net.forward() is used in the code rather than self.net()."""
+        """No Message will be added if the self.forward() is used in the code."""
         script = """
         def training_step(self, batch, batch_nb):
             idx = batch['idx']
@@ -73,5 +73,21 @@ class TestForwardPytorchChecker(pylint.testutils.CheckerTestCase):
             return {'loss': loss, 'idx': idx}
         """
         call_node = astroid.extract_node(script).value.value
+        with self.assertNoMessages():
+            self.checker.visit_call(call_node)
+
+    def test_use_super_forward(self):
+        """No Message will be added if the super().forward() is used in the code."""
+        script = """
+        class SpatialDropout(nn.Dropout2d):
+            def forward(self, x):
+                x = x.unsqueeze(2)    # (N, T, 1, K)
+                x = x.permute(0, 3, 2, 1)  # (N, K, 1, T)
+                x = super(SpatialDropout, self).forward(x)  # (N, K, 1, T), some features are masked #@
+                x = x.permute(0, 3, 2, 1)  # (N, T, 1, K)
+                x = x.squeeze(2)  # (N, T, K)
+                return x        
+        """
+        call_node = astroid.extract_node(script).value
         with self.assertNoMessages():
             self.checker.visit_call(call_node)

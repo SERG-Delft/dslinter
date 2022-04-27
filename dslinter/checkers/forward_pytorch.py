@@ -30,6 +30,7 @@ class ForwardPytorchChecker(BaseChecker):
         try:
             _has_forward = False
             _call_from_self = False
+            _call_from_super = False
             if hasattr(call_node.func, "attrname") and call_node.func.attrname == "forward":
                 _has_forward = True
             if(
@@ -38,7 +39,14 @@ class ForwardPytorchChecker(BaseChecker):
                 and call_node.func.expr.name == "self"
             ):
                 _call_from_self = True
-            if _has_forward is True and _call_from_self is False:
+            if(
+                hasattr(call_node.func, "expr")
+                and hasattr(call_node.func.expr, "func")
+                and hasattr(call_node.func.expr.func, "name")
+                and call_node.func.expr.func.name == "super"
+            ):
+                _call_from_super = True
+            if _has_forward is True and (_call_from_self is False and _call_from_super is False):
                 self.add_message("forward-pytorch", node=call_node)
         except: # pylint: disable = bare-except
             ExceptionHandler.handle(self, call_node)
