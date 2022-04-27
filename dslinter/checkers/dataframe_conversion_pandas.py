@@ -1,9 +1,8 @@
 """Checker which check whether df.values is used for dataframe conversion."""
+from typing import Dict
 import astroid
 from pylint.interfaces import IAstroidChecker
 from pylint.checkers import BaseChecker
-
-from typing import Dict
 
 from dslinter.utils.exception_handler import ExceptionHandler
 
@@ -40,17 +39,16 @@ class DataframeConversionPandasChecker(BaseChecker):
     def visit_call(self, call_node: astroid.Call):
         """Visit call node to see whether there is rule violation."""
         try:
-            node = call_node
-            while hasattr(node, "attrname") or (hasattr(node, "func") and hasattr(node.func, "expr")):
-                if hasattr(node, "attrname"):
-                    if node.attrname == "values":
-                        self.add_message("dataframe-conversion-pandas", node=call_node)
-                        return
-                    elif hasattr(node, "func") and hasattr(node.func, "expr"):
-                        node = node.func.expr
-                    else:
-                        return
-                elif hasattr(node, "func") and hasattr(node.func, "expr"):
-                    node = node.func.expr
+            if hasattr(call_node, "attrname") and call_node.attrname == "values":
+                self.add_message("dataframe-conversion-pandas", node=call_node)
+                return
+            if(
+                hasattr(call_node, "func")
+                and hasattr(call_node.func, "expr")
+                and hasattr(call_node.func.expr, "attrname")
+                and call_node.func.expr.attrname == "values"
+            ):
+                    self.add_message("dataframe-conversion-pandas", node=call_node)
+                    return
         except: # pylint: disable = bare-except
             ExceptionHandler.handle(self, call_node)

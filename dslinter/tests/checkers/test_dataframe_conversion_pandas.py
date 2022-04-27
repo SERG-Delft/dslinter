@@ -87,3 +87,15 @@ class TestDataframeConversionPandasChecker(pylint.testutils.CheckerTestCase):
         with self.assertAddsMessages(pylint.testutils.MessageTest(msg_id="dataframe-conversion-pandas", node=call_node)):
             self.checker.visit_import(import_node)
             self.checker.visit_call(call_node)
+
+    def test_dataframe_conversion_incorrectly_used3(self):
+        """Message should be added if .values is used for dataframe conversion."""
+        script = """
+        import pandas as pd #@
+        price_mm = MinMaxScaler().fit_transform(price.values.reshape(-1, 1).astype(np.float64)).flatten() #@
+        """
+        import_node, assign_node = astroid.extract_node(script)
+        call_node = assign_node.value.func.expr.args[0].func.expr
+        with self.assertAddsMessages(pylint.testutils.MessageTest(msg_id="dataframe-conversion-pandas", node=call_node)):
+            self.checker.visit_import(import_node)
+            self.checker.visit_call(call_node)
