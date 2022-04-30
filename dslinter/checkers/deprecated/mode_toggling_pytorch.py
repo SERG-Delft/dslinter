@@ -14,7 +14,7 @@ class ModeTogglingPytorchChecker(BaseChecker):
     name = "mode-toggling-pytorch"
     priority = -1
     msgs = {
-        "W5514": (
+        "": (
             "The training mode did not toggle back in time in the pytorch code.",
             "mode-toggling-pytorch",
             "Developers should call the training mode in the right place to avoid forgetting to switch back to the training mode after the inference step."

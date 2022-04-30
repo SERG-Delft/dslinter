@@ -3,7 +3,6 @@
 [![codecov.io](https://codecov.io/github/SERG-Delft/dslinter/coverage.svg?branch=main)](https://codecov.io/github/SERG-Delft/dslinter?branch=main)
 [![PyPI version](https://badge.fury.io/py/dslinter.svg)](https://badge.fury.io/py/dslinter)
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
-[![PyPI - Downloads - Daily](https://img.shields.io/pypi/dd/dslinter)](https://pypi.org/project/dslinter/)
 [![PyPI - Downloads - Monthly](https://img.shields.io/pypi/dm/dslinter)](https://pypi.org/project/dslinter/) 
 [![Code Grade](https://api.codiga.io/project/33224/status/svg)](https://api.codiga.io/project/33224/status/svg)
 
