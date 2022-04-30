@@ -19,7 +19,7 @@ class TestUnnecessaryIterationPandasChecker(pylint.testutils.CheckerTestCase):
         """
         module_tree = astroid.parse(script)
         call = module_tree.body[-1].iter
-        with self.assertAddsMessages(pylint.testutils.MessageTest(msg_id="dataframe-iteration", node=call),):
+        with self.assertAddsMessages(pylint.testutils.MessageTest(msg_id="dataframe-iteration-modification-pandas", node=call),):
             self.checker.visit_module(module_tree)
             self.checker.visit_call(call)
 
@@ -34,7 +34,7 @@ class TestUnnecessaryIterationPandasChecker(pylint.testutils.CheckerTestCase):
         module_tree = astroid.parse(script)
         for_node = module_tree.body[-1]
         with self.assertAddsMessages(
-            pylint.testutils.MessageTest(msg_id="dataframe-iteration-modification", node=for_node),
+            pylint.testutils.MessageTest(msg_id="dataframe-iteration-modification-pandas", node=for_node),
         ):
             self.checker.visit_module(module_tree)
             self.checker.visit_for(for_node)
@@ -50,7 +50,7 @@ class TestUnnecessaryIterationPandasChecker(pylint.testutils.CheckerTestCase):
         module_tree = astroid.parse(script)
         for_node = module_tree.body[-1]
         with self.assertAddsMessages(
-            pylint.testutils.MessageTest(msg_id="dataframe-iteration-modification", node=for_node),
+            pylint.testutils.MessageTest(msg_id="dataframe-iteration-modification-pandas", node=for_node),
         ):
             self.checker.visit_module(module_tree)
             self.checker.visit_for(for_node)
