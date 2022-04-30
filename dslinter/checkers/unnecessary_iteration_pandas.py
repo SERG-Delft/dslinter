@@ -54,7 +54,7 @@ class UnnecessaryIterationPandasChecker(BaseChecker):
         """
         try:
             if self._iterating_through_dataframe(node):
-                self.add_message("dataframe-iteration", node=node)
+                self.add_message("dataframe-iteration-modification-pandas", node=node)
         except:  # pylint: disable=bare-except
             ExceptionHandler.handle(self, node)
 
@@ -97,7 +97,7 @@ class UnnecessaryIterationPandasChecker(BaseChecker):
             modified_iterated_targets = any(target in for_targets for target in assigned)
 
             if modified_iterated_targets:
-                self.add_message("dataframe-iteration-modification", node=node)
+                self.add_message("dataframe-iteration-modification-pandas", node=node)
         except:  # pylint: disable=bare-except
             ExceptionHandler.handle(self, node)
 
