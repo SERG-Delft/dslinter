@@ -15,8 +15,7 @@ class HyperparameterTensorflowChecker(HyperparameterChecker):
     priority = -1
     msgs = {
         "R5507": (
-            "Some of the important hyperparameters(learning rate, batch size, momentum, \
-            and weight decay) is not set in the program.",
+            "Some of the important hyperparameters(learning rate, batch size, momentum, and weight decay) is not set in the program.",
             "hyperparameter-tensorflow",
             "Important hyperparameters should be set in the program."
         )

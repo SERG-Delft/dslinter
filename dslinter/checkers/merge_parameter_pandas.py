@@ -19,7 +19,7 @@ class MergeParameterPandasChecker(BaseChecker):
         "R5505": (
             "Parameters for merge operations are not set.",
             "merge-parameter-pandas",
-            "Parameters for merge operations should be set to ensure the correct usage of merging,"
+            "Parameters 'how', 'on' and 'validate' should be set for merge operations to ensure the correct usage of merging."
         )
     }
     options = ()

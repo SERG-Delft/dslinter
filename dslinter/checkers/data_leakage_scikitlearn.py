@@ -21,8 +21,7 @@ class DataLeakageScikitLearnChecker(BaseChecker):
         "W5516": (
             "scikit-learn estimator not used in a pipeline.",
             "data-leakage-scikitlearn",
-            "All scikit-learn estimators should be used inside pipelines, to prevent data leakage \
-             between training and test data.",
+            "All scikit-learn estimators should be used inside pipelines, to prevent data leakage between training and test data.",
         ),
     }
     options = ()
@@ -52,6 +51,7 @@ class DataLeakageScikitLearnChecker(BaseChecker):
         "QuantileTransformer",
         "RobustScaler",
         "StandardScaler",
+        "SelectKBest",
     ]
 
     def visit_call(self, call_node: astroid.Call):
@@ -68,8 +68,24 @@ class DataLeakageScikitLearnChecker(BaseChecker):
                 and call_node.func.attrname in self.LEARNING_FUNCTIONS
                 and hasattr(call_node.func, "expr")
                 and self._expr_is_estimator(call_node.func.expr)
+                and hasattr(call_node, "args")
             ):
-                self.add_message("data-leakage-scikitlearn", node=call_node)
+                has_learning_function = True
+                has_preprocessing_function = False
+                for arg in call_node.args:
+                    if isinstance(arg, astroid.Name):
+                        values = AssignUtil.assignment_values(arg)
+                        for value in values:
+                            if (
+                                isinstance(value, astroid.Call)
+                                and hasattr(value, "func")
+                                and hasattr(value.func, "expr")
+                            ):
+                                if self._expr_is_preprocessor(value.func.expr):
+                                    has_preprocessing_function = True
+                if has_learning_function is True and has_preprocessing_function is True:
+                    self.add_message("data-leakage-scikitlearn", node=call_node)
+
         except:  # pylint: disable=bare-except
             ExceptionHandler.handle(self, call_node)
 
@@ -112,13 +128,44 @@ class DataLeakageScikitLearnChecker(BaseChecker):
         """
         Get all estimator classes.
 
-        The list contains all learning classes and preprocessing classes which do something in the
+        The list contains all learning classes which do something in the
         fit function from sklearn.
 
         :return: List of estimator classes.
         """
         # pylint: disable = line-too-long
         learning_classes = list(Resources.get_hyperparameters("hyperparameters_scikitlearn_dict.pickle").keys())
-        estimator_classes = learning_classes + DataLeakageScikitLearnChecker.PREPROCESSING_CLASSES
+        estimator_classes = learning_classes
         assert None not in estimator_classes
         return estimator_classes
+
+    def _call_initiates_preprocessor(self, call: astroid.Call) -> bool:
+        """
+        Evaluate whether a Call node is initiating an scaler.
+
+        :param call: Call to evaluate.
+        :return: True when an estimator is initiated.
+        """
+        return (
+                hasattr(call, "func")
+                and hasattr(call.func, "name")
+                and call.func.name in self.PREPROCESSING_CLASSES
+        )
+
+    def _expr_is_preprocessor(self, expr: astroid.node_classes.NodeNG) -> bool:
+        """
+        Evaluate whether the expression is an estimator.
+
+        :param expr: Expression to evaluate.
+        :return: True when the expression is an estimator.
+        """
+        if isinstance(expr, astroid.Call) and self._call_initiates_preprocessor(expr):
+            return True
+
+        # If expr is a Name, check whether that name is assigned to an estimator.
+        if isinstance(expr, astroid.Name):
+            values = AssignUtil.assignment_values(expr)
+            for value in values:
+                if self._expr_is_preprocessor(value):
+                    return True
+        return False

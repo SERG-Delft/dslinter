@@ -18,8 +18,7 @@ class DeterministicAlgorithmChecker(BaseChecker):
         "W5505": (
             "torch.use_deterministic_algorithm()  is not used or not set to True",
             "deterministic-pytorch",
-            "torch.use_deterministic_algorithm()  should be used and set to True \
-            during development process for reproducible result."
+            "torch.use_deterministic_algorithm()  should be used and set to True during development process for reproducible result."
         )
     }
 
@@ -43,12 +42,16 @@ class DeterministicAlgorithmChecker(BaseChecker):
         Check whether there is a pytorch import
         :param node: import node
         """
-        self._import_pytorch = has_import(node, "torch")
+        try:
+            if self._import_pytorch is False:
+                self._import_pytorch = has_import(node, "torch")
+        except: # pylint: disable = bare-except
+            ExceptionHandler.handle(self, node)
 
     def visit_module(self, module: astroid.Module):
         """
         Check whether use_deterministic_algorithms option is used.
-        :param node: call node
+        :param module: call node
         """
         try:
             _is_main_module = check_main_module(module)

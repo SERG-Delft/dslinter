@@ -42,7 +42,8 @@ class RandomnessControlPytorchChecker(BaseChecker):
         :param node: import node
         """
         try:
-            self._import_pytorch = has_import(node, "torch")
+            if self._import_pytorch is False:
+                self._import_pytorch = has_import(node, "torch")
         except: # pylint: disable = bare-except
             ExceptionHandler.handle(self, node)
 

@@ -10,12 +10,12 @@ from dslinter.checkers.forward_pytorch import ForwardPytorchChecker
 from dslinter.checkers.gradient_clear_pytorch import GradientClearPytorchChecker
 from dslinter.checkers.imports import ImportChecker
 from dslinter.checkers.inplace_pandas import InPlacePandasChecker
-from dslinter.checkers.inplace_numpy import InPlaceNumpyChecker
+from dslinter.checkers.deprecated.inplace_numpy import InPlaceNumpyChecker
 from dslinter.checkers.mask_missing_pytorch import MaskMissingPytorchChecker
 from dslinter.checkers.mask_missing_tensorflow import MaskMissingTensorflowChecker
 from dslinter.checkers.memory_release_tensorflow import MemoryReleaseTensorflowChecker
 from dslinter.checkers.merge_parameter_pandas import MergeParameterPandasChecker
-from dslinter.checkers.mode_toggling_pytorch import ModeTogglingPytorchChecker
+from dslinter.checkers.deprecated.mode_toggling_pytorch import ModeTogglingPytorchChecker
 from dslinter.checkers.randomness_control_numpy import RandomnessControlNumpyChecker
 from dslinter.checkers.randomness_control_pytorch import RandomnessControlPytorchChecker
 # pylint: disable = line-too-long

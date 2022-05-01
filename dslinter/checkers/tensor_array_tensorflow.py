@@ -19,7 +19,7 @@ class TensorArrayTensorflowChecker(BaseChecker):
         "W5513": (
             "tf.constant() variable is assigned or growing in the loop.",
             "tensor-array-tensorflow",
-            "Using tf.TensorArray() for growing array in the loop.",
+            "Use tf.TensorArray() for growing array in the loop.",
         )
     }
     options = ()

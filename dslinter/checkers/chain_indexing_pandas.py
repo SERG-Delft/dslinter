@@ -19,7 +19,7 @@ class ChainIndexingPandasChecker(BaseChecker):
         "W5502": (
             "Chain indexing is used in pandas code",
             "chain-indexing-pandas",
-            "Chain indexing is considered bad practice in pandas and should be avoided in pandas code."
+            "Chain indexing is considered bad practice in pandas code and should be avoided."
         )
     }
     options = ()

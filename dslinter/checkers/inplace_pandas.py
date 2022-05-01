@@ -19,8 +19,7 @@ class InPlacePandasChecker(BaseChecker):
         "E5502": (
             "Result of operation on a DataFrame is not assigned.",
             "inplace-pandas",
-            "Most operations on a DataFrame return a new DataFrame. These should be assigned to \
-            a variable.",
+            "Most operations on a DataFrame return a new DataFrame. These should be assigned to a variable.",
         ),
     }
     options = ()

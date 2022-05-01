@@ -41,7 +41,8 @@ class RandomnessControlTensorflowChecker(BaseChecker):
         :param node: import node
         """
         try:
-            self._import_tensorflow = has_import(node, "tensorflow")
+            if self._import_tensorflow is False:
+                self._import_tensorflow = has_import(node, "tensorflow")
         except: # pylint: disable = bare-except
             ExceptionHandler.handle(self, node)
 
