@@ -20,7 +20,7 @@ class DependentThresholdTensorflowChecker(BaseChecker):
     name = "dependent-threshold-tensorflow"
     priority = -1
     msgs = {
-        "W5518": (
+        "W5520": (
             "The F1 Score is used but AUC is not used in the Tensorflow code.",
             "dependent-threshold-tensorflow",
             "The threshold independent evaluation method(e.g., AUC) is preferred over threshold dependent method(e.g., F1 Score)."

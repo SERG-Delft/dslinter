@@ -12,7 +12,7 @@ class MemoryReleaseTensorflowChecker(BaseChecker):
     name = "memory-release-tensorflow"
     priority = -1
     msgs = {
-        "W5504":{
+        "W5506":{
             "The memory has not freed in time.",
             "memory-release-tensorflow",
             "`clean_session()` can be used to free memory in the loop."

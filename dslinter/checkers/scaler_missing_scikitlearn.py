@@ -16,7 +16,7 @@ class ScalerMissingScikitLearnChecker(BaseChecker):
     name = "scaler-missing-scikitlearn"
     priority = -1
     msgs = {
-        "E5504": (
+        "W5505": (
             "Scaler is not used before scaling-sensitive operation",
             "scaler-missing-scikitlearn",
             "To ensure a good result, use feature scaling before scaling-sensitive operation."

@@ -19,7 +19,7 @@ class DependentThresholdScikitLearnChecker(BaseChecker):
     name = "dependent-threshold-scikitlearn"
     priority = -1
     msgs = {
-        "W5517": (
+        "W5519": (
             "The F1 Score is used but AUC is not used in the Scikit-learn code.",
             "dependent-threshold-scikitlearn",
             "The threshold independent evaluation method(e.g., AUC) is preferred over threshold dependent method(e.g., F1 Score)."

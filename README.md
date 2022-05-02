@@ -1,4 +1,4 @@
-# [dslinter](hynn01.github.io/dslinter/)
+# dslinter
 [![build](https://github.com/SERG-Delft/dslinter/actions/workflows/build.yml/badge.svg)](https://github.com/SERG-Delft/dslinter/actions/workflows/build.yml)
 [![codecov.io](https://codecov.io/github/SERG-Delft/dslinter/coverage.svg?branch=main)](https://codecov.io/github/SERG-Delft/dslinter?branch=main)
 [![PyPI version](https://badge.fury.io/py/dslinter.svg)](https://badge.fury.io/py/dslinter)
@@ -100,16 +100,16 @@ poetry run pytest .
 
 - **W5514 | missing-mask-pytorch | Mask Missing Checker(PyTorch)**: If log function is used in the code, check whether the argument value is valid. 
 
-- **W5516 | tensor-array-tensorflow | Tensor Array Checker(Tensorflow)**: Use tf.TensorArray() for growing array in the loop.
+- **W5515 | tensor-array-tensorflow | Tensor Array Checker(Tensorflow)**: Use tf.TensorArray() for growing array in the loop.
 
-- **W5517 | forward-pytorch | Net Forward Checker(PyTorch)**: It is recommended to use self.net() rather than self.net.forward() in PyTorch code. If self.net.forward() is used in the code, the rule is violated.
+- **W5516 | forward-pytorch | Net Forward Checker(PyTorch)**: It is recommended to use self.net() rather than self.net.forward() in PyTorch code. If self.net.forward() is used in the code, the rule is violated.
 
-- **W5518 | gradient-clear-pytorch | Gradient Clear Checker(PyTorch)**: The loss_fn.backward() and optimizer.step() should be used together with optimizer.zero_grad(). If the ".backward()" is missing in the code, the rule is violated.
+- **W5517 | gradient-clear-pytorch | Gradient Clear Checker(PyTorch)**: The loss_fn.backward() and optimizer.step() should be used together with optimizer.zero_grad(). If the ".backward()" is missing in the code, the rule is violated.
 
-- **W5519 | data-leakage-scikitlearn | Data Leakage Checker(ScikitLearn)**: All scikit-learn estimators should be used inside Pipelines, to prevent data leakage between training and test data.
+- **W5518 | data-leakage-scikitlearn | Data Leakage Checker(ScikitLearn)**: All scikit-learn estimators should be used inside Pipelines, to prevent data leakage between training and test data.
 
-- **W5520 | dependent-threshold-scikitlearn | Dependent Threshold Checker(TensorFlow)**: If threshold-dependent evaluation(e.g., f-score) is used in the code, check whether threshold-indenpendent evaluation(e.g., auc) metrics is also used in the code.
+- **W5519 | dependent-threshold-scikitlearn | Dependent Threshold Checker(TensorFlow)**: If threshold-dependent evaluation(e.g., f-score) is used in the code, check whether threshold-indenpendent evaluation(e.g., auc) metrics is also used in the code.
 
-- **W5521 | dependent-threshold-tensorflow | Dependent Threshold Checker(PyTorch)**: If threshold-dependent evaluation(e.g., f-score) is used in the code, check whether threshold-indenpendent evaluation(e.g., auc) metrics is also used in the code.
+- **W5520 | dependent-threshold-tensorflow | Dependent Threshold Checker(PyTorch)**: If threshold-dependent evaluation(e.g., f-score) is used in the code, check whether threshold-indenpendent evaluation(e.g., auc) metrics is also used in the code.
 
-- **W5522 | dependent-threshold-pytorch | Dependent Threshold Checker(ScikitLearn)**: If threshold-dependent evaluation(e.g., f-score) is used in the code, check whether threshold-indenpendent evaluation(e.g., auc) metrics is also used in the code.
+- **W5521 | dependent-threshold-pytorch | Dependent Threshold Checker(ScikitLearn)**: If threshold-dependent evaluation(e.g., f-score) is used in the code, check whether threshold-indenpendent evaluation(e.g., auc) metrics is also used in the code.
