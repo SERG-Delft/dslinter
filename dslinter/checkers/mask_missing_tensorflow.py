@@ -15,7 +15,7 @@ class MaskMissingTensorflowChecker(BaseChecker):
     name = "missing-mask-tensorflow"
     priority = -1
     msgs = {
-        "W5514": (
+        "W5513": (
             "The variable in tf.log() isn't wrapped with tf.clip_by_value().",
             "missing-mask-tensorflow",
             "Add a mask for possible invalid values. For example, developers should wrap the argument for tf.log() with tf.clip() to avoid the argument turning to zero."

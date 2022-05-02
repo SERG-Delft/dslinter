@@ -15,7 +15,7 @@ class MaskMissingPytorchChecker(BaseChecker):
     name = "missing-mask-pytorch"
     priority = -1
     msgs = {
-        "W5511": (
+        "W5514": (
             "The variable in torch.log() isn't wrapped with torch.clip() or torch.clamp().",
             "missing-mask-pytorch",
             "Add a mask for possible invalid values. For example, developers should wrap the argument for torch.log() with torch.clip() to avoid the argument turning to zero."
