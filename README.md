@@ -1,4 +1,4 @@
-# [dslinter](hynn01.github.io/dslinter/)
+# dslinter
 [![build](https://github.com/SERG-Delft/dslinter/actions/workflows/build.yml/badge.svg)](https://github.com/SERG-Delft/dslinter/actions/workflows/build.yml)
 [![codecov.io](https://codecov.io/github/SERG-Delft/dslinter/coverage.svg?branch=main)](https://codecov.io/github/SERG-Delft/dslinter?branch=main)
 [![PyPI version](https://badge.fury.io/py/dslinter.svg)](https://badge.fury.io/py/dslinter)
