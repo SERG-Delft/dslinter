@@ -14,7 +14,7 @@ class RandomnessControlTensorflowChecker(BaseChecker):
     name = "randomness-control-tensorflow"
     priority = -1
     msgs = {
-        "W5508": (
+        "W5510": (
             "tf.random.set_seed() is not set in TensorFlow program",
             "randomness-control-tensorflow",
             "tf.random.set_seed() should be set in TensorFlow program for reproducible result"

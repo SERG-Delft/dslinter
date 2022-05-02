@@ -18,7 +18,7 @@ class DataLeakageScikitLearnChecker(BaseChecker):
     name = "data-leakage-scikitlearn"
     priority = -1
     msgs = {
-        "W5516": (
+        "W5518": (
             "scikit-learn estimator not used in a pipeline.",
             "data-leakage-scikitlearn",
             "All scikit-learn estimators should be used inside pipelines, to prevent data leakage between training and test data.",
