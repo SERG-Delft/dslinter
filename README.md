@@ -10,6 +10,11 @@
 
 `dslinter` implements the detection rules for smells identified by [our previous work](https://arxiv.org/pdf/2203.13746.pdf). The smells are collected from papers, grey literature, GitHub commits, and Stack Overflow posts.
 
+
+https://user-images.githubusercontent.com/26082974/166459816-758b2cfc-303d-47d8-ab55-9525e3717c9d.mov
+
+
+
 ## Installation
 To install from the Python Package Index:
 ```
