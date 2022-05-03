@@ -8,12 +8,12 @@
 
 `dslinter` is a PyLint plugin for linting data science and machine learning code. It aims to help developers ensure the machine learning code quality and supports the following Python libraries: TensorFlow, PyTorch, Scikit-Learn, Pandas, NumPy and SciPy. 
 
-`dslinter` implements the detection rules for smells identified by [our previous work](https://arxiv.org/pdf/2203.13746.pdf). The smells are collected from papers, grey literature, GitHub commits, and Stack Overflow posts.
+`dslinter` implements the detection rules for smells identified by [our previous work](https://arxiv.org/pdf/2203.13746.pdf). The smells are collected from papers, grey literature, GitHub commits, and Stack Overflow posts. The smells are also elaborated at a [website](https://hynn01.github.io/ml-smells/) :)
 
 
 https://user-images.githubusercontent.com/26082974/166459816-758b2cfc-303d-47d8-ab55-9525e3717c9d.mov
 
-
+> The example project in the demo video can be found [here](https://github.com/Hynn01/dslinter-example-projects/tree/main/llexnlp).
 
 ## Installation
 To install from the Python Package Index:
