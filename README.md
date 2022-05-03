@@ -6,7 +6,9 @@
 [![PyPI - Downloads - Monthly](https://img.shields.io/pypi/dm/dslinter)](https://pypi.org/project/dslinter/) 
 [![Code Grade](https://api.codiga.io/project/33224/status/svg)](https://api.codiga.io/project/33224/status/svg)
 
-`dslinter` is a PyLint plugin for linting data science and machine learning code. We plan to support the following Python libraries: TensorFlow, PyTorch, Scikit-Learn, Pandas, NumPy and SciPy.
+`dslinter` is a PyLint plugin for linting data science and machine learning code. It aims to help developers ensure the machine learning code quality and supports the following Python libraries: TensorFlow, PyTorch, Scikit-Learn, Pandas, NumPy and SciPy. 
+
+`dslinter` implements the detection rules for smells identified by [our previous work](https://arxiv.org/pdf/2203.13746.pdf). The smells are collected from papers, grey literature, GitHub commits, and Stack Overflow posts.
 
 ## Installation
 To install from the Python Package Index:
@@ -17,7 +19,26 @@ pip install dslinter
 ## Usage
 To only use the checkers implemented in this plugin, run:
 ```
-pylint --load-plugins=dslinter --disable=all --enable=import,data-leakage <other_options> <path_to_sources>
+pylint \
+    --load-plugins=dslinter \
+    --disable=all \
+    --enable=import, unnecessary-iteration-pandas, unnecessary-iteration-tensorflow, \
+        nan-numpy, chain-indexing-pandas, datatype-pandas, \
+        column-selection-pandas, merge-parameter-pandas, inplace-pandas, \
+        dataframe-conversion-pandas, scaler-missing-scikitlearn, hyperparameters-scikitlearn, \
+        hyperparameter-tensorflow, hyperparameter-pytorch, memory-release-tensorflow, \
+        deterministic-pytorch, randomness-control-numpy, randomness-control-scikitlearn, \
+        randomness-control-tensorflow, randomness-control-pytorch, randomness-control-dataloader-pytorch, \
+        missing-mask-tensorflow, missing-mask-pytorch, tensor-array-tensorflow, \
+        forward-pytorch, gradient-clear-pytorch, data-leakage-scikitlearn, \
+        dependent-threshold-scikitlearn, dependent-threshold-tensorflow, dependent-threshold-pytorch \
+    --output-format=json:report.json,text:report.txt,colorized \
+    --reports=y \
+    <path_to_sources>
+```
+Or place a [`.pylintrc` configuration file](https://github.com/Hynn01/dslinter/blob/main/docs/examples/pylintrc-only-dslinter) which contains above settings in the folder where you run your command on, and run:
+```
+pylint <path_to_sources>
 ```
 To expand a current pylint configuration with the checkers from this plugin, run:
 ```
