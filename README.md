@@ -66,7 +66,7 @@ poetry run pytest .
 
 - **R5503 | datatype-pandas | Datatype Checker(Pandas)**: Datatype should be set when a dataframe is imported from data to ensure the data formats are imported as expected. If the datatype is not set when importing, the rule is violated.
 
-- **R5504 | column-selection-pandas | Column Selection Checker(Pandas)**: Column should be selected after the dataframe is imported for better readability. The developer will know what data to be expected in the downstream.
+- **R5504 | column-selection-pandas | Column Selection Checker(Pandas)**: Column should be selected after the dataframe is imported for better elaborating what to be expected in the downstream. 
 
 - **R5505 | merge-parameter-pandas | Merge Parameter Checker(Pandas)**: Parameters 'how', 'on' and 'validate' should be set for merge operations to ensure the correct usage of merging.
 

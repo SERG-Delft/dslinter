@@ -15,7 +15,7 @@ class MemoryReleaseTensorflowChecker(BaseChecker):
         "W5506":{
             "The memory has not freed in time.",
             "memory-release-tensorflow",
-            "`clean_session()` can be used to free memory in the loop."
+            "The `clean_session()` can be used to free memory in the loop."
         }
     }
     options = ()

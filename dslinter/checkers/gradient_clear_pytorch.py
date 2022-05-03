@@ -17,7 +17,7 @@ class GradientClearPytorchChecker(BaseChecker):
         "W5517": (
             "The optimizer.zero_grad() is not used in pytorch code when loss_fn.backward() and optimizer.step() are used.",
             "gradient-clear-pytorch",
-            "The loss_fn.backward() and optimizer.step() should be used together with optimizer.zero_grad()."
+            "The loss_fn.backward() and optimizer.step() should be used together with optimizer.zero_grad() to clear gradients."
         )
     }
     options = ()

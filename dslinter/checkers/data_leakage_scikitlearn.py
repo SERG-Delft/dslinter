@@ -19,9 +19,9 @@ class DataLeakageScikitLearnChecker(BaseChecker):
     priority = -1
     msgs = {
         "W5518": (
-            "scikit-learn estimator not used in a pipeline.",
+            "There are both preprocessing and estimation operations in the code, but they are not used in a pipeline.",
             "data-leakage-scikitlearn",
-            "All scikit-learn estimators should be used inside pipelines, to prevent data leakage between training and test data.",
+            "Scikit-learn preprocessors and estimators should be used inside pipelines, to prevent data leakage between training and test data.",
         ),
     }
     options = ()

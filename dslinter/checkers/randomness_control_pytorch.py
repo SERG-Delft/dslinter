@@ -15,9 +15,9 @@ class RandomnessControlPytorchChecker(BaseChecker):
     priority = -1
     msgs = {
         "W5511": (
-            "torch.manual_seed() is not set in PyTorch program",
+            "The torch.manual_seed() is not set in PyTorch program",
             "randomness-control-pytorch",
-            "torch.manual_seed() should be set in PyTorch program for reproducible result"
+            "The torch.manual_seed() should be set in PyTorch program for reproducible result"
         )
     }
 

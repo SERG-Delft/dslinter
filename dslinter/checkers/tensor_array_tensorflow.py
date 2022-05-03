@@ -17,7 +17,7 @@ class TensorArrayTensorflowChecker(BaseChecker):
     priority = -1
     msgs = {
         "W5515": (
-            "tf.constant() variable is assigned or growing in the loop.",
+            "The tf.constant() variable is assigned or growing in the loop.",
             "tensor-array-tensorflow",
             "Use tf.TensorArray() for growing array in the loop.",
         )
