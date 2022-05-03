@@ -15,32 +15,32 @@ class ImportChecker(BaseChecker):
     priority = -1
     msgs = {
         "C5501": (
-            "Import of pandas not bound to 'pd'.",
+            "The import of pandas doesn't bound to 'pd'.",
             "import-pandas",
             "The pandas module should be imported as 'pd'.",
         ),
         "C5502": (
-            "Import of numpy not bound to 'np'.",
+            "The import of numpy doesn't bound to 'np'.",
             "import-numpy",
             "The numpy module should be imported as 'np'.",
         ),
         "C5503": (
-            "Import of matplotlib.pyplot not bound to 'plt'.",
+            "The Import of matplotlib.pyplot doesn't bound to 'plt'.",
             "import-pyplot",
             "The matplotlib.pyplot module should be imported as 'plt'.",
         ),
         "C5504": (
-            "Import from sklearn module has an alias.",
+            "The import from sklearn module has an alias.",
             "import-sklearn",
             "Imports from sklearn modules should not have an alias.",
         ),
         "C5505": (
-            "Import of tensorflow not bound to 'tf'.",
+            "The import of tensorflow doesn't bound to 'tf'.",
             "import-tensorflow",
             "The tensorflow module should be imported as 'tf' ",
         ),
         "C5506": (
-            "Import of pytorch has an alias.",
+            "The import of pytorch has an alias.",
             "import-pytorch",
             "The pytorch module should not have an alias",
         )

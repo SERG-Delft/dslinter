@@ -6,7 +6,14 @@
 [![PyPI - Downloads - Monthly](https://img.shields.io/pypi/dm/dslinter)](https://pypi.org/project/dslinter/) 
 [![Code Grade](https://api.codiga.io/project/33224/status/svg)](https://api.codiga.io/project/33224/status/svg)
 
-`dslinter` is a PyLint plugin for linting data science and machine learning code. We plan to support the following Python libraries: TensorFlow, PyTorch, Scikit-Learn, Pandas, NumPy and SciPy.
+`dslinter` is a PyLint plugin for linting data science and machine learning code. It aims to help developers ensure the machine learning code quality and supports the following Python libraries: TensorFlow, PyTorch, Scikit-Learn, Pandas, NumPy and SciPy. 
+
+`dslinter` implements the detection rules for smells identified by [our previous work](https://arxiv.org/pdf/2203.13746.pdf). The smells are collected from papers, grey literature, GitHub commits, and Stack Overflow posts. The smells are also elaborated at a [website](https://hynn01.github.io/ml-smells/) :)
+
+
+https://user-images.githubusercontent.com/26082974/166459816-758b2cfc-303d-47d8-ab55-9525e3717c9d.mov
+
+> The example project in the demo video can be found [here](https://github.com/Hynn01/dslinter-example-projects/tree/main/llexnlp).
 
 ## Installation
 To install from the Python Package Index:
@@ -17,7 +24,26 @@ pip install dslinter
 ## Usage
 To only use the checkers implemented in this plugin, run:
 ```
-pylint --load-plugins=dslinter --disable=all --enable=import,data-leakage <other_options> <path_to_sources>
+pylint \
+--load-plugins=dslinter \
+--disable=all \
+--enable=import,unnecessary-iteration-pandas,unnecessary-iteration-tensorflow,\
+nan-numpy,chain-indexing-pandas,datatype-pandas,\
+column-selection-pandas,merge-parameter-pandas,inplace-pandas,\
+dataframe-conversion-pandas,scaler-missing-scikitlearn,hyperparameters-scikitlearn,\
+hyperparameter-tensorflow,hyperparameter-pytorch,memory-release-tensorflow,\
+deterministic-pytorch,randomness-control-numpy,randomness-control-scikitlearn,\
+randomness-control-tensorflow,randomness-control-pytorch,randomness-control-dataloader-pytorch,\
+missing-mask-tensorflow,missing-mask-pytorch,tensor-array-tensorflow,\
+forward-pytorch,gradient-clear-pytorch,data-leakage-scikitlearn,\
+dependent-threshold-scikitlearn,dependent-threshold-tensorflow,dependent-threshold-pytorch \
+--output-format=json:report.json,text:report.txt,colorized \
+--reports=y \
+<path_to_sources>
+```
+Or place a [`.pylintrc` configuration file](https://github.com/Hynn01/dslinter/blob/main/docs/pylint-configuration-examples/pylintrc-with-only-dslinter-settings/.pylintrc) which contains above settings in the folder where you run your command on, and run:
+```
+pylint <path_to_sources>
 ```
 To expand a current pylint configuration with the checkers from this plugin, run:
 ```
@@ -66,7 +92,7 @@ poetry run pytest .
 
 - **R5503 | datatype-pandas | Datatype Checker(Pandas)**: Datatype should be set when a dataframe is imported from data to ensure the data formats are imported as expected. If the datatype is not set when importing, the rule is violated.
 
-- **R5504 | column-selection-pandas | Column Selection Checker(Pandas)**: Column should be selected after the dataframe is imported for better readability. The developer will know what data to be expected in the downstream.
+- **R5504 | column-selection-pandas | Column Selection Checker(Pandas)**: Column should be selected after the dataframe is imported for better elaborating what to be expected in the downstream. 
 
 - **R5505 | merge-parameter-pandas | Merge Parameter Checker(Pandas)**: Parameters 'how', 'on' and 'validate' should be set for merge operations to ensure the correct usage of merging.
 

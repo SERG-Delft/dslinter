@@ -17,10 +17,9 @@ class RandomnessControlScikitLLearnChecker(BaseChecker):
     priority = -1
     msgs = {
         "W5509": (
-            "'random_state=None' shouldn't be used in estimators or "
-            "cross-validation splitters, it indicates improper randomness control",
+            "The 'random_state' should be set in estimators or cross-validation splitters.",
             "randomness-control-scikitlearn",
-            "For reproducible results across executions, remove any use of random_state=None."
+            "For reproducible results across executions, set 'random_state'."
         ),
     }
     options = ()

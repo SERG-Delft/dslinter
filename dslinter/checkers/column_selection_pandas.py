@@ -19,7 +19,7 @@ class ColumnSelectionPandasChecker(BaseChecker):
         "R5504": (
             "There is no column selection after the dataframe is imported.",
             "column-selection-pandas",
-            "Column should be selected after the dataframe is imported for better readability."
+            "Column should be selected after the dataframe is imported for better elaborating what to be expected in the downstream."
         )
     }
     options = ()

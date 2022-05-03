@@ -14,7 +14,7 @@ class RandomnessControlDataloaderPytorchChecker(BaseChecker):
     priority = -1
     msgs = {
         "W5512": (
-            "worker_init_fn() and generator is not set in PyTorch DataLoader API",
+            "The worker_init_fn() and generator is not set in PyTorch DataLoader API",
             "randomness-control-dataloader-pytorch",
             "Use worker_init_fn() and generator in PyTorch DataLoader API to preserve reproducibility"
         )
