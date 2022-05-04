@@ -68,3 +68,44 @@ class TestColumnSelectionPandasChecker(pylint.testutils.CheckerTestCase):
         module = astroid.parse(script)
         with self.assertNoMessages():
             self.checker.visit_module(module)
+
+    def test_violation_in_function_def(self):
+        script = """
+        import os
+        from unittest import TestCase
+        import pandas as pd
+        from typing import List
+        
+        from lexnlp.extract.common.base_path import lexnlp_test_path
+        from lexnlp.extract.common.annotations.law_annotation import LawAnnotation
+        # pylint:disable=no-name-in-module
+        from lexnlp.extract.de.laws import LawsParser, get_laws
+        from lexnlp.tests.typed_annotations_tests import TypedAnnotationsTester
+        
+        class TestParseDeLaws(TestCase):
+            def setup_parser(): #@
+                base_path = os.path.join(lexnlp_test_path, 'lexnlp/extract/de/laws/')
+                gesetze_df = pd.read_csv(os.path.join(os.path.dirname(__file__),
+                                                      base_path + 'gesetze_list.csv'),
+                                         encoding="utf-8")
+            
+                # verordnungen_df = pd.read_csv(os.path.join(os.path.dirname(__file__),
+                #                                           base_path + 'verordnungen_list.csv'),
+                #                              encoding="utf-8")
+            
+                # concept_df = pd.read_csv(os.path.join(os.path.dirname(__file__),
+                #                                      base_path + 'de_concept_sample.csv'),
+                #                         encoding="utf-8")
+            
+                law_parser = LawsParser(gesetze_df,
+                                        verordnungen_df,
+                                        concept_df)
+                return law_parser
+        
+        parser = setup_parser()
+        """
+        module = astroid.parse(script)
+        functiondef_node = astroid.extract_node(script)
+        with self.assertAddsMessages(pylint.testutils.MessageTest(msg_id="column-selection-pandas", node=functiondef_node.body[1])):
+            self.checker.visit_module(module)
+            self.checker.visit_functiondef(functiondef_node)

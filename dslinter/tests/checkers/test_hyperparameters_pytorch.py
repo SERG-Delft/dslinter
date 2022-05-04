@@ -25,7 +25,7 @@ class TestHyperparameterPyTorchChecker(pylint.testutils.CheckerTestCase):
         DataLoader(dataset)   #@
         """
         importfrom_node, call_node = astroid.extract_node(script)
-        with self.assertAddsMessages(pylint.testutils.MessageTest(msg_id="hyperparameter-pytorch", node=call_node)):
+        with self.assertAddsMessages(pylint.testutils.MessageTest(msg_id="hyperparameters-pytorch", node=call_node)):
             self.checker.visit_importfrom(importfrom_node)
             self.checker.visit_call(call_node)
 
@@ -47,6 +47,6 @@ class TestHyperparameterPyTorchChecker(pylint.testutils.CheckerTestCase):
         """
         importfrom_node, assign_node = astroid.extract_node(script)
         call_node = assign_node.value
-        with self.assertAddsMessages(pylint.testutils.MessageTest(msg_id="hyperparameter-pytorch", node=call_node)):
+        with self.assertAddsMessages(pylint.testutils.MessageTest(msg_id="hyperparameters-pytorch", node=call_node)):
             self.checker.visit_importfrom(importfrom_node)
             self.checker.visit_call(call_node)

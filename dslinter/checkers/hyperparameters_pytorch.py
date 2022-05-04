@@ -9,12 +9,12 @@ class HyperparameterPyTorchChecker(HyperparameterChecker):
 
     __implements__ = IAstroidChecker
 
-    name = "hyperparameter-pytorch"
+    name = "hyperparameters-pytorch"
     priority = -1
     msgs = {
         "R5508": (
             "Some of the important hyperparameters(learning rate, batch size, momentum, and weight decay) is not set in the program.",
-            "hyperparameter-pytorch",
+            "hyperparameters-pytorch",
             "Important hyperparameters should be set in the program."
         )
     }
@@ -34,7 +34,7 @@ class HyperparameterPyTorchChecker(HyperparameterChecker):
     def __init__(self, linter: PyLinter = HyperparameterChecker):
         super().__init__(linter)
         self.HYPERPARAMETER_RESOURCE = "hyperparameters_pytorch_dict.pickle"
-        self.MESSAGE = "hyperparameter-pytorch"
+        self.MESSAGE = "hyperparameters-pytorch"
         self.HYPERPARAMETERS_MAIN = {
             # dataloader
             "DataLoader": {"positional": 2,"keywords":["batch_size"]},

@@ -11,12 +11,12 @@ class HyperparameterTensorflowChecker(HyperparameterChecker):
 
     __implements__ = IAstroidChecker
 
-    name = "hyperparameter-tensorflow"
+    name = "hyperparameters-tensorflow"
     priority = -1
     msgs = {
         "R5507": (
             "Some of the important hyperparameters(learning rate, batch size, momentum, and weight decay) is not set in the program.",
-            "hyperparameter-tensorflow",
+            "hyperparameters-tensorflow",
             "Important hyperparameters should be set in the program."
         )
     }
@@ -36,7 +36,7 @@ class HyperparameterTensorflowChecker(HyperparameterChecker):
     def __init__(self, linter: PyLinter = HyperparameterChecker):
         super().__init__(linter)
         self.HYPERPARAMETER_RESOURCE = "hyperparameters_tensorflow_dict.pickle"
-        self.MESSAGE = "hyperparameter-tensorflow"
+        self.MESSAGE = "hyperparameters-tensorflow"
         self.HYPERPARAMETERS_MAIN = {
             # training
             # optimizer
@@ -76,7 +76,6 @@ class HyperparameterTensorflowChecker(HyperparameterChecker):
         :param node: Node which is visited.
         """
         try:
-            # pdb.set_trace()
             if(
                 hasattr(node, "func")
                 and hasattr(node.func, "name")
@@ -97,7 +96,7 @@ class HyperparameterTensorflowChecker(HyperparameterChecker):
         function_name = node.func.attrname
 
         if function_name in self.hyperparams_all_in_function:  # pylint: disable=unsupported-membership-test
-            if self.config.strict_hyperparameters: # strict mode
+            if self.config.strict_hyperparameters_tensorflow: # strict mode
                 # pylint: disable = line-too-long
                 if not self.has_required_hyperparameters(node, self.hyperparams_all_in_function, function_name):
                     self.add_message(self.MESSAGE, node=node)

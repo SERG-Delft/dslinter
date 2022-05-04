@@ -108,6 +108,6 @@ class TestHyperparameterTensorflowChecker(pylint.testutils.CheckerTestCase):
         """
         importfrom_node, assign_node = astroid.extract_node(script)
         call_node = assign_node.value
-        with self.assertAddsMessages(pylint.testutils.MessageTest(msg_id = "hyperparameter-tensorflow", node = call_node)):
+        with self.assertAddsMessages(pylint.testutils.MessageTest(msg_id = "hyperparameters-tensorflow", node = call_node)):
             self.checker.visit_importfrom(importfrom_node)
             self.checker.visit_call(call_node)
