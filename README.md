@@ -11,7 +11,8 @@
 `dslinter` implements the detection rules for smells identified by [our previous work](https://arxiv.org/pdf/2203.13746.pdf). The smells are collected from papers, grey literature, GitHub commits, and Stack Overflow posts. The smells are also elaborated at a [website](https://hynn01.github.io/ml-smells/) :)
 
 
-https://user-images.githubusercontent.com/26082974/166459816-758b2cfc-303d-47d8-ab55-9525e3717c9d.mov
+https://user-images.githubusercontent.com/26082974/166685300-71551c45-6d45-4646-bc34-084239b168bb.mov
+
 
 > The example project in the demo video can be found [here](https://github.com/Hynn01/dslinter-example-projects/tree/main/llexnlp).
 
