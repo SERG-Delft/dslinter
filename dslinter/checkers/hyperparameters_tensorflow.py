@@ -11,12 +11,12 @@ class HyperparameterTensorflowChecker(HyperparameterChecker):
 
     __implements__ = IAstroidChecker
 
-    name = "hyperparameter-tensorflow"
+    name = "hyperparameters-tensorflow"
     priority = -1
     msgs = {
         "R5507": (
             "Some of the important hyperparameters(learning rate, batch size, momentum, and weight decay) is not set in the program.",
-            "hyperparameter-tensorflow",
+            "hyperparameters-tensorflow",
             "Important hyperparameters should be set in the program."
         )
     }
@@ -36,7 +36,7 @@ class HyperparameterTensorflowChecker(HyperparameterChecker):
     def __init__(self, linter: PyLinter = HyperparameterChecker):
         super().__init__(linter)
         self.HYPERPARAMETER_RESOURCE = "hyperparameters_tensorflow_dict.pickle"
-        self.MESSAGE = "hyperparameter-tensorflow"
+        self.MESSAGE = "hyperparameters-tensorflow"
         self.HYPERPARAMETERS_MAIN = {
             # training
             # optimizer
