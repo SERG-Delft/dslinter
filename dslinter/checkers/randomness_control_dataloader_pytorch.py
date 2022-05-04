@@ -21,7 +21,7 @@ class RandomnessControlDataloaderPytorchChecker(BaseChecker):
     }
     options = ()
 
-    _import_DataLoader = False
+    _import_dataloader = False
 
     def visit_importfrom(self, importfrom_node: astroid.ImportFrom):
         """
@@ -35,7 +35,7 @@ class RandomnessControlDataloaderPytorchChecker(BaseChecker):
             ):
                 for name, _ in importfrom_node.names:
                     if name == "DataLoader":
-                        self._import_DataLoader = True
+                        self._import_dataloader = True
         except: # pylint: disable = bare-except
             ExceptionHandler.handle(self, importfrom_node)
 
@@ -60,7 +60,7 @@ class RandomnessControlDataloaderPytorchChecker(BaseChecker):
     def _use_dataloader_from_import(self, node):
         # Dataloader has been imported from torch.utils.data
         if(
-            self._import_DataLoader is True
+            self._import_dataloader is True
             and hasattr(node.func, "name")
             and node.func.name == "DataLoader"
         ):

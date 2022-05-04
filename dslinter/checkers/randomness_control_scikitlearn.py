@@ -77,7 +77,6 @@ class RandomnessControlScikitLLearnChecker(BaseChecker):
                     if _has_random_state_keyword is False:
                         self.add_message("randomness-control-scikitlearn", node=node)
 
-        # pylint: disable = W0702
-        except:
+        except: # pylint: disable = bare-except
             ExceptionHandler.handle(self, node)
             traceback.print_exc()
