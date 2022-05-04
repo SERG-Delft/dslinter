@@ -32,7 +32,7 @@ pylint \
 nan-numpy,chain-indexing-pandas,datatype-pandas,\
 column-selection-pandas,merge-parameter-pandas,inplace-pandas,\
 dataframe-conversion-pandas,scaler-missing-scikitlearn,hyperparameters-scikitlearn,\
-hyperparameter-tensorflow,hyperparameter-pytorch,memory-release-tensorflow,\
+hyperparameters-tensorflow,hyperparameters-pytorch,memory-release-tensorflow,\
 deterministic-pytorch,randomness-control-numpy,randomness-control-scikitlearn,\
 randomness-control-tensorflow,randomness-control-pytorch,randomness-control-dataloader-pytorch,\
 missing-mask-tensorflow,missing-mask-pytorch,tensor-array-tensorflow,\
