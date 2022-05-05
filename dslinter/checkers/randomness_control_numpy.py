@@ -23,7 +23,6 @@ class RandomnessControlNumpyChecker(BaseChecker):
     options = ()
 
     _import_numpy = False
-    _has_manual_seed = False
     _import_ml_libraries = False
 
     options = (
@@ -71,6 +70,7 @@ class RandomnessControlNumpyChecker(BaseChecker):
         :param module:
         """
         try:
+            _has_manual_seed = False
             _is_main_module = check_main_module(module)
             if self.config.no_main_module_check_randomness_control_numpy is False and _is_main_module is False:
                 return
@@ -88,12 +88,12 @@ class RandomnessControlNumpyChecker(BaseChecker):
                         and hasattr(call_node.func.expr.expr, "name")
                         and call_node.func.expr.expr.name in ["np", "numpy"]
                     ):
-                        self._has_manual_seed = True
+                        _has_manual_seed = True
 
             if(
                 self._import_numpy is True
                 and self._import_ml_libraries is True
-                and self._has_manual_seed is False
+                and _has_manual_seed is False
             ):
                 self.add_message("randomness-control-numpy", node=module)
         except: # pylint: disable = bare-except

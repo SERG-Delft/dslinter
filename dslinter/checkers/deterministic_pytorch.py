@@ -35,7 +35,6 @@ class DeterministicAlgorithmChecker(BaseChecker):
     )
 
     _import_pytorch = False
-    _has_deterministic_algorithm_option = False
 
     def visit_import(self, node: astroid.Import):
         """
@@ -54,6 +53,8 @@ class DeterministicAlgorithmChecker(BaseChecker):
         :param module: call node
         """
         try:
+            _has_deterministic_algorithm_option = False
+
             _is_main_module = check_main_module(module)
             if self.config.no_main_module_check_deterministic_pytorch is False and _is_main_module is False:
                 return
@@ -72,11 +73,11 @@ class DeterministicAlgorithmChecker(BaseChecker):
                         and hasattr(call_node.args[0], "value")
                         and call_node.args[0].value is True
                     ):
-                        self._has_deterministic_algorithm_option = True
+                        _has_deterministic_algorithm_option = True
 
             if(
                 self._import_pytorch is True
-                and self._has_deterministic_algorithm_option is False
+                and _has_deterministic_algorithm_option is False
             ):
                 self.add_message("deterministic-pytorch", node=module)
         except: # pylint: disable = bare-except

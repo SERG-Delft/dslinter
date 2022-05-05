@@ -33,7 +33,6 @@ class RandomnessControlTensorflowChecker(BaseChecker):
     )
 
     _import_tensorflow = False
-    _has_manual_seed = False
 
     def visit_import(self, node: astroid.Import):
         """
@@ -52,6 +51,7 @@ class RandomnessControlTensorflowChecker(BaseChecker):
         :param module:
         """
         try:
+            _has_manual_seed = False
             _is_main_module = check_main_module(module)
             if self.config.no_main_module_check_randomness_control_tensorflow is False and _is_main_module is False:
                 return
@@ -69,11 +69,11 @@ class RandomnessControlTensorflowChecker(BaseChecker):
                         and hasattr(call_node.func.expr.expr, "name")
                         and call_node.func.expr.expr.name in ["tf", "tensorflow"]
                     ):
-                        self._has_manual_seed = True
+                        _has_manual_seed = True
 
             if(
                 self._import_tensorflow is True
-                and self._has_manual_seed is False
+                and _has_manual_seed is False
             ):
                 self.add_message("randomness-control-tensorflow", node=module)
         except: # pylint: disable = bare-except
