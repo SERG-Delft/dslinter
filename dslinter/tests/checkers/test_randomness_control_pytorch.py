@@ -19,10 +19,8 @@ class TestRandomnessControlPytorchChecker(pylint.testutils.CheckerTestCase):
         if __name__ == '__main__':
             pass
         """
-        import_node = astroid.extract_node(script)
         module = astroid.parse(script)
         with self.assertNoMessages():
-            self.checker.visit_import(import_node)
             self.checker.visit_module(module)
 
     def test_without_pytorch_randomness_control(self):
@@ -34,10 +32,8 @@ class TestRandomnessControlPytorchChecker(pylint.testutils.CheckerTestCase):
         if __name__ == '__main__':
             pass
         """
-        import_node = astroid.extract_node(script)
         module = astroid.parse(script)
-        with self.assertAddsMessages(pylint.testutils.MessageTest(msg_id="randomness-control-pytorch", node = module)):
-            self.checker.visit_import(import_node)
+        with self.assertAddsMessages(pylint.testutils.MessageTest(msg_id="randomness-control-pytorch", node=module)):
             self.checker.visit_module(module)
 
     def test_pytorch_randomness_with_main_module(self):
@@ -59,8 +55,7 @@ class TestRandomnessControlPytorchChecker(pylint.testutils.CheckerTestCase):
             parser = argparse.ArgumentParser(description="Train a network for ...")
             opt = parser.parse_args() 
         """
-        import_node = astroid.extract_node(script)
         module = astroid.parse(script)
         with self.assertNoMessages():
-            self.checker.visit_import(import_node)
             self.checker.visit_module(module)
+

@@ -18,10 +18,8 @@ class TestDeterministicAlgorithmChecker(pylint.testutils.CheckerTestCase):
         if __name__ == '__main__':
             pass
         """
-        import_node = astroid.extract_node(script)
         module = astroid.parse(script)
         with self.assertNoMessages():
-            self.checker.visit_import(import_node)
             self.checker.visit_module(module)
 
     def test_without_deterministic_option_set(self):
@@ -33,8 +31,6 @@ class TestDeterministicAlgorithmChecker(pylint.testutils.CheckerTestCase):
         if __name__ == '__main__':
             pass
         """
-        import_node = astroid.extract_node(script)
         module = astroid.parse(script)
         with self.assertAddsMessages(pylint.testutils.MessageTest(msg_id="deterministic-pytorch", node=module)):
-            self.checker.visit_import(import_node)
             self.checker.visit_module(module)

@@ -20,10 +20,6 @@ class RandomnessControlNumpyChecker(BaseChecker):
             "The np.random.seed() should be set in numpy program for reproducible result."
         )
     }
-    options = ()
-
-    _import_numpy = False
-    _import_ml_libraries = False
 
     options = (
         (
@@ -37,64 +33,59 @@ class RandomnessControlNumpyChecker(BaseChecker):
         ),
     )
 
-    def visit_import(self, node: astroid.Import):
-        """
-        Check whether there is a numpy import and ml library import.
-        :param node: import node
-        """
-        try:
-            if self._import_numpy is False:
-                self._import_numpy = has_import(node, "numpy")
-            if self._import_ml_libraries is False:
-                self._import_ml_libraries = has_import(node, "sklearn") \
-                                            or has_import(node, "torch") \
-                                            or has_import(node, "tensorflow")
-        except: # pylint: disable = bare-except
-            ExceptionHandler.handle(self, node)
-
-    def visit_importfrom(self, node: astroid.ImportFrom):
-        """
-        Check whether there is a scikit-learn import.
-        :param node: import from node
-        """
-        try:
-            if self._import_ml_libraries is False:
-                self._import_ml_libraries = has_importfrom_sklearn(node)
-        except: # pylint: disable = bare-except
-            ExceptionHandler.handle(self, node)
-
-
     def visit_module(self, module: astroid.Module):
         """
         Check whether there is a rule violation.
         :param module:
         """
         try:
-            _has_manual_seed = False
+            _import_numpy = False
+            _import_ml_libraries = False
+            _has_numpy_manual_seed = False
+
+            # if the user wants to only check main module, but the current file is not main module, just return
             _is_main_module = check_main_module(module)
             if self.config.no_main_module_check_randomness_control_numpy is False and _is_main_module is False:
                 return
 
+            # traverse over the node in the module
             for node in module.body:
+                if isinstance(node, astroid.Import):
+                    if _import_ml_libraries is False:
+                        _import_ml_libraries = has_import(node, "tensorflow") or has_import(node, "torch") or has_import(node, "sklearn")
+                    if _import_numpy is False:
+                        _import_numpy = has_import(node, "numpy")
+
+                if isinstance(node, astroid.ImportFrom):
+                    if _import_ml_libraries is False:
+                        _import_ml_libraries = has_importfrom_sklearn(node)
+
                 if isinstance(node, astroid.nodes.Expr) and hasattr(node, "value"):
                     call_node = node.value
-                    if(
-                        hasattr(call_node, "func")
-                        and hasattr(call_node.func, "attrname")
-                        and call_node.func.attrname == "seed"
-                        and hasattr(call_node.func.expr, "attrname")
-                        and call_node.func.expr.attrname == "random"
-                        and hasattr(call_node.func.expr, "expr")
-                        and hasattr(call_node.func.expr.expr, "name")
-                        and call_node.func.expr.expr.name in ["np", "numpy"]
-                    ):
-                        _has_manual_seed = True
+                    if _has_numpy_manual_seed is False:
+                        _has_numpy_manual_seed = self._check_numpy_manual_seed(call_node)
 
+            # check if the rules are violated
             if(
-                self._import_numpy is True
-                and self._import_ml_libraries is True
-                and _has_manual_seed is False
+                _import_numpy is True
+                and _import_ml_libraries is True
+                and _has_numpy_manual_seed is False
             ):
                 self.add_message("randomness-control-numpy", node=module)
         except: # pylint: disable = bare-except
             ExceptionHandler.handle(self, module)
+
+    @staticmethod
+    def _check_numpy_manual_seed(call_node: astroid.Call):
+        if(
+            hasattr(call_node, "func")
+            and hasattr(call_node.func, "attrname")
+            and call_node.func.attrname == "seed"
+            and hasattr(call_node.func.expr, "attrname")
+            and call_node.func.expr.attrname == "random"
+            and hasattr(call_node.func.expr, "expr")
+            and hasattr(call_node.func.expr.expr, "name")
+            and call_node.func.expr.expr.name in ["np", "numpy"]
+        ):
+            return True
+        return False

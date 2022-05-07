@@ -20,11 +20,8 @@ class TestRandomnessControlNumpyChecker(pylint.testutils.CheckerTestCase):
         if __name__ == '__main__':
             pass
         """
-        import_node1, import_node2 = astroid.extract_node(script)
         module = astroid.parse(script)
         with self.assertNoMessages():
-            self.checker.visit_import(import_node1)
-            self.checker.visit_import(import_node2)
             self.checker.visit_module(module)
 
     def test_non_ml_code_with_numpy_randomness_control(self):
@@ -37,10 +34,8 @@ class TestRandomnessControlNumpyChecker(pylint.testutils.CheckerTestCase):
         if __name__ == '__main__':
             pass
         """
-        import_node1 = astroid.extract_node(script)
         module = astroid.parse(script)
         with self.assertNoMessages():
-            self.checker.visit_import(import_node1)
             self.checker.visit_module(module)
 
     def test_ml_code_without_numpy_randomness_control(self):
@@ -53,11 +48,8 @@ class TestRandomnessControlNumpyChecker(pylint.testutils.CheckerTestCase):
         if __name__ == '__main__':
             pass
         """
-        import_node1, import_node2 = astroid.extract_node(script)
         module = astroid.parse(script)
         with self.assertAddsMessages(pylint.testutils.MessageTest(msg_id="randomness-control-numpy", node=module)):
-            self.checker.visit_import(import_node1)
-            self.checker.visit_import(import_node2)
             self.checker.visit_module(module)
 
     def test_non_ml_code_without_numpy_randomness_control(self):
@@ -69,8 +61,6 @@ class TestRandomnessControlNumpyChecker(pylint.testutils.CheckerTestCase):
         if __name__ == '__main__':
             pass
         """
-        import_node1 = astroid.extract_node(script)
         module = astroid.parse(script)
         with self.assertNoMessages():
-            self.checker.visit_import(import_node1)
             self.checker.visit_module(module)
