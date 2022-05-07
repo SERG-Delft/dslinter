@@ -6,6 +6,8 @@
 [![PyPI - Downloads - Monthly](https://img.shields.io/pypi/dm/dslinter)](https://pypi.org/project/dslinter/) 
 [![Code Grade](https://api.codiga.io/project/33224/status/svg)](https://api.codiga.io/project/33224/status/svg)
 
+> Hi! We’re currently researching the code smells in machine learning projects in the industry context and looking for feedback for `dslinter`! It would be a massive help if you could run `dslinter` on your machine learning project in an industry setting and send the text and the json output to dslinter2022@gmail.com . The steps and commands can be found [here](https://github.com/SERG-Delft/dslinter/blob/main/STEPS_TO_FOLLOW.md) and it should take no more than 10 minutes. Feel free to send me an [email](dslinter2022@gmail.com) if you want to go through the process together. The process is anonymous and we will remove any sensitive information before the results are published. Many thanks!
+
 `dslinter` is a PyLint plugin for linting data science and machine learning code. It aims to help developers ensure the machine learning code quality and supports the following Python libraries: TensorFlow, PyTorch, Scikit-Learn, Pandas, NumPy and SciPy. 
 
 `dslinter` implements the detection rules for smells identified by [our previous work](https://arxiv.org/pdf/2203.13746.pdf). The smells are collected from papers, grey literature, GitHub commits, and Stack Overflow posts. The smells are also elaborated at a [website](https://hynn01.github.io/ml-smells/) :)

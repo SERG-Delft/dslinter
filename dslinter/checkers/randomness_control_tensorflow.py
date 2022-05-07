@@ -20,6 +20,7 @@ class RandomnessControlTensorflowChecker(BaseChecker):
             "The tf.random.set_seed() should be set in TensorFlow program for reproducible result"
         )
     }
+
     options = (
         (
             "no_main_module_check_randomness_control_tensorflow",
@@ -32,49 +33,51 @@ class RandomnessControlTensorflowChecker(BaseChecker):
         ),
     )
 
-    _import_tensorflow = False
-    _has_manual_seed = False
-
-    def visit_import(self, node: astroid.Import):
-        """
-        Check whether there is a tensorflow import.
-        :param node: import node
-        """
-        try:
-            if self._import_tensorflow is False:
-                self._import_tensorflow = has_import(node, "tensorflow")
-        except: # pylint: disable = bare-except
-            ExceptionHandler.handle(self, node)
-
     def visit_module(self, module: astroid.Module):
         """
         Check whether there is a rule violation.
         :param module:
         """
         try:
+            _import_tensorflow = False
+            _has_tensorflow_manual_seed = False
+
+            # if the user wants to only check main module, but the current file is not main module, just return
             _is_main_module = check_main_module(module)
             if self.config.no_main_module_check_randomness_control_tensorflow is False and _is_main_module is False:
                 return
 
+            # traverse over the node in the module
             for node in module.body:
+                if isinstance(node, astroid.Import):
+                    if _import_tensorflow is False:
+                        _import_tensorflow = has_import(node, "tensorflow")
+
                 if isinstance(node, astroid.nodes.Expr) and hasattr(node, "value"):
                     call_node = node.value
-                    if(
-                        hasattr(call_node, "func")
-                        and hasattr(call_node.func, "attrname")
-                        and call_node.func.attrname == "set_seed"
-                        and hasattr(call_node.func.expr, "attrname")
-                        and call_node.func.expr.attrname == "random"
-                        and hasattr(call_node.func.expr, "expr")
-                        and hasattr(call_node.func.expr.expr, "name")
-                        and call_node.func.expr.expr.name in ["tf", "tensorflow"]
-                    ):
-                        self._has_manual_seed = True
+                    if _has_tensorflow_manual_seed is False:
+                        _has_tensorflow_manual_seed = self._check_tensorflow_manual_seed(call_node)
 
+            # check if the rules are violated
             if(
-                self._import_tensorflow is True
-                and self._has_manual_seed is False
+                _import_tensorflow is True
+                and _has_tensorflow_manual_seed is False
             ):
                 self.add_message("randomness-control-tensorflow", node=module)
         except: # pylint: disable = bare-except
             ExceptionHandler.handle(self, module)
+
+    @staticmethod
+    def _check_tensorflow_manual_seed(call_node: astroid.Call):
+        if(
+            hasattr(call_node, "func")
+            and hasattr(call_node.func, "attrname")
+            and call_node.func.attrname == "set_seed"
+            and hasattr(call_node.func.expr, "attrname")
+            and call_node.func.expr.attrname == "random"
+            and hasattr(call_node.func.expr, "expr")
+            and hasattr(call_node.func.expr.expr, "name")
+            and call_node.func.expr.expr.name in ["tf", "tensorflow"]
+        ):
+            return True
+        return False

@@ -19,10 +19,8 @@ class TestRandomnessControlTensorflowChecker(pylint.testutils.CheckerTestCase):
         if __name__ == '__main__':
             pass
         """
-        import_node = astroid.extract_node(script)
         module = astroid.parse(script)
         with self.assertNoMessages():
-            self.checker.visit_import(import_node)
             self.checker.visit_module(module)
 
     def test_without_tensorflow_randomness_control(self):
@@ -34,8 +32,6 @@ class TestRandomnessControlTensorflowChecker(pylint.testutils.CheckerTestCase):
         if __name__ == '__main__':
             pass
         """
-        import_node = astroid.extract_node(script)
         module = astroid.parse(script)
-        with self.assertAddsMessages(pylint.testutils.MessageTest(msg_id="randomness-control-tensorflow", node = module)):
-            self.checker.visit_import(import_node)
+        with self.assertAddsMessages(pylint.testutils.MessageTest(msg_id="randomness-control-tensorflow", node=module)):
             self.checker.visit_module(module)
