@@ -22,7 +22,7 @@ skip = 'scripts'
 
 [tool.poetry]
 name = "dslinter"
-version = "2.0.4"
+version = "2.0.5"
 description = "`dslinter` is a pylint plugin for linting data science and machine learning code. We plan to support the following Python libraries: TensorFlow, PyTorch, Scikit-Learn, Pandas, NumPy and SciPy."
 
 license = "GPL-3.0 License"
