@@ -62,7 +62,7 @@ git submodule update --init --recursive
 ```
 2. `dslinter` uses `poetry` to manage dependencies, so you will need to install `poetry` first and then install the dependencies. 
 ```
-pip install poerty
+pip install poetry
 poetry install
 ```
 - To install `dslinter` from source for development purposes, install it with:
