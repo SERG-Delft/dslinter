@@ -4,6 +4,7 @@ from pylint.interfaces import IAstroidChecker
 from pylint.lint import PyLinter
 from dslinter.checkers.hyperparameters import HyperparameterChecker
 from dslinter.utils.exception_handler import ExceptionHandler
+from dslinter.utils.hyperparameters_helper import check_module_with_library
 
 
 class HyperparameterTensorflowChecker(HyperparameterChecker):
@@ -82,7 +83,8 @@ class HyperparameterTensorflowChecker(HyperparameterChecker):
             ):
                 self.hyperparameter_in_class(node, node.func.name)
             if(
-                hasattr(node, "func")
+                check_module_with_library(node, "tensorflow")
+                and hasattr(node, "func")
                 and hasattr(node.func, "attrname")
                 and node.func.attrname == "fit"
             ):
