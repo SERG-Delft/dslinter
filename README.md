@@ -26,6 +26,7 @@ pip install dslinter
 
 ## Usage
 To only use the checkers implemented in this plugin, run:
+
 [For Linux/Mac OS Users]:
 ```
 pylint \
