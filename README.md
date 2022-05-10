@@ -153,4 +153,4 @@ poetry run pytest .
 
 The dslinter is developed by Mark Haakman and Haiyin Zhang during our master theses at the Software Engineering Research Group (SERG) at TU Delft and ING's AI for FinTech Research Lab, supervised by Luís Cruz and Arie van Deursen.
 
-The current maintainer is Haiyin Zhang [hynn0633@gmail.com].
+Maintainer: Haiyin Zhang [hynn0633@gmail.com].
