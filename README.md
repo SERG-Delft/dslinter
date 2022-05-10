@@ -148,3 +148,11 @@ poetry run pytest .
 - **W5520 | dependent-threshold-tensorflow | Dependent Threshold Checker(PyTorch)**: If threshold-dependent evaluation(e.g., f-score) is used in the code, check whether threshold-indenpendent evaluation(e.g., auc) metrics is also used in the code.
 
 - **W5521 | dependent-threshold-pytorch | Dependent Threshold Checker(ScikitLearn)**: If threshold-dependent evaluation(e.g., f-score) is used in the code, check whether threshold-indenpendent evaluation(e.g., auc) metrics is also used in the code.
+
+## Team
+
+The dslinter is developed by Mark Haakman and Haiyin Zhang during our master theses.
+
+The current maintainer is Haiyin Zhang [hynn0633@gmail.com].
+
+The project is develop under the supervision of Luís Cruz and Arie van Deursen, members of the Software Engineering Research Group (SERG) of the Delft University of Technology, in the Netherlands.
