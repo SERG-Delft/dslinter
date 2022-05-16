@@ -1,6 +1,6 @@
 ### Here are the steps to follow for the evaluation :)
 
-We recommend you wrap your project in a new folder and run the following command on that folder. The output json and txt, by default, will be generated at the folder where you run your command on.
+We recommend you wrap your project in a parent folder and run the following command on that folder. The output json and txt, by default, will be generated at the folder where you run your command on.
 
 ## For Python Project:
 
