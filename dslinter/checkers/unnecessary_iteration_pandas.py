@@ -54,7 +54,7 @@ class UnnecessaryIterationPandasChecker(BaseChecker):
         """
         try:
             if self._iterating_through_dataframe(node):
-                self.add_message("dataframe-iteration-modification-pandas", node=node)
+                self.add_message("unnecessary-iteration-pandas", node=node)
         except:  # pylint: disable=bare-except
             ExceptionHandler.handle(self, node)
 

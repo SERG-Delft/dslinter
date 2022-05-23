@@ -19,7 +19,7 @@ class TestUnnecessaryIterationPandasChecker(pylint.testutils.CheckerTestCase):
         """
         module_tree = astroid.parse(script)
         call = module_tree.body[-1].iter
-        with self.assertAddsMessages(pylint.testutils.MessageTest(msg_id="dataframe-iteration-modification-pandas", node=call),):
+        with self.assertAddsMessages(pylint.testutils.MessageTest(msg_id="unnecessary-iteration-pandas", node=call),):
             self.checker.visit_module(module_tree)
             self.checker.visit_call(call)
 

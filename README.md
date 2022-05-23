@@ -139,7 +139,7 @@ poetry run pytest .
 
 - **W5516 | forward-pytorch | Net Forward Checker(PyTorch)**: It is recommended to use self.net() rather than self.net.forward() in PyTorch code. If self.net.forward() is used in the code, the rule is violated.
 
-- **W5517 | gradient-clear-pytorch | Gradient Clear Checker(PyTorch)**: The loss_fn.backward() and optimizer.step() should be used together with optimizer.zero_grad(). If the ".backward()" is missing in the code, the rule is violated.
+- **W5517 | gradient-clear-pytorch | Gradient Clear Checker(PyTorch)**: The loss_fn.backward() and optimizer.step() should be used together with optimizer.zero_grad(). If the `.zero_grad()` is missing in the code, the rule is violated.
 
 - **W5518 | data-leakage-scikitlearn | Data Leakage Checker(ScikitLearn)**: All scikit-learn estimators should be used inside Pipelines, to prevent data leakage between training and test data.
 
