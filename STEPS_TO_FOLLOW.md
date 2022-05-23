@@ -10,6 +10,8 @@ Install `dslinter` from the Python Package Index:
 pip install dslinter
 ```
 ### STEP 2
+A `__init__.py` file (can be empty) is expected at the <path_to_the_project> folder.
+
 Copy the following command in your terminal, type in the path to your project, and press `enter` to run:
 
 [For Linux/Mac OS Users]:
