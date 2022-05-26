@@ -22,6 +22,20 @@ class TestDeterministicAlgorithmChecker(pylint.testutils.CheckerTestCase):
         with self.assertNoMessages():
             self.checker.visit_module(module)
 
+    def test_with_deterministic_option_set2(self):
+        """Test whether no message is added if the deterministic algorithm option is used."""
+        script = """
+        import torch #@
+        def set_random_seed():
+            torch.use_deterministic_algorithms(True)
+        
+        if __name__ == '__main__':
+            pass
+        """
+        module = astroid.parse(script)
+        with self.assertNoMessages():
+            self.checker.visit_module(module)
+
     def test_without_deterministic_option_set(self):
         """Test whether a message is added if the deterministic algorithm option is not used"""
         script = """

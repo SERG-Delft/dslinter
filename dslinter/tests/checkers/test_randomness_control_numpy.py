@@ -24,6 +24,22 @@ class TestRandomnessControlNumpyChecker(pylint.testutils.CheckerTestCase):
         with self.assertNoMessages():
             self.checker.visit_module(module)
 
+    def test_ml_code_with_numpy_randomness_control2(self):
+        """Tests whether no message is added if manual seed is set."""
+        script = """
+        import numpy as np #@
+        import torch #@
+        def add_seed():
+            np.random.seed(0)
+            np.random.rand(4)
+                
+        if __name__ == '__main__':
+            pass
+        """
+        module = astroid.parse(script)
+        with self.assertNoMessages():
+            self.checker.visit_module(module)
+
     def test_non_ml_code_with_numpy_randomness_control(self):
         """Tests whether no message is added if manual seed is set."""
         script = """

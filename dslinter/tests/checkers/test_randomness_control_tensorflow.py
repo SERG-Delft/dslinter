@@ -23,6 +23,21 @@ class TestRandomnessControlTensorflowChecker(pylint.testutils.CheckerTestCase):
         with self.assertNoMessages():
             self.checker.visit_module(module)
 
+    def test_with_tensorflow_randomness_control2(self):
+        """Tests whether no message is added if manual seed is set."""
+        script = """
+        import tensorflow as tf #@
+        def add_seed():
+            tf.random.set_seed(0)
+            tf.random.uniform([1])
+                
+        if __name__ == '__main__':
+            pass
+        """
+        module = astroid.parse(script)
+        with self.assertNoMessages():
+            self.checker.visit_module(module)
+
     def test_without_tensorflow_randomness_control(self):
         """Tests whether a message is added if manual seed is not set"""
         script = """
