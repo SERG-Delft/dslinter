@@ -44,19 +44,11 @@ keywords = ["machine learning", "software engineering"]
 [tool.poetry.dependencies]
 python = "^3.7"  # Compatible python versions must be declared here
 toml = "^0.10"
-# Dependencies with extras
-# requests = { version = "^2.13", extras = [ "security" ] }
-# Python specific dependencies with prereleases allowed
-# pathlib2 = { version = "^2.2", allow-prereleases = true }
-# Git dependencies
-# cleo = { git = "https://github.com/sdispater/cleo.git", branch = "master" }
-# Optional dependencies (extras)
-# pendulum = { version = "^1.4", optional = true }
-pylint = { version = "~2.12.2" }
-astroid = { version = "~2.9.3" }
-mypy = { version = "~0.931" }
-data-science-types = { version = "~0.2.23" }
-pyspark-stubs = {version = "~3.0.0.post3" }
+pylint = { version = "^2.12.2" }
+astroid = { version = "^2.9.3" }
+mypy = { version = "^0.931" }
+data-science-types = { version = "^0.2.23" }
+pyspark-stubs = {version = "^3.0.0.post3" }
 
 [tool.poetry.dev-dependencies]
 pytest = "^3.0"
