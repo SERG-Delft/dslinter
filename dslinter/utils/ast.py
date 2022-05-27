@@ -228,4 +228,7 @@ class AssignUtil:
             return target.name
         if hasattr(target, "value"):
             return AssignUtil._get_target_name(target.value)
-        raise Exception("Target name cannot be retrieved.")
+        # raise Exception("Target name cannot be retrieved.")
+        # This is a quick fix
+        # TODO: make a stable fix
+        return ""

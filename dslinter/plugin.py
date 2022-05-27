@@ -27,7 +27,7 @@ from dslinter.checkers.tensor_array_tensorflow import TensorArrayTensorflowCheck
 from dslinter.checkers.unnecessary_iteration_pandas import UnnecessaryIterationPandasChecker
 from dslinter.checkers.unnecessary_iteration_tensorflow import UnnecessaryIterationTensorflowChecker
 from dslinter.checkers.deterministic_pytorch import DeterministicAlgorithmChecker
-from dslinter.checkers.data_leakage_scikitlearn import DataLeakageScikitLearnChecker
+from dslinter.checkers.pipeline_scikitlearn import PipelineScikitLearnChecker
 from dslinter.checkers.hyperparameters_pytorch import HyperparameterPyTorchChecker
 from dslinter.checkers.hyperparameters_tensorflow import HyperparameterTensorflowChecker
 # pylint: disable = line-too-long
@@ -58,7 +58,7 @@ def register(linter):
     linter.register_checker(RandomnessControlDataloaderPytorchChecker(linter))
     linter.register_checker(RandomnessControlTensorflowChecker(linter))
     linter.register_checker(RandomnessControlNumpyChecker(linter))
-    linter.register_checker(DataLeakageScikitLearnChecker(linter))
+    linter.register_checker(PipelineScikitLearnChecker(linter))
     linter.register_checker(DependentThresholdPytorchChecker(linter))
     linter.register_checker(DependentThresholdTensorflowChecker(linter))
     linter.register_checker(DependentThresholdScikitLearnChecker(linter))

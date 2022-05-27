@@ -40,15 +40,15 @@ hyperparameters-tensorflow,hyperparameters-pytorch,memory-release-tensorflow,\
 deterministic-pytorch,randomness-control-numpy,randomness-control-scikitlearn,\
 randomness-control-tensorflow,randomness-control-pytorch,randomness-control-dataloader-pytorch,\
 missing-mask-tensorflow,missing-mask-pytorch,tensor-array-tensorflow,\
-forward-pytorch,gradient-clear-pytorch,data-leakage-scikitlearn,\
+forward-pytorch,gradient-clear-pytorch,pipeline-not-used-scikitlearn,\
 dependent-threshold-scikitlearn,dependent-threshold-tensorflow,dependent-threshold-pytorch \
---output-format=json:report.json,text:report.txt,colorized \
+--output-format=text:report.txt,colorized \
 --reports=y \
 <path_to_sources>
 ```
 [For Windows Users]:
 ```
-pylint --load-plugins=dslinter --disable=all --enable=import,unnecessary-iteration-pandas,unnecessary-iteration-tensorflow,nan-numpy,chain-indexing-pandas,datatype-pandas,column-selection-pandas,merge-parameter-pandas,inplace-pandas,dataframe-conversion-pandas,scaler-missing-scikitlearn,hyperparameters-scikitlearn,hyperparameters-tensorflow,hyperparameters-pytorch,memory-release-tensorflow,deterministic-pytorch,randomness-control-numpy,randomness-control-scikitlearn,randomness-control-tensorflow,randomness-control-pytorch,randomness-control-dataloader-pytorch,missing-mask-tensorflow,missing-mask-pytorch,tensor-array-tensorflow,forward-pytorch,gradient-clear-pytorch,data-leakage-scikitlearn,dependent-threshold-scikitlearn,dependent-threshold-tensorflow,dependent-threshold-pytorch --output-format=json:report.json,text:report.txt,colorized --reports=y <path_to_sources>
+pylint --load-plugins=dslinter --disable=all --enable=import,unnecessary-iteration-pandas,unnecessary-iteration-tensorflow,nan-numpy,chain-indexing-pandas,datatype-pandas,column-selection-pandas,merge-parameter-pandas,inplace-pandas,dataframe-conversion-pandas,scaler-missing-scikitlearn,hyperparameters-scikitlearn,hyperparameters-tensorflow,hyperparameters-pytorch,memory-release-tensorflow,deterministic-pytorch,randomness-control-numpy,randomness-control-scikitlearn,randomness-control-tensorflow,randomness-control-pytorch,randomness-control-dataloader-pytorch,missing-mask-tensorflow,missing-mask-pytorch,tensor-array-tensorflow,forward-pytorch,gradient-clear-pytorch,pipeline-not-used-scikitlearn,dependent-threshold-scikitlearn,dependent-threshold-tensorflow,dependent-threshold-pytorch --output-format=text:report.txt,colorized --reports=y <path_to_sources>
 ```
 Or place a [`.pylintrc` configuration file](https://github.com/Hynn01/dslinter/blob/main/docs/pylint-configuration-examples/pylintrc-with-only-dslinter-settings/.pylintrc) which contains above settings in the folder where you run your command on, and run:
 ```
@@ -141,7 +141,7 @@ poetry run pytest .
 
 - **W5517 | gradient-clear-pytorch | Gradient Clear Checker(PyTorch)**: The loss_fn.backward() and optimizer.step() should be used together with optimizer.zero_grad(). If the `.zero_grad()` is missing in the code, the rule is violated.
 
-- **W5518 | data-leakage-scikitlearn | Data Leakage Checker(ScikitLearn)**: All scikit-learn estimators should be used inside Pipelines, to prevent data leakage between training and test data.
+- **W5518 | pipeline-not-used-scikitlearn | Pipeline Checker(ScikitLearn)**: All scikit-learn estimators should be used inside Pipelines, to prevent data leakage between training and test data.
 
 - **W5519 | dependent-threshold-scikitlearn | Dependent Threshold Checker(TensorFlow)**: If threshold-dependent evaluation(e.g., f-score) is used in the code, check whether threshold-indenpendent evaluation(e.g., auc) metrics is also used in the code.
 

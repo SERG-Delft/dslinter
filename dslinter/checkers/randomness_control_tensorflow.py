@@ -53,10 +53,15 @@ class RandomnessControlTensorflowChecker(BaseChecker):
                     if _import_tensorflow is False:
                         _import_tensorflow = has_import(node, "tensorflow")
 
-                if isinstance(node, astroid.nodes.Expr) and hasattr(node, "value"):
-                    call_node = node.value
+                if isinstance(node, astroid.nodes.Expr):
                     if _has_tensorflow_manual_seed is False:
-                        _has_tensorflow_manual_seed = self._check_tensorflow_manual_seed(call_node)
+                        _has_tensorflow_manual_seed = self._check_tensorflow_manual_seed_in_expr_node(node)
+
+                if isinstance(node, astroid.nodes.FunctionDef):
+                    for nod in node.body:
+                        if isinstance(nod, astroid.nodes.Expr):
+                            if _has_tensorflow_manual_seed is False:
+                                _has_tensorflow_manual_seed = self._check_tensorflow_manual_seed_in_expr_node(nod)
 
             # check if the rules are violated
             if(
@@ -68,7 +73,13 @@ class RandomnessControlTensorflowChecker(BaseChecker):
             ExceptionHandler.handle(self, module)
 
     @staticmethod
-    def _check_tensorflow_manual_seed(call_node: astroid.Call):
+    def _check_tensorflow_manual_seed_in_expr_node(expr_node: astroid.Expr):
+        if hasattr(expr_node, "value"):
+            call_node = expr_node.value
+            return RandomnessControlTensorflowChecker._check_tensorflow_manual_seed_in_call_node(call_node)
+
+    @staticmethod
+    def _check_tensorflow_manual_seed_in_call_node(call_node: astroid.Call):
         if(
             hasattr(call_node, "func")
             and hasattr(call_node.func, "attrname")

@@ -60,10 +60,15 @@ class RandomnessControlNumpyChecker(BaseChecker):
                     if _import_ml_libraries is False:
                         _import_ml_libraries = has_importfrom_sklearn(node)
 
-                if isinstance(node, astroid.nodes.Expr) and hasattr(node, "value"):
-                    call_node = node.value
+                if isinstance(node, astroid.nodes.Expr):
                     if _has_numpy_manual_seed is False:
-                        _has_numpy_manual_seed = self._check_numpy_manual_seed(call_node)
+                        _has_numpy_manual_seed = self._check_numpy_manual_seed_in_expr_node(node)
+
+                if isinstance(node, astroid.nodes.FunctionDef):
+                    for nod in node.body:
+                        if isinstance(nod, astroid.nodes.Expr):
+                            if _has_numpy_manual_seed is False:
+                                _has_numpy_manual_seed = self._check_numpy_manual_seed_in_expr_node(nod)
 
             # check if the rules are violated
             if(
@@ -76,7 +81,13 @@ class RandomnessControlNumpyChecker(BaseChecker):
             ExceptionHandler.handle(self, module)
 
     @staticmethod
-    def _check_numpy_manual_seed(call_node: astroid.Call):
+    def _check_numpy_manual_seed_in_expr_node(expr_node: astroid.Expr):
+        if hasattr(expr_node, "value"):
+            call_node = expr_node.value
+            return RandomnessControlNumpyChecker._check_numpy_manual_seed_in_call_node(call_node)
+
+    @staticmethod
+    def _check_numpy_manual_seed_in_call_node(call_node: astroid.Call):
         if(
             hasattr(call_node, "func")
             and hasattr(call_node.func, "attrname")

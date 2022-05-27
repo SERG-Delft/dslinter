@@ -10,17 +10,17 @@ from dslinter.utils.exception_handler import ExceptionHandler
 from dslinter.utils.resources import Resources
 
 
-class DataLeakageScikitLearnChecker(BaseChecker):
+class PipelineScikitLearnChecker(BaseChecker):
     """Checker which checks rules for preventing data leakage between training and test data."""
 
     __implements__ = IAstroidChecker
 
-    name = "data-leakage-scikitlearn"
+    name = "pipeline-not-used-scikitlearn"
     priority = -1
     msgs = {
         "W5518": (
             "There are both preprocessing and estimation operations in the code, but they are not used in a pipeline.",
-            "data-leakage-scikitlearn",
+            "pipeline-not-used-scikitlearn",
             "Scikit-learn preprocessors and estimators should be used inside pipelines, to prevent data leakage between training and test data.",
         ),
     }
@@ -84,7 +84,7 @@ class DataLeakageScikitLearnChecker(BaseChecker):
                                 if self._expr_is_preprocessor(value.func.expr):
                                     has_preprocessing_function = True
                 if has_learning_function is True and has_preprocessing_function is True:
-                    self.add_message("data-leakage-scikitlearn", node=call_node)
+                    self.add_message("pipeline-not-used-scikitlearn", node=call_node)
 
         except:  # pylint: disable=bare-except
             ExceptionHandler.handle(self, call_node)
@@ -98,14 +98,14 @@ class DataLeakageScikitLearnChecker(BaseChecker):
         :return: True when the expression is an estimator.
         """
         if isinstance(expr, astroid.Call) \
-                and DataLeakageScikitLearnChecker._call_initiates_estimator(expr):
+                and PipelineScikitLearnChecker._call_initiates_estimator(expr):
             return True
 
         # If expr is a Name, check whether that name is assigned to an estimator.
         if isinstance(expr, astroid.Name):
             values = AssignUtil.assignment_values(expr)
             for value in values:
-                if DataLeakageScikitLearnChecker._expr_is_estimator(value):
+                if PipelineScikitLearnChecker._expr_is_estimator(value):
                     return True
         return False
 
@@ -120,7 +120,7 @@ class DataLeakageScikitLearnChecker(BaseChecker):
         return (
                 call.func is not None
                 and hasattr(call.func, "name")
-                and call.func.name in DataLeakageScikitLearnChecker._get_estimator_classes()
+                and call.func.name in PipelineScikitLearnChecker._get_estimator_classes()
         )
 
     @staticmethod

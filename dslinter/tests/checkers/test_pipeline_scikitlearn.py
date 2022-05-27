@@ -7,7 +7,7 @@ import dslinter
 class TestDataLeakageScikitLearnChecker(pylint.testutils.CheckerTestCase):
     """Class which tests the DataLeakageChecker."""
 
-    CHECKER_CLASS = dslinter.plugin.DataLeakageScikitLearnChecker
+    CHECKER_CLASS = dslinter.plugin.PipelineScikitLearnChecker
 
     def test_pipeline_violation_on_call(self):
         """Message should be added when learning function is called directly on a learning class."""
@@ -32,7 +32,7 @@ class TestDataLeakageScikitLearnChecker(pylint.testutils.CheckerTestCase):
         SVC().fit(X_train, y_train) #@
         """
         call_node = astroid.extract_node(script)
-        with self.assertAddsMessages(pylint.testutils.MessageTest(msg_id="data-leakage-scikitlearn", node=call_node),):
+        with self.assertAddsMessages(pylint.testutils.MessageTest(msg_id="pipeline-not-used-scikitlearn", node=call_node),):
             self.checker.visit_call(call_node)
 
     def test_learning_function_without_preprocessor(self):
@@ -65,7 +65,7 @@ class TestDataLeakageScikitLearnChecker(pylint.testutils.CheckerTestCase):
             model.fit(X_train) #@
         """
         call_node = astroid.extract_node(script)
-        with self.assertAddsMessages(pylint.testutils.MessageTest(msg_id="data-leakage-scikitlearn", node=call_node),):
+        with self.assertAddsMessages(pylint.testutils.MessageTest(msg_id="pipeline-not-used-scikitlearn", node=call_node),):
             self.checker.visit_call(call_node)
 
     def test_pipeline_violation_on_name(self):
@@ -77,7 +77,7 @@ class TestDataLeakageScikitLearnChecker(pylint.testutils.CheckerTestCase):
         kmeans.fit(X_train) #@
         """
         call_node = astroid.extract_node(script)
-        with self.assertAddsMessages(pylint.testutils.MessageTest(msg_id="data-leakage-scikitlearn", node=call_node),):
+        with self.assertAddsMessages(pylint.testutils.MessageTest(msg_id="pipeline-not-used-scikitlearn", node=call_node),):
             self.checker.visit_call(call_node)
 
     def test_pipeline_violation_on_name_twice(self):
@@ -90,7 +90,7 @@ class TestDataLeakageScikitLearnChecker(pylint.testutils.CheckerTestCase):
         kmeans2.fit(X_train) #@
         """
         call_node = astroid.extract_node(script)
-        with self.assertAddsMessages(pylint.testutils.MessageTest(msg_id="data-leakage-scikitlearn", node=call_node),):
+        with self.assertAddsMessages(pylint.testutils.MessageTest(msg_id="pipeline-not-used-scikitlearn", node=call_node),):
             self.checker.visit_call(call_node)
 
     def test_pipeline_violation_in_function(self):
@@ -103,7 +103,7 @@ class TestDataLeakageScikitLearnChecker(pylint.testutils.CheckerTestCase):
         f(KMeans())
         """
         call_node = astroid.extract_node(script)
-        with self.assertAddsMessages(pylint.testutils.MessageTest(msg_id="data-leakage-scikitlearn", node=call_node),):
+        with self.assertAddsMessages(pylint.testutils.MessageTest(msg_id="pipeline-not-used-scikitlearn", node=call_node),):
             self.checker.visit_call(call_node)
 
     def test_pipeline_violation_in_function_arg_assigned(self):
@@ -117,7 +117,7 @@ class TestDataLeakageScikitLearnChecker(pylint.testutils.CheckerTestCase):
         f(kmeans_model)
         """
         call_node = astroid.extract_node(script)
-        with self.assertAddsMessages(pylint.testutils.MessageTest(msg_id="data-leakage-scikitlearn", node=call_node),):
+        with self.assertAddsMessages(pylint.testutils.MessageTest(msg_id="pipeline-not-used-scikitlearn", node=call_node),):
             self.checker.visit_call(call_node)
 
     def test_pipeline_violation_in_second_function_argument(self):
@@ -130,5 +130,5 @@ class TestDataLeakageScikitLearnChecker(pylint.testutils.CheckerTestCase):
         f(0, KMeans())
         """
         call_node = astroid.extract_node(script)
-        with self.assertAddsMessages(pylint.testutils.MessageTest(msg_id="data-leakage-scikitlearn", node=call_node),):
+        with self.assertAddsMessages(pylint.testutils.MessageTest(msg_id="pipeline-not-used-scikitlearn", node=call_node),):
             self.checker.visit_call(call_node)

@@ -22,7 +22,7 @@ skip = 'scripts'
 
 [tool.poetry]
 name = "dslinter"
-version = "2.0.7"
+version = "2.0.8"
 description = "`dslinter` is a pylint plugin for linting data science and machine learning code. We plan to support the following Python libraries: TensorFlow, PyTorch, Scikit-Learn, Pandas, NumPy and SciPy."
 
 license = "GPL-3.0 License"
@@ -44,14 +44,6 @@ keywords = ["machine learning", "software engineering"]
 [tool.poetry.dependencies]
 python = "^3.7"  # Compatible python versions must be declared here
 toml = "^0.10"
-# Dependencies with extras
-# requests = { version = "^2.13", extras = [ "security" ] }
-# Python specific dependencies with prereleases allowed
-# pathlib2 = { version = "^2.2", allow-prereleases = true }
-# Git dependencies
-# cleo = { git = "https://github.com/sdispater/cleo.git", branch = "master" }
-# Optional dependencies (extras)
-# pendulum = { version = "^1.4", optional = true }
 pylint = { version = "~2.12.2" }
 astroid = { version = "~2.9.3" }
 mypy = { version = "~0.931" }

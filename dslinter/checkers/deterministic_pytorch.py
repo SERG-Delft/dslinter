@@ -54,10 +54,15 @@ class DeterministicAlgorithmChecker(BaseChecker):
                     if _import_pytorch is False:
                         _import_pytorch = has_import(node, "torch")
 
-                if isinstance(node, astroid.nodes.Expr) and hasattr(node, "value"):
-                    call_node = node.value
+                if isinstance(node, astroid.nodes.Expr):
                     if _has_deterministic_algorithm_option is False:
-                        _has_deterministic_algorithm_option = self._check_deterministic_algorithm_option(call_node)
+                        _has_deterministic_algorithm_option = self._check_deterministic_algorithm_option_in_expr_node(node)
+
+                if isinstance(node, astroid.nodes.FunctionDef):
+                    for nod in node.body:
+                        if isinstance(nod, astroid.nodes.Expr):
+                            if _has_deterministic_algorithm_option is False:
+                                _has_deterministic_algorithm_option = self._check_deterministic_algorithm_option_in_expr_node(nod)
 
             # check if the rules are violated
             if(
@@ -70,7 +75,13 @@ class DeterministicAlgorithmChecker(BaseChecker):
             ExceptionHandler.handle(self, module)
 
     @staticmethod
-    def _check_deterministic_algorithm_option(call_node: astroid.Call):
+    def _check_deterministic_algorithm_option_in_expr_node(expr_node: astroid.Expr):
+        if hasattr(expr_node, "value"):
+            call_node = expr_node.value
+            return DeterministicAlgorithmChecker._check_deterministic_algorithm_option_in_call_node(call_node)
+
+    @staticmethod
+    def _check_deterministic_algorithm_option_in_call_node(call_node: astroid.Call):
         # if torch.use_deterministic_algorithm() is call and the argument is True,
         # set _has_deterministic_algorithm_option to True
         if(
