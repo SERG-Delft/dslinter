@@ -12,12 +12,12 @@ class DataframeConversionPandasChecker(BaseChecker):
 
     __implements__ = IAstroidChecker
 
-    name = "dataframe-conversion-pandas"
+    name = "dataframe-conversion-pandas-correct"
     priority = -1
     msgs = {
         "W5504": (
             "df.values is used in pandas code for dataframe conversion.",
-            "dataframe-conversion-pandas",
+            "dataframe-conversion-pandas-correct",
             "For dataframe conversion in pandas code, use .to_numpy() instead of .values."
         )
     }
@@ -39,16 +39,12 @@ class DataframeConversionPandasChecker(BaseChecker):
     def visit_call(self, call_node: astroid.Call):
         """Visit call node to see whether there is rule violation."""
         try:
-            if hasattr(call_node, "attrname") and call_node.attrname == "values":
-                self.add_message("dataframe-conversion-pandas", node=call_node)
-                return
             if(
                 hasattr(call_node, "func")
-                and hasattr(call_node.func, "expr")
-                and hasattr(call_node.func.expr, "attrname")
-                and call_node.func.expr.attrname == "values"
+                and hasattr(call_node.func, "attrname")
+                and call_node.func.attrname == "to_numpy"
             ):
-                    self.add_message("dataframe-conversion-pandas", node=call_node)
-                    return
+                self.add_message("dataframe-conversion-pandas-correct", node=call_node)
+                return
         except: # pylint: disable = bare-except
             ExceptionHandler.handle(self, call_node)

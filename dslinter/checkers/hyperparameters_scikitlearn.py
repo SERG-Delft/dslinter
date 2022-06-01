@@ -10,12 +10,12 @@ class HyperparameterScikitLearnChecker(HyperparameterChecker):
 
     __implements__ = IAstroidChecker
 
-    name = "hyperparameters-scikitlearn"
+    name = "hyperparameters-scikitlearn-correct"
     priority = -1
     msgs = {
         "R5506": (
             "Some of the important hyperparameters is not set in the program.",
-            "hyperparameters-scikitlearn",
+            "hyperparameters-scikitlearn-correct",
             "For learning algorithms, hyperparameters should be tuned and set.",
         ),
     }
@@ -35,7 +35,7 @@ class HyperparameterScikitLearnChecker(HyperparameterChecker):
     def __init__(self, linter: PyLinter = HyperparameterChecker):
         super().__init__(linter)
         self.HYPERPARAMETER_RESOURCE = "hyperparameters_scikitlearn_dict.pickle"
-        self.MESSAGE = "hyperparameters-scikitlearn"
+        self.MESSAGE = "hyperparameters-scikitlearn-correct"
         self.LIBRARY = "scikitlearn"
         # Main hyperparameters of learning algorithms, as defined in research.
         # Sources:

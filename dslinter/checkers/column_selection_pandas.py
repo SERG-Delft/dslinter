@@ -13,12 +13,12 @@ class ColumnSelectionPandasChecker(BaseChecker):
 
     __implements__ = IAstroidChecker
 
-    name = "column-selection-pandas"
+    name = "column-selection-pandas-correct"
     priority = -1
     msgs = {
         "R5504": (
             "There is no column selection after the dataframe is imported.",
-            "column-selection-pandas",
+            "column-selection-pandas-correct",
             "Column should be selected after the dataframe is imported for better elaborating what to be expected in the downstream."
         )
     }
@@ -58,8 +58,8 @@ class ColumnSelectionPandasChecker(BaseChecker):
 
         # check which dataframe is imported but not selected by columns
         for k, v in _dataframe_selected_dict.items():
-            if v is False:
-                self.add_message("column-selection-pandas", node=_name_node_dict[k])
+            if v is True:
+                self.add_message("column-selection-pandas-correct", node=_name_node_dict[k])
 
     def _process_assign_node(self, node: astroid.Assign, _dataframe_selected_dict, _name_node_dict):
         """Check assign node to see if there is a imported dataframe or whether the datdframe columns are selected."""

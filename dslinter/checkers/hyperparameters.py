@@ -72,11 +72,11 @@ class HyperparameterChecker(BaseChecker):
                 if (
                     function_name in self.HYPERPARAMETERS_MAIN
                     # pylint: disable = line-too-long
-                    and not self.has_required_hyperparameters(node, self.HYPERPARAMETERS_MAIN, function_name)
+                    and self.has_required_hyperparameters(node, self.HYPERPARAMETERS_MAIN, function_name)
                 ):
                     self.add_message(self.MESSAGE, node=node)
-                elif len(node.args) == 0 and node.keywords is None:
-                    self.add_message(self.MESSAGE, node=node)
+                # elif len(node.args) == 0 and node.keywords is None:
+                #     self.add_message(self.MESSAGE, node=node)
 
     def has_required_hyperparameters(self, node: astroid.Call, hyperparameters: Dict, name: str):
         """

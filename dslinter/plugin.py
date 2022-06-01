@@ -8,6 +8,7 @@ from dslinter.checkers.dependent_threshold_scikitlearn import DependentThreshold
 from dslinter.checkers.dependent_threshold_tensorflow import DependentThresholdTensorflowChecker
 from dslinter.checkers.forward_pytorch import ForwardPytorchChecker
 from dslinter.checkers.gradient_clear_pytorch import GradientClearPytorchChecker
+from dslinter.checkers.hyperparameters_count import HyperparameterCountChecker
 from dslinter.checkers.imports import ImportChecker
 from dslinter.checkers.inplace_pandas import InPlacePandasChecker
 from dslinter.checkers.deprecated.inplace_numpy import InPlaceNumpyChecker
@@ -51,6 +52,7 @@ def register(linter):
     linter.register_checker(HyperparameterPyTorchChecker(linter))
     linter.register_checker(HyperparameterTensorflowChecker(linter))
     linter.register_checker(HyperparameterScikitLearnChecker(linter))
+    linter.register_checker(HyperparameterCountChecker(linter))
     linter.register_checker(MemoryReleaseTensorflowChecker(linter))
     linter.register_checker(DeterministicAlgorithmChecker(linter))
     linter.register_checker(RandomnessControlScikitLLearnChecker(linter))

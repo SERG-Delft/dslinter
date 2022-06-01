@@ -13,12 +13,12 @@ class ScalerMissingScikitLearnChecker(BaseChecker):
 
     __implements__ = IAstroidChecker
 
-    name = "scaler-missing-scikitlearn"
+    name = "scaler-missing-scikitlearn-correct"
     priority = -1
     msgs = {
         "W5505": (
             "Scaler is not used before scaling-sensitive operation",
-            "scaler-missing-scikitlearn",
+            "scaler-missing-scikitlearn-correct",
             "To ensure a good result, use feature scaling before scaling-sensitive operation."
         ),
     }
@@ -82,8 +82,8 @@ class ScalerMissingScikitLearnChecker(BaseChecker):
                         if self._call_initiates_scaling_sensitive_operations(arg):
                             has_scaling_sensitive_operation = True
                             break
-                if has_scaling_sensitive_operation is True and has_scaler is False:
-                    self.add_message("scaler-missing-scikitlearn", node=node)
+                if has_scaling_sensitive_operation is True and has_scaler is True:
+                    self.add_message("scaler-missing-scikitlearn-correct", node=node)
 
             # If pipeline is not used and a scaling-sensitive operation is called
             if (
@@ -108,7 +108,7 @@ class ScalerMissingScikitLearnChecker(BaseChecker):
                                 if self._expr_is_scaler(value.func.expr):
                                     has_scaler = True
                 if has_scaling_sensitive_operation is True and has_scaler is False:
-                    self.add_message("scaler-missing-scikitlearn", node=node)
+                    self.add_message("scaler-missing-scikitlearn-correct", node=node)
 
         except:  # pylint: disable=bare-except
             ExceptionHandler.handle(self, node)
