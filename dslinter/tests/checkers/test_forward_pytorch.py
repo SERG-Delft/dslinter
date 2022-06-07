@@ -13,7 +13,7 @@ class TestForwardPytorchChecker(pylint.testutils.CheckerTestCase):
     def test_use_forward(self):
         """Message will be added if the self.net.forward() is used in the code rather than self.net()."""
         script = """
-        import torch.nn as nn
+        import torch.nn as nn #@
         class Net(nn.Module):
             def __init__(self):
                 super().__init__()
@@ -33,14 +33,16 @@ class TestForwardPytorchChecker(pylint.testutils.CheckerTestCase):
                 x = self.fc3(x)
                 return x
         """
-        call_node = astroid.extract_node(script).value
+        import_node, assign_node = astroid.extract_node(script)
+        call_node = assign_node.value
         with self.assertAddsMessages(pylint.testutils.MessageTest(msg_id="forward-pytorch", node=call_node)):
+            self.checker.visit_import(import_node)
             self.checker.visit_call(call_node)
 
     def test_not_use_forward(self):
         """No message will be added if self.net() is used in the code."""
         script = """
-        import torch.nn as nn
+        import torch.nn as nn #@
         class Net(nn.Module):
             def __init__(self):
                 super().__init__()
@@ -60,25 +62,31 @@ class TestForwardPytorchChecker(pylint.testutils.CheckerTestCase):
                 x = self.fc3(x)
                 return x
         """
-        call_node = astroid.extract_node(script).value
+        import_node, assign_node = astroid.extract_node(script)
+        call_node = assign_node.value
         with self.assertNoMessages():
+            self.checker.visit_import(import_node)
             self.checker.visit_call(call_node)
 
     def test_use_self_forward(self):
         """No Message will be added if the self.forward() is used in the code."""
         script = """
+        import torch #@
         def training_step(self, batch, batch_nb):
             idx = batch['idx']
             loss = self.forward(batch)[0] #@
             return {'loss': loss, 'idx': idx}
         """
-        call_node = astroid.extract_node(script).value.value
+        import_node, assign_node = astroid.extract_node(script)
+        call_node = assign_node.value.value
         with self.assertNoMessages():
+            self.checker.visit_import(import_node)
             self.checker.visit_call(call_node)
 
     def test_use_super_forward(self):
         """No Message will be added if the super().forward() is used in the code."""
         script = """
+        import torch #@
         class SpatialDropout(nn.Dropout2d):
             def forward(self, x):
                 x = x.unsqueeze(2)    # (N, T, 1, K)
@@ -88,6 +96,8 @@ class TestForwardPytorchChecker(pylint.testutils.CheckerTestCase):
                 x = x.squeeze(2)  # (N, T, K)
                 return x        
         """
-        call_node = astroid.extract_node(script).value
+        import_node, assign_node = astroid.extract_node(script)
+        call_node = assign_node.value
         with self.assertNoMessages():
+            self.checker.visit_import(import_node)
             self.checker.visit_call(call_node)
