@@ -4,6 +4,7 @@ from pylint.checkers import BaseChecker
 from pylint.interfaces import IAstroidChecker
 
 from dslinter.utils.exception_handler import ExceptionHandler
+from dslinter.utils.randomness_control_helper import has_import
 
 
 class ForwardPytorchChecker(BaseChecker):
@@ -21,6 +22,12 @@ class ForwardPytorchChecker(BaseChecker):
         )
     }
     options = ()
+
+    _import_torch = False
+
+    def visit_import(self, import_node: astroid.Import):
+        if self._import_torch is False:
+            self._import_torch = has_import(import_node, "torch")
 
     def visit_call(self, call_node: astroid.Call):
         """
@@ -46,7 +53,17 @@ class ForwardPytorchChecker(BaseChecker):
                 and call_node.func.expr.func.name == "super"
             ):
                 _call_from_super = True
-            if _has_forward is True and (_call_from_self is False and _call_from_super is False):
+            if(
+                self._import_torch is True
+                and _has_forward is True
+                and (
+                    _call_from_self is False
+                    and _call_from_super is False
+                )
+            ):
                 self.add_message("forward-pytorch", node=call_node)
         except: # pylint: disable = bare-except
             ExceptionHandler.handle(self, call_node)
+
+    def leave_module(self, module: astroid.Module):
+        self._import_torch = False

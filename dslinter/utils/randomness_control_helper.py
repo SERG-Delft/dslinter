@@ -20,7 +20,7 @@ def check_main_module(module: astroid.Module) -> bool:
 
 def has_import(node: astroid.Import, library_name: str):
     for name, _ in node.names:
-        if name == library_name:
+        if name == library_name or library_name in name:
             return True
     return False
 
