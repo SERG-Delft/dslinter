@@ -37,8 +37,12 @@ class ASTUtil:
         if node.file is not None:
             # Otherwise, read the entire file stated in the 'file' attribute.
             with open(node.file, "r", encoding="utf-8") as file:
-                return file.read()
-        raise Exception("Could not retrieve the source code of the module.")
+                try:
+                    return file.read()
+                except:
+                    return ""
+        # raise Exception("Could not retrieve the source code of the module.")
+        return ""
 
     @staticmethod
     def search_body_parent(node: astroid.node_classes.NodeNG) -> astroid.node_classes.NodeNG:
