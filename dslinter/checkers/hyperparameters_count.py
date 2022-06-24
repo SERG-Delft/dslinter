@@ -1,7 +1,5 @@
 """Hyperparameter checker checks whether all hyperparameters for learning algorithms are set."""
-from typing import List, Dict
 import astroid
-from pylint.lint import PyLinter
 from pylint.checkers import BaseChecker
 from pylint.interfaces import IAstroidChecker
 from dslinter.utils.exception_handler import ExceptionHandler
@@ -90,21 +88,19 @@ class HyperparameterCountChecker(BaseChecker):
 
     def hyperparameter_in_class(self, node: astroid.Call, function_name: str):
         """Cheches whether the required hyperparameters are used in the class."""
+        if (
+            function_name in self.HYPERPARAMETERS_MAIN
+            and len(node.args) == 0
+        ):
+            self.add_message(self.MESSAGE, node=node)
+            # if function_name not in self.count_dict:
+            #     self.count_dict[function_name] = {}
+            # else:
+            #     for kw in node.keywords:
+            #         if kw not in self.count_dict:
+            #             self.count_dict[function_name][kw.arg] = 1
+            #         else:
+            #             self.count_dict[function_name][kw.arg] += 1
 
-        hyperparams_all = Resources.get_hyperparameters(self.HYPERPARAMETER_RESOURCE)
-
-        if function_name in hyperparams_all:  # pylint: disable=unsupported-membership-test
-            if (
-                function_name in self.HYPERPARAMETERS_MAIN
-            ):
-                if function_name not in self.count_dict:
-                    self.count_dict[function_name] = {}
-                else:
-                    for kw in node.keywords:
-                        if kw not in self.count_dict:
-                            self.count_dict[function_name][kw.arg] = 1
-                        else:
-                            self.count_dict[function_name][kw.arg] += 1
-
-    def leave_module(self, module: astroid.Module):
-        print(self.count_dict)
+    # def leave_module(self, module: astroid.Module):
+    #     print(self.count_dict)
