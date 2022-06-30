@@ -67,7 +67,8 @@ class TypeInference:
                 if lines[line_no].strip()[0] == ";":
                     # If the call is added to a new line, remove the semicolon.
                     lines[line_no] = lines[line_no].strip()[1:]
-            except AttributeError:
+            # except AttributeError:
+            except:
                 pass  # The attribute from the expression is not found. Continue.
 
         return "\n".join(lines)
@@ -114,7 +115,8 @@ class TypeInference:
         os.remove(_tmp_dslinter_file)
 
         if result[1] != '':
-            raise Exception("Running mypy resulted in an error: " + result[1])
+            # raise Exception("Running mypy resulted in an error: " + result[1])
+            return ""
         return result[0]
 
     @staticmethod

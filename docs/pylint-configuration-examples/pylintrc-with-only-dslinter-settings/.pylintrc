@@ -92,7 +92,7 @@ enable=import,
         tensor-array-tensorflow,
         forward-pytorch,
         gradient-clear-pytorch,
-        data-leakage-scikitlearn,
+        pipeline-not-used-scikitlearn,
         dependent-threshold-scikitlearn,
         dependent-threshold-tensorflow,
         dependent-threshold-pytorch
@@ -113,7 +113,7 @@ evaluation=10.0 - ((float(5 * error + warning + refactor + convention) / stateme
 # Set the output format. Available formats are text, parseable, colorized, json
 # and msvs (visual studio). You can also give a reporter class, e.g.
 # mypackage.mymodule.MyReporterClass.
-output-format=text:report.txt,json:report.json,colorized
+output-format=text:report.txt,colorized
 
 # Tells whether to display a full report or only the messages.
 reports=y

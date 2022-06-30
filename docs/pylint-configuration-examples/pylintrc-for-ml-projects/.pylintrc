@@ -28,7 +28,7 @@ limit-inference-results=100
 
 # List of plugins (as comma separated values of python modules names) to load,
 # usually to register additional checkers.
-load-plugins=
+load-plugins=dslinter
 
 # Pickle collected data for later comparisons.
 persistent=yes
@@ -145,7 +145,37 @@ disable=print-statement,
 # either give multiple identifier separated by comma (,) or put this option
 # multiple time (only on the command line, not in the configuration file where
 # it should appear only once). See also the "--disable" option for examples.
-enable=c-extension-no-member
+enable=c-extension-no-member,
+        import,
+        unnecessary-iteration-pandas,
+        unnecessary-iteration-tensorflow,
+        nan-numpy,
+        chain-indexing-pandas,
+        datatype-pandas,
+        column-selection-pandas,
+        merge-parameter-pandas,
+        inplace-pandas,
+        dataframe-conversion-pandas,
+        scaler-missing-scikitlearn,
+        hyperparameters-scikitlearn,
+        hyperparameters-tensorflow,
+        hyperparameters-pytorch,
+        memory-release-tensorflow,
+        deterministic-pytorch,
+        randomness-control-numpy,
+        randomness-control-scikitlearn,
+        randomness-control-tensorflow,
+        randomness-control-pytorch,
+        randomness-control-dataloader-pytorch,
+        missing-mask-tensorflow,
+        missing-mask-pytorch,
+        tensor-array-tensorflow,
+        forward-pytorch,
+        gradient-clear-pytorch,
+        pipeline-not-used-scikitlearn,
+        dependent-threshold-scikitlearn,
+        dependent-threshold-tensorflow,
+        dependent-threshold-pytorch
 
 
 [REPORTS]
@@ -164,10 +194,10 @@ evaluation=10.0 - ((float(5 * error + warning + refactor + convention) / stateme
 # Set the output format. Available formats are text, parseable, colorized, json
 # and msvs (visual studio). You can also give a reporter class, e.g.
 # mypackage.mymodule.MyReporterClass.
-output-format=text
+output-format=text:report.txt,colorized
 
 # Tells whether to display a full report or only the messages.
-reports=no
+reports=y
 
 # Activate the evaluation score.
 score=yes
