@@ -11,12 +11,12 @@ class RandomnessControlNumpyChecker(BaseChecker):
     """Checker which checks whether random seed is set in numpy"""
     __implements__ = IAstroidChecker
 
-    name = "randomness-control-numpy"
+    name = "randomness-control-numpy-correct"
     priority = -1
     msgs = {
         "W5508": (
             "The np.random.seed() is not set in numpy program.",
-            "randomness-control-numpy",
+            "randomness-control-numpy-correct",
             "The np.random.seed() should be set in numpy program for reproducible result."
         )
     }
@@ -74,9 +74,9 @@ class RandomnessControlNumpyChecker(BaseChecker):
             if(
                 _import_numpy is True
                 and _import_ml_libraries is True
-                and _has_numpy_manual_seed is False
+                and _has_numpy_manual_seed is True
             ):
-                self.add_message("randomness-control-numpy", node=module)
+                self.add_message("randomness-control-numpy-correct", node=module)
         except: # pylint: disable = bare-except
             ExceptionHandler.handle(self, module)
 

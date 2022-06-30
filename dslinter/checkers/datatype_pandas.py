@@ -11,12 +11,12 @@ class DatatypePandasChecker(BaseChecker):
 
     __implements__ = IAstroidChecker
 
-    name = "datatype-pandas"
+    name = "datatype-pandas-correct"
     priority = -1
     msgs = {
         "R5503":(
             "Datatype is not set when a dataframe is imported from data.",
-            "datatype-pandas",
+            "datatype-pandas-correct",
             "Datatype should be set when a dataframe is imported from data.",
         )
     }
@@ -39,7 +39,9 @@ class DatatypePandasChecker(BaseChecker):
                 and call_node.func.expr.name in ["pandas", "pd"]
             ):
                 kws = [kw.arg for kw in call_node.keywords if hasattr(kw, "arg")]
-                if "dtype" not in kws:
-                    self.add_message(msgid="datatype-pandas", node=call_node)
+                # if "dtype" not in kws:
+                #     self.add_message(msgid="datatype-pandas", node=call_node)
+                if "dtype" in kws:
+                    self.add_message(msgid="datatype-pandas-correct", node=call_node)
         except: # pylint: disable = bare-except
             ExceptionHandler.handle(self, call_node)
