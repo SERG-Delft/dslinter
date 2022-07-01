@@ -25,7 +25,18 @@ pip install dslinter
 ```
 
 ## Usage
-To only use the checkers implemented in this plugin, run:
+#### To expand a current pylint configuration with the checkers from this plugin, run:
+ 
+```
+pylint --load-plugins=dslinter <other_options> <path_to_sources>
+```
+
+Or place a [`.pylintrc` configuration file](https://github.com/SERG-Delft/dslinter/tree/main/docs/pylint-configuration-examples/pylintrc-for-ml-projects) which contains above settings in the folder where you run your command on, and run:
+```
+pylint <path_to_sources>
+```
+
+#### To only use the checkers implemented in this plugin, run:
 
 [For Linux/Mac OS Users]:
 ```
@@ -53,10 +64,6 @@ pylint --load-plugins=dslinter --disable=all --enable=import,unnecessary-iterati
 Or place a [`.pylintrc` configuration file](https://github.com/Hynn01/dslinter/blob/main/docs/pylint-configuration-examples/pylintrc-with-only-dslinter-settings/.pylintrc) which contains above settings in the folder where you run your command on, and run:
 ```
 pylint <path_to_sources>
-```
-To expand a current pylint configuration with the checkers from this plugin, run:
-```
-pylint --load-plugins=dslinter <other_options> <path_to_sources>
 ```
 
 ## How to contribute
