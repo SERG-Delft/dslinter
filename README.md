@@ -48,14 +48,14 @@ pylint \
 --load-plugins=dslinter \
 --disable=all \
 --enable=import,unnecessary-iteration-pandas,unnecessary-iteration-tensorflow,\
-nan-numpy,chain-indexing-pandas,datatype-pandas,\
-column-selection-pandas,merge-parameter-pandas,inplace-pandas,\
+nan-numpy,chain-indexing-pandas,\
+merge-parameter-pandas,\
 dataframe-conversion-pandas,scaler-missing-scikitlearn,hyperparameters-scikitlearn,\
 hyperparameters-tensorflow,hyperparameters-pytorch,memory-release-tensorflow,\
 deterministic-pytorch,randomness-control-numpy,randomness-control-scikitlearn,\
 randomness-control-tensorflow,randomness-control-pytorch,randomness-control-dataloader-pytorch,\
 missing-mask-tensorflow,missing-mask-pytorch,tensor-array-tensorflow,\
-forward-pytorch,gradient-clear-pytorch,pipeline-not-used-scikitlearn,\
+forward-pytorch,pipeline-not-used-scikitlearn,\
 dependent-threshold-scikitlearn,dependent-threshold-tensorflow,dependent-threshold-pytorch \
 --output-format=text:report.txt,colorized \
 --reports=y \
@@ -63,7 +63,7 @@ dependent-threshold-scikitlearn,dependent-threshold-tensorflow,dependent-thresho
 ```
 [For Windows Users]:
 ```
-pylint --load-plugins=dslinter --disable=all --enable=import,unnecessary-iteration-pandas,unnecessary-iteration-tensorflow,nan-numpy,chain-indexing-pandas,datatype-pandas,column-selection-pandas,merge-parameter-pandas,inplace-pandas,dataframe-conversion-pandas,scaler-missing-scikitlearn,hyperparameters-scikitlearn,hyperparameters-tensorflow,hyperparameters-pytorch,memory-release-tensorflow,deterministic-pytorch,randomness-control-numpy,randomness-control-scikitlearn,randomness-control-tensorflow,randomness-control-pytorch,randomness-control-dataloader-pytorch,missing-mask-tensorflow,missing-mask-pytorch,tensor-array-tensorflow,forward-pytorch,gradient-clear-pytorch,pipeline-not-used-scikitlearn,dependent-threshold-scikitlearn,dependent-threshold-tensorflow,dependent-threshold-pytorch --output-format=text:report.txt,colorized --reports=y <path_to_sources>
+pylint --load-plugins=dslinter --disable=all --enable=import,unnecessary-iteration-pandas,unnecessary-iteration-tensorflow,nan-numpy,chain-indexing-pandas,merge-parameter-pandas,dataframe-conversion-pandas,scaler-missing-scikitlearn,hyperparameters-scikitlearn,hyperparameters-tensorflow,hyperparameters-pytorch,memory-release-tensorflow,deterministic-pytorch,randomness-control-numpy,randomness-control-scikitlearn,randomness-control-tensorflow,randomness-control-pytorch,randomness-control-dataloader-pytorch,missing-mask-tensorflow,missing-mask-pytorch,tensor-array-tensorflow,forward-pytorch,pipeline-not-used-scikitlearn,dependent-threshold-scikitlearn,dependent-threshold-tensorflow,dependent-threshold-pytorch --output-format=text:report.txt,colorized --reports=y <path_to_sources>
 ```
 Or place a [`.pylintrc` configuration file](https://github.com/Hynn01/dslinter/blob/main/docs/pylint-configuration-examples/pylintrc-with-only-dslinter-settings/.pylintrc) which contains above settings in the folder where you run your command on, and run:
 ```
